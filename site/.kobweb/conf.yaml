@@ -1,5 +1,6 @@
 site:
   title: "Portfolio"
+  basePath: "portfolio"
 
 server:
   files:
