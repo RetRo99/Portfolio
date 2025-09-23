@@ -25,6 +25,7 @@ import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.silk.components.icons.fa.FaParagraph
 import com.varabyte.kobweb.silk.style.CssStyle
+import com.varabyte.kobweb.silk.style.selectors.hover
 import com.varabyte.kobweb.silk.style.toModifier
 import org.jetbrains.compose.web.css.AlignItems
 import org.jetbrains.compose.web.css.DisplayStyle
@@ -81,7 +82,9 @@ public val LinkButtonStyle = CssStyle {
             .backgroundColor(rgb(33, 150, 243)) // blue
             .color(rgb(255, 255, 255))
     }
-    cssRule(":hover") { Modifier.backgroundColor(rgb(25, 118, 210)) }
+    hover {
+        Modifier.backgroundColor(rgb(25, 118, 210))
+    }
 }
 
 @Page
