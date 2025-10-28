@@ -92,8 +92,8 @@ val CardStyle = CssStyle {
 val LinkButtonStyle = CssStyle {
     base {
         Modifier
-            .border { width(1.px); style(LineStyle.Solid); color(Color.lightgray) }
-            .borderRadius(32.px)
+            .border(1.px, LineStyle.Solid, Color.lightgray)
+            .borderRadius(16.px)
             .backgroundColor(Color.transparent)
             .color(rgb(74, 74, 69))
     }
@@ -109,25 +109,14 @@ fun IndexPage() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .gap(40.px)
             .alignItems(AlignItems.Center)
-            .padding(top = 48.px, bottom = 64.px)
     ) {
         // Hero Section
         Column(SectionContainerStyle.toModifier()) {
             Title()
             Subtitle()
             Descriptor()
-            Row(Modifier.gap(8.px)) {
-                SocialLink(
-                    href = "https://www.linkedin.com/in/rok-retar/",
-                    label = "LinkedIn"
-                )
-                SocialLink(
-                    href = "https://github.com/retro99",
-                    label = "GitHub"
-                )
-            }
+            SocialButtons()
         }
 
         // About Section
@@ -169,6 +158,19 @@ fun IndexPage() {
             H2 { Text("Contact") }
             P { Text("Reach out on LinkedIn or GitHub, or open an issue on one of my repos.") }
         }
+    }
+}
+
+private fun SocialButtons() {
+    Row(Modifier.gap(8.px)) {
+        SocialLink(
+            href = "https://www.linkedin.com/in/rok-retar/",
+            label = "LinkedIn"
+        )
+        SocialLink(
+            href = "https://github.com/retro99",
+            label = "GitHub"
+        )
     }
 }
 
