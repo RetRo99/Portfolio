@@ -98,7 +98,7 @@ val LinkButtonStyle = CssStyle {
             .color(rgb(74, 74, 69))
     }
     hover {
-        Modifier.backgroundColor(Color.transparent).color(Color.white)
+        Modifier.backgroundColor(rgb(122, 136, 254)).color(Color.white)
     }
 }
 
