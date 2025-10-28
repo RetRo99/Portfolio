@@ -27,6 +27,7 @@ import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.silk.components.forms.Button
 import com.varabyte.kobweb.silk.style.CssStyle
+import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.style.selectors.hover
 import com.varabyte.kobweb.silk.style.toModifier
 import kotlinx.browser.window
@@ -61,6 +62,10 @@ val HeroTitleStyle = CssStyle {
         Modifier
             .fontSize(55.px)
             .fontWeight(FontWeight.Normal)
+    }
+
+    Breakpoint.ZERO {
+        Modifier.fontSize(32.px)
     }
 }
 
