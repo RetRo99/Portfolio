@@ -1,6 +1,7 @@
 package io.github.retar.portfolio.pages
 
 import androidx.compose.runtime.Composable
+import com.varabyte.kobweb.compose.css.FontWeight
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Modifier
@@ -15,6 +16,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
 import com.varabyte.kobweb.compose.ui.modifiers.flexGrow
 import com.varabyte.kobweb.compose.ui.modifiers.flexWrap
 import com.varabyte.kobweb.compose.ui.modifiers.fontSize
+import com.varabyte.kobweb.compose.ui.modifiers.fontWeight
 import com.varabyte.kobweb.compose.ui.modifiers.gap
 import com.varabyte.kobweb.compose.ui.modifiers.margin
 import com.varabyte.kobweb.compose.ui.modifiers.maxWidth
@@ -23,11 +25,13 @@ import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.modifiers.width
 import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.core.Page
-import com.varabyte.kobweb.silk.components.icons.fa.FaParagraph
+import com.varabyte.kobweb.silk.components.forms.Button
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.selectors.hover
 import com.varabyte.kobweb.silk.style.toModifier
+import kotlinx.browser.window
 import org.jetbrains.compose.web.css.AlignItems
+import org.jetbrains.compose.web.css.Color
 import org.jetbrains.compose.web.css.DisplayStyle
 import org.jetbrains.compose.web.css.FlexWrap
 import org.jetbrains.compose.web.css.LineStyle
@@ -53,13 +57,27 @@ val SectionContainerStyle = CssStyle {
 }
 
 val HeroTitleStyle = CssStyle {
-    base { Modifier.fontSize(36.px) }
+    base {
+        Modifier
+            .fontSize(55.px)
+            .fontWeight(FontWeight.Normal)
+    }
 }
 
 val SubtitleStyle = CssStyle {
-    base { Modifier.color(rgb(120, 120, 120)).fontSize(18.px) }
+    base {
+        Modifier
+            .fontSize(18.px)
+    }
 }
 
+val DescriptorStyle = CssStyle {
+    base {
+        Modifier
+            .color(Color.lightgray)
+            .fontSize(18.px)
+    }
+}
 val CardStyle = CssStyle {
     base {
         Modifier
@@ -68,22 +86,19 @@ val CardStyle = CssStyle {
             .border(1.px, LineStyle.Solid, rgba(0, 0, 0, 0.1))
             .backgroundColor(rgb(250, 250, 250))
     }
-    cssRule(":hover") { Modifier.boxShadow(0.px, 8.px, 24.px, 0.px, rgba(0, 0, 0, 0.12)) }
+    hover { Modifier.boxShadow(0.px, 8.px, 24.px, 0.px, rgba(0, 0, 0, 0.12)) }
 }
 
-public val LinkButtonStyle = CssStyle {
+val LinkButtonStyle = CssStyle {
     base {
         Modifier
-            .display(DisplayStyle.Flex)
-            .alignItems(AlignItems.Center)
-            .gap(8.px)
-            .padding(topBottom = 10.px, leftRight = 14.px)
-            .borderRadius(999.px)
-            .backgroundColor(rgb(33, 150, 243)) // blue
-            .color(rgb(255, 255, 255))
+            .border { width(1.px); style(LineStyle.Solid); color(Color.lightgray) }
+            .borderRadius(32.px)
+            .backgroundColor(Color.transparent)
+            .color(rgb(74, 74, 69))
     }
     hover {
-        Modifier.backgroundColor(rgb(25, 118, 210))
+        Modifier.backgroundColor(Color.transparent).color(Color.white)
     }
 }
 
@@ -99,17 +114,18 @@ fun IndexPage() {
             .padding(top = 48.px, bottom = 64.px)
     ) {
         // Hero Section
-        Column(SectionContainerStyle.toModifier().gap(16.px)) {
-            H1(HeroTitleStyle.toModifier().toAttrs()) { Text("Rok Retar") }
-            P(SubtitleStyle.toModifier().toAttrs()) { Text("Kotlin / Android / Web Developer") }
-            Row(Modifier.gap(12.px)) {
-                SocialLink(
-                    href = "https://github.com/retro99",
-                    label = "GitHub"
-                )
+        Column(SectionContainerStyle.toModifier()) {
+            Title()
+            Subtitle()
+            Descriptor()
+            Row(Modifier.gap(8.px)) {
                 SocialLink(
                     href = "https://www.linkedin.com/in/rok-retar/",
                     label = "LinkedIn"
+                )
+                SocialLink(
+                    href = "https://github.com/retro99",
+                    label = "GitHub"
                 )
             }
         }
@@ -157,9 +173,39 @@ fun IndexPage() {
 }
 
 @Composable
+private fun Title() {
+    H1(HeroTitleStyle.toModifier().toAttrs()) {
+        Text("I'm Rok Retar, a developer specializing in building innovative digital solutions, based in Slovenia.")
+    }
+}
+
+@Composable
+private fun Subtitle() {
+    P(
+        SubtitleStyle.toModifier().toAttrs()
+    ) {
+        Text("Kotlin-focused developer who enjoys building polished mobile and web experiences. This portfolio is built with Kobweb and Silk, which bring a Compose-like developer experience to the web.")
+    }
+}
+
+@Composable
+private fun Descriptor() {
+    P(DescriptorStyle.toModifier().toAttrs()) {
+        Text("Kotlin / Android / Web Developer")
+    }
+}
+
+@Composable
 private fun SocialLink(href: String, label: String) {
-    A(href, attrs = LinkButtonStyle.toModifier().toAttrs()) {
-        Text(label)
+    P {
+        Button(
+            onClick = {
+                window.open(href, "_blank")
+            },
+            modifier = LinkButtonStyle.toModifier()
+        ) {
+            Text(label)
+        }
     }
 }
 
