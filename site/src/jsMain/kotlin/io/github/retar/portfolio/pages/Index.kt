@@ -161,6 +161,7 @@ fun IndexPage() {
     }
 }
 
+@Composable
 private fun SocialButtons() {
     Row(Modifier.gap(8.px)) {
         SocialLink(
