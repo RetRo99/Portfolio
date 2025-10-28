@@ -25,6 +25,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.modifiers.width
 import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.core.Page
+import com.varabyte.kobweb.core.rememberPageContext
 import com.varabyte.kobweb.silk.components.forms.Button
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
@@ -205,10 +206,11 @@ private fun Descriptor() {
 
 @Composable
 private fun SocialLink(href: String, label: String) {
+    val navigator = rememberPageContext().router
     P {
         Button(
             onClick = {
-                window.open(href, "_blank")
+                navigator.navigateTo(href)
             },
             modifier = LinkButtonStyle.toModifier()
         ) {
