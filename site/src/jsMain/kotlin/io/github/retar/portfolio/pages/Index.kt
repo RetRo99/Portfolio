@@ -26,7 +26,9 @@ import com.varabyte.kobweb.compose.ui.modifiers.width
 import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.core.rememberPageContext
+import com.varabyte.kobweb.navigation.OpenLinkStrategy
 import com.varabyte.kobweb.silk.components.forms.Button
+import com.varabyte.kobweb.silk.components.navigation.Link
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.style.selectors.hover
@@ -98,6 +100,7 @@ val CardStyle = CssStyle {
 val LinkButtonStyle = CssStyle {
     base {
         Modifier
+            .padding(8.px)
             .border(1.px, LineStyle.Solid, Color.lightgray)
             .borderRadius(16.px)
             .backgroundColor(Color.transparent)
@@ -204,18 +207,11 @@ private fun Descriptor() {
     }
 }
 
+
 @Composable
 private fun SocialLink(href: String, label: String) {
-    val navigator = rememberPageContext().router
-    P {
-        Button(
-            onClick = {
-                navigator.navigateTo(href)
-            },
-            modifier = LinkButtonStyle.toModifier()
-        ) {
-            Text(label)
-        }
+    A(href, attrs = LinkButtonStyle.toModifier().toAttrs()) {
+        Text(label)
     }
 }
 
