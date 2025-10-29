@@ -123,7 +123,7 @@ fun IndexPage() {
         // Hero Section
         Column(SectionContainerStyle.toModifier()) {
             Img(
-                src = "/portfolio/favicon.svg",
+                src = "favicon.svg",
                 alt = "Rok Retar",
                 attrs = Modifier
                     .borderRadius(75.px)
