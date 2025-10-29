@@ -44,6 +44,7 @@ import org.jetbrains.compose.web.dom.A
 import org.jetbrains.compose.web.dom.Div
 import org.jetbrains.compose.web.dom.H1
 import org.jetbrains.compose.web.dom.H2
+import org.jetbrains.compose.web.dom.Img
 import org.jetbrains.compose.web.dom.P
 import org.jetbrains.compose.web.dom.Text
 
@@ -121,6 +122,14 @@ fun IndexPage() {
     ) {
         // Hero Section
         Column(SectionContainerStyle.toModifier()) {
+            Img(
+                src = "/portfolio/favicon.svg",
+                alt = "Rok Retar",
+                attrs = Modifier
+                    .borderRadius(75.px)
+                    .margin(bottom = 16.px)
+                    .toAttrs()
+            )
             Title()
             Subtitle()
             Descriptor()
