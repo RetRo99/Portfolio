@@ -14,7 +14,7 @@ kobweb {
     app {
         index {
             description.set("Powered by Kobweb")
-            faviconPath.set("/favicon.svg")
+            faviconPath.set("favicon.svg")
         }
     }
 }
