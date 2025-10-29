@@ -206,7 +206,6 @@ private fun Descriptor() {
     }
 }
 
-
 @Composable
 private fun SocialLink(href: String, label: String) {
     A(href, attrs = LinkButtonStyle.toModifier().toAttrs()) {
