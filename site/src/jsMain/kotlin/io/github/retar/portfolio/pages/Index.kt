@@ -18,6 +18,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.gap
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.core.Page
+import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.style.selectors.hover
@@ -26,6 +27,8 @@ import io.github.retar.portfolio.components.PortfolioButton
 import io.github.retar.portfolio.components.PortfolioSection
 import io.github.retar.portfolio.resources.StringRes
 import org.jetbrains.compose.web.css.AlignItems
+import org.jetbrains.compose.web.css.CSSSizeValue
+import org.jetbrains.compose.web.css.CSSUnit
 import org.jetbrains.compose.web.css.Color
 import org.jetbrains.compose.web.css.LineStyle
 import org.jetbrains.compose.web.css.px
@@ -90,15 +93,20 @@ private fun HeroSection() {
         TitleWithSubtitle(
             title = StringRes.HeroTitle.value,
             subtitle = StringRes.HeroSubtitle.value,
+            gap = 40.px
         )
         Descriptor()
-        SocialButtons()
+        SocialButtons(
+            modifier = Modifier.padding(top = 44.px)
+        )
     }
 }
 
 @Composable
-private fun SocialButtons() {
-    Row(Modifier.gap(8.px)) {
+private fun SocialButtons(
+    modifier: Modifier = Modifier
+) {
+    Row(modifier.gap(8.px)) {
         PortfolioButton(
             url = StringRes.GitHubLink.value,
             label = StringRes.Github.value
@@ -111,8 +119,14 @@ private fun SocialButtons() {
 }
 
 @Composable
-private fun TitleWithSubtitle(title: String, subtitle: String) {
-    Column {
+private fun TitleWithSubtitle(
+    title: String,
+    subtitle: String,
+    gap: CSSSizeValue<CSSUnit.px> = 0.px
+) {
+    Column(
+        modifier = Modifier.gap(gap)
+    ) {
         Title(title)
         Subtitle(subtitle)
     }
@@ -127,11 +141,10 @@ private fun Title(title: String) {
 
 @Composable
 private fun Subtitle(subtitle: String) {
-    P(
-        SubtitleStyle.toModifier().toAttrs()
-    ) {
-        Text(subtitle)
-    }
+    SpanText(
+        text = subtitle,
+        modifier = SubtitleStyle.toModifier(),
+    )
 }
 
 @Composable
