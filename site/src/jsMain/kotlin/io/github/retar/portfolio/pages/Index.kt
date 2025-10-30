@@ -15,9 +15,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
 import com.varabyte.kobweb.compose.ui.modifiers.fontSize
 import com.varabyte.kobweb.compose.ui.modifiers.fontWeight
 import com.varabyte.kobweb.compose.ui.modifiers.gap
-import com.varabyte.kobweb.compose.ui.modifiers.maxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.padding
-import com.varabyte.kobweb.compose.ui.modifiers.width
 import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.silk.style.CssStyle
@@ -25,27 +23,17 @@ import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.style.selectors.hover
 import com.varabyte.kobweb.silk.style.toModifier
 import io.github.retar.portfolio.components.PortfolioButton
+import io.github.retar.portfolio.components.PortfolioSection
 import io.github.retar.portfolio.resources.StringRes
 import org.jetbrains.compose.web.css.AlignItems
 import org.jetbrains.compose.web.css.Color
 import org.jetbrains.compose.web.css.LineStyle
-import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.css.rgb
 import org.jetbrains.compose.web.css.rgba
 import org.jetbrains.compose.web.dom.H1
 import org.jetbrains.compose.web.dom.P
 import org.jetbrains.compose.web.dom.Text
-
-// Styles
-val SectionContainerStyle = CssStyle {
-    base {
-        Modifier
-            .padding(topBottom = 32.px, leftRight = 16.px)
-            .width(100.percent)
-            .maxWidth(1200.px)
-    }
-}
 
 val TitleStyle = CssStyle {
     base {
@@ -98,7 +86,7 @@ fun IndexPage() {
 
 @Composable
 private fun HeroSection() {
-    Column(SectionContainerStyle.toModifier()) {
+    PortfolioSection {
         TitleWithSubtitle(
             title = StringRes.HeroTitle.value,
             subtitle = StringRes.HeroSubtitle.value,
@@ -124,7 +112,7 @@ private fun SocialButtons() {
 
 @Composable
 private fun TitleWithSubtitle(title: String, subtitle: String) {
-    Column() {
+    Column {
         Title(title)
         Subtitle(subtitle)
     }
