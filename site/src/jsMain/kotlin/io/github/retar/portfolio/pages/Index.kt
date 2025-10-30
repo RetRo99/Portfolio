@@ -2,7 +2,6 @@ package io.github.retar.portfolio.pages
 
 import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.compose.css.FontWeight
-import com.varabyte.kobweb.compose.css.TextDecorationLine
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Modifier
@@ -18,7 +17,6 @@ import com.varabyte.kobweb.compose.ui.modifiers.fontWeight
 import com.varabyte.kobweb.compose.ui.modifiers.gap
 import com.varabyte.kobweb.compose.ui.modifiers.maxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.padding
-import com.varabyte.kobweb.compose.ui.modifiers.textDecorationLine
 import com.varabyte.kobweb.compose.ui.modifiers.width
 import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.core.Page
@@ -27,6 +25,7 @@ import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.style.selectors.hover
 import com.varabyte.kobweb.silk.style.toModifier
 import io.github.retar.portfolio.StringRes
+import io.github.retar.portfolio.components.PortfolioButton
 import org.jetbrains.compose.web.css.AlignItems
 import org.jetbrains.compose.web.css.Color
 import org.jetbrains.compose.web.css.LineStyle
@@ -34,7 +33,6 @@ import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.css.rgb
 import org.jetbrains.compose.web.css.rgba
-import org.jetbrains.compose.web.dom.A
 import org.jetbrains.compose.web.dom.H1
 import org.jetbrains.compose.web.dom.P
 import org.jetbrains.compose.web.dom.Text
@@ -86,22 +84,6 @@ val CardStyle = CssStyle {
     hover { Modifier.boxShadow(0.px, 8.px, 24.px, 0.px, rgba(0, 0, 0, 0.12)) }
 }
 
-val LinkButtonStyle = CssStyle {
-    base {
-        Modifier
-            .padding(8.px)
-            .border(1.px, LineStyle.Solid, Color.lightgray)
-            .borderRadius(16.px)
-            .backgroundColor(Color.transparent)
-            .color(rgb(74, 74, 69))
-            .textDecorationLine(TextDecorationLine.None)
-    }
-
-    hover {
-        Modifier.backgroundColor(rgb(122, 136, 254)).color(Color.white)
-    }
-}
-
 @Page
 @Composable
 fun IndexPage() {
@@ -129,11 +111,11 @@ private fun HeroSection() {
 @Composable
 private fun SocialButtons() {
     Row(Modifier.gap(8.px)) {
-        SocialLink(
+        PortfolioButton(
             href = "https://www.linkedin.com/in/rok-retar/",
             label = "LinkedIn"
         )
-        SocialLink(
+        PortfolioButton(
             href = "https://github.com/retro99",
             label = "GitHub"
         )
@@ -168,12 +150,5 @@ private fun Subtitle(subtitle: String) {
 private fun Descriptor() {
     P(DescriptorStyle.toModifier().toAttrs()) {
         Text(StringRes.Descriptor.value)
-    }
-}
-
-@Composable
-private fun SocialLink(href: String, label: String) {
-    A(href, attrs = LinkButtonStyle.toModifier().toAttrs()) {
-        Text(label)
     }
 }
