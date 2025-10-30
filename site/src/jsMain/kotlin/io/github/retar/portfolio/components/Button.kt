@@ -21,8 +21,8 @@ import org.jetbrains.compose.web.dom.A
 import org.jetbrains.compose.web.dom.Text
 
 @Composable
-fun PortfolioButton(href: String, label: String) {
-    A(href, attrs = LinkButtonStyle.toModifier().toAttrs()) {
+fun PortfolioButton(url: String, label: String) {
+    A(url, attrs = LinkButtonStyle.toModifier().toAttrs()) {
         Text(label)
     }
 }
