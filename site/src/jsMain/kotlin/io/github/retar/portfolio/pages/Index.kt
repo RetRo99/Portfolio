@@ -112,11 +112,11 @@ private fun HeroSection() {
 private fun SocialButtons() {
     Row(Modifier.gap(8.px)) {
         PortfolioButton(
-            href = StringRes.GitHubLink.value,
+            url = StringRes.GitHubLink.value,
             label = StringRes.Github.value
         )
         PortfolioButton(
-            href = StringRes.LinkedIn.value,
+            url = StringRes.LinkedIn.value,
             label = StringRes.LinkedIn.value
         )
     }
