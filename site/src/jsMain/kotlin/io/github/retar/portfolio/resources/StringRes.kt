@@ -1,4 +1,4 @@
-package io.github.retar.portfolio
+package io.github.retar.portfolio.resources
 
 enum class StringRes(val value: String) {
     HeroTitle(
@@ -12,5 +12,21 @@ enum class StringRes(val value: String) {
     ),
     Descriptor(
         "Kotlin / Android / Web Developer"
+    ),
+
+    Github(
+        "GitHub"
+    ),
+
+    GitHubLink(
+        "https://github.com/retro99"
+    ),
+
+    LinkedIn(
+        "LinkedIn"
+    ),
+
+    LinkedInLink(
+        "https://www.linkedin.com/in/rok-retar/"
     ),
 }
