@@ -24,8 +24,8 @@ import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.style.selectors.hover
 import com.varabyte.kobweb.silk.style.toModifier
-import io.github.retar.portfolio.StringRes
 import io.github.retar.portfolio.components.PortfolioButton
+import io.github.retar.portfolio.resources.StringRes
 import org.jetbrains.compose.web.css.AlignItems
 import org.jetbrains.compose.web.css.Color
 import org.jetbrains.compose.web.css.LineStyle
@@ -112,12 +112,12 @@ private fun HeroSection() {
 private fun SocialButtons() {
     Row(Modifier.gap(8.px)) {
         PortfolioButton(
-            href = "https://www.linkedin.com/in/rok-retar/",
-            label = "LinkedIn"
+            href = StringRes.GitHubLink.value,
+            label = StringRes.Github.value
         )
         PortfolioButton(
-            href = "https://github.com/retro99",
-            label = "GitHub"
+            href = StringRes.LinkedIn.value,
+            label = StringRes.LinkedIn.value
         )
     }
 }
