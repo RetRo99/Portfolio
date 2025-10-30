@@ -112,7 +112,7 @@ private fun SocialButtons(
             label = StringRes.Github.value
         )
         PortfolioButton(
-            url = StringRes.LinkedIn.value,
+            url = StringRes.LinkedInLink.value,
             label = StringRes.LinkedIn.value
         )
     }
