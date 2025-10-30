@@ -29,4 +29,12 @@ enum class StringRes(val value: String) {
     LinkedInLink(
         "https://www.linkedin.com/in/rok-retar/"
     ),
+
+    SelectedProjectsTitle(
+        "Selected Projects"
+    ),
+
+    SelectedProjectsSubtitle(
+        "Explore a curated collection of projects that showcase my dedication to cutting-edge technology and intuitive design."
+    ),
 }

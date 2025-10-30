@@ -84,6 +84,7 @@ fun IndexPage() {
             .alignItems(AlignItems.Center)
     ) {
         HeroSection()
+        SelectedProjectsSection()
     }
 }
 
@@ -98,6 +99,17 @@ private fun HeroSection() {
         Descriptor()
         SocialButtons(
             modifier = Modifier.padding(top = 44.px)
+        )
+    }
+}
+
+@Composable
+private fun SelectedProjectsSection() {
+    PortfolioSection {
+        TitleWithSubtitle(
+            title = StringRes.SelectedProjectsTitle.value,
+            subtitle = StringRes.SelectedProjectsSubtitle.value,
+            gap = 10.px
         )
     }
 }
