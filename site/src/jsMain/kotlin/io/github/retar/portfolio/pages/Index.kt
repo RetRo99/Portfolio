@@ -95,7 +95,9 @@ private fun ProjectsCarousel(
     modifier: Modifier = Modifier,
 ) {
     val containerRef = remember { mutableStateOf<HTMLDivElement?>(null) }
-    val projectsTrack = remember { List(3) { SelectedProjects }.flatten() }
+    // Repeat the projects list so there is always enough content to scroll,
+    // even when the viewport is wider than the unique items.
+    val projectsTrack = (0 until 5).flatMap { SelectedProjects }
 
     LaunchedEffect(containerRef.value) {
         val container = containerRef.value ?: return@LaunchedEffect
