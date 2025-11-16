@@ -10,11 +10,12 @@ import com.varabyte.kobweb.compose.ui.modifiers.gap
 import com.varabyte.kobweb.compose.ui.modifiers.overflow
 import com.varabyte.kobweb.compose.ui.modifiers.translateX
 import com.varabyte.kobweb.compose.ui.modifiers.whiteSpace
-import com.varabyte.kobweb.compose.ui.styleModifier
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.animation.Keyframes
 import com.varabyte.kobweb.silk.style.animation.toAnimation
 import com.varabyte.kobweb.silk.style.selectors.hover
+import org.jetbrains.compose.web.css.AnimationPlayState
+import org.jetbrains.compose.web.css.AnimationTimingFunction
 import org.jetbrains.compose.web.css.DisplayStyle
 import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
@@ -39,29 +40,30 @@ val ProjectsCarouselContainerStyle = CssStyle {
 val ProjectsCarouselTrackStyle = CssStyle {
     base {
         Modifier
+            .display(DisplayStyle.LegacyInlineFlex)
             .gap(24.px)
-            .styleModifier {
-                // Use inline-flex so the track width matches its content, which is
-                // required for the 50% marquee shift trick to be seamless.
-                property("display", "inline-flex")
-            }
             .whiteSpace(WhiteSpace.NoWrap)
             .animation(
                 ProjectsCarouselScrollKeyframes.toAnimation(
                     colorMode = colorMode,
                     duration = 20.s,
                     iterationCount = AnimationIterationCount.Infinite,
+                    timingFunction = AnimationTimingFunction.Linear,
                 ),
             )
-            .styleModifier {
-                property("animation-timing-function", "linear")
-            }
     }
 
     hover {
-        Modifier.styleModifier {
-            property("animation-play-state", "paused")
-        }
+        Modifier
+            .animation(
+                ProjectsCarouselScrollKeyframes.toAnimation(
+                    colorMode = colorMode,
+                    duration = 20.s,
+                    iterationCount = AnimationIterationCount.Infinite,
+                    timingFunction = AnimationTimingFunction.Linear,
+                    playState = AnimationPlayState.Paused,
+                ),
+            )
     }
 }
 
