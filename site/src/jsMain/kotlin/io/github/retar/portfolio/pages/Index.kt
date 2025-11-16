@@ -21,8 +21,6 @@ import io.github.retar.portfolio.components.PortfolioSection
 import io.github.retar.portfolio.resources.StringRes
 import io.github.retar.portfolio.styles.AppColors
 import io.github.retar.portfolio.styles.DescriptorStyle
-import io.github.retar.portfolio.styles.ProjectsCarouselContainerStyle
-import io.github.retar.portfolio.styles.ProjectsCarouselTrackStyle
 import io.github.retar.portfolio.styles.SubtitleStyle
 import io.github.retar.portfolio.styles.TitleStyle
 import org.jetbrains.compose.web.css.AlignItems
