@@ -89,6 +89,9 @@ private val SelectedProjects = listOf(
 private fun ProjectsCarousel(
     modifier: Modifier = Modifier,
 ) {
+    val baseRepeatCount = if (SelectedProjects.size < 4) 3 else 1
+    val baseItems = List(baseRepeatCount) { SelectedProjects }.flatten()
+
     Div(
         attrs = ProjectsCarouselContainerStyle
             .toModifier()
@@ -100,10 +103,12 @@ private fun ProjectsCarousel(
                 .toModifier()
                 .toAttrs(),
         ) {
-            SelectedProjects.forEach { project ->
-                ProjectCard(
-                    title = project,
-                )
+            repeat(2) {
+                baseItems.forEach { project ->
+                    ProjectCard(
+                        title = project,
+                    )
+                }
             }
         }
     }
