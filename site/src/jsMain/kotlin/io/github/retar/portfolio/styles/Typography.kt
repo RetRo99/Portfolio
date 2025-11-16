@@ -7,7 +7,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.fontSize
 import com.varabyte.kobweb.compose.ui.modifiers.fontWeight
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
-import org.jetbrains.compose.web.css.Color
+import io.github.retar.portfolio.styles.AppColors
 import org.jetbrains.compose.web.css.px
 
 val TitleStyle = CssStyle {
@@ -32,7 +32,7 @@ val SubtitleStyle = CssStyle {
 val DescriptorStyle = CssStyle {
     base {
         Modifier
-            .color(Color.lightgray)
+            .color(AppColors.TextSecondary)
             .fontSize(18.px)
     }
 }
