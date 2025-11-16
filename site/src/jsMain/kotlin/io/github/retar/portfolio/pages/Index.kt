@@ -82,8 +82,8 @@ private fun SelectedProjectsSection() {
 }
 
 private val SelectedProjects = listOf(
-    "Portfolio site - this website built with Kotlin & Kobweb",
     "Android client - Kotlin, Compose, and clean architecture",
+    "Portfolio site - this website built with Kotlin & Kobweb",
     "Backend services - Kotlin & Spring / Ktor work",
 )
 
