@@ -1,11 +1,6 @@
 package io.github.retar.portfolio.pages
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import com.varabyte.kobweb.compose.css.Overflow
-import com.varabyte.kobweb.compose.css.overflowX
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Modifier
@@ -25,9 +20,10 @@ import io.github.retar.portfolio.components.PortfolioSection
 import io.github.retar.portfolio.resources.StringRes
 import io.github.retar.portfolio.styles.AppColors
 import io.github.retar.portfolio.styles.DescriptorStyle
+import io.github.retar.portfolio.styles.ProjectsCarouselContainerStyle
+import io.github.retar.portfolio.styles.ProjectsCarouselTrackStyle
 import io.github.retar.portfolio.styles.SubtitleStyle
 import io.github.retar.portfolio.styles.TitleStyle
-import kotlinx.coroutines.delay
 import org.jetbrains.compose.web.css.AlignItems
 import org.jetbrains.compose.web.css.CSSSizeValue
 import org.jetbrains.compose.web.css.CSSUnit
@@ -38,7 +34,6 @@ import org.jetbrains.compose.web.dom.Div
 import org.jetbrains.compose.web.dom.H1
 import org.jetbrains.compose.web.dom.P
 import org.jetbrains.compose.web.dom.Text
-import org.w3c.dom.HTMLDivElement
 
 @Page
 @Composable
@@ -94,46 +89,18 @@ private val SelectedProjects = listOf(
 private fun ProjectsCarousel(
     modifier: Modifier = Modifier,
 ) {
-    val containerRef = remember { mutableStateOf<HTMLDivElement?>(null) }
-    // Repeat the projects list so there is always enough content to scroll,
-    // even when the viewport is wider than the unique items.
-    val projectsTrack = (0 until 5).flatMap { SelectedProjects }
-
-    LaunchedEffect(containerRef.value) {
-        val container = containerRef.value ?: return@LaunchedEffect
-
-        while (true) {
-            delay(30L)
-
-            val maxScroll =
-                (container.scrollWidth - container.clientWidth)
-                    .coerceAtLeast(0)
-
-            if (container.scrollLeft >= maxScroll.toDouble()) {
-                container.scrollLeft = 0.0
-            } else {
-                container.scrollLeft += 1.0
-            }
-        }
-    }
-
     Div(
-        attrs = modifier.toAttrs {
-            ref { element ->
-                containerRef.value = element
-                onDispose {
-                    containerRef.value = null
-                }
-            }
-            style {
-                overflowX(Overflow.Hidden)
-            }
-        },
+        attrs = ProjectsCarouselContainerStyle
+            .toModifier()
+            .then(modifier)
+            .toAttrs(),
     ) {
-        Row(
-            modifier = Modifier.gap(24.px),
+        Div(
+            attrs = ProjectsCarouselTrackStyle
+                .toModifier()
+                .toAttrs(),
         ) {
-            projectsTrack.forEach { project ->
+            SelectedProjects.forEach { project ->
                 ProjectCard(
                     title = project,
                 )
