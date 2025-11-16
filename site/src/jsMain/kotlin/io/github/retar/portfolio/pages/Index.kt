@@ -12,6 +12,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.gap
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.toAttrs
+import io.github.retar.portfolio.components.InfiniteCarousel
 import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.toModifier
@@ -71,11 +72,14 @@ private fun SelectedProjectsSection() {
             subtitle = StringRes.SelectedProjectsSubtitle.value,
             gap = 10.px,
         )
-        ProjectsCarousel(
+        InfiniteCarousel(
+            items = SelectedProjects,
             modifier = Modifier
                 .padding(top = 24.px)
                 .fillMaxWidth(),
-        )
+        ) { project ->
+            ProjectCard(title = project)
+        }
     }
 }
 
@@ -84,35 +88,6 @@ private val SelectedProjects = listOf(
     "Android client - Kotlin, Compose, and clean architecture",
     "Backend services - Kotlin & Spring / Ktor work",
 )
-
-@Composable
-private fun ProjectsCarousel(
-    modifier: Modifier = Modifier,
-) {
-    val baseRepeatCount = if (SelectedProjects.size < 4) 3 else 1
-    val baseItems = List(baseRepeatCount) { SelectedProjects }.flatten()
-
-    Div(
-        attrs = ProjectsCarouselContainerStyle
-            .toModifier()
-            .then(modifier)
-            .toAttrs(),
-    ) {
-        Div(
-            attrs = ProjectsCarouselTrackStyle
-                .toModifier()
-                .toAttrs(),
-        ) {
-            repeat(2) {
-                baseItems.forEach { project ->
-                    ProjectCard(
-                        title = project,
-                    )
-                }
-            }
-        }
-    }
-}
 
 @Composable
 private fun ProjectCard(
