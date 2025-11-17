@@ -76,7 +76,7 @@ val InfiniteCarouselTrackStyle = CssStyle {
             .animation(
                 InfiniteCarouselScrollKeyframes.toAnimation(
                     colorMode = colorMode,
-                    duration = 20.s,
+                    duration = 40.s,
                     iterationCount = AnimationIterationCount.Infinite,
                     timingFunction = AnimationTimingFunction.Linear,
                 ),
@@ -88,7 +88,7 @@ val InfiniteCarouselTrackStyle = CssStyle {
             .animation(
                 InfiniteCarouselScrollKeyframes.toAnimation(
                     colorMode = colorMode,
-                    duration = 20.s,
+                    duration = 40.s,
                     iterationCount = AnimationIterationCount.Infinite,
                     timingFunction = AnimationTimingFunction.Linear,
                     playState = AnimationPlayState.Paused,
