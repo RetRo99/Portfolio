@@ -1,9 +1,17 @@
 package io.github.retar.portfolio.pages
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import com.varabyte.kobweb.compose.css.Overflow
+import com.varabyte.kobweb.compose.css.Transition
 import com.varabyte.kobweb.compose.css.functions.brightness
+import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
+import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.alignItems
 import com.varabyte.kobweb.compose.ui.modifiers.borderRadius
@@ -11,8 +19,12 @@ import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.filter
 import com.varabyte.kobweb.compose.ui.modifiers.gap
+import com.varabyte.kobweb.compose.ui.modifiers.onMouseEnter
+import com.varabyte.kobweb.compose.ui.modifiers.onMouseLeave
+import com.varabyte.kobweb.compose.ui.modifiers.overflow
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.modifiers.scale
+import com.varabyte.kobweb.compose.ui.modifiers.transition
 import com.varabyte.kobweb.compose.ui.modifiers.width
 import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.core.Page
@@ -31,6 +43,7 @@ import io.github.retar.portfolio.styles.TitleStyle
 import org.jetbrains.compose.web.css.AlignItems
 import org.jetbrains.compose.web.css.CSSSizeValue
 import org.jetbrains.compose.web.css.CSSUnit
+import org.jetbrains.compose.web.css.ms
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.H1
 import org.jetbrains.compose.web.dom.P
@@ -111,6 +124,8 @@ val ProjectImageStyle = CssStyle {
         Modifier
             .width(220.px)
             .borderRadius(16.px)
+            .overflow(Overflow.Hidden)
+            .transition(Transition.all(duration = 500.ms))
     }
     hover {
         Modifier
@@ -124,12 +139,20 @@ private fun ProjectCard(
     title: String,
     imagePath: String,
 ) {
+    var hasMouse by remember { mutableStateOf(false) }
 
-    Image(
-        src = imagePath,
-        description = title,
+    Box(
         modifier = ProjectImageStyle.toModifier()
-    )
+            .onMouseEnter { hasMouse = true }
+            .onMouseLeave { hasMouse = false },
+        contentAlignment = Alignment.Center,
+    ) {
+        Image(
+            src = imagePath,
+            description = title,
+            modifier = Modifier.fillMaxSize(),
+        )
+    }
 }
 
 @Composable
