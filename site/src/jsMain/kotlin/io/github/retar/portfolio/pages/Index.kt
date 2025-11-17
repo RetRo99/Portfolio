@@ -1,6 +1,7 @@
 package io.github.retar.portfolio.pages
 
 import androidx.compose.runtime.Composable
+import com.varabyte.kobweb.compose.css.functions.brightness
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Modifier
@@ -8,13 +9,17 @@ import com.varabyte.kobweb.compose.ui.modifiers.alignItems
 import com.varabyte.kobweb.compose.ui.modifiers.borderRadius
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
+import com.varabyte.kobweb.compose.ui.modifiers.filter
 import com.varabyte.kobweb.compose.ui.modifiers.gap
 import com.varabyte.kobweb.compose.ui.modifiers.padding
+import com.varabyte.kobweb.compose.ui.modifiers.scale
 import com.varabyte.kobweb.compose.ui.modifiers.width
 import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.text.SpanText
+import com.varabyte.kobweb.silk.style.CssStyle
+import com.varabyte.kobweb.silk.style.selectors.hover
 import com.varabyte.kobweb.silk.style.toModifier
 import io.github.retar.portfolio.components.InfiniteCarousel
 import io.github.retar.portfolio.components.PortfolioButton
@@ -70,7 +75,7 @@ private fun SelectedProjectsSection() {
         InfiniteCarousel(
             items = SelectedProjects,
             modifier = Modifier
-                .padding(top = 24.px)
+                .padding(top = 16.px, bottom = 16.px)
                 .fillMaxWidth(),
         ) { project ->
             ProjectCard(
@@ -101,18 +106,29 @@ private val SelectedProjects = listOf(
     ),
 )
 
+val ProjectImageStyle = CssStyle {
+    base {
+        Modifier
+            .width(220.px)
+            .borderRadius(16.px)
+    }
+    hover {
+        Modifier
+            .filter(brightness(0.6))
+            .scale(1.1)
+    }
+}
+
 @Composable
 private fun ProjectCard(
     title: String,
     imagePath: String,
 ) {
+
     Image(
         src = imagePath,
         description = title,
-        modifier = Modifier
-            .width(220.px)
-            .borderRadius(16.px)
-            .padding(bottom = 8.px),
+        modifier = ProjectImageStyle.toModifier()
     )
 }
 
