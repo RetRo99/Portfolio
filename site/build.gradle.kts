@@ -17,6 +17,10 @@ kobweb {
             faviconPath.set("favicon.svg")
         }
     }
+
+    markdown {
+        defaultLayout.set(".pages.MarkdownPage")
+    }
 }
 
 kotlin {
