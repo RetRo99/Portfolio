@@ -5,31 +5,28 @@ import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.alignItems
-import com.varabyte.kobweb.compose.ui.modifiers.border
 import com.varabyte.kobweb.compose.ui.modifiers.borderRadius
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.gap
 import com.varabyte.kobweb.compose.ui.modifiers.padding
+import com.varabyte.kobweb.compose.ui.modifiers.width
 import com.varabyte.kobweb.compose.ui.toAttrs
-import io.github.retar.portfolio.components.InfiniteCarousel
 import com.varabyte.kobweb.core.Page
+import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.toModifier
+import io.github.retar.portfolio.components.InfiniteCarousel
 import io.github.retar.portfolio.components.PortfolioButton
 import io.github.retar.portfolio.components.PortfolioSection
 import io.github.retar.portfolio.resources.StringRes
-import io.github.retar.portfolio.styles.AppColors
 import io.github.retar.portfolio.styles.DescriptorStyle
 import io.github.retar.portfolio.styles.SubtitleStyle
 import io.github.retar.portfolio.styles.TitleStyle
 import org.jetbrains.compose.web.css.AlignItems
 import org.jetbrains.compose.web.css.CSSSizeValue
 import org.jetbrains.compose.web.css.CSSUnit
-import org.jetbrains.compose.web.css.LineStyle
-import org.jetbrains.compose.web.css.minWidth
 import org.jetbrains.compose.web.css.px
-import org.jetbrains.compose.web.dom.Div
 import org.jetbrains.compose.web.dom.H1
 import org.jetbrains.compose.web.dom.P
 import org.jetbrains.compose.web.dom.Text
@@ -76,38 +73,47 @@ private fun SelectedProjectsSection() {
                 .padding(top = 24.px)
                 .fillMaxWidth(),
         ) { project ->
-            ProjectCard(title = project)
+            ProjectCard(
+                title = project.title,
+                imagePath = project.imagePath,
+            )
         }
     }
 }
 
+private data class Project(
+    val title: String,
+    val imagePath: String,
+)
+
 private val SelectedProjects = listOf(
-    "Android client - Kotlin, Compose, and clean architecture",
-    "Portfolio site - this website built with Kotlin & Kobweb",
-    "Backend services - Kotlin & Spring / Ktor work",
+    Project(
+        title = "Android client - Kotlin, Compose, and clean architecture",
+        imagePath = "bardy/Bardy1.avif",
+    ),
+    Project(
+        title = "Portfolio site - this website built with Kotlin & Kobweb",
+        imagePath = "bardy/Bardy2.avif",
+    ),
+    Project(
+        title = "Backend services - Kotlin & Spring / Ktor work",
+        imagePath = "bardy/Bardy3.avif",
+    ),
 )
 
 @Composable
 private fun ProjectCard(
     title: String,
-    modifier: Modifier = Modifier,
+    imagePath: String,
 ) {
-    Div(
-        attrs = modifier
-            .padding(16.px)
-            .border(1.px, LineStyle.Solid, AppColors.ButtonBorder)
+    Image(
+        src = imagePath,
+        description = title,
+        modifier = Modifier
+            .width(220.px)
             .borderRadius(16.px)
-            .toAttrs {
-                style {
-                    minWidth(260.px)
-                }
-            },
-    ) {
-        SpanText(
-            text = title,
-            modifier = SubtitleStyle.toModifier(),
-        )
-    }
+            .padding(bottom = 8.px),
+    )
 }
 
 @Composable
