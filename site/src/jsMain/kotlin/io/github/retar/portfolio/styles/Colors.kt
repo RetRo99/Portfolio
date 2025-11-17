@@ -6,6 +6,8 @@ import org.jetbrains.compose.web.css.rgb
 object AppColors {
     val TextSecondary = rgb(0x85, 0x82, 0x7A)
 
+    val CodeBackground = rgb(0xF5, 0xF5, 0xF5)
+
     val ButtonBorder = Color.lightgray
     val ButtonBackground = Color.transparent
     val ButtonText = rgb(74, 74, 69)
