@@ -36,6 +36,7 @@ import com.varabyte.kobweb.silk.style.toModifier
 import io.github.retar.portfolio.components.InfiniteCarousel
 import io.github.retar.portfolio.components.PortfolioButton
 import io.github.retar.portfolio.components.PortfolioSection
+import io.github.retar.portfolio.resources.ImageRes
 import io.github.retar.portfolio.resources.StringRes
 import io.github.retar.portfolio.styles.DescriptorStyle
 import io.github.retar.portfolio.styles.SubtitleStyle
@@ -45,6 +46,7 @@ import org.jetbrains.compose.web.css.CSSSizeValue
 import org.jetbrains.compose.web.css.CSSUnit
 import org.jetbrains.compose.web.css.ms
 import org.jetbrains.compose.web.css.px
+import org.jetbrains.compose.web.dom.A
 import org.jetbrains.compose.web.dom.H1
 import org.jetbrains.compose.web.dom.P
 import org.jetbrains.compose.web.dom.Text
@@ -92,30 +94,25 @@ private fun SelectedProjectsSection() {
                 .fillMaxWidth(),
         ) { project ->
             ProjectCard(
-                title = project.title,
-                imagePath = project.imagePath,
+                image = project.image,
             )
         }
     }
 }
 
 private data class Project(
-    val title: String,
-    val imagePath: String,
+    val image: ImageRes,
 )
 
 private val SelectedProjects = listOf(
     Project(
-        title = "Android client - Kotlin, Compose, and clean architecture",
-        imagePath = "bardy/Bardy1.avif",
+        image = ImageRes.Bardy1,
     ),
     Project(
-        title = "Portfolio site - this website built with Kotlin & Kobweb",
-        imagePath = "bardy/Bardy2.avif",
+        image = ImageRes.Bardy2,
     ),
     Project(
-        title = "Backend services - Kotlin & Spring / Ktor work",
-        imagePath = "bardy/Bardy3.avif",
+        image = ImageRes.Bardy3,
     ),
 )
 
@@ -136,8 +133,7 @@ val ProjectImageStyle = CssStyle {
 
 @Composable
 private fun ProjectCard(
-    title: String,
-    imagePath: String,
+    image: ImageRes,
 ) {
     var hasMouse by remember { mutableStateOf(false) }
 
@@ -148,8 +144,7 @@ private fun ProjectCard(
         contentAlignment = Alignment.Center,
     ) {
         Image(
-            src = imagePath,
-            description = title,
+            src = image.path,
             modifier = Modifier.fillMaxSize(),
         )
     }

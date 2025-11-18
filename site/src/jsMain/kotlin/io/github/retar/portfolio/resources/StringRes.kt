@@ -37,4 +37,13 @@ enum class StringRes(val value: String) {
     SelectedProjectsSubtitle(
         "Explore a curated collection of projects that showcase my dedication to cutting-edge technology and intuitive design."
     ),
+
+    ArticlesTitle(
+        "Articles"
+    ),
+
+    ArticlesSubtitle(
+        "A selection of write-ups about how I build things, including Kobweb, Compose, and Kotlin."
+    ),
+
 }
