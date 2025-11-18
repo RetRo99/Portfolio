@@ -9,7 +9,6 @@ import com.varabyte.kobweb.compose.css.Cursor
 import com.varabyte.kobweb.compose.css.ObjectFit
 import com.varabyte.kobweb.compose.css.Overflow
 import com.varabyte.kobweb.compose.css.PointerEvents
-import com.varabyte.kobweb.compose.css.TextDecorationLine
 import com.varabyte.kobweb.compose.css.Transition
 import com.varabyte.kobweb.compose.css.functions.brightness
 import com.varabyte.kobweb.compose.foundation.layout.Box
@@ -26,17 +25,16 @@ import com.varabyte.kobweb.compose.ui.modifiers.onMouseLeave
 import com.varabyte.kobweb.compose.ui.modifiers.overflow
 import com.varabyte.kobweb.compose.ui.modifiers.pointerEvents
 import com.varabyte.kobweb.compose.ui.modifiers.scale
-import com.varabyte.kobweb.compose.ui.modifiers.textDecorationLine
 import com.varabyte.kobweb.compose.ui.modifiers.transition
 import com.varabyte.kobweb.compose.ui.modifiers.width
 import com.varabyte.kobweb.core.rememberPageContext
 import com.varabyte.kobweb.silk.components.graphics.Image
-import com.varabyte.kobweb.silk.components.navigation.Link
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.selectors.hover
 import com.varabyte.kobweb.silk.style.toModifier
 import io.github.retar.portfolio.resources.ImageRes
+import io.github.retar.portfolio.styles.ImageTextHoverStyle
 import org.jetbrains.compose.web.css.ms
 import org.jetbrains.compose.web.css.px
 
@@ -127,20 +125,20 @@ fun ArticleCard(
 ) {
     val router = rememberPageContext().router
 
-    Link(
-        path = route,
-        modifier = Modifier.textDecorationLine(TextDecorationLine.None)
+    var hasMouse by remember { mutableStateOf(false) }
+    ImageCard(
+        image = image,
+        modifier = modifier,
+        contentDescription = title,
+        onClick = {
+            hasMouse = !hasMouse
+//            router.navigateTo(route)
+        },
     ) {
-        // We pass 'null' for onClick so the Link tag handles the click
-        ImageCard(
-            image = image,
-            modifier = modifier,
-            contentDescription = title,
-            onClick = null
-        ) {
-            SpanText(description)
-        }
+        SpanText(
+            text = hasMouse.toString(),
+            modifier = ImageTextHoverStyle.toModifier(),
+        )
     }
-
 }
 
