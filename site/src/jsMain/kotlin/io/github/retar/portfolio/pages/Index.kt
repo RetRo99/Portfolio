@@ -137,7 +137,7 @@ private fun ArticlesSection() {
             ArticleCard(
                 title = "Building a Smooth, Infinite Carousel in Kobweb",
                 description = "How to build an infinite, gapless carousel using Silk and Kobweb.",
-                route = LinkRes.InfiniteCarouselArticle,
+                route = LinkRes.Internal.InfiniteCarouselArticle,
                 image = ImageRes.InfiniteCarouselArticle,
             )
         }
@@ -210,11 +210,11 @@ private fun SocialButtons(
 ) {
     Row(modifier.gap(8.px)) {
         PortfolioButton(
-            url = LinkRes.GitHub,
+            url = LinkRes.External.GitHub,
             label = StringRes.Github.value
         )
         PortfolioButton(
-            url = LinkRes.LinkedIn,
+            url = LinkRes.External.LinkedIn,
             label = StringRes.LinkedIn.value
         )
     }
