@@ -165,7 +165,7 @@ private fun ArticleCard(
             src = image.path,
             description = title,
             modifier = Modifier.fillMaxSize().onClick {
-                router.tryRoutingTo(route)
+                router.navigateTo(route)
             },
         )
         if (hasMouse) {
