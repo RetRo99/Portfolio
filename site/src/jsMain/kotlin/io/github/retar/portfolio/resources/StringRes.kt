@@ -18,16 +18,8 @@ enum class StringRes(val value: String) {
         "GitHub"
     ),
 
-    GitHubLink(
-        "https://github.com/retro99"
-    ),
-
     LinkedIn(
         "LinkedIn"
-    ),
-
-    LinkedInLink(
-        "https://www.linkedin.com/in/rok-retar/"
     ),
 
     SelectedProjectsTitle(

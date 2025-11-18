@@ -39,6 +39,7 @@ import io.github.retar.portfolio.components.InfiniteCarousel
 import io.github.retar.portfolio.components.PortfolioButton
 import io.github.retar.portfolio.components.PortfolioSection
 import io.github.retar.portfolio.resources.ImageRes
+import io.github.retar.portfolio.resources.LinkRes
 import io.github.retar.portfolio.resources.StringRes
 import io.github.retar.portfolio.styles.DescriptorStyle
 import io.github.retar.portfolio.styles.ImageTextHoverStyle
@@ -136,7 +137,7 @@ private fun ArticlesSection() {
             ArticleCard(
                 title = "Building a Smooth, Infinite Carousel in Kobweb",
                 description = "How to build an infinite, gapless carousel using Silk and Kobweb.",
-                route = "/articles/infinite-carousel",
+                route = LinkRes.InfiniteCarouselArticle,
                 image = ImageRes.InfiniteCarouselArticle,
             )
         }
@@ -164,7 +165,7 @@ private fun ArticleCard(
             src = image.path,
             description = title,
             modifier = Modifier.fillMaxSize().onClick {
-                router.navigateTo(route)
+                router.tryRoutingTo(route)
             },
         )
         if (hasMouse) {
@@ -209,11 +210,11 @@ private fun SocialButtons(
 ) {
     Row(modifier.gap(8.px)) {
         PortfolioButton(
-            url = StringRes.GitHubLink.value,
+            url = LinkRes.GitHub,
             label = StringRes.Github.value
         )
         PortfolioButton(
-            url = StringRes.LinkedInLink.value,
+            url = LinkRes.LinkedIn,
             label = StringRes.LinkedIn.value
         )
     }
