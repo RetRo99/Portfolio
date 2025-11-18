@@ -13,5 +13,6 @@ object AppColors {
     val ButtonText = rgb(74, 74, 69)
     val ButtonBackgroundHover = rgb(122, 136, 254)
     val ButtonTextHover = Color.white
+    val ImageTextHover = Color.white
 }
 

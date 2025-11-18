@@ -36,3 +36,11 @@ val DescriptorStyle = CssStyle {
             .fontSize(18.px)
     }
 }
+
+val ImageTextHoverStyle = CssStyle {
+    base {
+        Modifier
+            .color(AppColors.ImageTextHover)
+            .fontSize(18.px)
+    }
+}

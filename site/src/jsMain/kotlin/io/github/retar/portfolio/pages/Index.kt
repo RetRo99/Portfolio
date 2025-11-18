@@ -19,6 +19,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.filter
 import com.varabyte.kobweb.compose.ui.modifiers.gap
+import com.varabyte.kobweb.compose.ui.modifiers.onClick
 import com.varabyte.kobweb.compose.ui.modifiers.onMouseEnter
 import com.varabyte.kobweb.compose.ui.modifiers.onMouseLeave
 import com.varabyte.kobweb.compose.ui.modifiers.overflow
@@ -28,6 +29,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.transition
 import com.varabyte.kobweb.compose.ui.modifiers.width
 import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.core.Page
+import com.varabyte.kobweb.core.rememberPageContext
 import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.CssStyle
@@ -39,6 +41,7 @@ import io.github.retar.portfolio.components.PortfolioSection
 import io.github.retar.portfolio.resources.ImageRes
 import io.github.retar.portfolio.resources.StringRes
 import io.github.retar.portfolio.styles.DescriptorStyle
+import io.github.retar.portfolio.styles.ImageTextHoverStyle
 import io.github.retar.portfolio.styles.SubtitleStyle
 import io.github.retar.portfolio.styles.TitleStyle
 import org.jetbrains.compose.web.css.AlignItems
@@ -46,7 +49,6 @@ import org.jetbrains.compose.web.css.CSSSizeValue
 import org.jetbrains.compose.web.css.CSSUnit
 import org.jetbrains.compose.web.css.ms
 import org.jetbrains.compose.web.css.px
-import org.jetbrains.compose.web.dom.A
 import org.jetbrains.compose.web.dom.H1
 import org.jetbrains.compose.web.dom.P
 import org.jetbrains.compose.web.dom.Text
@@ -61,6 +63,7 @@ fun IndexPage() {
     ) {
         HeroSection()
         SelectedProjectsSection()
+        ArticlesSection()
     }
 }
 
@@ -116,6 +119,60 @@ private val SelectedProjects = listOf(
     ),
 )
 
+@Composable
+private fun ArticlesSection() {
+    PortfolioSection {
+        TitleWithSubtitle(
+            title = StringRes.ArticlesTitle.value,
+            subtitle = StringRes.ArticlesSubtitle.value,
+            gap = 10.px,
+        )
+        Column(
+            modifier = Modifier
+                .padding(top = 16.px, bottom = 16.px)
+                .fillMaxWidth()
+                .gap(12.px),
+        ) {
+            ArticleCard(
+                title = "Building a Smooth, Infinite Carousel in Kobweb",
+                description = "How to build an infinite, gapless carousel using Silk and Kobweb.",
+                route = "/articles/infinite-carousel",
+                image = ImageRes.InfiniteCarouselArticle,
+            )
+        }
+    }
+}
+
+@Composable
+private fun ArticleCard(
+    title: String,
+    description: String,
+    route: String,
+    image: ImageRes,
+) {
+    var hasMouse by remember { mutableStateOf(false) }
+
+    Box(
+        modifier = ProjectImageStyle.toModifier()
+            .onMouseEnter { hasMouse = true }
+            .onMouseLeave { hasMouse = false }
+            .overflow(Overflow.Hidden),
+        contentAlignment = Alignment.Center,
+    ) {
+        val router = rememberPageContext().router
+        Image(
+            src = image.path,
+            description = title,
+            modifier = Modifier.fillMaxSize().onClick {
+                router.navigateTo(route)
+            },
+        )
+        if (hasMouse) {
+            SpanText(text = description, modifier = ImageTextHoverStyle.toModifier())
+        }
+    }
+}
+
 val ProjectImageStyle = CssStyle {
     base {
         Modifier
@@ -135,12 +192,8 @@ val ProjectImageStyle = CssStyle {
 private fun ProjectCard(
     image: ImageRes,
 ) {
-    var hasMouse by remember { mutableStateOf(false) }
-
     Box(
-        modifier = ProjectImageStyle.toModifier()
-            .onMouseEnter { hasMouse = true }
-            .onMouseLeave { hasMouse = false },
+        modifier = ProjectImageStyle.toModifier(),
         contentAlignment = Alignment.Center,
     ) {
         Image(
