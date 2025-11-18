@@ -5,13 +5,28 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import com.varabyte.kobweb.compose.css.Cursor
+import com.varabyte.kobweb.compose.css.ObjectFit
+import com.varabyte.kobweb.compose.css.Overflow
+import com.varabyte.kobweb.compose.css.PointerEvents
+import com.varabyte.kobweb.compose.css.Transition
+import com.varabyte.kobweb.compose.css.functions.brightness
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
+import com.varabyte.kobweb.compose.ui.modifiers.borderRadius
+import com.varabyte.kobweb.compose.ui.modifiers.cursor
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
+import com.varabyte.kobweb.compose.ui.modifiers.filter
+import com.varabyte.kobweb.compose.ui.modifiers.objectFit
 import com.varabyte.kobweb.compose.ui.modifiers.onClick
 import com.varabyte.kobweb.compose.ui.modifiers.onMouseEnter
 import com.varabyte.kobweb.compose.ui.modifiers.onMouseLeave
+import com.varabyte.kobweb.compose.ui.modifiers.overflow
+import com.varabyte.kobweb.compose.ui.modifiers.pointerEvents
+import com.varabyte.kobweb.compose.ui.modifiers.scale
+import com.varabyte.kobweb.compose.ui.modifiers.transition
+import com.varabyte.kobweb.compose.ui.modifiers.width
 import com.varabyte.kobweb.core.rememberPageContext
 import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.text.SpanText
@@ -57,22 +72,34 @@ fun ImageCard(
             .onMouseLeave { hasMouse = false },
         contentAlignment = Alignment.Center,
     ) {
-        val imageModifier = if (onClick != null) {
+        val imageWrapperModifier = if (onClick != null) {
             Modifier
                 .fillMaxSize()
+                .cursor(Cursor.Pointer)
                 .onClick { onClick() }
         } else {
             Modifier.fillMaxSize()
         }
 
-        Image(
-            src = image.path,
-            description = contentDescription ?: "",
-            modifier = imageModifier,
-        )
+        Box(modifier = imageWrapperModifier) {
+            Image(
+                src = image.path,
+                description = contentDescription ?: "",
+                modifier = Modifier
+                    .fillMaxSize()
+                    .objectFit(ObjectFit.Cover)
+            )
+        }
 
         if (hasMouse && overlay != null) {
-            overlay()
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .pointerEvents(PointerEvents.None),
+                contentAlignment = Alignment.Center,
+            ) {
+                overlay()
+            }
         }
     }
 }
