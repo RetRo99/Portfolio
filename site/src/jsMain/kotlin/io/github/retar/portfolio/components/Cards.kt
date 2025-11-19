@@ -5,6 +5,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import com.varabyte.kobweb.compose.css.Cursor
 import com.varabyte.kobweb.compose.css.ObjectFit
 import com.varabyte.kobweb.compose.css.Overflow
 import com.varabyte.kobweb.compose.css.PointerEvents
@@ -14,6 +15,7 @@ import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.borderRadius
+import com.varabyte.kobweb.compose.ui.modifiers.cursor
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
 import com.varabyte.kobweb.compose.ui.modifiers.filter
 import com.varabyte.kobweb.compose.ui.modifiers.objectFit
@@ -73,7 +75,7 @@ fun ImageCard(
         val imageWrapperModifier = if (onClick != null) {
             Modifier
                 .fillMaxSize()
-//                .cursor(Cursor.Pointer)
+                .cursor(Cursor.Pointer)
                 .onClick { onClick() }
         } else {
             Modifier.fillMaxSize()
@@ -89,16 +91,16 @@ fun ImageCard(
             )
         }
 
-//        if (hasMouse && overlay != null) {
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .pointerEvents(PointerEvents.None),
-            contentAlignment = Alignment.Center,
-        ) {
-            overlay?.invoke()
+        if (hasMouse && overlay != null) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .pointerEvents(PointerEvents.None),
+                contentAlignment = Alignment.Center,
+            ) {
+                overlay()
+            }
         }
-//        }
     }
 }
 
@@ -123,18 +125,16 @@ fun ArticleCard(
 ) {
     val router = rememberPageContext().router
 
-    var hasMouse by remember { mutableStateOf(false) }
     ImageCard(
         image = image,
         modifier = modifier,
         contentDescription = title,
         onClick = {
-            hasMouse = !hasMouse
-//            router.navigateTo(route)
+            router.navigateTo(route)
         },
     ) {
         SpanText(
-            text = hasMouse.toString(),
+            text = description,
             modifier = ImageTextHoverStyle.toModifier(),
         )
     }
