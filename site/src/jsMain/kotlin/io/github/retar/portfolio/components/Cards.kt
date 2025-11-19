@@ -75,7 +75,7 @@ fun ImageCard(
         val imageWrapperModifier = if (onClick != null) {
             Modifier
                 .fillMaxSize()
-                .cursor(Cursor.Pointer)
+//                .cursor(Cursor.Pointer)
                 .onClick { onClick() }
         } else {
             Modifier.fillMaxSize()
@@ -91,16 +91,16 @@ fun ImageCard(
             )
         }
 
-        if (hasMouse && overlay != null) {
+//        if (hasMouse && overlay != null) {
             Box(
                 modifier = Modifier
                     .fillMaxSize()
                     .pointerEvents(PointerEvents.None),
                 contentAlignment = Alignment.Center,
             ) {
-                overlay()
+                overlay?.invoke()
             }
-        }
+//        }
     }
 }
 
