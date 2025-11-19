@@ -45,30 +45,6 @@ fun initStyles(ctx: InitSilkContext) {
 fun AppEntry(content: @Composable () -> Unit) {
     SilkApp {
         Surface(SmoothColorStyle.toModifier().fillMaxHeight()) {
-            SideEffect {
-                val head = document.head
-                if (head != null) {
-                    fun upsert(rel: String, type: String?, href: String) {
-                        var link =
-                            head.querySelector("link[rel='${'$'}rel']") as? HTMLLinkElement
-                        if (link == null) {
-                            link = document.createElement("link") as HTMLLinkElement
-                            link.rel = rel
-                            head.appendChild(link)
-                        }
-                        if (type != null) {
-                            link.type = type
-                        } else {
-                            link.removeAttribute("type")
-                        }
-                        link.href = href
-                    }
-                    // Ensure favicon works with basePath in export and adds explicit
-                    // type for better browser support
-                    upsert("icon", "image/svg+xml", "favicon.svg")
-                    upsert("shortcut icon", "image/svg+xml", "favicon.svg")
-                }
-            }
             content()
         }
     }
