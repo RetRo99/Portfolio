@@ -1,7 +1,12 @@
 package io.github.retar.portfolio.pages
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import com.varabyte.kobweb.compose.foundation.layout.Column
+import com.varabyte.kobweb.compose.foundation.layout.Spacer
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.alignItems
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
@@ -9,6 +14,8 @@ import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.gap
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.core.Page
+import com.varabyte.kobweb.silk.components.forms.Button
+import com.varabyte.kobweb.silk.components.text.SpanText
 import io.github.retar.portfolio.components.ArticleCard
 import io.github.retar.portfolio.components.DescriptorText
 import io.github.retar.portfolio.components.InfiniteCarousel
@@ -32,6 +39,14 @@ fun IndexPage() {
             .fillMaxSize()
             .alignItems(AlignItems.Center)
     ) {
+        var number by remember { mutableStateOf(0) }
+
+        SpanText(number.toString())
+        Button( {
+            number++
+        }) {
+            SpanText("Click to increment")
+        }
         HeroSection()
         SelectedProjectsSection()
         ArticlesSection()
