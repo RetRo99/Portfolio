@@ -1,6 +1,6 @@
 site:
   title: "Rok Retar"
-  basePath: "portfolio"
+  basePath: ""
 
 server:
   files:
