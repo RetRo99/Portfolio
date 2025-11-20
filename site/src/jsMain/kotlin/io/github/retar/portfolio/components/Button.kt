@@ -8,6 +8,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.border
 import com.varabyte.kobweb.compose.ui.modifiers.borderRadius
 import com.varabyte.kobweb.compose.ui.modifiers.color
 import com.varabyte.kobweb.compose.ui.modifiers.padding
+import com.varabyte.kobweb.compose.ui.modifiers.scale
 import com.varabyte.kobweb.compose.ui.modifiers.textDecorationLine
 import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.silk.style.CssStyle
@@ -29,11 +30,11 @@ fun PortfolioButton(url: String, label: String) {
 val LinkButtonStyle = CssStyle {
     base {
         Modifier
-            .padding(8.px)
-            .border(1.px, LineStyle.Solid, AppColors.ButtonBorder)
-            .borderRadius(16.px)
-            .backgroundColor(AppColors.ButtonBackground)
-            .color(AppColors.ButtonText)
+            .padding(topBottom = 10.px, leftRight = 18.px)
+            .border(1.px, LineStyle.Solid, AppColors.ButtonBackgroundHover)
+            .borderRadius(999.px)
+            .backgroundColor(AppColors.ButtonBackgroundHover)
+            .color(AppColors.ButtonTextHover)
             .textDecorationLine(TextDecorationLine.None)
     }
 
@@ -41,5 +42,6 @@ val LinkButtonStyle = CssStyle {
         Modifier
             .backgroundColor(AppColors.ButtonBackgroundHover)
             .color(AppColors.ButtonTextHover)
+            .scale(1.03)
     }
 }
