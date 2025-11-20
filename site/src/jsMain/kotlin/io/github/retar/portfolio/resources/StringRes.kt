@@ -38,4 +38,24 @@ enum class StringRes(val value: String) {
         "A selection of write-ups about how I build things, including Kobweb, Compose, and Kotlin."
     ),
 
+    HeaderTitle(
+        "Rok Retar"
+    ),
+
+    NavIntro(
+        "Intro"
+    ),
+
+    NavProjects(
+        "Projects"
+    ),
+
+    NavArticles(
+        "Articles"
+    ),
+
+    NavContact(
+        "Contact"
+    ),
+
 }

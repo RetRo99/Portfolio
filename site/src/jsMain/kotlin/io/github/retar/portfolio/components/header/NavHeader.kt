@@ -15,6 +15,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.modifiers.width
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.toModifier
+import io.github.retar.portfolio.resources.StringRes
 import io.github.retar.portfolio.styles.AppColors
 import io.github.retar.portfolio.styles.DescriptorStyle
 import org.jetbrains.compose.web.css.LineStyle
@@ -36,26 +37,26 @@ fun NavHeader() {
                 .justifyContent(JustifyContent.SpaceBetween),
         ) {
             SpanText(
-                text = "Rok Retar",
+                text = StringRes.HeaderTitle.value,
                 modifier = DescriptorStyle.toModifier(),
             )
 
             Row(
                 modifier = Modifier.gap(24.px),
             ) {
-                HeaderNavItem("Intro")
-                HeaderNavItem("Projects")
-                HeaderNavItem("Articles")
-                HeaderNavItem("Contact")
+                HeaderNavItem(StringRes.NavIntro)
+                HeaderNavItem(StringRes.NavProjects)
+                HeaderNavItem(StringRes.NavArticles)
+                HeaderNavItem(StringRes.NavContact)
             }
         }
     }
 }
 
 @Composable
-private fun HeaderNavItem(label: String) {
+private fun HeaderNavItem(label: StringRes) {
     SpanText(
-        text = label,
+        text = label.value,
         modifier = DescriptorStyle.toModifier(),
     )
 }
