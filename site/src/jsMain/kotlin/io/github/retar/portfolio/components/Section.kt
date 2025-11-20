@@ -28,6 +28,5 @@ val SectionContainerStyle = CssStyle {
         Modifier
             .padding(topBottom = 32.px, leftRight = 16.px)
             .width(100.percent)
-            .maxWidth(1200.px)
     }
 }

@@ -7,10 +7,12 @@ import com.varabyte.kobweb.compose.ui.modifiers.alignItems
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
 import com.varabyte.kobweb.core.layout.Layout
 import io.github.retar.portfolio.components.PortfolioSection
+import io.github.retar.portfolio.components.layouts.PageLayout
+
 import org.jetbrains.compose.web.css.AlignItems
 
-@Layout
 @Composable
+@Layout(".components.layouts.PageLayout")
 fun MarkdownPage(content: @Composable () -> Unit) {
     Column(
         modifier = Modifier

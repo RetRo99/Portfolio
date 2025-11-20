@@ -9,6 +9,8 @@ import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.gap
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.core.Page
+import com.varabyte.kobweb.core.layout.Layout
+
 import io.github.retar.portfolio.components.ArticleCard
 import io.github.retar.portfolio.components.DescriptorText
 import io.github.retar.portfolio.components.InfiniteCarousel
@@ -24,6 +26,7 @@ import org.jetbrains.compose.web.css.AlignItems
 import org.jetbrains.compose.web.css.px
 
 @Page
+@Layout(".components.layouts.PageLayout")
 @Composable
 fun IndexPage() {
     Column(

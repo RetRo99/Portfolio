@@ -49,7 +49,6 @@ val CardImageStyle = CssStyle {
 
     hover {
         Modifier
-            .filter(brightness(0.6))
             .scale(1.1)
     }
 }
@@ -132,11 +131,6 @@ fun ArticleCard(
         onClick = {
             router.navigateTo(route)
         },
-    ) {
-        SpanText(
-            text = description,
-            modifier = ImageTextHoverStyle.toModifier(),
-        )
-    }
+    )
 }
 
