@@ -1,15 +1,22 @@
 package io.github.retar.portfolio.pages
 
 import androidx.compose.runtime.Composable
+import com.varabyte.kobweb.compose.css.ObjectFit
 import com.varabyte.kobweb.compose.foundation.layout.Column
+import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.alignItems
+import com.varabyte.kobweb.compose.ui.modifiers.borderRadius
+import com.varabyte.kobweb.compose.ui.modifiers.draggable
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.gap
+import com.varabyte.kobweb.compose.ui.modifiers.objectFit
 import com.varabyte.kobweb.compose.ui.modifiers.padding
+import com.varabyte.kobweb.compose.ui.modifiers.size
 import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.core.layout.Layout
+import com.varabyte.kobweb.silk.components.graphics.Image
 
 import io.github.retar.portfolio.components.ArticleCard
 import io.github.retar.portfolio.components.DescriptorText
@@ -43,15 +50,35 @@ fun IndexPage() {
 @Composable
 private fun HeroSection() {
     PortfolioSection {
-        SectionHeader(
-            title = StringRes.HeroTitle.value,
-            subtitle = StringRes.HeroSubtitle.value,
-            gap = 40.px,
-        )
-        DescriptorText()
-        SocialButtons(
-            modifier = Modifier.padding(top = 44.px),
-        )
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .gap(32.px),
+        ) {
+            Column(
+                modifier = Modifier.gap(24.px),
+            ) {
+                Image(
+                    src = ImageRes.ProfileImage.path,
+                    description = "Portrait of Rok Retar",
+                    modifier = Modifier
+                        .size(144.px)
+                        .borderRadius(999.px)
+                        .objectFit(ObjectFit.Cover)
+                        .draggable(false),
+                )
+
+                SectionHeader(
+                    title = StringRes.HeroTitle.value,
+                    subtitle = StringRes.HeroSubtitle.value,
+                    gap = 40.px,
+                )
+                DescriptorText()
+                SocialButtons(
+                    modifier = Modifier.padding(top = 24.px),
+                )
+            }
+        }
     }
 }
 
