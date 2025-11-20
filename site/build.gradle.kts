@@ -13,8 +13,8 @@ version = "1.0-SNAPSHOT"
 kobweb {
     app {
         index {
-            description.set("Powered by Kobweb")
-            faviconPath.set("favicon.svg")
+            description.set("Personal portfolio of Rok Retar, showcasing projects, experience, and skills.")
+            faviconPath.set("/favicon.svg")
         }
     }
 
