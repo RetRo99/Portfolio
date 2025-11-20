@@ -1,4 +1,5 @@
 import com.varabyte.kobweb.gradle.application.util.configAsKobwebApplication
+import kotlinx.html.link
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
@@ -15,6 +16,17 @@ kobweb {
         index {
             description.set("Personal portfolio of Rok Retar, showcasing projects, experience, and skills.")
             faviconPath.set("/favicon.svg")
+            head.add {
+                link(rel = "preconnect", href = "https://fonts.googleapis.com")
+                link(
+                    rel = "preconnect",
+                    href = "https://fonts.gstatic.com"
+                ) { attributes["crossorigin"] = "" }
+                link(
+                    href = "https://fonts.googleapis.com/css2?family=Roboto&display=swap",
+                    rel = "stylesheet"
+                )
+            }
         }
     }
 
@@ -34,7 +46,7 @@ kotlin {
             implementation(libs.kobweb.silk)
             implementation(libs.silk.icons.fa)
             implementation(libs.kobwebx.markdown)
-            
+
         }
     }
 }

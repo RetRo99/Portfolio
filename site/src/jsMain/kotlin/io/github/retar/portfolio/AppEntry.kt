@@ -24,7 +24,9 @@ import org.w3c.dom.HTMLLinkElement
 @InitSilk
 fun initStyles(ctx: InitSilkContext) {
     ctx.stylesheet.registerStyleBase("html, body") {
-        Modifier.fillMaxHeight()
+        Modifier
+            .fillMaxHeight()
+            .fontFamily("Roboto", "system-ui", "sans-serif")
     }
 
     ctx.stylesheet.registerStyleBase("pre") {
