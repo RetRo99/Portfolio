@@ -5,7 +5,6 @@ import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.gap
 import com.varabyte.kobweb.compose.ui.toAttrs
-import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.toModifier
 import io.github.retar.portfolio.resources.StringRes
 import io.github.retar.portfolio.styles.DescriptorStyle
@@ -41,10 +40,9 @@ fun SectionTitle(text: String) {
 
 @Composable
 fun SectionSubtitle(text: String) {
-    SpanText(
-        text = text,
-        modifier = SubtitleStyle.toModifier(),
-    )
+    P(SubtitleStyle.toModifier().toAttrs()) {
+        Text(text)
+    }
 }
 
 @Composable
