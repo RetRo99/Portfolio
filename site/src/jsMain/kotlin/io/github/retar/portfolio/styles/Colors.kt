@@ -7,6 +7,7 @@ object AppColors {
     val TextSecondary = rgb(0x85, 0x82, 0x7A)
 
     val CodeBackground = rgb(0xF5, 0xF5, 0xF5)
+    val DrawerBackground = rgb(0xF5, 0xF5, 0xF5)
 
     val ButtonBorder = Color.lightgray
     val ButtonBackground = Color.transparent
