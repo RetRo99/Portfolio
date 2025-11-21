@@ -44,6 +44,7 @@ import com.varabyte.kobweb.silk.style.breakpoint.displayUntil
 import com.varabyte.kobweb.silk.style.extendedBy
 import com.varabyte.kobweb.silk.style.toModifier
 import io.github.retar.portfolio.LocalActiveSection
+import io.github.retar.portfolio.LocalSetActiveSection
 import io.github.retar.portfolio.resources.StringRes
 import io.github.retar.portfolio.styles.AppColors
 import io.github.retar.portfolio.styles.DescriptorStyle
@@ -176,6 +177,7 @@ private fun HeaderNavItem(
     onClick: () -> Unit,
 ) {
     val activeSection = LocalActiveSection.current
+    val setActiveSection = LocalSetActiveSection.current
     val isActive = item.section == activeSection
     SpanText(
         text = item.label.value,
@@ -185,7 +187,11 @@ private fun HeaderNavItem(
             .color(if (isActive) AppColors.Accent else Colors.Gray)
             .onClick {
                 onClick()
-                item.section?.let { section ->
+
+                val section = item.section
+                if (section != null) {
+                    setActiveSection(section)
+
                     document
                         .getElementById(section.domId)
                         ?.scrollIntoView()
