@@ -159,14 +159,14 @@ private fun MobileNavDropdown(onClose: () -> Unit) {
 @Composable
 private fun NavItems() {
     NavItem.entries.forEach { item ->
-        HeaderNavItem(item.label)
+        HeaderNavItem(item)
     }
 }
 
 @Composable
-private fun HeaderNavItem(label: StringRes) {
+private fun HeaderNavItem(item: NavItem) {
     SpanText(
-        text = label.value,
+        text = item.label.value,
         modifier = DescriptorStyle.toModifier(),
     )
 }
