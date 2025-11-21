@@ -38,7 +38,7 @@ fun IndexPage() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .alignItems(AlignItems.Center)
+            .alignItems(AlignItems.FlexStart)
     ) {
         HeroSection()
         SelectedProjectsSection()
