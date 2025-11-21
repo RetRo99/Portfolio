@@ -31,16 +31,16 @@ val LinkButtonStyle = CssStyle {
     base {
         Modifier
             .padding(topBottom = 10.px, leftRight = 18.px)
-            .border(1.px, LineStyle.Solid, AppColors.ButtonBackgroundHover)
+            .border(1.px, LineStyle.Solid, AppColors.Accent)
             .borderRadius(999.px)
-            .backgroundColor(AppColors.ButtonBackgroundHover)
+            .backgroundColor(AppColors.Accent)
             .color(AppColors.ButtonTextHover)
             .textDecorationLine(TextDecorationLine.None)
     }
 
     hover {
         Modifier
-            .backgroundColor(AppColors.ButtonBackgroundHover)
+            .backgroundColor(AppColors.Accent)
             .color(AppColors.ButtonTextHover)
             .scale(1.03)
     }

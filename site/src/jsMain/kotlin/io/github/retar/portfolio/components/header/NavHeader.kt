@@ -14,9 +14,11 @@ import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
+import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.animation
 import com.varabyte.kobweb.compose.ui.modifiers.backgroundColor
 import com.varabyte.kobweb.compose.ui.modifiers.borderBottom
+import com.varabyte.kobweb.compose.ui.modifiers.color
 import com.varabyte.kobweb.compose.ui.modifiers.cursor
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.gap
@@ -41,6 +43,7 @@ import com.varabyte.kobweb.silk.style.breakpoint.displayIfAtLeast
 import com.varabyte.kobweb.silk.style.breakpoint.displayUntil
 import com.varabyte.kobweb.silk.style.extendedBy
 import com.varabyte.kobweb.silk.style.toModifier
+import io.github.retar.portfolio.LocalActiveSection
 import io.github.retar.portfolio.resources.StringRes
 import io.github.retar.portfolio.styles.AppColors
 import io.github.retar.portfolio.styles.DescriptorStyle
@@ -172,11 +175,14 @@ private fun HeaderNavItem(
     item: NavItem,
     onClick: () -> Unit,
 ) {
+    val activeSection = LocalActiveSection.current
+    val isActive = item.section == activeSection
     SpanText(
         text = item.label.value,
         modifier = DescriptorStyle
             .toModifier()
             .cursor(Cursor.Pointer)
+            .color(if (isActive) AppColors.Accent else Colors.Gray)
             .onClick {
                 onClick()
                 item.section?.let { section ->

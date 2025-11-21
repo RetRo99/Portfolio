@@ -1,7 +1,12 @@
 package io.github.retar.portfolio
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.compositionLocalOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.backgroundColor
 import com.varabyte.kobweb.compose.ui.modifiers.borderRadius
@@ -17,9 +22,7 @@ import com.varabyte.kobweb.silk.init.registerStyleBase
 import com.varabyte.kobweb.silk.style.common.SmoothColorStyle
 import com.varabyte.kobweb.silk.style.toModifier
 import io.github.retar.portfolio.styles.AppColors
-import kotlinx.browser.document
 import org.jetbrains.compose.web.css.px
-import org.w3c.dom.HTMLLinkElement
 
 @InitSilk
 fun initStyles(ctx: InitSilkContext) {
@@ -42,12 +45,22 @@ fun initStyles(ctx: InitSilkContext) {
     }
 }
 
+val LocalActiveSection = compositionLocalOf<PortfolioSectionId?> { null }
+val LocalSetActiveSection = compositionLocalOf<(PortfolioSectionId?) -> Unit> { {} }
+
 @App
 @Composable
 fun AppEntry(content: @Composable () -> Unit) {
     SilkApp {
         Surface(SmoothColorStyle.toModifier().fillMaxHeight()) {
-            content()
+            var active by remember { mutableStateOf<PortfolioSectionId?>(null) }
+
+            CompositionLocalProvider(
+                LocalActiveSection provides active,
+                LocalSetActiveSection provides { active = it }
+            ) {
+                content()
+            }
         }
     }
 }
