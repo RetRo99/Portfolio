@@ -16,7 +16,7 @@ fun MarkdownPage(content: @Composable () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .alignItems(AlignItems.Center)
+            .alignItems(AlignItems.FlexStart)
     ) {
         PortfolioSection(
             section = PortfolioSectionId.MarkdownPage,
