@@ -44,6 +44,7 @@ import com.varabyte.kobweb.silk.style.toModifier
 import io.github.retar.portfolio.resources.StringRes
 import io.github.retar.portfolio.styles.AppColors
 import io.github.retar.portfolio.styles.DescriptorStyle
+import kotlinx.browser.document
 import org.jetbrains.compose.web.css.LineStyle
 import org.jetbrains.compose.web.css.Position
 import org.jetbrains.compose.web.css.ms
@@ -99,7 +100,7 @@ fun NavHeader() {
                     .gap(24.px)
                     .displayIfAtLeast(Breakpoint.MD),
             ) {
-                NavItems()
+                NavItems({ isMenuOpen = false })
             }
 
             Box(
@@ -151,22 +152,38 @@ private fun MobileNavDropdown(onClose: () -> Unit) {
                 .onClick { it.stopPropagation() },
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            NavItems()
+            NavItems(onItemClick = onClose)
         }
     }
 }
 
 @Composable
-private fun NavItems() {
+private fun NavItems(onItemClick: () -> Unit) {
     NavItem.entries.forEach { item ->
-        HeaderNavItem(item)
+        HeaderNavItem(
+            item = item,
+            onClick = onItemClick,
+        )
     }
 }
 
 @Composable
-private fun HeaderNavItem(item: NavItem) {
+private fun HeaderNavItem(
+    item: NavItem,
+    onClick: () -> Unit,
+) {
     SpanText(
         text = item.label.value,
-        modifier = DescriptorStyle.toModifier(),
+        modifier = DescriptorStyle
+            .toModifier()
+            .cursor(Cursor.Pointer)
+            .onClick {
+                onClick()
+                item.section?.let { section ->
+                    document
+                        .getElementById(section.domId)
+                        ?.scrollIntoView()
+                }
+            },
     )
 }
