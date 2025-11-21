@@ -7,8 +7,8 @@ import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.backgroundColor
-import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
+import com.varabyte.kobweb.compose.ui.modifiers.minHeight
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.modifiers.position
 import com.varabyte.kobweb.compose.ui.modifiers.top
@@ -22,6 +22,7 @@ import io.github.retar.portfolio.components.header.NavHeader
 import org.jetbrains.compose.web.css.Position
 import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
+import org.jetbrains.compose.web.css.vh
 
 val PageContentStyle = CssStyle {
     base {
@@ -52,7 +53,8 @@ val NavHeaderStyle = CssStyle {
 fun PageLayout(content: @Composable () -> Unit) {
     Column(
         modifier = Modifier
-            .fillMaxSize(),
+            .fillMaxWidth()
+            .minHeight(100.vh),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
