@@ -16,6 +16,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.size
 import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.core.layout.Layout
 import com.varabyte.kobweb.silk.components.graphics.Image
+import io.github.retar.portfolio.PortfolioSectionId
 import io.github.retar.portfolio.components.ArticleCard
 import io.github.retar.portfolio.components.DescriptorText
 import io.github.retar.portfolio.components.InfiniteCarousel
@@ -47,7 +48,9 @@ fun IndexPage() {
 
 @Composable
 private fun HeroSection() {
-    PortfolioSection {
+    PortfolioSection(
+        section = PortfolioSectionId.Intro,
+    ) {
         Column(
             modifier = Modifier.gap(24.px),
         ) {
@@ -76,7 +79,9 @@ private fun HeroSection() {
 
 @Composable
 private fun SelectedProjectsSection() {
-    PortfolioSection {
+    PortfolioSection(
+        section = PortfolioSectionId.Projects,
+    ) {
         SectionHeader(
             title = StringRes.SelectedProjectsTitle.value,
             subtitle = StringRes.SelectedProjectsSubtitle.value,
@@ -97,7 +102,9 @@ private fun SelectedProjectsSection() {
 
 @Composable
 private fun ArticlesSection() {
-    PortfolioSection {
+    PortfolioSection(
+        section = PortfolioSectionId.Articles,
+    ) {
         SectionHeader(
             title = StringRes.ArticlesTitle.value,
             subtitle = StringRes.ArticlesSubtitle.value,

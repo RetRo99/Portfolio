@@ -99,10 +99,7 @@ fun NavHeader() {
                     .gap(24.px)
                     .displayIfAtLeast(Breakpoint.MD),
             ) {
-                HeaderNavItem(StringRes.NavIntro)
-                HeaderNavItem(StringRes.NavProjects)
-                HeaderNavItem(StringRes.NavArticles)
-                HeaderNavItem(StringRes.NavContact)
+                NavItems()
             }
 
             Box(
@@ -113,7 +110,7 @@ fun NavHeader() {
                     CloseIcon(
                         modifier = MenuIconStyle
                             .toModifier()
-                            .onClick { isMenuOpen = false }
+                            .onClick { isMenuOpen = false },
                     )
                 } else {
                     HamburgerIcon(
@@ -143,7 +140,7 @@ private fun MobileNavDropdown(onClose: () -> Unit) {
             .padding(top = 24.px)
             .animation(MobileNavSlideDownKeyframes.toAnimation(duration = 300.ms))
             .onClick { onClose() },
-        contentAlignment = Alignment.TopCenter
+        contentAlignment = Alignment.TopCenter,
     ) {
         Column(
             modifier = Modifier
@@ -154,11 +151,15 @@ private fun MobileNavDropdown(onClose: () -> Unit) {
                 .onClick { it.stopPropagation() },
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            HeaderNavItem(StringRes.NavIntro)
-            HeaderNavItem(StringRes.NavProjects)
-            HeaderNavItem(StringRes.NavArticles)
-            HeaderNavItem(StringRes.NavContact)
+            NavItems()
         }
+    }
+}
+
+@Composable
+private fun NavItems() {
+    NavItem.entries.forEach { item ->
+        HeaderNavItem(item.label)
     }
 }
 
