@@ -7,12 +7,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import com.varabyte.kobweb.compose.css.ScrollBehavior
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.backgroundColor
 import com.varabyte.kobweb.compose.ui.modifiers.borderRadius
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxHeight
 import com.varabyte.kobweb.compose.ui.modifiers.fontFamily
 import com.varabyte.kobweb.compose.ui.modifiers.padding
+import com.varabyte.kobweb.compose.ui.modifiers.scrollBehavior
 import com.varabyte.kobweb.core.App
 import com.varabyte.kobweb.silk.SilkApp
 import com.varabyte.kobweb.silk.components.layout.Surface
@@ -30,6 +32,12 @@ fun initStyles(ctx: InitSilkContext) {
         Modifier
             .fillMaxHeight()
             .fontFamily("Roboto", "system-ui", "sans-serif")
+    }
+
+    ctx.stylesheet.registerStyle("html") {
+        base {
+            Modifier.scrollBehavior(ScrollBehavior.Smooth)
+        }
     }
 
     ctx.stylesheet.registerStyleBase("pre") {
