@@ -8,6 +8,7 @@ import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.backgroundColor
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
+import com.varabyte.kobweb.compose.ui.modifiers.id
 import com.varabyte.kobweb.compose.ui.modifiers.minHeight
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.modifiers.position
@@ -17,6 +18,7 @@ import com.varabyte.kobweb.core.layout.Layout
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.style.toModifier
+import io.github.retar.portfolio.PortfolioSectionId
 import io.github.retar.portfolio.components.footer.Footer
 import io.github.retar.portfolio.components.header.NavHeader
 import org.jetbrains.compose.web.css.Position
@@ -26,7 +28,10 @@ import org.jetbrains.compose.web.css.vh
 
 val PageContentStyle = CssStyle {
     base {
-        Modifier.fillMaxWidth(95.percent)
+        Modifier
+            .fillMaxWidth(95.percent)
+            .padding(top = 24.px)
+
     }
     Breakpoint.MD {
         Modifier.fillMaxWidth(85.percent)
@@ -61,6 +66,7 @@ fun PageLayout(content: @Composable () -> Unit) {
         Box(
             modifier = NavHeaderStyle
                 .toModifier()
+                .id(PortfolioSectionId.Header.domId)
                 .fillMaxWidth()
                 .position(Position.Sticky)
                 .top(0.px)

@@ -45,15 +45,18 @@ import com.varabyte.kobweb.silk.style.extendedBy
 import com.varabyte.kobweb.silk.style.toModifier
 import io.github.retar.portfolio.LocalActiveSection
 import io.github.retar.portfolio.LocalSetActiveSection
+import io.github.retar.portfolio.PortfolioSectionId
 import io.github.retar.portfolio.resources.StringRes
 import io.github.retar.portfolio.styles.AppColors
 import io.github.retar.portfolio.styles.DescriptorStyle
 import kotlinx.browser.document
+import kotlinx.browser.window
 import org.jetbrains.compose.web.css.LineStyle
 import org.jetbrains.compose.web.css.Position
 import org.jetbrains.compose.web.css.ms
 import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
+import org.w3c.dom.HTMLElement
 
 val MobileNavSlideDownKeyframes = Keyframes {
     from {
@@ -192,9 +195,24 @@ private fun HeaderNavItem(
                 if (section != null) {
                     setActiveSection(section)
 
-                    document
-                        .getElementById(section.domId)
-                        ?.scrollIntoView()
+                    val target =
+                        document
+                            .getElementById(section.domId)
+                                as? HTMLElement
+                            ?: return@onClick
+
+                    val headerHeight =
+                        (document.getElementById(PortfolioSectionId.Header.domId) as? HTMLElement)
+                            ?.offsetHeight
+                            ?.toDouble()
+                            ?: 0.0
+
+                    val targetY =
+                        target.getBoundingClientRect().top +
+                                window.scrollY -
+                                headerHeight
+
+                    window.scrollTo(x = 0.0, y = targetY)
                 }
             },
     )
