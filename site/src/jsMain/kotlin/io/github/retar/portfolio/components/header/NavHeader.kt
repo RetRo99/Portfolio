@@ -233,6 +233,7 @@ private fun HeaderNavItem(
         text = item.label.value,
         modifier = DescriptorStyle
             .toModifier()
+            .userSelect(UserSelect.None)
             .cursor(Cursor.Pointer)
             .color(if (isActive) palette.primary else palette.textSecondary)
             .onClick {
@@ -368,6 +369,7 @@ private fun LanguageItem(
             text = language.label,
             modifier = DescriptorStyle
                 .toModifier()
+                .userSelect(UserSelect.None)
                 .color(if (isSelected) palette.primary else palette.textSecondary)
         )
     }
