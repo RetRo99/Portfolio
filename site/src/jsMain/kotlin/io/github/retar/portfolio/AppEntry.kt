@@ -37,6 +37,8 @@ fun initStyles(ctx: InitSilkContext) {
     ctx.config.initialColorMode =
         ColorMode.loadFromLocalStorage() ?: ColorMode.systemPreference
 
+    Language.initializeFromLocalStorage()
+
     ctx.theme.palettes.light.background = SitePalettes.light.background
     ctx.theme.palettes.light.color = SitePalettes.light.textPrimary
 
@@ -73,13 +75,10 @@ fun AppEntry(content: @Composable () -> Unit) {
     SilkApp {
         Surface(SmoothColorStyle.toModifier()) {
             var active by remember { mutableStateOf<PortfolioSectionId?>(null) }
-            var language by remember { mutableStateOf(Language.Default) }
 
             CompositionLocalProvider(
                 LocalActiveSection provides active,
                 LocalSetActiveSection provides { active = it },
-                LocalLanguage provides language,
-                LocalSetLanguage provides { language = it },
             ) {
                 content()
             }

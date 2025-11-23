@@ -2,12 +2,11 @@ package io.github.retar.portfolio.resources
 
 import androidx.compose.runtime.Composable
 import io.github.retar.portfolio.Language
-import io.github.retar.portfolio.LocalLanguage
 
 sealed class StringRes(val en: String, val sl: String, val lv: String) {
     val value: String
         @Composable get() {
-            val language = LocalLanguage.current
+            val language = Language.current
             return when (language) {
                 Language.EN -> en
                 Language.SL -> sl

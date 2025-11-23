@@ -17,7 +17,6 @@ import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.animation
 import com.varabyte.kobweb.compose.ui.modifiers.backgroundColor
-import com.varabyte.kobweb.compose.ui.modifiers.borderBottom
 import com.varabyte.kobweb.compose.ui.modifiers.borderRadius
 import com.varabyte.kobweb.compose.ui.modifiers.boxShadow
 import com.varabyte.kobweb.compose.ui.modifiers.color
@@ -57,17 +56,15 @@ import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.varabyte.kobweb.silk.theme.colors.saveToLocalStorage
 import io.github.retar.portfolio.Language
 import io.github.retar.portfolio.LocalActiveSection
-import io.github.retar.portfolio.LocalLanguage
 import io.github.retar.portfolio.LocalSetActiveSection
-import io.github.retar.portfolio.LocalSetLanguage
 import io.github.retar.portfolio.PortfolioSectionId
 import io.github.retar.portfolio.resources.StringRes
+import io.github.retar.portfolio.saveToLocalStorage
 import io.github.retar.portfolio.styles.DescriptorStyle
 import io.github.retar.portfolio.styles.sitePalette
 import io.github.retar.portfolio.styles.toSitePalette
 import kotlinx.browser.document
 import kotlinx.browser.window
-import org.jetbrains.compose.web.css.LineStyle
 import org.jetbrains.compose.web.css.Position
 import org.jetbrains.compose.web.css.ms
 import org.jetbrains.compose.web.css.percent
@@ -111,13 +108,11 @@ fun NavHeader() {
     var isMenuOpen by remember { mutableStateOf(false) }
 
     val palette = sitePalette()
-    val borderColor = palette.headerBorder
 
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .position(Position.Relative)
-            .borderBottom(1.px, LineStyle.Solid, borderColor),
+            .position(Position.Relative),
         contentAlignment = Alignment.Center,
     ) {
         Row(
@@ -161,12 +156,14 @@ fun NavHeader() {
                         CloseIcon(
                             modifier = MenuIconStyle
                                 .toModifier()
+                                .color(palette.textSecondary)
                                 .onClick { isMenuOpen = false },
                         )
                     } else {
                         HamburgerIcon(
                             modifier = MenuIconStyle
                                 .toModifier()
+                                .color(palette.textSecondary)
                                 .onClick { isMenuOpen = true },
                         )
                     }
@@ -271,12 +268,14 @@ private fun HeaderNavItem(
 @Composable
 private fun ThemeToggle(modifier: Modifier = Modifier) {
     var colorMode by ColorMode.currentState
+    val palette = sitePalette()
 
     LaunchedEffect(colorMode) {
         colorMode.saveToLocalStorage()
     }
     val iconModifier = DescriptorStyle
         .toModifier()
+        .color(palette.textSecondary)
         .then(modifier)
         .cursor(Cursor.Pointer)
         .onClick {
@@ -292,10 +291,13 @@ private fun ThemeToggle(modifier: Modifier = Modifier) {
 
 @Composable
 private fun LanguageSwitcher(modifier: Modifier = Modifier) {
-    val language = LocalLanguage.current
-    val setLanguage = LocalSetLanguage.current
+    var language by Language.currentState
     var isOpen by remember { mutableStateOf(false) }
+    val palette = sitePalette()
 
+    LaunchedEffect(language) {
+        language.saveToLocalStorage()
+    }
     Box(
         modifier = modifier.position(Position.Relative),
         contentAlignment = Alignment.Center
@@ -304,6 +306,7 @@ private fun LanguageSwitcher(modifier: Modifier = Modifier) {
             text = language.code.uppercase(),
             modifier = DescriptorStyle
                 .toModifier()
+                .color(palette.textSecondary)
                 .cursor(Cursor.Pointer)
                 .onClick { isOpen = !isOpen }
         )
@@ -335,7 +338,7 @@ private fun LanguageSwitcher(modifier: Modifier = Modifier) {
                         language = item,
                         isSelected = item == language,
                         onClick = {
-                            setLanguage(item)
+                            language = item
                             isOpen = false
                         }
                     )
