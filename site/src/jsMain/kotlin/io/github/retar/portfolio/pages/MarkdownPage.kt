@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.alignItems
-import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
+import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.core.layout.Layout
 import io.github.retar.portfolio.PortfolioSectionId
 import io.github.retar.portfolio.components.PortfolioSection
@@ -15,11 +15,12 @@ import org.jetbrains.compose.web.css.AlignItems
 fun MarkdownPage(content: @Composable () -> Unit) {
     Column(
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxWidth()
             .alignItems(AlignItems.FlexStart)
     ) {
         PortfolioSection(
             section = PortfolioSectionId.MarkdownPage,
+            modifier = Modifier.fillMaxWidth(),
         ) {
             content()
         }
