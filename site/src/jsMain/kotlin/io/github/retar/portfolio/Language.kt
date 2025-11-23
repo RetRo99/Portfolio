@@ -4,7 +4,8 @@ import androidx.compose.runtime.compositionLocalOf
 
 enum class Language(val code: String, val label: String) {
     EN("en", "English"),
-    SL("sl", "Slovenščina");
+    SL("sl", "Slovenščina"),
+    LV("lv", "Latviešu");
 
     companion object {
         val Default = EN

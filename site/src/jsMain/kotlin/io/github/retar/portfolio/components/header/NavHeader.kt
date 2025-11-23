@@ -281,7 +281,7 @@ private fun LanguageSwitcher(modifier: Modifier = Modifier) {
             .then(modifier)
             .cursor(Cursor.Pointer)
             .onClick {
-                setLanguage(if (language == Language.EN) Language.SL else Language.EN)
+                setLanguage(Language.entries[(language.ordinal + 1) % Language.entries.size])
             }
     )
 }
