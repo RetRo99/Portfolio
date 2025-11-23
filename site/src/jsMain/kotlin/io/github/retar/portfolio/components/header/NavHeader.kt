@@ -19,21 +19,26 @@ import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.animation
 import com.varabyte.kobweb.compose.ui.modifiers.backgroundColor
 import com.varabyte.kobweb.compose.ui.modifiers.borderBottom
+import com.varabyte.kobweb.compose.ui.modifiers.borderRadius
+import com.varabyte.kobweb.compose.ui.modifiers.boxShadow
 import com.varabyte.kobweb.compose.ui.modifiers.color
 import com.varabyte.kobweb.compose.ui.modifiers.cursor
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.gap
 import com.varabyte.kobweb.compose.ui.modifiers.justifyContent
 import com.varabyte.kobweb.compose.ui.modifiers.left
+import com.varabyte.kobweb.compose.ui.modifiers.minWidth
 import com.varabyte.kobweb.compose.ui.modifiers.onClick
 import com.varabyte.kobweb.compose.ui.modifiers.opacity
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.modifiers.position
 import com.varabyte.kobweb.compose.ui.modifiers.textAlign
 import com.varabyte.kobweb.compose.ui.modifiers.top
+import com.varabyte.kobweb.compose.ui.modifiers.translateX
 import com.varabyte.kobweb.compose.ui.modifiers.translateY
 import com.varabyte.kobweb.compose.ui.modifiers.userSelect
 import com.varabyte.kobweb.compose.ui.modifiers.width
+import com.varabyte.kobweb.compose.ui.modifiers.zIndex
 import com.varabyte.kobweb.silk.components.icons.CloseIcon
 import com.varabyte.kobweb.silk.components.icons.HamburgerIcon
 import com.varabyte.kobweb.silk.components.icons.MoonIcon
@@ -64,6 +69,7 @@ import org.jetbrains.compose.web.css.Position
 import org.jetbrains.compose.web.css.ms
 import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
+import org.jetbrains.compose.web.css.rgba
 import org.w3c.dom.HTMLElement
 
 val MobileNavSlideDownKeyframes = Keyframes {
@@ -117,6 +123,8 @@ fun NavHeader() {
                 modifier = Modifier
                     .gap(24.px)
                     .displayIfAtLeast(Breakpoint.MD),
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 NavItems({ isMenuOpen = false })
                 Row(modifier = Modifier.gap(12.px)) {
@@ -273,16 +281,72 @@ private fun ThemeToggle(modifier: Modifier = Modifier) {
 private fun LanguageSwitcher(modifier: Modifier = Modifier) {
     val language = LocalLanguage.current
     val setLanguage = LocalSetLanguage.current
+    var isOpen by remember { mutableStateOf(false) }
+    val palette = sitePalette()
 
-    SpanText(
-        text = language.code.uppercase(),
-        modifier = DescriptorStyle
-            .toModifier()
-            .then(modifier)
-            .cursor(Cursor.Pointer)
-            .onClick {
-                setLanguage(Language.entries[(language.ordinal + 1) % Language.entries.size])
+    Box(
+        modifier = modifier.position(Position.Relative),
+        contentAlignment = Alignment.Center
+    ) {
+        SpanText(
+            text = language.code.uppercase(),
+            modifier = DescriptorStyle
+                .toModifier()
+                .cursor(Cursor.Pointer)
+                .onClick { isOpen = !isOpen }
+        )
+
+        if (isOpen) {
+            Column(
+                modifier = Modifier
+                    .position(Position.Absolute)
+                    .top(100.percent)
+                    .left(50.percent)
+                    .translateY(10.px)
+                    .translateX((-50).percent)
+                    .backgroundColor(palette.background)
+                    .padding(8.px)
+                    .borderRadius(8.px)
+                    .minWidth(150.px)
+                    .boxShadow(0.px, 4.px, 12.px, 0.px, rgba(0, 0, 0, 0.1))
+                    .zIndex(10)
+            ) {
+                Language.entries.forEach { item ->
+                    LanguageItem(
+                        language = item,
+                        isSelected = item == language,
+                        onClick = {
+                            setLanguage(item)
+                            isOpen = false
+                        }
+                    )
+                }
             }
-    )
+        }
+    }
+}
+
+@Composable
+private fun LanguageItem(
+    language: Language,
+    isSelected: Boolean,
+    onClick: () -> Unit
+) {
+    val palette = sitePalette()
+
+    Box(
+        modifier = Modifier
+            .width(100.percent)
+            .padding(8.px)
+            .cursor(Cursor.Pointer)
+            .onClick { onClick() }
+    ) {
+        SpanText(
+            text = language.label,
+            modifier = DescriptorStyle
+                .toModifier()
+                .color(if (isSelected) palette.primary else palette.textSecondary)
+        )
+    }
 }
 
