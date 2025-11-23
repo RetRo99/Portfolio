@@ -42,6 +42,11 @@ kobweb {
                         )
                     }
                 }
+                script {
+                    defer = true
+                    src = "https://cloud.umami.is/script.js"
+                    attributes["data-website-id"] = "75b85e4b-8c2d-4491-b957-0d6d27fd6307"
+                }
             }
         }
     }
