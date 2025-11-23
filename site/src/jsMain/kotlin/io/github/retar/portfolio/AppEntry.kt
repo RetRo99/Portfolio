@@ -73,10 +73,13 @@ fun AppEntry(content: @Composable () -> Unit) {
     SilkApp {
         Surface(SmoothColorStyle.toModifier()) {
             var active by remember { mutableStateOf<PortfolioSectionId?>(null) }
+            var language by remember { mutableStateOf(Language.Default) }
 
             CompositionLocalProvider(
                 LocalActiveSection provides active,
                 LocalSetActiveSection provides { active = it },
+                LocalLanguage provides language,
+                LocalSetLanguage provides { language = it },
             ) {
                 content()
             }

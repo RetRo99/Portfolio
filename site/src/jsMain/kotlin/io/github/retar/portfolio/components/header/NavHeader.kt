@@ -10,6 +10,7 @@ import com.varabyte.kobweb.compose.css.Cursor
 import com.varabyte.kobweb.compose.css.JustifyContent
 import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.css.UserSelect
+import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
@@ -47,8 +48,11 @@ import com.varabyte.kobweb.silk.style.extendedBy
 import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.varabyte.kobweb.silk.theme.colors.saveToLocalStorage
+import io.github.retar.portfolio.Language
 import io.github.retar.portfolio.LocalActiveSection
+import io.github.retar.portfolio.LocalLanguage
 import io.github.retar.portfolio.LocalSetActiveSection
+import io.github.retar.portfolio.LocalSetLanguage
 import io.github.retar.portfolio.PortfolioSectionId
 import io.github.retar.portfolio.resources.StringRes
 import io.github.retar.portfolio.styles.DescriptorStyle
@@ -115,25 +119,36 @@ fun NavHeader() {
                     .displayIfAtLeast(Breakpoint.MD),
             ) {
                 NavItems({ isMenuOpen = false })
-                ThemeToggle()
+                Row(modifier = Modifier.gap(12.px)) {
+                    ThemeToggle()
+                    LanguageSwitcher()
+                }
             }
 
             Box(
                 modifier = Modifier.displayUntil(Breakpoint.MD),
                 contentAlignment = Alignment.Center,
             ) {
-                if (isMenuOpen) {
-                    CloseIcon(
-                        modifier = MenuIconStyle
-                            .toModifier()
-                            .onClick { isMenuOpen = false },
-                    )
-                } else {
-                    HamburgerIcon(
-                        modifier = MenuIconStyle
-                            .toModifier()
-                            .onClick { isMenuOpen = true },
-                    )
+                Row(
+                    modifier = Modifier.gap(12.px),
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    ThemeToggle()
+                    LanguageSwitcher()
+                    if (isMenuOpen) {
+                        CloseIcon(
+                            modifier = MenuIconStyle
+                                .toModifier()
+                                .onClick { isMenuOpen = false },
+                        )
+                    } else {
+                        HamburgerIcon(
+                            modifier = MenuIconStyle
+                                .toModifier()
+                                .onClick { isMenuOpen = true },
+                        )
+                    }
                 }
             }
         }
@@ -171,7 +186,6 @@ private fun MobileNavDropdown(onClose: () -> Unit) {
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             NavItems(onItemClick = onClose)
-            ThemeToggle(modifier = Modifier.padding(top = 8.px))
         }
     }
 }
@@ -253,5 +267,22 @@ private fun ThemeToggle(modifier: Modifier = Modifier) {
     } else {
         MoonIcon(modifier = iconModifier)
     }
+}
+
+@Composable
+private fun LanguageSwitcher(modifier: Modifier = Modifier) {
+    val language = LocalLanguage.current
+    val setLanguage = LocalSetLanguage.current
+
+    SpanText(
+        text = language.code.uppercase(),
+        modifier = DescriptorStyle
+            .toModifier()
+            .then(modifier)
+            .cursor(Cursor.Pointer)
+            .onClick {
+                setLanguage(if (language == Language.EN) Language.SL else Language.EN)
+            }
+    )
 }
 
