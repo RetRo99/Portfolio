@@ -47,12 +47,7 @@ fun initStyles(ctx: InitSilkContext) {
         Modifier
             .fillMaxHeight()
             .fontFamily("Inter", "system-ui", "sans-serif")
-    }
-
-    ctx.stylesheet.registerStyle("html") {
-        base {
-            Modifier.scrollBehavior(ScrollBehavior.Smooth)
-        }
+            .scrollBehavior(ScrollBehavior.Smooth)
     }
 
     ctx.stylesheet.registerStyleBase("pre") {
