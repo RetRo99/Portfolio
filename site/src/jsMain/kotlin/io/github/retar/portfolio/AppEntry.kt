@@ -24,21 +24,29 @@ import com.varabyte.kobweb.silk.init.InitSilkContext
 import com.varabyte.kobweb.silk.init.registerStyleBase
 import com.varabyte.kobweb.silk.style.common.SmoothColorStyle
 import com.varabyte.kobweb.silk.style.toModifier
+import com.varabyte.kobweb.silk.theme.colors.ColorMode
+import com.varabyte.kobweb.silk.theme.colors.loadFromLocalStorage
 import com.varabyte.kobweb.silk.theme.colors.palette.background
-import io.github.retar.portfolio.styles.AppColors
+import com.varabyte.kobweb.silk.theme.colors.palette.color
+import com.varabyte.kobweb.silk.theme.colors.systemPreference
+import io.github.retar.portfolio.styles.SitePalettes
 import org.jetbrains.compose.web.css.px
 
 @InitSilk
 fun initStyles(ctx: InitSilkContext) {
-    ctx.theme.palettes.light.background = AppColors.Background
-    ctx.theme.palettes.dark.background = AppColors.Background
+    ctx.config.initialColorMode =
+        ColorMode.loadFromLocalStorage() ?: ColorMode.systemPreference
+
+    ctx.theme.palettes.light.background = SitePalettes.light.background
+    ctx.theme.palettes.light.color = SitePalettes.light.textPrimary
+
+    ctx.theme.palettes.dark.background = SitePalettes.dark.background
+    ctx.theme.palettes.dark.color = SitePalettes.dark.textPrimary
 
     ctx.stylesheet.registerStyleBase("html, body") {
         Modifier
             .fillMaxHeight()
             .fontFamily("Inter", "system-ui", "sans-serif")
-            .backgroundColor(AppColors.Background)
-            .color(AppColors.TextPrimary)
     }
 
     ctx.stylesheet.registerStyle("html") {
@@ -50,7 +58,8 @@ fun initStyles(ctx: InitSilkContext) {
     ctx.stylesheet.registerStyleBase("pre") {
         Modifier
             .padding(12.px)
-            .backgroundColor(AppColors.CodeBackground)
+            .backgroundColor(SitePalettes.dark.codeBackground)
+            .color(SitePalettes.dark.codeText)
             .borderRadius(8.px)
             .fontFamily("monospace")
     }
@@ -72,7 +81,7 @@ fun AppEntry(content: @Composable () -> Unit) {
 
             CompositionLocalProvider(
                 LocalActiveSection provides active,
-                LocalSetActiveSection provides { active = it }
+                LocalSetActiveSection provides { active = it },
             ) {
                 content()
             }

@@ -14,7 +14,7 @@ import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.selectors.hover
 import com.varabyte.kobweb.silk.style.toModifier
-import io.github.retar.portfolio.styles.AppColors
+import io.github.retar.portfolio.styles.sitePalette
 import org.jetbrains.compose.web.css.LineStyle
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.A
@@ -29,19 +29,21 @@ fun PortfolioButton(url: String, label: String) {
 
 val LinkButtonStyle = CssStyle {
     base {
+        val palette = sitePalette()
         Modifier
             .padding(topBottom = 10.px, leftRight = 18.px)
-            .border(1.px, LineStyle.Solid, AppColors.Primary)
+            .border(1.px, LineStyle.Solid, palette.primary)
             .borderRadius(999.px)
-            .backgroundColor(AppColors.Primary)
-            .color(AppColors.ButtonTextHover)
+            .backgroundColor(palette.primary)
+            .color(palette.buttonText)
             .textDecorationLine(TextDecorationLine.None)
     }
 
     hover {
+        val palette = sitePalette()
         Modifier
-            .backgroundColor(AppColors.Primary)
-            .color(AppColors.ButtonTextHover)
+            .backgroundColor(palette.primary)
+            .color(palette.buttonText)
             .scale(1.03)
     }
 }

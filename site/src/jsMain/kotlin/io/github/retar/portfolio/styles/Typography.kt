@@ -17,7 +17,6 @@ import org.jetbrains.compose.web.css.px
 val TitleStyle = CssStyle {
     base {
         Modifier
-            .color(AppColors.TextPrimary)
             .fontSize(64.px)
             .fontWeight(FontWeight.Bold)
             .fontFamily("Outfit", "sans-serif")
@@ -31,7 +30,6 @@ val TitleStyle = CssStyle {
 val SubtitleStyle = CssStyle {
     base {
         Modifier
-            .color(AppColors.TextSecondary)
             .fontSize(18.px)
             .fontWeight(FontWeight.Medium)
             .fontFamily("Inter", "sans-serif")
@@ -42,7 +40,6 @@ val SubtitleStyle = CssStyle {
 val DescriptorStyle = CssStyle {
     base {
         Modifier
-            .color(AppColors.TextSecondary)
             .fontSize(18.px)
             .fontFamily("Inter", "sans-serif")
     }
@@ -50,8 +47,9 @@ val DescriptorStyle = CssStyle {
 
 val ImageTextHoverStyle = CssStyle {
     base {
+        val palette = sitePalette()
         Modifier
-            .color(AppColors.ImageTextHover)
+            .color(palette.imageTextHover)
             .fontSize(18.px)
             .padding(leftRight = 8.px)
             .textAlign(TextAlign.Center)

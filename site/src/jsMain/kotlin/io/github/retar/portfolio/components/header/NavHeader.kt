@@ -1,6 +1,7 @@
 package io.github.retar.portfolio.components.header
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -14,7 +15,6 @@ import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
-import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.animation
 import com.varabyte.kobweb.compose.ui.modifiers.backgroundColor
 import com.varabyte.kobweb.compose.ui.modifiers.borderBottom
@@ -35,6 +35,8 @@ import com.varabyte.kobweb.compose.ui.modifiers.userSelect
 import com.varabyte.kobweb.compose.ui.modifiers.width
 import com.varabyte.kobweb.silk.components.icons.CloseIcon
 import com.varabyte.kobweb.silk.components.icons.HamburgerIcon
+import com.varabyte.kobweb.silk.components.icons.MoonIcon
+import com.varabyte.kobweb.silk.components.icons.SunIcon
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.animation.Keyframes
 import com.varabyte.kobweb.silk.style.animation.toAnimation
@@ -43,12 +45,14 @@ import com.varabyte.kobweb.silk.style.breakpoint.displayIfAtLeast
 import com.varabyte.kobweb.silk.style.breakpoint.displayUntil
 import com.varabyte.kobweb.silk.style.extendedBy
 import com.varabyte.kobweb.silk.style.toModifier
+import com.varabyte.kobweb.silk.theme.colors.ColorMode
+import com.varabyte.kobweb.silk.theme.colors.saveToLocalStorage
 import io.github.retar.portfolio.LocalActiveSection
 import io.github.retar.portfolio.LocalSetActiveSection
 import io.github.retar.portfolio.PortfolioSectionId
 import io.github.retar.portfolio.resources.StringRes
-import io.github.retar.portfolio.styles.AppColors
 import io.github.retar.portfolio.styles.DescriptorStyle
+import io.github.retar.portfolio.styles.sitePalette
 import kotlinx.browser.document
 import kotlinx.browser.window
 import org.jetbrains.compose.web.css.LineStyle
@@ -62,7 +66,7 @@ val MobileNavSlideDownKeyframes = Keyframes {
     from {
         Modifier
             .opacity(0)
-            .translateY((-10).percent) // Starts slightly tucked up
+            .translateY((-10).percent)
     }
     to {
         Modifier
@@ -83,11 +87,14 @@ val MenuIconStyle = DescriptorStyle.extendedBy {
 fun NavHeader() {
     var isMenuOpen by remember { mutableStateOf(false) }
 
+    val palette = sitePalette()
+    val borderColor = palette.headerBorder
+
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .position(Position.Relative)
-            .borderBottom(1.px, LineStyle.Solid, AppColors.ButtonBorder),
+            .borderBottom(1.px, LineStyle.Solid, borderColor),
         contentAlignment = Alignment.Center,
     ) {
         Row(
@@ -108,6 +115,7 @@ fun NavHeader() {
                     .displayIfAtLeast(Breakpoint.MD),
             ) {
                 NavItems({ isMenuOpen = false })
+                ThemeToggle()
             }
 
             Box(
@@ -138,13 +146,16 @@ fun NavHeader() {
 
 @Composable
 private fun MobileNavDropdown(onClose: () -> Unit) {
+    val palette = sitePalette()
+    val drawerBackground = palette.drawerBackground
+
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .position(Position.Absolute)
             .top(100.percent)
             .left(0.px)
-            .backgroundColor(AppColors.DrawerBackground)
+            .backgroundColor(drawerBackground)
             .padding(top = 24.px)
             .animation(MobileNavSlideDownKeyframes.toAnimation(duration = 300.ms))
             .onClick { onClose() },
@@ -160,6 +171,7 @@ private fun MobileNavDropdown(onClose: () -> Unit) {
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             NavItems(onItemClick = onClose)
+            ThemeToggle(modifier = Modifier.padding(top = 8.px))
         }
     }
 }
@@ -182,12 +194,14 @@ private fun HeaderNavItem(
     val activeSection = LocalActiveSection.current
     val setActiveSection = LocalSetActiveSection.current
     val isActive = item.section == activeSection
+    val palette = sitePalette()
+
     SpanText(
         text = item.label.value,
         modifier = DescriptorStyle
             .toModifier()
             .cursor(Cursor.Pointer)
-            .color(if (isActive) AppColors.Primary else Colors.Gray)
+            .color(if (isActive) palette.primary else palette.textSecondary)
             .onClick {
                 onClick()
 
@@ -217,3 +231,27 @@ private fun HeaderNavItem(
             },
     )
 }
+
+@Composable
+private fun ThemeToggle(modifier: Modifier = Modifier) {
+    var colorMode by ColorMode.currentState
+
+
+    LaunchedEffect(colorMode) {
+        colorMode.saveToLocalStorage()
+    }
+    val iconModifier = DescriptorStyle
+        .toModifier()
+        .then(modifier)
+        .cursor(Cursor.Pointer)
+        .onClick {
+            colorMode = colorMode.opposite
+        }
+
+    if (colorMode == ColorMode.LIGHT) {
+        SunIcon(modifier = iconModifier)
+    } else {
+        MoonIcon(modifier = iconModifier)
+    }
+}
+

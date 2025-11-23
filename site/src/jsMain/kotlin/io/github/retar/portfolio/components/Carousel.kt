@@ -14,7 +14,6 @@ import com.varabyte.kobweb.compose.ui.modifiers.translateX
 import com.varabyte.kobweb.compose.ui.modifiers.whiteSpace
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.animation.Keyframes
-import com.varabyte.kobweb.silk.style.animation.toAnimation
 import com.varabyte.kobweb.silk.style.selectors.hover
 import com.varabyte.kobweb.silk.style.toModifier
 import org.jetbrains.compose.web.css.AnimationPlayState
@@ -75,7 +74,6 @@ val InfiniteCarouselTrackStyle = CssStyle {
             .whiteSpace(WhiteSpace.NoWrap)
             .animation(
                 InfiniteCarouselScrollKeyframes.toAnimation(
-                    colorMode = colorMode,
                     duration = 40.s,
                     iterationCount = AnimationIterationCount.Infinite,
                     timingFunction = AnimationTimingFunction.Linear,
@@ -87,7 +85,6 @@ val InfiniteCarouselTrackStyle = CssStyle {
         Modifier
             .animation(
                 InfiniteCarouselScrollKeyframes.toAnimation(
-                    colorMode = colorMode,
                     duration = 40.s,
                     iterationCount = AnimationIterationCount.Infinite,
                     timingFunction = AnimationTimingFunction.Linear,
