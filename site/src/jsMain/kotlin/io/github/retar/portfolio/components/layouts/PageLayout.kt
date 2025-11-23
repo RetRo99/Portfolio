@@ -21,6 +21,7 @@ import com.varabyte.kobweb.silk.style.toModifier
 import io.github.retar.portfolio.PortfolioSectionId
 import io.github.retar.portfolio.components.footer.Footer
 import io.github.retar.portfolio.components.header.NavHeader
+import io.github.retar.portfolio.styles.AppColors
 import org.jetbrains.compose.web.css.Position
 import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
@@ -71,7 +72,7 @@ fun PageLayout(content: @Composable () -> Unit) {
                 .position(Position.Sticky)
                 .top(0.px)
                 .zIndex(1)
-                .backgroundColor(Colors.White),
+                .backgroundColor(AppColors.Background)
         ) {
             NavHeader()
         }

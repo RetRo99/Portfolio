@@ -34,8 +34,10 @@ import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.selectors.hover
 import com.varabyte.kobweb.silk.style.toModifier
 import io.github.retar.portfolio.resources.ImageRes
+import com.varabyte.kobweb.compose.ui.modifiers.boxShadow
 import org.jetbrains.compose.web.css.ms
 import org.jetbrains.compose.web.css.px
+import org.jetbrains.compose.web.css.rgba
 
 val CardImageStyle = CssStyle {
     base {
@@ -43,12 +45,13 @@ val CardImageStyle = CssStyle {
             .width(220.px)
             .borderRadius(16.px)
             .overflow(Overflow.Hidden)
-            .transition(Transition.all(duration = 500.ms))
+            .transition(Transition.all(duration = 300.ms))
     }
 
     hover {
         Modifier
-            .scale(1.1)
+            .scale(1.05)
+            .boxShadow(0.px, 10.px, 20.px, 0.px, rgba(0, 0, 0, 0.2))
     }
 }
 

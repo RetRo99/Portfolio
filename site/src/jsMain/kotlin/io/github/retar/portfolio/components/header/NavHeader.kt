@@ -187,7 +187,7 @@ private fun HeaderNavItem(
         modifier = DescriptorStyle
             .toModifier()
             .cursor(Cursor.Pointer)
-            .color(if (isActive) AppColors.Accent else Colors.Gray)
+            .color(if (isActive) AppColors.Primary else Colors.Gray)
             .onClick {
                 onClick()
 
