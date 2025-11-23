@@ -1,5 +1,7 @@
 import com.varabyte.kobweb.gradle.application.util.configAsKobwebApplication
 import kotlinx.html.link
+import kotlinx.html.script
+import kotlinx.html.unsafe
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
@@ -26,6 +28,20 @@ kobweb {
                     href = "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap",
                     rel = "stylesheet"
                 )
+                script {
+                    async = true
+                    src = "https://plausible.io/js/pa-KV_Y-QH0U3Bxdqi_EJupK.js"
+                }
+                script {
+                    unsafe {
+                        raw(
+                            """
+                window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+                plausible.init()
+            """.trimIndent()
+                        )
+                    }
+                }
             }
         }
     }
