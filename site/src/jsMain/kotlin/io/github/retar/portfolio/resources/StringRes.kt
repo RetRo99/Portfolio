@@ -1,77 +1,83 @@
 package io.github.retar.portfolio.resources
 
-enum class StringRes(val value: String) {
-    HeroTitle(
-        "I'm Rok Retar, a developer specializing in building innovative digital solutions, " +
+sealed class StringRes {
+    abstract val value: String
+
+    data object HeroTitle : StringRes() {
+        override val value =
+            "I'm Rok Retar, a developer specializing in building innovative digital solutions, " +
                 "based in Slovenia."
-    ),
+    }
 
-    HeroSubtitle(
-        "Kotlin-focused developer who enjoys building polished mobile and web" +
+    data object HeroSubtitle : StringRes() {
+        override val value =
+            "Kotlin-focused developer who enjoys building polished mobile and web" +
                 "experiences. This portfolio is built with Kobweb and Silk, which bring a Compose-like developer experience to the web."
-    ),
-    Descriptor(
-        "Kotlin / Android / Web Developer"
-    ),
+    }
 
-    Github(
-        "GitHub"
-    ),
+    data object Descriptor : StringRes() {
+        override val value = "Kotlin / Android / Web Developer"
+    }
 
-    LinkedIn(
-        "LinkedIn"
-    ),
+    data object Github : StringRes() {
+        override val value = "GitHub"
+    }
 
-    SelectedProjectsTitle(
-        "Selected Projects"
-    ),
+    data object LinkedIn : StringRes() {
+        override val value = "LinkedIn"
+    }
 
-    SelectedProjectsSubtitle(
-        "Explore a curated collection of projects that showcase my dedication to cutting-edge technology and intuitive design."
-    ),
+    data object SelectedProjectsTitle : StringRes() {
+        override val value = "Selected Projects"
+    }
 
-    ArticlesTitle(
-        "Articles"
-    ),
+    data object SelectedProjectsSubtitle : StringRes() {
+        override val value =
+            "Explore a curated collection of projects that showcase my dedication to cutting-edge technology and intuitive design."
+    }
 
-    ArticlesSubtitle(
-        "A selection of write-ups about how I build things, including Kobweb, Compose, and Kotlin."
-    ),
+    data object ArticlesTitle : StringRes() {
+        override val value = "Articles"
+    }
 
-    HeaderTitle(
-        "Rok Retar"
-    ),
+    data object ArticlesSubtitle : StringRes() {
+        override val value =
+            "A selection of write-ups about how I build things, including Kobweb, Compose, and Kotlin."
+    }
 
-    NavIntro(
-        "Intro"
-    ),
+    data object HeaderTitle : StringRes() {
+        override val value = "Rok Retar"
+    }
 
-    NavProjects(
-        "Projects"
-    ),
+    data object NavIntro : StringRes() {
+        override val value = "Intro"
+    }
 
-    NavArticles(
-        "Articles"
-    ),
+    data object NavProjects : StringRes() {
+        override val value = "Projects"
+    }
 
-    NavContact(
-        "Contact"
-    ),
+    data object NavArticles : StringRes() {
+        override val value = "Articles"
+    }
 
-    FooterCopyright(
-        "© 2025 Rok Retar"
-    ),
+    data object NavContact : StringRes() {
+        override val value = "Contact"
+    }
 
-    ProfileImageDesc(
-        "Portrait of Rok Retar"
-    ),
+    data class FooterCopyright(val year: Int) : StringRes() {
+        override val value = "© $year Rok Retar"
+    }
 
-    InfiniteCarouselArticleTitle(
-        "Building a Smooth, Infinite Carousel in Kobweb"
-    ),
+    data object ProfileImageDesc : StringRes() {
+        override val value = "Portrait of Rok Retar"
+    }
 
-    InfiniteCarouselArticleDesc(
-        "How to build an infinite, gapless carousel using Silk and Kobweb."
-    ),
+    data object InfiniteCarouselArticleTitle : StringRes() {
+        override val value = "Building a Smooth, Infinite Carousel in Kobweb"
+    }
 
+    data object InfiniteCarouselArticleDesc : StringRes() {
+        override val value = "How to build an infinite, gapless carousel using Silk and Kobweb."
+    }
 }

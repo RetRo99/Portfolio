@@ -14,6 +14,7 @@ import io.github.retar.portfolio.resources.StringRes
 import io.github.retar.portfolio.styles.DescriptorStyle
 import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
+import kotlin.js.Date
 
 @Composable
 fun Footer() {
@@ -29,7 +30,7 @@ fun Footer() {
             contentAlignment = Alignment.Center,
         ) {
             SpanText(
-                text = StringRes.FooterCopyright.value,
+                text = StringRes.FooterCopyright(Date().getFullYear()).value,
                 modifier = DescriptorStyle.toModifier(),
             )
         }
