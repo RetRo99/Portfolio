@@ -18,6 +18,7 @@ data class SitePalette(
     val headerBorder: Color,
     val buttonText: Color,
     val imageTextHover: Color,
+    val dropdownBackground: Color,
 )
 
 object SitePalettes {
@@ -34,6 +35,7 @@ object SitePalettes {
             headerBorder = Colors.LightGray,
             buttonText = Color.rgb(255, 255, 255),
             imageTextHover = Color.rgb(255, 255, 255),
+            dropdownBackground = Color.rgb(255, 255, 255),
         )
 
     val dark =
@@ -49,6 +51,7 @@ object SitePalettes {
             headerBorder = Color.rgb(63, 63, 70),
             buttonText = Color.rgb(255, 255, 255),
             imageTextHover = Color.rgb(255, 255, 255),
+            dropdownBackground = Color.rgb(39, 39, 42),
         )
 }
 

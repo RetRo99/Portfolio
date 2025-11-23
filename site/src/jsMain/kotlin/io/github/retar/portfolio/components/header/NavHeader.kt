@@ -8,7 +8,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import com.varabyte.kobweb.compose.css.Cursor
 import com.varabyte.kobweb.compose.css.JustifyContent
-import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.css.UserSelect
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Box
@@ -25,14 +24,15 @@ import com.varabyte.kobweb.compose.ui.modifiers.color
 import com.varabyte.kobweb.compose.ui.modifiers.cursor
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.gap
+import com.varabyte.kobweb.compose.ui.modifiers.height
 import com.varabyte.kobweb.compose.ui.modifiers.justifyContent
 import com.varabyte.kobweb.compose.ui.modifiers.left
+import com.varabyte.kobweb.compose.ui.modifiers.margin
 import com.varabyte.kobweb.compose.ui.modifiers.minWidth
 import com.varabyte.kobweb.compose.ui.modifiers.onClick
 import com.varabyte.kobweb.compose.ui.modifiers.opacity
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.modifiers.position
-import com.varabyte.kobweb.compose.ui.modifiers.textAlign
 import com.varabyte.kobweb.compose.ui.modifiers.top
 import com.varabyte.kobweb.compose.ui.modifiers.translateX
 import com.varabyte.kobweb.compose.ui.modifiers.translateY
@@ -44,8 +44,10 @@ import com.varabyte.kobweb.silk.components.icons.HamburgerIcon
 import com.varabyte.kobweb.silk.components.icons.MoonIcon
 import com.varabyte.kobweb.silk.components.icons.SunIcon
 import com.varabyte.kobweb.silk.components.text.SpanText
+import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.animation.Keyframes
 import com.varabyte.kobweb.silk.style.animation.toAnimation
+import com.varabyte.kobweb.silk.style.base
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.style.breakpoint.displayIfAtLeast
 import com.varabyte.kobweb.silk.style.breakpoint.displayUntil
@@ -62,6 +64,7 @@ import io.github.retar.portfolio.PortfolioSectionId
 import io.github.retar.portfolio.resources.StringRes
 import io.github.retar.portfolio.styles.DescriptorStyle
 import io.github.retar.portfolio.styles.sitePalette
+import io.github.retar.portfolio.styles.toSitePalette
 import kotlinx.browser.document
 import kotlinx.browser.window
 import org.jetbrains.compose.web.css.LineStyle
@@ -70,6 +73,8 @@ import org.jetbrains.compose.web.css.ms
 import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.css.rgba
+import org.jetbrains.compose.web.css.vh
+import org.jetbrains.compose.web.css.vw
 import org.w3c.dom.HTMLElement
 
 val MobileNavSlideDownKeyframes = Keyframes {
@@ -91,6 +96,14 @@ val MenuIconStyle = DescriptorStyle.extendedBy {
             .userSelect(UserSelect.None)
             .cursor(Cursor.Pointer)
     }
+}
+
+val DropdownStyle = CssStyle.base {
+    Modifier
+        .backgroundColor(colorMode.toSitePalette().dropdownBackground)
+        .borderRadius(8.px)
+        .boxShadow(0.px, 4.px, 12.px, 0.px, rgba(0, 0, 0, 0.1))
+        .zIndex(10)
 }
 
 @Composable
@@ -169,32 +182,33 @@ fun NavHeader() {
 
 @Composable
 private fun MobileNavDropdown(onClose: () -> Unit) {
-    val palette = sitePalette()
-    val drawerBackground = palette.drawerBackground
+    sitePalette()
 
     Box(
         modifier = Modifier
-            .fillMaxWidth()
+            .position(Position.Fixed)
+            .top(0.px)
+            .left(0.px)
+            .width(100.vw)
+            .height(100.vh)
+            .zIndex(9)
+            .onClick { onClose() }
+    )
+
+    Column(
+        modifier = DropdownStyle.toModifier()
             .position(Position.Absolute)
             .top(100.percent)
             .left(0.px)
-            .backgroundColor(drawerBackground)
-            .padding(top = 24.px)
+            .width(100.percent)
+            .margin(top = 10.px)
+            .padding(16.px)
+            .gap(16.px)
             .animation(MobileNavSlideDownKeyframes.toAnimation(duration = 300.ms))
-            .onClick { onClose() },
-        contentAlignment = Alignment.TopCenter,
+            .onClick { it.stopPropagation() },
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .gap(16.px)
-                .textAlign(TextAlign.Center)
-                .padding(bottom = 16.px)
-                .onClick { it.stopPropagation() },
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            NavItems(onItemClick = onClose)
-        }
+        NavItems(onItemClick = onClose)
     }
 }
 
@@ -258,7 +272,6 @@ private fun HeaderNavItem(
 private fun ThemeToggle(modifier: Modifier = Modifier) {
     var colorMode by ColorMode.currentState
 
-
     LaunchedEffect(colorMode) {
         colorMode.saveToLocalStorage()
     }
@@ -282,7 +295,6 @@ private fun LanguageSwitcher(modifier: Modifier = Modifier) {
     val language = LocalLanguage.current
     val setLanguage = LocalSetLanguage.current
     var isOpen by remember { mutableStateOf(false) }
-    val palette = sitePalette()
 
     Box(
         modifier = modifier.position(Position.Relative),
@@ -297,19 +309,26 @@ private fun LanguageSwitcher(modifier: Modifier = Modifier) {
         )
 
         if (isOpen) {
-            Column(
+            Box(
                 modifier = Modifier
+                    .position(Position.Fixed)
+                    .top(0.px)
+                    .left(0.px)
+                    .width(100.vw)
+                    .height(100.vh)
+                    .zIndex(9)
+                    .onClick { isOpen = false }
+            )
+
+            Column(
+                modifier = DropdownStyle.toModifier()
                     .position(Position.Absolute)
                     .top(100.percent)
                     .left(50.percent)
                     .translateY(10.px)
                     .translateX((-50).percent)
-                    .backgroundColor(palette.background)
                     .padding(8.px)
-                    .borderRadius(8.px)
                     .minWidth(150.px)
-                    .boxShadow(0.px, 4.px, 12.px, 0.px, rgba(0, 0, 0, 0.1))
-                    .zIndex(10)
             ) {
                 Language.entries.forEach { item ->
                     LanguageItem(
