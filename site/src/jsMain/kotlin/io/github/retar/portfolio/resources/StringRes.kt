@@ -58,4 +58,20 @@ enum class StringRes(val value: String) {
         "Contact"
     ),
 
+    FooterCopyright(
+        "© 2025 Rok Retar"
+    ),
+
+    ProfileImageDesc(
+        "Portrait of Rok Retar"
+    ),
+
+    InfiniteCarouselArticleTitle(
+        "Building a Smooth, Infinite Carousel in Kobweb"
+    ),
+
+    InfiniteCarouselArticleDesc(
+        "How to build an infinite, gapless carousel using Silk and Kobweb."
+    ),
+
 }

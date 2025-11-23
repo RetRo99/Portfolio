@@ -3,7 +3,6 @@ package io.github.retar.portfolio.pages
 import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.compose.css.ObjectFit
 import com.varabyte.kobweb.compose.foundation.layout.Column
-import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.alignItems
 import com.varabyte.kobweb.compose.ui.modifiers.borderRadius
@@ -57,7 +56,7 @@ private fun HeroSection() {
         ) {
             Image(
                 src = ImageRes.ProfileImage.path,
-                description = "Portrait of Rok Retar",
+                description = StringRes.ProfileImageDesc.value,
                 modifier = Modifier
                     .size(180.px)
                     .borderRadius(999.px)
@@ -118,8 +117,8 @@ private fun ArticlesSection() {
                 .gap(12.px),
         ) {
             ArticleCard(
-                title = "Building a Smooth, Infinite Carousel in Kobweb",
-                description = "How to build an infinite, gapless carousel using Silk and Kobweb.",
+                title = StringRes.InfiniteCarouselArticleTitle.value,
+                description = StringRes.InfiniteCarouselArticleDesc.value,
                 route = LinkRes.Internal.InfiniteCarouselArticle,
                 image = ImageRes.InfiniteCarouselArticle,
             )

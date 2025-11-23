@@ -5,6 +5,7 @@ import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
+import com.varabyte.kobweb.compose.ui.modifiers.backgroundColor
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.id
 import com.varabyte.kobweb.compose.ui.modifiers.minHeight
@@ -19,6 +20,7 @@ import com.varabyte.kobweb.silk.style.toModifier
 import io.github.retar.portfolio.PortfolioSectionId
 import io.github.retar.portfolio.components.footer.Footer
 import io.github.retar.portfolio.components.header.NavHeader
+import io.github.retar.portfolio.styles.sitePalette
 import org.jetbrains.compose.web.css.Position
 import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
@@ -68,6 +70,7 @@ fun PageLayout(content: @Composable () -> Unit) {
                 .fillMaxWidth()
                 .position(Position.Sticky)
                 .top(0.px)
+                .backgroundColor(sitePalette().background)
                 .zIndex(1)
         ) {
             NavHeader()

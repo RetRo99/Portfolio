@@ -10,6 +10,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.modifiers.width
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.toModifier
+import io.github.retar.portfolio.resources.StringRes
 import io.github.retar.portfolio.styles.DescriptorStyle
 import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
@@ -28,7 +29,7 @@ fun Footer() {
             contentAlignment = Alignment.Center,
         ) {
             SpanText(
-                text = "© 2025 Rok Retar",
+                text = StringRes.FooterCopyright.value,
                 modifier = DescriptorStyle.toModifier(),
             )
         }
