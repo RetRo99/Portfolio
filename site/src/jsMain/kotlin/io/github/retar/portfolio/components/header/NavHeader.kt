@@ -299,7 +299,7 @@ private fun LanguageSwitcher(modifier: Modifier = Modifier) {
         language.saveToLocalStorage()
     }
     Box(
-        modifier = modifier.position(Position.Relative),
+        modifier = modifier.position(Position.Relative).userSelect(UserSelect.None),
         contentAlignment = Alignment.Center
     ) {
         SpanText(
@@ -361,6 +361,7 @@ private fun LanguageItem(
             .width(100.percent)
             .padding(8.px)
             .cursor(Cursor.Pointer)
+            .userSelect(UserSelect.None)
             .onClick { onClick() }
     ) {
         SpanText(
