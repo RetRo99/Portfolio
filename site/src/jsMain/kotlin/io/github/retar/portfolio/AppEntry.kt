@@ -76,7 +76,7 @@ val LocalSetActiveSection = compositionLocalOf<(PortfolioSectionId?) -> Unit> { 
 @Composable
 fun AppEntry(content: @Composable () -> Unit) {
     SilkApp {
-        Surface(SmoothColorStyle.toModifier().fillMaxHeight()) {
+        Surface(SmoothColorStyle.toModifier()) {
             var active by remember { mutableStateOf<PortfolioSectionId?>(null) }
 
             CompositionLocalProvider(
