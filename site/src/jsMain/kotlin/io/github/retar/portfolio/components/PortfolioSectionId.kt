@@ -4,4 +4,6 @@ sealed class PortfolioSectionId(val domId: String) {
     object About : PortfolioSectionId("about")
     object Projects : PortfolioSectionId("projects")
     object Blog : PortfolioSectionId("blog")
+
+    val path get() = "#$domId"
 }

@@ -274,7 +274,7 @@ private fun HeaderNavItem(
                 setActiveSection(section)
 
                 if (section != null) {
-                    router.tryRoutingTo("#${section.domId}")
+                    router.tryRoutingTo(section.path)
                 } else {
                     router.navigateTo(item.route)
                 }
