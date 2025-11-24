@@ -1,4 +1,4 @@
-package io.github.retar.portfolio.components
+package io.github.retar.portfolio.components.widgets
 
 import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.compose.css.TextDecorationLine

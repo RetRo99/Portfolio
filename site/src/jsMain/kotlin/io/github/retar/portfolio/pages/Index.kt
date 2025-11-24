@@ -19,13 +19,13 @@ import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.core.layout.Layout
 import com.varabyte.kobweb.silk.components.graphics.Image
 import io.github.retar.portfolio.PortfolioSectionId
-import io.github.retar.portfolio.components.ArticleCard
 import io.github.retar.portfolio.components.DescriptorText
-import io.github.retar.portfolio.components.InfiniteCarousel
 import io.github.retar.portfolio.components.PortfolioSection
-import io.github.retar.portfolio.components.ProjectCard
 import io.github.retar.portfolio.components.SectionHeader
-import io.github.retar.portfolio.components.SocialButtons
+import io.github.retar.portfolio.components.widgets.ArticleCard
+import io.github.retar.portfolio.components.widgets.InfiniteCarousel
+import io.github.retar.portfolio.components.widgets.ProjectCard
+import io.github.retar.portfolio.components.widgets.SocialButtons
 import io.github.retar.portfolio.resources.ImageRes
 import io.github.retar.portfolio.resources.LinkRes
 import io.github.retar.portfolio.resources.ProjectsRes

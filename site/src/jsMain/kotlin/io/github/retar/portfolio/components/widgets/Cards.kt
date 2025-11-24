@@ -1,4 +1,4 @@
-package io.github.retar.portfolio.components
+package io.github.retar.portfolio.components.widgets
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -10,15 +10,14 @@ import com.varabyte.kobweb.compose.css.ObjectFit
 import com.varabyte.kobweb.compose.css.Overflow
 import com.varabyte.kobweb.compose.css.PointerEvents
 import com.varabyte.kobweb.compose.css.Transition
-import com.varabyte.kobweb.compose.css.functions.brightness
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.borderRadius
+import com.varabyte.kobweb.compose.ui.modifiers.boxShadow
 import com.varabyte.kobweb.compose.ui.modifiers.cursor
 import com.varabyte.kobweb.compose.ui.modifiers.draggable
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
-import com.varabyte.kobweb.compose.ui.modifiers.filter
 import com.varabyte.kobweb.compose.ui.modifiers.objectFit
 import com.varabyte.kobweb.compose.ui.modifiers.onClick
 import com.varabyte.kobweb.compose.ui.modifiers.onMouseEnter
@@ -34,7 +33,6 @@ import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.selectors.hover
 import com.varabyte.kobweb.silk.style.toModifier
 import io.github.retar.portfolio.resources.ImageRes
-import com.varabyte.kobweb.compose.ui.modifiers.boxShadow
 import org.jetbrains.compose.web.css.ms
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.css.rgba
