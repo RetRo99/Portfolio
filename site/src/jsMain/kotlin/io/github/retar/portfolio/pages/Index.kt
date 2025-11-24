@@ -109,7 +109,7 @@ private fun ArticlesSection() {
         section = PortfolioSectionId.Blog,
     ) {
         SectionHeader(
-            title = StringRes.ArticlesTitle.value,
+            title = StringRes.BlogTitle.value,
             subtitle = StringRes.ArticlesSubtitle.value,
             gap = 10.px,
         )

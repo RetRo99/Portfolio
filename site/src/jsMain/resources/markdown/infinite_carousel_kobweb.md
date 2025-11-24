@@ -1,5 +1,5 @@
 ---
-routeOverride: "/articles/infinite-carousel"
+routeOverride: "/blog/infinite-carousel"
 title: "Building a Smooth, Infinite Carousel in Kobweb"
 description: "How to build a smooth, infinite carousel in Kobweb with Silk."
 ---

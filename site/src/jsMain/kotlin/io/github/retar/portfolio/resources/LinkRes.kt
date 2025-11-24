@@ -7,7 +7,7 @@ object LinkRes {
     }
 
     object Internal {
-        const val InfiniteCarouselArticle = "/articles/infinite-carousel"
+        const val InfiniteCarouselArticle = "/blog/infinite-carousel"
     }
 }
 

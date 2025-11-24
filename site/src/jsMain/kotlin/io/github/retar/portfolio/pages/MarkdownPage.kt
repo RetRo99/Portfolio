@@ -2,7 +2,7 @@ package io.github.retar.portfolio.pages
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import com.varabyte.kobweb.compose.foundation.layout.Box
+import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.alignItems
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
@@ -17,7 +17,7 @@ fun MarkdownPage(content: @Composable () -> Unit) {
         window.asDynamic().Prism?.highlightAll()
     }
 
-    Box(
+    Column(
         modifier = Modifier
             .fillMaxWidth()
             .alignItems(AlignItems.FlexStart),

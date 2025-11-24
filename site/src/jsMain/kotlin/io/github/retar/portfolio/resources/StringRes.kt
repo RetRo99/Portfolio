@@ -56,10 +56,10 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
         lv = "Izpētiet atlasītu projektu kolekciju, kas parāda manu aizrautību ar modernām tehnoloģijām un intuitīvu dizainu."
     )
 
-    data object ArticlesTitle : StringRes(
-        en = "Articles",
-        sl = "Članki",
-        lv = "Raksti"
+    data object BlogTitle : StringRes(
+        en = "Blog",
+        sl = "Blog",
+        lv = "Blogs"
     )
 
     data object ArticlesSubtitle : StringRes(
