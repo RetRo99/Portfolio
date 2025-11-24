@@ -20,7 +20,6 @@ import com.varabyte.kobweb.core.layout.Layout
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.style.toModifier
-import io.github.retar.portfolio.components.PortfolioSectionId
 import io.github.retar.portfolio.components.footer.Footer
 import io.github.retar.portfolio.components.header.NavHeader
 import io.github.retar.portfolio.styles.sitePalette
@@ -45,6 +44,7 @@ val PageContentStyle = CssStyle {
     }
 }
 
+const val Header_domId = "header"
 val NavHeaderStyle = CssStyle {
     base {
         Modifier
@@ -74,7 +74,7 @@ fun PageLayout(content: @Composable () -> Unit) {
         Box(
             modifier = NavHeaderStyle
                 .toModifier()
-                .id(PortfolioSectionId.Header.domId)
+                .id(Header_domId)
                 .fillMaxWidth()
                 .position(Position.Sticky)
                 .top(0.px)

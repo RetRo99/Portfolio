@@ -51,7 +51,7 @@ fun IndexPage() {
 @Composable
 private fun HeroSection() {
     PortfolioSection(
-        section = PortfolioSectionId.Intro,
+        section = PortfolioSectionId.About,
     ) {
         Column(
             modifier = Modifier.gap(24.px),
@@ -106,7 +106,7 @@ private fun SelectedProjectsSection() {
 @Composable
 private fun ArticlesSection() {
     PortfolioSection(
-        section = PortfolioSectionId.Articles,
+        section = PortfolioSectionId.Blog,
     ) {
         SectionHeader(
             title = StringRes.ArticlesTitle.value,

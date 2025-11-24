@@ -1,9 +1,7 @@
 package io.github.retar.portfolio.components
 
 sealed class PortfolioSectionId(val domId: String) {
-    object Header : PortfolioSectionId("nav-header")
-    object Intro : PortfolioSectionId("intro-section")
-    object Projects : PortfolioSectionId("projects-section")
-    object Articles : PortfolioSectionId("articles-section")
-    object MarkdownPage : PortfolioSectionId("markdown-page")
+    object About : PortfolioSectionId("about")
+    object Projects : PortfolioSectionId("projects")
+    object Blog : PortfolioSectionId("blog")
 }

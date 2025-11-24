@@ -8,20 +8,20 @@ enum class NavItem(
     val route: String,
     val label: StringRes,
 ) {
-    Intro(
-        section = PortfolioSectionId.Intro,
+    About(
+        section = PortfolioSectionId.About,
         route = "/",
-        label = StringRes.NavIntro,
+        label = StringRes.NavAbout,
     ),
     Projects(
         section = PortfolioSectionId.Projects,
         route = "/",
         label = StringRes.NavProjects,
     ),
-    Articles(
-        section = PortfolioSectionId.Articles,
+    Blog(
+        section = PortfolioSectionId.Blog,
         route = "/",
-        label = StringRes.NavArticles,
+        label = StringRes.NavBlog,
     ),
     Contact(
         section = null,

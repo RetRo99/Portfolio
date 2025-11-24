@@ -16,19 +16,19 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
 
     data object HeroTitle : StringRes(
         en = "I'm Rok Retar, a developer specializing in building innovative digital solutions, based in Slovenia.",
-        sl = "Sem Rok Retar, razvijalec specializiran za gradnjo inovativnih digitalnih rešitev, s sedežem v Sloveniji.",
-        lv = "Esmu Rok Retar, izstrādātājs, kas specializējas inovatīvu digitālo risinājumu izveidē, bāzēts Slovēnijā."
+        sl = "Sem Rok Retar, razvijalec, ki ustvarja inovativne digitalne rešitve. Delujem iz Slovenije.",
+        lv = "Esmu Rok Retar — izstrādātājs, kurš veido inovatīvus digitālos risinājumus. Strādāju no Slovēnijas."
     )
 
     data object HeroSubtitle : StringRes(
         en = "Kotlin-focused developer who enjoys building polished mobile and web experiences. This portfolio is built with Kobweb and Silk, which bring a Compose-like developer experience to the web.",
-        sl = "Razvijalec osredotočen na Kotlin, ki uživa v gradnji poliranih mobilnih in spletnih izkušenj. Ta portfelj je zgrajen s Kobweb in Silk, ki prinašata Compose-like izkušnjo na splet.",
-        lv = "Kotlin orientēts izstrādātājs, kuram patīk veidot noslīpētu mobilo un tīmekļa pieredzi. Šis portfelis ir veidots ar Kobweb un Silk, kas tīmeklī ienes Compose līdzīgu izstrādātāja pieredzi."
+        sl = "Sem razvijalec, osredotočen na Kotlin, z veseljem pa ustvarjam dovršene mobilne in spletne izkušnje. Ta portfelj je narejen s Kobwebom in Silkom, ki na splet prinašata izkušnjo, podobno Compose.",
+        lv = "Esmu Kotlin izstrādātājs, kuram patīk veidot noslīpētas mobilās un tīmekļa pieredzes. Šis portfelis ir veidots ar Kobweb un Silk, kas tīmeklī sniedz izstrādes pieredzi, līdzīgu Compose."
     )
 
     data object Descriptor : StringRes(
         en = "Kotlin / Android / Web Developer",
-        sl = "Kotlin / Android / Spletni Razvijalec",
+        sl = "Kotlin / Android / Spletni razvijalec",
         lv = "Kotlin / Android / Tīmekļa izstrādātājs"
     )
 
@@ -46,14 +46,14 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
 
     data object SelectedProjectsTitle : StringRes(
         en = "Selected Projects",
-        sl = "Izbrani Projekti",
+        sl = "Izbrani projekti",
         lv = "Izvēlētie projekti"
     )
 
     data object SelectedProjectsSubtitle : StringRes(
         en = "Explore a curated collection of projects that showcase my dedication to cutting-edge technology and intuitive design.",
-        sl = "Raziščite zbirko projektov, ki prikazujejo mojo predanost najnovejši tehnologiji in intuitivnemu dizajnu.",
-        lv = "Izpētiet izvēlētu projektu kolekciju, kas parāda manu aizrautību ar jaunākajām tehnoloģijām un intuitīvu dizainu."
+        sl = "Raziščite izbor projektov, ki prikazujejo mojo predanost sodobnim tehnologijam in intuitivnemu dizajnu.",
+        lv = "Izpētiet atlasītu projektu kolekciju, kas parāda manu aizrautību ar modernām tehnoloģijām un intuitīvu dizainu."
     )
 
     data object ArticlesTitle : StringRes(
@@ -64,8 +64,8 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
 
     data object ArticlesSubtitle : StringRes(
         en = "A selection of write-ups about how I build things, including Kobweb, Compose, and Kotlin.",
-        sl = "Izbor zapisov o tem, kako gradim stvari, vključno s Kobweb, Compose in Kotlin.",
-        lv = "Rakstu izlase par to, kā es būvēju lietas, ieskaitot Kobweb, Compose un Kotlin."
+        sl = "Izbor zapisov o tem, kako gradim stvari, vključno s Kobwebom, Compose in Kotlinom.",
+        lv = "Rakstu izlase par to, kā es būvēju lietas — tostarp ar Kobweb, Compose un Kotlin."
     )
 
     data object HeaderTitle : StringRes(
@@ -74,22 +74,21 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
         lv = "Rok Retar"
     )
 
-    data object NavIntro : StringRes(
-        en = "Intro",
-        sl = "Uvod",
-        lv = "Ievads"
+    data object NavAbout : StringRes(
+        en = "About",
+        sl = "O meni",
+        lv = "Par mani"
     )
-
     data object NavProjects : StringRes(
         en = "Projects",
         sl = "Projekti",
         lv = "Projekti"
     )
 
-    data object NavArticles : StringRes(
-        en = "Articles",
-        sl = "Članki",
-        lv = "Raksti"
+    data object NavBlog : StringRes(
+        en = "Blog",
+        sl = "Blog",
+        lv = "Blogs"
     )
 
     data object NavContact : StringRes(
@@ -107,18 +106,18 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
     data object ProfileImageDesc : StringRes(
         en = "Portrait of Rok Retar",
         sl = "Portret Roka Retarja",
-        lv = "Rok Retar portrets"
+        lv = "Roka Retara portrets"
     )
 
     data object InfiniteCarouselArticleTitle : StringRes(
         en = "Building a Smooth, Infinite Carousel in Kobweb",
         sl = "Gradnja gladkega, neskončnega vrtiljaka v Kobwebu",
-        lv = "Gluda, bezgalīga karuseļa izveide Kobweb"
+        lv = "Gludas, bezgalīgas karuseļa komponentes izveide Kobweb"
     )
 
     data object InfiniteCarouselArticleDesc : StringRes(
         en = "How to build an infinite, gapless carousel using Silk and Kobweb.",
-        sl = "Kako zgraditi neskončen vrtiljak brez vrzeli z uporabo Silk in Kobweb.",
-        lv = "Kā izveidot bezgalīgu karuseli bez atstarpēm, izmantojot Silk un Kobweb."
+        sl = "Kako zgraditi neskončen, brezšivni vrtiljak z uporabo Silk in Kobweb.",
+        lv = "Kā izveidot bezgalīgu, bezstarpīgu karuseli, izmantojot Silk un Kobweb."
     )
 }
