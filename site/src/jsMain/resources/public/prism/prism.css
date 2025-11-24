@@ -254,6 +254,8 @@ pre[class*="language-"] *::selection {
 /* Toolbar plugin */
 div.code-toolbar {
     position: relative;
+    max-width: 100%;
+    overflow-x: auto;
 }
 
 div.code-toolbar > .toolbar {
