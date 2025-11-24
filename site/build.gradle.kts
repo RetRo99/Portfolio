@@ -1,3 +1,4 @@
+import com.varabyte.kobweb.common.text.isSurrounded
 import com.varabyte.kobweb.gradle.application.util.configAsKobwebApplication
 import kotlinx.html.link
 import kotlinx.html.script
@@ -22,12 +23,19 @@ kobweb {
                 link(rel = "preconnect", href = "https://fonts.googleapis.com")
                 link(
                     rel = "preconnect",
-                    href = "https://fonts.gstatic.com"
+                    href = "https://fonts.gstatic.com",
                 ) { attributes["crossorigin"] = "" }
                 link(
                     href = "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap",
-                    rel = "stylesheet"
+                    rel = "stylesheet",
                 )
+                link(
+                    rel = "stylesheet",
+                    href = "/prism/prism.css",
+                )
+                script {
+                    src = "/prism/prism.js"
+                }
                 script {
                     async = true
                     src = "https://plausible.io/js/pa-KV_Y-QH0U3Bxdqi_EJupK.js"
@@ -38,7 +46,7 @@ kobweb {
                             """
                 window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
                 plausible.init()
-            """.trimIndent()
+            """.trimIndent(),
                         )
                     }
                 }
@@ -53,6 +61,61 @@ kobweb {
 
     markdown {
         defaultLayout.set(".pages.MarkdownPage")
+
+        handlers {
+            val WIDGET_PATH = "io.github.retar.portfolio.components.widgets"
+
+            code.set { code ->
+                var lang: String? = null
+                var lines: String? = null
+                var label: String? = null
+                var editingLabel = false
+
+                code.info
+                    .split(" ")
+                    .filter { it.isNotBlank() }
+                    .forEach { infoPart ->
+                        if (editingLabel) {
+                            label += " "
+                            if (infoPart.endsWith("\"")) {
+                                label += infoPart.removeSuffix("\"")
+                                editingLabel = false
+                            } else {
+                                label += infoPart
+                            }
+                        } else {
+                            if (infoPart.isSurrounded("\"")) {
+                                label = infoPart.removeSurrounding("\"")
+                            } else if (infoPart.startsWith("\"")) {
+                                label = infoPart.removePrefix("\"")
+                                editingLabel = true
+                            } else if (infoPart.first().isDigit()) {
+                                lines = infoPart
+                            } else {
+                                lang = infoPart
+                            }
+                        }
+                    }
+
+                buildString {
+                    append("$WIDGET_PATH.CodeBlock(\"\"\"${code.literal.escapeTripleQuotedText()}\"\"\"")
+                    if (lang != null) {
+                        append(", lang = \"$lang\"")
+                    }
+                    if (lines != null) {
+                        append(", highlightLines = \"$lines\"")
+                    }
+                    if (label != null) {
+                        append(", label = \"$label\"")
+                    }
+                    append(")")
+                }
+            }
+
+            inlineCode.set { code ->
+                "$WIDGET_PATH.InlineCode(\"\"\"${code.literal.escapeTripleQuotedText()}\"\"\")"
+            }
+        }
     }
 }
 
@@ -71,3 +134,6 @@ kotlin {
         }
     }
 }
+
+private fun String.escapeTripleQuotedText(): String =
+    replace("\"\"\"", "\\\"\\\"\\\"")
