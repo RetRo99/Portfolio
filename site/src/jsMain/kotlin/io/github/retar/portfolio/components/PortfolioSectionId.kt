@@ -1,4 +1,4 @@
-package io.github.retar.portfolio
+package io.github.retar.portfolio.components
 
 sealed class PortfolioSectionId(val domId: String) {
     object Header : PortfolioSectionId("nav-header")

@@ -7,8 +7,8 @@ import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.alignItems
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.core.layout.Layout
-import io.github.retar.portfolio.PortfolioSectionId
 import io.github.retar.portfolio.components.PortfolioSection
+import io.github.retar.portfolio.components.PortfolioSectionId
 import kotlinx.browser.window
 import org.jetbrains.compose.web.css.AlignItems
 

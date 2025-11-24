@@ -20,7 +20,7 @@ import com.varabyte.kobweb.core.layout.Layout
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.style.toModifier
-import io.github.retar.portfolio.PortfolioSectionId
+import io.github.retar.portfolio.components.PortfolioSectionId
 import io.github.retar.portfolio.components.footer.Footer
 import io.github.retar.portfolio.components.header.NavHeader
 import io.github.retar.portfolio.styles.sitePalette

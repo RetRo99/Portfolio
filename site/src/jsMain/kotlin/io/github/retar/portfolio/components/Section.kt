@@ -13,10 +13,11 @@ import com.varabyte.kobweb.compose.foundation.layout.ColumnScope
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.id
 import com.varabyte.kobweb.compose.ui.modifiers.padding
+import com.varabyte.kobweb.compose.ui.modifiers.scrollMargin
 import com.varabyte.kobweb.compose.ui.modifiers.width
 import com.varabyte.kobweb.silk.style.CssStyle
 import io.github.retar.portfolio.LocalSetActiveSection
-import io.github.retar.portfolio.PortfolioSectionId
+import io.github.retar.portfolio.components.header.NavHeaderHeight
 import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
 import org.w3c.dom.HTMLElement
@@ -54,7 +55,8 @@ fun PortfolioSection(
     }
 
     Column(
-        modifier = modifier.id(section.domId),
+        modifier = modifier.id(section.domId)
+            .scrollMargin(top = NavHeaderHeight.value()),
         ref = ref { htmlElement ->
             element = htmlElement
         },

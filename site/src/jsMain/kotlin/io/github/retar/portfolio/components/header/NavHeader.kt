@@ -1,14 +1,18 @@
 package io.github.retar.portfolio.components.header
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import com.varabyte.kobweb.browser.dom.observers.ResizeObserver
 import com.varabyte.kobweb.compose.css.Cursor
 import com.varabyte.kobweb.compose.css.JustifyContent
+import com.varabyte.kobweb.compose.css.StyleVariable
 import com.varabyte.kobweb.compose.css.UserSelect
+import com.varabyte.kobweb.compose.dom.ref
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
@@ -38,6 +42,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.translateY
 import com.varabyte.kobweb.compose.ui.modifiers.userSelect
 import com.varabyte.kobweb.compose.ui.modifiers.width
 import com.varabyte.kobweb.compose.ui.modifiers.zIndex
+import com.varabyte.kobweb.core.rememberPageContext
 import com.varabyte.kobweb.silk.components.icons.CloseIcon
 import com.varabyte.kobweb.silk.components.icons.HamburgerIcon
 import com.varabyte.kobweb.silk.components.icons.MoonIcon
@@ -57,14 +62,13 @@ import com.varabyte.kobweb.silk.theme.colors.saveToLocalStorage
 import io.github.retar.portfolio.Language
 import io.github.retar.portfolio.LocalActiveSection
 import io.github.retar.portfolio.LocalSetActiveSection
-import io.github.retar.portfolio.PortfolioSectionId
 import io.github.retar.portfolio.resources.StringRes
 import io.github.retar.portfolio.saveToLocalStorage
 import io.github.retar.portfolio.styles.DescriptorStyle
 import io.github.retar.portfolio.styles.sitePalette
 import io.github.retar.portfolio.styles.toSitePalette
 import kotlinx.browser.document
-import kotlinx.browser.window
+import org.jetbrains.compose.web.css.CSSLengthValue
 import org.jetbrains.compose.web.css.Position
 import org.jetbrains.compose.web.css.ms
 import org.jetbrains.compose.web.css.percent
@@ -103,17 +107,43 @@ val DropdownStyle = CssStyle.base {
         .zIndex(10)
 }
 
+val NavHeaderHeight by StyleVariable<CSSLengthValue>(prefix = "site", defaultFallback = 0.px)
+
 @Composable
 fun NavHeader() {
     var isMenuOpen by remember { mutableStateOf(false) }
 
     val palette = sitePalette()
+    var headerElement by remember { mutableStateOf<HTMLElement?>(null) }
+    DisposableEffect(headerElement) {
+        val element = headerElement
+        if (element != null) {
+            val observer = ResizeObserver { entries, _ ->
+                val height = entries.firstOrNull()?.contentRect?.height ?: 0.0
+
+                // FIX: We check if the name already has dashes, if not we add them.
+                val variableName = NavHeaderHeight.name.let {
+                    if (it.startsWith("--")) it else "--$it"
+                }
+
+                (document.documentElement as? HTMLElement)?.style?.setProperty(
+                    variableName,
+                    "${height}px"
+                )
+            }
+            observer.observe(element)
+            onDispose { observer.disconnect() }
+        } else {
+            onDispose { }
+        }
+    }
 
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .position(Position.Relative),
         contentAlignment = Alignment.Center,
+        ref = ref { element -> headerElement = element }
     ) {
         Row(
             modifier = Modifier
@@ -224,6 +254,8 @@ private fun HeaderNavItem(
     item: NavItem,
     onClick: () -> Unit,
 ) {
+    val pageContext = rememberPageContext()
+    val router = pageContext.router
     val activeSection = LocalActiveSection.current
     val setActiveSection = LocalSetActiveSection.current
     val isActive = item.section == activeSection
@@ -238,29 +270,13 @@ private fun HeaderNavItem(
             .color(if (isActive) palette.primary else palette.textSecondary)
             .onClick {
                 onClick()
-
                 val section = item.section
+                setActiveSection(section)
+
                 if (section != null) {
-                    setActiveSection(section)
-
-                    val target =
-                        document
-                            .getElementById(section.domId)
-                                as? HTMLElement
-                            ?: return@onClick
-
-                    val headerHeight =
-                        (document.getElementById(PortfolioSectionId.Header.domId) as? HTMLElement)
-                            ?.offsetHeight
-                            ?.toDouble()
-                            ?: 0.0
-
-                    val targetY =
-                        target.getBoundingClientRect().top +
-                                window.scrollY -
-                                headerHeight
-
-                    window.scrollTo(x = 0.0, y = targetY)
+                    router.tryRoutingTo("#${section.domId}")
+                } else {
+                    router.navigateTo(item.route)
                 }
             },
     )

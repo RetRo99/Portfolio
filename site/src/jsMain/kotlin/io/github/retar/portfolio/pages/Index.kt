@@ -18,9 +18,9 @@ import com.varabyte.kobweb.compose.ui.modifiers.userSelect
 import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.core.layout.Layout
 import com.varabyte.kobweb.silk.components.graphics.Image
-import io.github.retar.portfolio.PortfolioSectionId
 import io.github.retar.portfolio.components.DescriptorText
 import io.github.retar.portfolio.components.PortfolioSection
+import io.github.retar.portfolio.components.PortfolioSectionId
 import io.github.retar.portfolio.components.SectionHeader
 import io.github.retar.portfolio.components.widgets.ArticleCard
 import io.github.retar.portfolio.components.widgets.InfiniteCarousel

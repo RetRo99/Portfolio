@@ -33,6 +33,7 @@ import com.varabyte.kobweb.silk.theme.colors.loadFromLocalStorage
 import com.varabyte.kobweb.silk.theme.colors.palette.background
 import com.varabyte.kobweb.silk.theme.colors.palette.color
 import com.varabyte.kobweb.silk.theme.colors.systemPreference
+import io.github.retar.portfolio.components.PortfolioSectionId
 import io.github.retar.portfolio.styles.SitePalettes
 import org.jetbrains.compose.web.css.px
 

@@ -1,6 +1,6 @@
 package io.github.retar.portfolio.components.header
 
-import io.github.retar.portfolio.PortfolioSectionId
+import io.github.retar.portfolio.components.PortfolioSectionId
 import io.github.retar.portfolio.resources.StringRes
 
 enum class NavItem(
@@ -20,7 +20,7 @@ enum class NavItem(
     ),
     Articles(
         section = PortfolioSectionId.Articles,
-        route = "/articles",
+        route = "/",
         label = StringRes.NavArticles,
     ),
     Contact(
