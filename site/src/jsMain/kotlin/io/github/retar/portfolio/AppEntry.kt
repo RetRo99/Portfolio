@@ -82,7 +82,6 @@ fun AppEntry(content: @Composable () -> Unit) {
     SilkApp {
         Surface(SmoothColorStyle.toModifier()) {
             var active by remember { mutableStateOf<PortfolioSectionId?>(null) }
-
             CompositionLocalProvider(
                 LocalActiveSection provides active,
                 LocalSetActiveSection provides { active = it },

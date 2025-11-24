@@ -6,6 +6,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import com.varabyte.kobweb.browser.dom.observers.ResizeObserver
 import com.varabyte.kobweb.compose.css.Cursor
@@ -68,6 +69,8 @@ import io.github.retar.portfolio.styles.DescriptorStyle
 import io.github.retar.portfolio.styles.sitePalette
 import io.github.retar.portfolio.styles.toSitePalette
 import kotlinx.browser.document
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.jetbrains.compose.web.css.CSSLengthValue
 import org.jetbrains.compose.web.css.Position
 import org.jetbrains.compose.web.css.ms
@@ -261,6 +264,7 @@ private fun HeaderNavItem(
     val isActive = item.section == activeSection
     val palette = sitePalette()
 
+    val coroutineScope = rememberCoroutineScope()
     SpanText(
         text = item.label.value,
         modifier = DescriptorStyle
@@ -271,12 +275,17 @@ private fun HeaderNavItem(
             .onClick {
                 onClick()
                 val section = item.section
-                setActiveSection(section)
 
                 if (section != null) {
-                    router.tryRoutingTo(section.path)
+                    router.tryRoutingTo(
+                        item.route + section.path
+                    )
                 } else {
                     router.navigateTo(item.route)
+                }
+                coroutineScope.launch {
+                    delay(200)
+                    setActiveSection(item.section)
                 }
             },
     )
