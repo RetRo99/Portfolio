@@ -28,7 +28,7 @@
     --hue-6: hsl(35, 99%, 36%);
     /*--hue-6-2: hsl(35, 99%, 40%);*/
     /*--syntax-fg: hsl(230, 8%, 24%);*/
-    --syntax-bg: hsl(230, 1%, 98%);
+    --syntax-bg: rgb(240, 240, 244);
     /*--syntax-gutter: hsl(230, 1%, 62%);*/
     /*--syntax-guide: hsla(230, 8%, 24%, 0.2);*/
     /*--syntax-accent: hsl(230, 100%, 66%);*/
@@ -55,7 +55,7 @@
     --hue-6: hsl(29, 54%, 61%);
     /*--hue-6-2: hsl(39, 67%, 69%);*/
     /*--syntax-fg: hsl(220, 14%, 71%);*/
-    --syntax-bg: hsl(220, 13%, 18%);
+    --syntax-bg: rgb(39, 39, 42);
     /*--syntax-gutter: hsl(220, 14%, 45%);*/
     /*--syntax-guide: hsla(220, 14%, 71%, 0.15);*/
     /*--syntax-accent: hsl(220, 100%, 66%);*/
@@ -79,6 +79,11 @@ pre[class*="language-"] {
     line-height: 1.5;
     tab-size: 2;
 }
+
+code[class*="language-"] {
+    background: transparent;
+}
+
 
 /* Selection */
 

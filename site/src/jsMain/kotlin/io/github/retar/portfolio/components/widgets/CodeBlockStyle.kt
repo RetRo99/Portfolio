@@ -32,6 +32,8 @@ import com.varabyte.kobweb.silk.style.base
 import com.varabyte.kobweb.silk.style.common.SmoothColorStyle
 import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.theme.name
+import io.github.retar.portfolio.styles.sitePalette
+import io.github.retar.portfolio.styles.toSitePalette
 import kotlinx.browser.document
 import kotlinx.browser.window
 import org.jetbrains.compose.web.css.CSSColorValue
@@ -45,7 +47,10 @@ import org.jetbrains.compose.web.dom.Pre
 import org.jetbrains.compose.web.dom.Text
 
 val CodeBlockStyle = CssStyle.base(extraModifier = { SmoothColorStyle.toModifier() }) {
+    val palette = colorMode.toSitePalette()
     Modifier
+        .backgroundColor(palette.codeBackground)
+        .color(palette.codeText)
         .borderRadius(10.px)
         .maxWidth(100.percent)
         .overflow { x(Overflow.Auto) }
@@ -104,9 +109,11 @@ fun CodeBlock(
                     }
             }
             .toAttrs()) {
+        val palette = sitePalette()
         Code(
             attrs = SmoothColorStyle.toModifier()
                 .display(DisplayStyle.Block)
+                .color(palette.codeText)
                 // Ensure iOS doesn't shrink text size when zooming
                 .styleModifier { property("-webkit-text-size-adjust", 100.percent) }
                 .classNames("language-${lang ?: "none"}")
