@@ -11,7 +11,9 @@ import androidx.compose.runtime.setValue
 import com.varabyte.kobweb.browser.dom.observers.ResizeObserver
 import com.varabyte.kobweb.compose.css.Cursor
 import com.varabyte.kobweb.compose.css.JustifyContent
+import com.varabyte.kobweb.compose.css.ObjectFit
 import com.varabyte.kobweb.compose.css.StyleVariable
+import com.varabyte.kobweb.compose.css.TextDecorationLine
 import com.varabyte.kobweb.compose.css.UserSelect
 import com.varabyte.kobweb.compose.dom.ref
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
@@ -26,6 +28,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.borderRadius
 import com.varabyte.kobweb.compose.ui.modifiers.boxShadow
 import com.varabyte.kobweb.compose.ui.modifiers.color
 import com.varabyte.kobweb.compose.ui.modifiers.cursor
+import com.varabyte.kobweb.compose.ui.modifiers.draggable
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.gap
 import com.varabyte.kobweb.compose.ui.modifiers.height
@@ -33,10 +36,13 @@ import com.varabyte.kobweb.compose.ui.modifiers.justifyContent
 import com.varabyte.kobweb.compose.ui.modifiers.left
 import com.varabyte.kobweb.compose.ui.modifiers.margin
 import com.varabyte.kobweb.compose.ui.modifiers.minWidth
+import com.varabyte.kobweb.compose.ui.modifiers.objectFit
 import com.varabyte.kobweb.compose.ui.modifiers.onClick
 import com.varabyte.kobweb.compose.ui.modifiers.opacity
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.modifiers.position
+import com.varabyte.kobweb.compose.ui.modifiers.size
+import com.varabyte.kobweb.compose.ui.modifiers.textDecorationLine
 import com.varabyte.kobweb.compose.ui.modifiers.top
 import com.varabyte.kobweb.compose.ui.modifiers.translateX
 import com.varabyte.kobweb.compose.ui.modifiers.translateY
@@ -44,10 +50,16 @@ import com.varabyte.kobweb.compose.ui.modifiers.userSelect
 import com.varabyte.kobweb.compose.ui.modifiers.width
 import com.varabyte.kobweb.compose.ui.modifiers.zIndex
 import com.varabyte.kobweb.core.rememberPageContext
+import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.icons.CloseIcon
 import com.varabyte.kobweb.silk.components.icons.HamburgerIcon
 import com.varabyte.kobweb.silk.components.icons.MoonIcon
 import com.varabyte.kobweb.silk.components.icons.SunIcon
+import com.varabyte.kobweb.silk.components.icons.fa.FaEnvelope
+import com.varabyte.kobweb.silk.components.icons.fa.FaGithub
+import com.varabyte.kobweb.silk.components.icons.fa.FaLinkedin
+import com.varabyte.kobweb.silk.components.icons.fa.IconSize
+import com.varabyte.kobweb.silk.components.navigation.Link
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.animation.Keyframes
@@ -63,9 +75,13 @@ import com.varabyte.kobweb.silk.theme.colors.saveToLocalStorage
 import io.github.retar.portfolio.Language
 import io.github.retar.portfolio.LocalActiveSection
 import io.github.retar.portfolio.LocalSetActiveSection
+import io.github.retar.portfolio.resources.ImageRes
+import io.github.retar.portfolio.resources.LinkRes
 import io.github.retar.portfolio.resources.StringRes
 import io.github.retar.portfolio.saveToLocalStorage
+import io.github.retar.portfolio.styles.BodySmallStyle
 import io.github.retar.portfolio.styles.DescriptorStyle
+import io.github.retar.portfolio.styles.LabelStyle
 import io.github.retar.portfolio.styles.sitePalette
 import io.github.retar.portfolio.styles.toSitePalette
 import kotlinx.browser.document
@@ -155,25 +171,51 @@ fun NavHeader() {
                 .justifyContent(JustifyContent.SpaceBetween),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            SpanText(
-                text = StringRes.HeaderTitle.value,
-                modifier = DescriptorStyle.toModifier(),
-            )
+            // Left side: Profile image + Name and subtitle
+            Row(
+                modifier = Modifier.gap(12.px),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Image(
+                    src = ImageRes.ProfileImage.path,
+                    description = StringRes.ProfileImageDesc.value,
+                    modifier = Modifier
+                        .size(40.px)
+                        .borderRadius(999.px)
+                        .objectFit(ObjectFit.Cover)
+                        .draggable(false)
+                        .userSelect(UserSelect.None),
+                )
+                Column(
+                    modifier = Modifier.gap(0.px),
+                ) {
+                    SpanText(
+                        text = StringRes.HeaderTitle.value,
+                        modifier = LabelStyle.toModifier(),
+                    )
+                    SpanText(
+                        text = StringRes.Descriptor.value,
+                        modifier = BodySmallStyle.toModifier(),
+                    )
+                }
+            }
 
+            // Right side: Social icons (desktop)
             Row(
                 modifier = Modifier
-                    .gap(24.px)
+                    .gap(16.px)
                     .displayIfAtLeast(Breakpoint.MD),
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                NavItems({ isMenuOpen = false })
+                HeaderSocialIcons()
                 Row(modifier = Modifier.gap(12.px)) {
                     ThemeToggle()
                     LanguageSwitcher()
                 }
             }
 
+            // Mobile menu
             Box(
                 modifier = Modifier.displayUntil(Breakpoint.MD),
                 contentAlignment = Alignment.Center,
@@ -211,6 +253,47 @@ fun NavHeader() {
 }
 
 @Composable
+private fun HeaderSocialIcons() {
+    val palette = sitePalette()
+    val iconModifier = Modifier
+        .color(palette.textSecondary)
+        .cursor(Cursor.Pointer)
+
+    Row(
+        modifier = Modifier.gap(16.px),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Link(
+            path = LinkRes.External.GitHub,
+            modifier = Modifier.textDecorationLine(TextDecorationLine.None),
+        ) {
+            FaGithub(
+                modifier = iconModifier,
+                size = IconSize.LG,
+            )
+        }
+        Link(
+            path = LinkRes.External.LinkedIn,
+            modifier = Modifier.textDecorationLine(TextDecorationLine.None),
+        ) {
+            FaLinkedin(
+                modifier = iconModifier,
+                size = IconSize.LG,
+            )
+        }
+        Link(
+            path = "mailto:rok.retar@gmail.com",
+            modifier = Modifier.textDecorationLine(TextDecorationLine.None),
+        ) {
+            FaEnvelope(
+                modifier = iconModifier,
+                size = IconSize.LG,
+            )
+        }
+    }
+}
+
+@Composable
 private fun MobileNavDropdown(onClose: () -> Unit) {
     sitePalette()
 
@@ -239,6 +322,7 @@ private fun MobileNavDropdown(onClose: () -> Unit) {
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         NavItems(onItemClick = onClose)
+        HeaderSocialIcons()
     }
 }
 

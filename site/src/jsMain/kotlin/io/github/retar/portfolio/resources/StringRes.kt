@@ -14,6 +14,24 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
             }
         }
 
+    data object HeroIntro : StringRes(
+        en = "Hi, my name is",
+        sl = "Živjo, moje ime je",
+        lv = "Sveiki, mani sauc"
+    )
+
+    data object HeroName : StringRes(
+        en = "Rok Retar",
+        sl = "Rok Retar",
+        lv = "Rok Retar"
+    )
+
+    data object HeroTagline : StringRes(
+        en = "I build things for the web.",
+        sl = "Gradim stvari za splet.",
+        lv = "Es būvēju lietas tīmeklim."
+    )
+
     data object HeroTitle : StringRes(
         en = "I'm Rok Retar, a developer specializing in building innovative digital solutions, based in Slovenia.",
         sl = "Sem Rok Retar, razvijalec, ki ustvarja inovativne digitalne rešitve. Delujem iz Slovenije.",
@@ -21,15 +39,21 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
     )
 
     data object HeroSubtitle : StringRes(
-        en = "Kotlin-focused developer who enjoys building polished mobile and web experiences. This portfolio is built with Kobweb and Silk, which bring a Compose-like developer experience to the web.",
-        sl = "Sem razvijalec, osredotočen na Kotlin, z veseljem pa ustvarjam dovršene mobilne in spletne izkušnje. Ta portfelj je narejen s Kobwebom in Silkom, ki na splet prinašata izkušnjo, podobno Compose.",
-        lv = "Esmu Kotlin izstrādātājs, kuram patīk veidot noslīpētas mobilās un tīmekļa pieredzes. Šis portfelis ir veidots ar Kobweb un Silk, kas tīmeklī sniedz izstrādes pieredzi, līdzīgu Compose."
+        en = "I'm a full-stack developer specializing in building exceptional digital experiences. Currently focused on creating accessible, human-centered products with modern web technologies.",
+        sl = "Sem full-stack razvijalec, specializiran za gradnjo izjemnih digitalnih izkušenj. Trenutno se osredotočam na ustvarjanje dostopnih, človeku prijaznih izdelkov z modernimi spletnimi tehnologijami.",
+        lv = "Esmu pilna steka izstrādātājs, kas specializējas izcilu digitālo pieredžu veidošanā. Pašlaik koncentrējos uz pieejamu, cilvēkcentrētu produktu radīšanu ar modernām tīmekļa tehnoloģijām."
+    )
+
+    data object ViewMyWork : StringRes(
+        en = "View My Work",
+        sl = "Poglej moje delo",
+        lv = "Skatīt manus darbus"
     )
 
     data object Descriptor : StringRes(
-        en = "Kotlin / Android / Web Developer",
-        sl = "Kotlin / Android / Spletni razvijalec",
-        lv = "Kotlin / Android / Tīmekļa izstrādātājs"
+        en = "Full-Stack Developer",
+        sl = "Full-Stack razvijalec",
+        lv = "Pilna steka izstrādātājs"
     )
 
     data object Github : StringRes(

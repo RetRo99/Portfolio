@@ -1,49 +1,59 @@
 package io.github.retar.portfolio.components.widgets
 
 import androidx.compose.runtime.Composable
-import com.varabyte.kobweb.compose.css.TextDecorationLine
 import com.varabyte.kobweb.compose.ui.Modifier
-import com.varabyte.kobweb.compose.ui.modifiers.backgroundColor
+import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.border
 import com.varabyte.kobweb.compose.ui.modifiers.borderRadius
 import com.varabyte.kobweb.compose.ui.modifiers.color
-import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.modifiers.scale
-import com.varabyte.kobweb.compose.ui.modifiers.textDecorationLine
-import com.varabyte.kobweb.compose.ui.toAttrs
+import com.varabyte.kobweb.compose.ui.modifiers.setVariable
+import com.varabyte.kobweb.core.rememberPageContext
+import com.varabyte.kobweb.silk.components.forms.Button
+import com.varabyte.kobweb.silk.components.forms.ButtonSize
+import com.varabyte.kobweb.silk.components.forms.ButtonVars
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.selectors.hover
 import com.varabyte.kobweb.silk.style.toModifier
 import io.github.retar.portfolio.styles.sitePalette
 import org.jetbrains.compose.web.css.LineStyle
 import org.jetbrains.compose.web.css.px
-import org.jetbrains.compose.web.dom.A
 import org.jetbrains.compose.web.dom.Text
 
 @Composable
-fun PortfolioButton(url: String, label: String) {
-    A(url, attrs = LinkButtonStyle.toModifier().toAttrs()) {
+fun OutlineButton(
+    url: String,
+    label: String,
+    modifier: Modifier = Modifier,
+) {
+    val ctx = rememberPageContext()
+
+    Button(
+        onClick = { ctx.router.navigateTo(url) },
+        modifier = OutlineButtonStyle.toModifier()
+            .then(modifier),
+        size = ButtonSize.MD,
+    ) {
         Text(label)
     }
 }
 
-val LinkButtonStyle = CssStyle {
+val OutlineButtonStyle = CssStyle {
     base {
         val palette = sitePalette()
         Modifier
-            .padding(topBottom = 10.px, leftRight = 18.px)
-            .border(1.px, LineStyle.Solid, palette.primary)
-            .borderRadius(999.px)
-            .backgroundColor(palette.primary)
-            .color(palette.buttonText)
-            .textDecorationLine(TextDecorationLine.None)
+            .setVariable(ButtonVars.BackgroundDefaultColor, Colors.Transparent)
+            .setVariable(ButtonVars.BackgroundHoverColor, palette.accent)
+            .setVariable(ButtonVars.BackgroundPressedColor, palette.accent)
+            .setVariable(ButtonVars.Color, palette.accent)
+            .border(2.px, LineStyle.Solid, palette.accent)
+            .borderRadius(4.px)
     }
 
     hover {
         val palette = sitePalette()
         Modifier
-            .backgroundColor(palette.primary)
-            .color(palette.buttonText)
-            .scale(1.03)
+            .color(palette.background)
+            .scale(1.02)
     }
 }
