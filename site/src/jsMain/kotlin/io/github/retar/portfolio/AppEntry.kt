@@ -2,6 +2,7 @@ package io.github.retar.portfolio
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -40,18 +41,26 @@ fun initStyles(ctx: InitSilkContext) {
     ctx.config.initialColorMode =
         ColorMode.loadFromLocalStorage(COLOR_MODE_KEY) ?: ColorMode.systemPreference
 
-    // Script to prevent color mode flash on exported sites
+    // Script to fix color mode and hide content until language is ready on exported sites
     if (AppGlobals.isExporting) {
         document.head!!.appendChild(
             document.createElement("script").apply {
                 textContent = """
                     {
+                        // Fix color mode
                         const storedColor = localStorage.getItem('$COLOR_MODE_KEY');
-                        const desiredColor = storedColor
-                            ? `silk-${'$'}{storedColor.toLowerCase()}`
-                            : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'silk-dark' : 'silk-light');
-                        const oppositeColor = desiredColor === 'silk-dark' ? 'silk-light' : 'silk-dark';
+                        const isDark = storedColor
+                            ? storedColor.toLowerCase() === 'dark'
+                            : window.matchMedia('(prefers-color-scheme: dark)').matches;
+                        const desiredColor = isDark ? 'silk-dark' : 'silk-light';
+                        const oppositeColor = isDark ? 'silk-light' : 'silk-dark';
                         document.documentElement.classList.replace(oppositeColor, desiredColor);
+
+                        // Hide content until language is initialized (with correct background)
+                        const style = document.createElement('style');
+                        style.id = 'initial-hide';
+                        style.textContent = 'body { visibility: hidden; background: ' + (isDark ? '${SitePalettes.dark.background}' : '${SitePalettes.light.background}') + '; }';
+                        document.head.appendChild(style);
                     }
                 """.trimIndent()
             }
@@ -85,6 +94,11 @@ val LocalSetActiveSection = compositionLocalOf<(PortfolioSectionId?) -> Unit> { 
 @App
 @Composable
 fun AppEntry(content: @Composable () -> Unit) {
+    // Remove the initial hide style once the app is ready (language is initialized)
+    LaunchedEffect(Unit) {
+        document.getElementById("initial-hide")?.remove()
+    }
+
     SilkApp {
         Surface(SmoothColorStyle.toModifier()) {
             var active by remember { mutableStateOf<PortfolioSectionId?>(null) }
