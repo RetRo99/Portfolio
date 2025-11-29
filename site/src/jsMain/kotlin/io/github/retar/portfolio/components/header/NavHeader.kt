@@ -72,6 +72,7 @@ import com.varabyte.kobweb.silk.style.extendedBy
 import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.varabyte.kobweb.silk.theme.colors.saveToLocalStorage
+import io.github.retar.portfolio.COLOR_MODE_KEY
 import io.github.retar.portfolio.Language
 import io.github.retar.portfolio.LocalActiveSection
 import io.github.retar.portfolio.LocalSetActiveSection
@@ -381,7 +382,7 @@ private fun ThemeToggle(modifier: Modifier = Modifier) {
     val palette = sitePalette()
 
     LaunchedEffect(colorMode) {
-        colorMode.saveToLocalStorage()
+        colorMode.saveToLocalStorage(COLOR_MODE_KEY)
     }
     val iconModifier = DescriptorStyle
         .toModifier()

@@ -15,6 +15,8 @@ import com.varabyte.kobweb.compose.ui.modifiers.fontFamily
 import com.varabyte.kobweb.compose.ui.modifiers.overflow
 import com.varabyte.kobweb.compose.ui.modifiers.scrollBehavior
 import com.varabyte.kobweb.core.App
+import com.varabyte.kobweb.core.AppGlobals
+import com.varabyte.kobweb.core.isExporting
 import com.varabyte.kobweb.silk.SilkApp
 import com.varabyte.kobweb.silk.components.layout.Surface
 import com.varabyte.kobweb.silk.init.InitSilk
@@ -29,11 +31,32 @@ import com.varabyte.kobweb.silk.theme.colors.palette.color
 import com.varabyte.kobweb.silk.theme.colors.systemPreference
 import io.github.retar.portfolio.components.PortfolioSectionId
 import io.github.retar.portfolio.styles.SitePalettes
+import kotlinx.browser.document
+
+const val COLOR_MODE_KEY = "portfolio:colorMode"
 
 @InitSilk
 fun initStyles(ctx: InitSilkContext) {
     ctx.config.initialColorMode =
-        ColorMode.loadFromLocalStorage() ?: ColorMode.systemPreference
+        ColorMode.loadFromLocalStorage(COLOR_MODE_KEY) ?: ColorMode.systemPreference
+
+    // Script to prevent color mode flash on exported sites
+    if (AppGlobals.isExporting) {
+        document.head!!.appendChild(
+            document.createElement("script").apply {
+                textContent = """
+                    {
+                        const storedColor = localStorage.getItem('$COLOR_MODE_KEY');
+                        const desiredColor = storedColor
+                            ? `silk-${'$'}{storedColor.toLowerCase()}`
+                            : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'silk-dark' : 'silk-light');
+                        const oppositeColor = desiredColor === 'silk-dark' ? 'silk-light' : 'silk-dark';
+                        document.documentElement.classList.replace(oppositeColor, desiredColor);
+                    }
+                """.trimIndent()
+            }
+        )
+    }
 
     Language.initializeFromLocalStorage()
 

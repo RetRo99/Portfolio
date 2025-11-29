@@ -42,10 +42,6 @@ enum class Language(val code: String, val label: String) {
     }
 }
 
-private val rootLanguageState by lazy { mutableStateOf(Language.Default) }
-
-private val LocalLanguage = compositionLocalOf { rootLanguageState }
-
 private const val LANGUAGE_STORAGE_KEY = "portfolio.language"
 
 private fun createLanguageStorageKey(key: String) =
@@ -57,6 +53,13 @@ fun Language.Companion.loadFromLocalStorage(
     val languageKey = createLanguageStorageKey(key)
     return window.localStorage.getItem(languageKey)
 }
+
+// Initialize with stored value immediately to prevent flash of default language
+private val rootLanguageState by lazy {
+    mutableStateOf(Language.loadFromLocalStorage() ?: Language.systemPreference)
+}
+
+private val LocalLanguage = compositionLocalOf { rootLanguageState }
 
 fun Language.saveToLocalStorage(
     key: String = LANGUAGE_STORAGE_KEY,
