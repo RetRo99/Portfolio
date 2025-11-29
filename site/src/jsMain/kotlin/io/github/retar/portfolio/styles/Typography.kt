@@ -11,7 +11,6 @@ import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import org.jetbrains.compose.web.css.px
 
-// Large heading (H1 equivalent)
 val HeadingXLStyle = CssStyle {
     base {
         val palette = sitePalette()
@@ -27,7 +26,6 @@ val HeadingXLStyle = CssStyle {
     }
 }
 
-// Medium heading (H2 equivalent)
 val HeadingLStyle = CssStyle {
     base {
         val palette = sitePalette()
@@ -43,7 +41,21 @@ val HeadingLStyle = CssStyle {
     }
 }
 
-// Body text style
+val HeadingMStyle = CssStyle {
+    base {
+        val palette = sitePalette()
+        Modifier
+            .fontSize(36.px)
+            .fontWeight(FontWeight.Bold)
+            .fontFamily("Outfit", "sans-serif")
+            .color(palette.textPrimary)
+    }
+
+    Breakpoint.ZERO {
+        Modifier.fontSize(28.px)
+    }
+}
+
 val BodyStyle = CssStyle {
     base {
         val palette = sitePalette()
@@ -54,7 +66,6 @@ val BodyStyle = CssStyle {
     }
 }
 
-// Small body text style
 val BodySmallStyle = CssStyle {
     base {
         val palette = sitePalette()
@@ -65,7 +76,6 @@ val BodySmallStyle = CssStyle {
     }
 }
 
-// Label/title style (bold, primary color)
 val LabelStyle = CssStyle {
     base {
         val palette = sitePalette()
@@ -77,7 +87,6 @@ val LabelStyle = CssStyle {
     }
 }
 
-// Monospace/code style with accent color
 val MonoAccentStyle = CssStyle {
     base {
         val palette = sitePalette()
@@ -102,8 +111,10 @@ val SubtitleStyle = CssStyle {
 
 val DescriptorStyle = CssStyle {
     base {
+        val palette = sitePalette()
         Modifier
-            .fontSize(18.px)
+            .fontSize(14.px)
             .fontFamily("Inter", "sans-serif")
+            .color(palette.textSecondary)
     }
 }
