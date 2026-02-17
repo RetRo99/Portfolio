@@ -19,11 +19,15 @@ import com.varabyte.kobweb.core.layout.Layout
 import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.toModifier
+import io.github.retar.portfolio.components.widgets.DownloadButton
 import io.github.retar.portfolio.resources.ImageRes
+import io.github.retar.portfolio.resources.ParrotRes
 import io.github.retar.portfolio.styles.BodyStyle
+import io.github.retar.portfolio.styles.BodySmallStyle
 import io.github.retar.portfolio.styles.HeadingLStyle
 import io.github.retar.portfolio.styles.HeadingMStyle
 import io.github.retar.portfolio.styles.HeadingXLStyle
+import io.github.retar.portfolio.styles.LabelStyle
 import io.github.retar.portfolio.styles.SubtitleStyle
 import org.jetbrains.compose.web.css.AlignItems
 import org.jetbrains.compose.web.css.px
@@ -72,6 +76,9 @@ fun ParrotPage() {
                 )
             }
 
+            // Download Section
+            ReleasesSection()
+
             // Features Section
             Column(
                 modifier = Modifier
@@ -98,6 +105,81 @@ fun ParrotPage() {
                     title = "Pick Up Where You Left Off",
                     description = "Life is busy, and Parrot understands that. Your reading position is saved automatically, so you can seamlessly switch between your phone, tablet, and desktop without losing your place. Tap a notification and jump straight back into your book — no searching, no scrolling, just reading."
                 )
+            }
+        }
+    }
+}
+
+@Composable
+private fun ReleasesSection() {
+    val latestRelease = ParrotRes.latestRelease
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .gap(24.px)
+            .alignItems(AlignItems.Center),
+    ) {
+        SpanText(
+            text = "Download",
+            modifier = HeadingMStyle.toModifier(),
+        )
+
+        DownloadButton(
+            url = latestRelease.apkUrl,
+            label = "Download v${latestRelease.version} (APK)",
+        )
+
+        // Changelog
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .gap(16.px)
+                .alignItems(AlignItems.FlexStart),
+        ) {
+            SpanText(
+                text = "Version ${latestRelease.version} (${latestRelease.date})",
+                modifier = LabelStyle.toModifier(),
+            )
+
+            if (latestRelease.bugFixes.isNotEmpty()) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .gap(8.px),
+                ) {
+                    SpanText(
+                        text = "Bug Fixes",
+                        modifier = BodyStyle.toModifier(),
+                    )
+                    latestRelease.bugFixes.forEach { fix ->
+                        SpanText(
+                            text = "• $fix",
+                            modifier = BodySmallStyle.toModifier()
+                                .margin(left = 16.px),
+                        )
+                    }
+                }
+            }
+
+            if (latestRelease.improvements.isNotEmpty()) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .gap(8.px),
+                ) {
+                    SpanText(
+                        text = "Improvements",
+                        modifier = BodyStyle.toModifier(),
+                    )
+                    latestRelease.improvements.forEach { improvement ->
+                        SpanText(
+                            text = "• $improvement",
+                            modifier = BodySmallStyle.toModifier()
+                                .margin(left = 16.px),
+                        )
+                    }
+                }
             }
         }
     }
