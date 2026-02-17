@@ -7,6 +7,7 @@ import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.border
 import com.varabyte.kobweb.compose.ui.modifiers.borderRadius
 import com.varabyte.kobweb.compose.ui.modifiers.color
+import com.varabyte.kobweb.compose.ui.modifiers.onClick
 import com.varabyte.kobweb.compose.ui.modifiers.scale
 import com.varabyte.kobweb.compose.ui.modifiers.setVariable
 import com.varabyte.kobweb.compose.ui.modifiers.textDecorationLine
@@ -19,6 +20,7 @@ import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.selectors.hover
 import com.varabyte.kobweb.silk.style.toModifier
 import io.github.retar.portfolio.styles.sitePalette
+import io.github.retar.portfolio.utils.trackEvent
 import org.jetbrains.compose.web.css.LineStyle
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.Text
@@ -47,18 +49,24 @@ fun DownloadButton(
     label: String,
     modifier: Modifier = Modifier,
 ) {
-    Link(
-        path = url,
-        modifier = Modifier.textDecorationLine(TextDecorationLine.None),
+    Button(
+        onClick = {
+            // Track download event with Umami analytics
+            val fileName = url.substringAfterLast("/")
+            val version = fileName.removeSuffix(".apk")
+            val eventData = js("{}")
+            eventData["version"] = version
+            eventData["file"] = fileName
+            trackEvent("apk-download", eventData)
+
+            // Trigger download
+            js("window.open")(url, "_self")
+        },
+        modifier = OutlineButtonStyle.toModifier()
+            .then(modifier),
+        size = ButtonSize.MD,
     ) {
-        Button(
-            onClick = { },
-            modifier = OutlineButtonStyle.toModifier()
-                .then(modifier),
-            size = ButtonSize.MD,
-        ) {
-            Text(label)
-        }
+        Text(label)
     }
 }
 

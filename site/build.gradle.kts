@@ -37,20 +37,6 @@ kobweb {
                     src = "/prism/prism.js"
                 }
                 script {
-                    async = true
-                    src = "https://plausible.io/js/pa-KV_Y-QH0U3Bxdqi_EJupK.js"
-                }
-                script {
-                    unsafe {
-                        raw(
-                            """
-                window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
-                plausible.init()
-            """.trimIndent(),
-                        )
-                    }
-                }
-                script {
                     defer = true
                     src = "https://cloud.umami.is/script.js"
                     attributes["data-website-id"] = "75b85e4b-8c2d-4491-b957-0d6d27fd6307"
