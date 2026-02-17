@@ -39,9 +39,9 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
     )
 
     data object HeroSubtitle : StringRes(
-        en = "I'm a full-stack developer specializing in building exceptional digital experiences. Currently focused on creating accessible, human-centered products with modern web technologies.",
-        sl = "Sem full-stack razvijalec, specializiran za gradnjo izjemnih digitalnih izkušenj. Trenutno se osredotočam na ustvarjanje dostopnih, človeku prijaznih izdelkov z modernimi spletnimi tehnologijami.",
-        lv = "Esmu pilna steka izstrādātājs, kas specializējas izcilu digitālo pieredžu veidošanā. Pašlaik koncentrējos uz pieejamu, cilvēkcentrētu produktu radīšanu ar modernām tīmekļa tehnoloģijām."
+        en = "I'm a mobile developer specializing in building exceptional digital experiences. Currently focused on creating accessible, human-centered products with modern mobile technologies.",
+        sl = "Sem mobilni razvijalec, specializiran za gradnjo izjemnih digitalnih izkušenj. Trenutno se osredotočam na ustvarjanje dostopnih, človeku prijaznih izdelkov z modernimi mobilnimi tehnologijami.",
+        lv = "Esmu mobilo lietotņu izstrādātājs, kas specializējas izcilu digitālo pieredžu veidošanā. Pašlaik koncentrējos uz pieejamu, cilvēkcentrētu produktu radīšanu ar modernām mobilajām tehnoloģijām."
     )
 
     data object ViewMyWork : StringRes(
@@ -51,9 +51,9 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
     )
 
     data object Descriptor : StringRes(
-        en = "Full-Stack Developer",
-        sl = "Full-Stack razvijalec",
-        lv = "Pilna steka izstrādātājs"
+        en = "Mobile Developer",
+        sl = "Mobilni razvijalec",
+        lv = "Mobilo lietotņu izstrādātājs"
     )
 
     data object Github : StringRes(
