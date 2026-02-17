@@ -69,15 +69,15 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
     )
 
     data object SelectedProjectsTitle : StringRes(
-        en = "Selected Projects",
-        sl = "Izbrani projekti",
-        lv = "Izvēlētie projekti"
+        en = "Parrot",
+        sl = "Parrot",
+        lv = "Parrot"
     )
 
     data object SelectedProjectsSubtitle : StringRes(
-        en = "Explore a curated collection of projects that showcase my dedication to cutting-edge technology and intuitive design.",
-        sl = "Raziščite izbor projektov, ki prikazujejo mojo predanost sodobnim tehnologijam in intuitivnemu dizajnu.",
-        lv = "Izpētiet atlasītu projektu kolekciju, kas parāda manu aizrautību ar modernām tehnoloģijām un intuitīvu dizainu."
+        en = "A modern EPUB reader for Android with a focus on simplicity and reading experience.",
+        sl = "Sodoben EPUB bralnik za Android s poudarkom na preprostosti in bralni izkušnji.",
+        lv = "Moderns EPUB lasītājs Android ierīcēm ar uzsvaru uz vienkāršību un lasīšanas pieredzi."
     )
 
     data object BlogTitle : StringRes(

@@ -109,9 +109,14 @@ fun ProjectCard(
     image: ImageRes,
     modifier: Modifier = Modifier,
 ) {
+    val router = rememberPageContext().router
+
     ImageCard(
         image = image,
         modifier = modifier,
+        onClick = {
+            router.navigateTo("/parrot")
+        },
     )
 }
 
