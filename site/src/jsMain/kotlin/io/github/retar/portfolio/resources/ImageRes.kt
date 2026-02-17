@@ -6,6 +6,7 @@ enum class ImageRes(val path: String) {
     Bardy3("bardy/Bardy3.avif"),
 
     InfiniteCarouselArticle("articles/infinite_carousel.png"),
+    ParrotIcon("parrot/parrot.png"),
     ProfileImage("profile/profile_image.png"),
 }
 
