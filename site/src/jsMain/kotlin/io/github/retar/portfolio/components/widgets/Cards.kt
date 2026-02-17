@@ -107,6 +107,7 @@ fun ImageCard(
 @Composable
 fun ProjectCard(
     image: ImageRes,
+    route: String,
     modifier: Modifier = Modifier,
 ) {
     val router = rememberPageContext().router
@@ -115,7 +116,7 @@ fun ProjectCard(
         image = image,
         modifier = modifier,
         onClick = {
-            router.navigateTo("/parrot")
+            router.navigateTo(route)
         },
     )
 }

@@ -107,6 +107,7 @@ private fun SelectedProjectsSection() {
         ) { projectImage ->
             ProjectCard(
                 image = projectImage,
+                route = LinkRes.Internal.Parrot,
             )
         }
     }
