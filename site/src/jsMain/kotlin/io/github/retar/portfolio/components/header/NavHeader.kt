@@ -134,6 +134,7 @@ fun NavHeader() {
     var isMenuOpen by remember { mutableStateOf(false) }
 
     val palette = sitePalette()
+    val router = rememberPageContext().router
     var headerElement by remember { mutableStateOf<HTMLElement?>(null) }
     DisposableEffect(headerElement) {
         val element = headerElement
@@ -185,7 +186,11 @@ fun NavHeader() {
                         .borderRadius(999.px)
                         .objectFit(ObjectFit.Cover)
                         .draggable(false)
-                        .userSelect(UserSelect.None),
+                        .userSelect(UserSelect.None)
+                        .cursor(Cursor.Pointer)
+                        .onClick {
+                            router.navigateTo("/")
+                        },
                 )
                 Column(
                     modifier = Modifier.gap(0.px),
