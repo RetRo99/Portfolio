@@ -69,7 +69,7 @@ fun ParrotPage() {
                 )
 
                 SpanText(
-                    text = "A beautifully crafted e-reader app designed for book lovers who want more than just reading — they want an experience.",
+                    text = "A beautifully crafted e-reader app and companion app for Storyteller, designed for book lovers who want more than just reading — they want an experience.",
                     modifier = SubtitleStyle.toModifier()
                         .fillMaxWidth()
                         .maxWidth(650.px),
