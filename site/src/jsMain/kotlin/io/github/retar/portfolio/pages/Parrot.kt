@@ -3,6 +3,7 @@ package io.github.retar.portfolio.pages
 import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
+import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.alignItems
@@ -21,6 +22,7 @@ import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.toModifier
 import io.github.retar.portfolio.components.widgets.DownloadButton
 import io.github.retar.portfolio.resources.ImageRes
+import io.github.retar.portfolio.resources.ParrotRelease
 import io.github.retar.portfolio.resources.ParrotRes
 import io.github.retar.portfolio.styles.BodyStyle
 import io.github.retar.portfolio.styles.BodySmallStyle
@@ -130,55 +132,190 @@ private fun ReleasesSection() {
             label = "Download v${latestRelease.version} (APK)",
         )
 
-        // Changelog
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .gap(16.px)
-                .alignItems(AlignItems.FlexStart),
-        ) {
-            SpanText(
-                text = "Version ${latestRelease.version} (${latestRelease.date})",
-                modifier = LabelStyle.toModifier(),
-            )
+        // Latest Release Changelog
+        ReleaseChangelog(latestRelease)
 
-            if (latestRelease.bugFixes.isNotEmpty()) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .gap(8.px),
-                ) {
-                    SpanText(
-                        text = "Bug Fixes",
-                        modifier = BodyStyle.toModifier(),
-                    )
-                    latestRelease.bugFixes.forEach { fix ->
-                        SpanText(
-                            text = "• $fix",
-                            modifier = BodySmallStyle.toModifier()
-                                .margin(left = 16.px),
-                        )
-                    }
+        // Version History
+        if (ParrotRes.releases.size > 1) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .gap(24.px)
+                    .alignItems(AlignItems.FlexStart)
+                    .margin(top = 48.px),
+            ) {
+                SpanText(
+                    text = "Version History",
+                    modifier = HeadingMStyle.toModifier(),
+                )
+
+                ParrotRes.releases.drop(1).forEach { release ->
+                    ReleaseHistoryItem(release)
                 }
             }
+        }
+    }
+}
 
-            if (latestRelease.improvements.isNotEmpty()) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .gap(8.px),
-                ) {
+@Composable
+private fun ReleaseChangelog(release: ParrotRelease) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .gap(16.px)
+            .alignItems(AlignItems.FlexStart),
+    ) {
+        SpanText(
+            text = "Version ${release.version} (${release.date})",
+            modifier = LabelStyle.toModifier(),
+        )
+
+        if (release.features.isNotEmpty()) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .gap(8.px),
+            ) {
+                SpanText(
+                    text = "New Features",
+                    modifier = BodyStyle.toModifier(),
+                )
+                release.features.forEach { feature ->
                     SpanText(
-                        text = "Improvements",
-                        modifier = BodyStyle.toModifier(),
+                        text = "• $feature",
+                        modifier = BodySmallStyle.toModifier()
+                            .margin(left = 16.px),
                     )
-                    latestRelease.improvements.forEach { improvement ->
-                        SpanText(
-                            text = "• $improvement",
-                            modifier = BodySmallStyle.toModifier()
-                                .margin(left = 16.px),
-                        )
-                    }
+                }
+            }
+        }
+
+        if (release.bugFixes.isNotEmpty()) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .gap(8.px),
+            ) {
+                SpanText(
+                    text = "Bug Fixes",
+                    modifier = BodyStyle.toModifier(),
+                )
+                release.bugFixes.forEach { fix ->
+                    SpanText(
+                        text = "• $fix",
+                        modifier = BodySmallStyle.toModifier()
+                            .margin(left = 16.px),
+                    )
+                }
+            }
+        }
+
+        if (release.improvements.isNotEmpty()) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .gap(8.px),
+            ) {
+                SpanText(
+                    text = "Improvements",
+                    modifier = BodyStyle.toModifier(),
+                )
+                release.improvements.forEach { improvement ->
+                    SpanText(
+                        text = "• $improvement",
+                        modifier = BodySmallStyle.toModifier()
+                            .margin(left = 16.px),
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun ReleaseHistoryItem(release: ParrotRelease) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .gap(12.px)
+            .alignItems(AlignItems.FlexStart),
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .gap(16.px),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            SpanText(
+                text = "Version ${release.version}",
+                modifier = LabelStyle.toModifier(),
+            )
+            SpanText(
+                text = release.date,
+                modifier = BodySmallStyle.toModifier(),
+            )
+            DownloadButton(
+                url = release.apkUrl,
+                label = "Download APK",
+            )
+        }
+
+        if (release.features.isNotEmpty()) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .gap(4.px),
+            ) {
+                SpanText(
+                    text = "New Features:",
+                    modifier = BodyStyle.toModifier(),
+                )
+                release.features.forEach { feature ->
+                    SpanText(
+                        text = "• $feature",
+                        modifier = BodySmallStyle.toModifier()
+                            .margin(left = 16.px),
+                    )
+                }
+            }
+        }
+
+        if (release.bugFixes.isNotEmpty()) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .gap(4.px),
+            ) {
+                SpanText(
+                    text = "Bug Fixes:",
+                    modifier = BodyStyle.toModifier(),
+                )
+                release.bugFixes.forEach { fix ->
+                    SpanText(
+                        text = "• $fix",
+                        modifier = BodySmallStyle.toModifier()
+                            .margin(left = 16.px),
+                    )
+                }
+            }
+        }
+
+        if (release.improvements.isNotEmpty()) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .gap(4.px),
+            ) {
+                SpanText(
+                    text = "Improvements:",
+                    modifier = BodyStyle.toModifier(),
+                )
+                release.improvements.forEach { improvement ->
+                    SpanText(
+                        text = "• $improvement",
+                        modifier = BodySmallStyle.toModifier()
+                            .margin(left = 16.px),
+                    )
                 }
             }
         }
