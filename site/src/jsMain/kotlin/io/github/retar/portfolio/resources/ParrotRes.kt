@@ -12,6 +12,35 @@ data class ParrotRelease(
 object ParrotRes {
     val releases = listOf(
         ParrotRelease(
+            version = "0.2.0",
+            date = "2026-02-21",
+            apkUrl = "/parrot/parrot-0.2.0.apk",
+            features = listOf(
+                "CACHED quick filter - Quickly filter to show only cached/downloaded books",
+                "DATE_ADDED sort option - Sort your book library by when books were added",
+                "Publication date support - Local/imported books now display publication date",
+                "Separate underline color for ReadAloud - Customize the underline color independently when using ReadAloud feature",
+                "Custom highlight colors - Full support for custom highlight colors with proper alpha/transparency",
+                "Auto-scroll to expanded sections in settings for better navigation",
+                "Expandable font selection in Reader settings"
+            ),
+            bugFixes = listOf(
+                "Fixed series position not showing in UI",
+                "Fixed race condition in LocalServerInitializer causing imported books not to appear",
+                "Fixed underline color in dark theme and conditionally show color pickers",
+                "Fixed highlight color selection and persistence issues",
+                "Fixed highlight color alpha being ignored by Readium",
+                "Fixed highlight/underline decoration styles",
+                "Highlight decoration now refreshes immediately when color or style changes"
+            ),
+            improvements = listOf(
+                "Fetch reading progress when initializing imported books",
+                "Renamed BooksViewModel to BooksListViewModel for clarity",
+                "Renamed DATE_ADDED to DATE_PUBLISHED sort option for accuracy",
+                "Code cleanup (removed debug logs)"
+            )
+        ),
+        ParrotRelease(
             version = "0.1.0",
             date = "2026-02-21",
             apkUrl = "/parrot/parrot-0.1.0.apk",
