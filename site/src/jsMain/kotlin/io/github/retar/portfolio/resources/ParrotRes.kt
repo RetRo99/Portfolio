@@ -14,7 +14,7 @@ object ParrotRes {
         ParrotRelease(
             version = "0.1.0",
             date = "2026-02-21",
-            apkUrl = "/parrot-0.1.0.apk",
+            apkUrl = "/parrot/parrot-0.1.0.apk",
             features = listOf(
                 "Multi-User Profiles - Create and switch between multiple user profiles. Each profile has its own reading progress and preferences. Long-press profiles to rename or delete them",
                 "Local Book Import - Import EPUB files directly from your device. Automatic detection of readaloud books with audio. Delete imported books from the book details screen",
