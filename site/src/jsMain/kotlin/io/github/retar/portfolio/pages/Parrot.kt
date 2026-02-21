@@ -1,6 +1,7 @@
 package io.github.retar.portfolio.pages
 
 import androidx.compose.runtime.Composable
+import com.varabyte.kobweb.compose.dom.ref
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
@@ -21,6 +22,7 @@ import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.toModifier
 import io.github.retar.portfolio.components.widgets.DownloadButton
+import io.github.retar.portfolio.components.widgets.OutlineButton
 import io.github.retar.portfolio.resources.ImageRes
 import io.github.retar.portfolio.resources.ParrotRelease
 import io.github.retar.portfolio.resources.ParrotRes
@@ -79,7 +81,7 @@ fun ParrotPage() {
             }
 
             // Download Section
-            ReleasesSection()
+            LatestReleaseSection()
 
             // Features Section
             Column(
@@ -108,12 +110,17 @@ fun ParrotPage() {
                     description = "Life is busy, and Parrot understands that. Your reading position is saved automatically, so you can seamlessly switch between your phone, tablet, and desktop without losing your place. Tap a notification and jump straight back into your book — no searching, no scrolling, just reading."
                 )
             }
+
+            // Version History Section (at the bottom)
+            if (ParrotRes.releases.size > 1) {
+                VersionHistorySection()
+            }
         }
     }
 }
 
 @Composable
-private fun ReleasesSection() {
+private fun LatestReleaseSection() {
     val latestRelease = ParrotRes.latestRelease
 
     Column(
@@ -135,24 +142,36 @@ private fun ReleasesSection() {
         // Latest Release Changelog
         ReleaseChangelog(latestRelease)
 
-        // Version History
+        // Version History Button
         if (ParrotRes.releases.size > 1) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .gap(24.px)
-                    .alignItems(AlignItems.FlexStart)
-                    .margin(top = 48.px),
-            ) {
-                SpanText(
-                    text = "Version History",
-                    modifier = HeadingMStyle.toModifier(),
-                )
+            OutlineButton(
+                url = "#version-history",
+                label = "View Version History",
+                modifier = Modifier.margin(top = 16.px)
+            )
+        }
+    }
+}
 
-                ParrotRes.releases.drop(1).forEach { release ->
-                    ReleaseHistoryItem(release)
-                }
-            }
+@Composable
+private fun VersionHistorySection() {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .gap(24.px)
+            .alignItems(AlignItems.FlexStart)
+            .margin(top = 48.px),
+        ref = ref { element ->
+            element.id = "version-history"
+        }
+    ) {
+        SpanText(
+            text = "Version History",
+            modifier = HeadingMStyle.toModifier(),
+        )
+
+        ParrotRes.releases.drop(1).forEach { release ->
+            ReleaseHistoryItem(release)
         }
     }
 }
