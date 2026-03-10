@@ -12,6 +12,33 @@ data class ParrotRelease(
 object ParrotRes {
     val releases = listOf(
         ParrotRelease(
+            version = "0.3.0",
+            date = "2026-03-10",
+            apkUrl = "/parrot/parrot-0.3.0.apk",
+            features = listOf(
+                "Android Auto Integration - Full Android Auto support with headless playback for listening to audiobooks while driving",
+                "Background Audio Playback - Audio continues playing when the app is in the background with proper notification controls",
+                "Mini Player - New mini player component that shows current playback state across the app",
+                "Chapter Navigation in Media Controls - Skip to next/previous chapter directly from notification or Android Auto",
+                "Volume Button Navigation - Use hardware volume buttons to navigate pages while reading"
+            ),
+            bugFixes = listOf(
+                "Fixed playback speed not being persisted between sessions",
+                "Fixed seek bar not updating when navigating pages",
+                "Fixed incorrect ReadAloud starting position",
+                "Fixed VisibleSentenceDetector returning not_found on chapter change",
+                "Fixed position preservation when changing font size",
+                "Fixed multi-audio file playback and chapter completion",
+                "Fixed slow audio loading by pre-scanning all SMIL files"
+            ),
+            improvements = listOf(
+                "Improved synchronization between media playback and reader UI",
+                "Better notification metadata with chapter titles",
+                "Refactored Android audio playback to a service-centric architecture for better reliability",
+                "Improved audio sync on navigation"
+            )
+        ),
+        ParrotRelease(
             version = "0.2.0",
             date = "2026-02-21",
             apkUrl = "/parrot/parrot-0.2.0.apk",
