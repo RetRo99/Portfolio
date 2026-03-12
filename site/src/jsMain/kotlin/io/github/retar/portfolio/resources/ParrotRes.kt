@@ -12,6 +12,14 @@ data class ParrotRelease(
 object ParrotRes {
     val releases = listOf(
         ParrotRelease(
+            version = "0.4.1",
+            date = "2026-03-12",
+            apkUrl = "/parrot/parrot-0.4.1.apk",
+            bugFixes = listOf(
+                "Fixed fragment restoration crash when multiple EPUB navigator fragments are restored after process death"
+            )
+        ),
+        ParrotRelease(
             version = "0.4.0",
             date = "2026-03-11",
             apkUrl = "/parrot/parrot-0.4.0.apk",
