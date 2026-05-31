@@ -12,6 +12,22 @@ data class ParrotRelease(
 object ParrotRes {
     val releases = listOf(
         ParrotRelease(
+            version = "0.4.2",
+            date = "2026-05-31",
+            apkUrl = "/parrot/parrot-0.4.2.apk",
+            bugFixes = listOf(
+                "Fixed Readium navigator restoration crashes after Android process death",
+                "Fixed playback foreground service startup crashes",
+                "Fixed duplicate reader scope creation when reopening a book",
+                "Fixed large embedded cover artwork causing playback metadata out-of-memory crashes",
+                "Fixed browser sign-in state when returning without completing OAuth"
+            ),
+            improvements = listOf(
+                "Updated Compose Multiplatform and Material3 dependencies",
+                "Improved release signing so APK updates use the same certificate as previous portfolio builds"
+            )
+        ),
+        ParrotRelease(
             version = "0.4.1",
             date = "2026-03-12",
             apkUrl = "/parrot/parrot-0.4.1.apk",
