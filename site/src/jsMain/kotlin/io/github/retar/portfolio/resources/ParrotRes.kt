@@ -12,6 +12,18 @@ data class ParrotRelease(
 object ParrotRes {
     val releases = listOf(
         ParrotRelease(
+            version = "0.4.3",
+            date = "2026-06-01",
+            apkUrl = "/parrot/parrot-0.4.3.apk",
+            bugFixes = listOf(
+                "Fixed Storyteller browser/OIDC login by completing authentication from the callback app token",
+                "Removed the extra user lookup after OAuth login that could fail with a 401"
+            ),
+            improvements = listOf(
+                "Added sanitized analytics diagnostics for OAuth login failures"
+            )
+        ),
+        ParrotRelease(
             version = "0.4.2",
             date = "2026-05-31",
             apkUrl = "/parrot/parrot-0.4.2.apk",
