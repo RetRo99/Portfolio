@@ -12,6 +12,25 @@ data class ParrotRelease(
 object ParrotRes {
     val releases = listOf(
         ParrotRelease(
+            version = "0.4.4",
+            date = "2026-06-02",
+            apkUrl = "/parrot/parrot-0.4.4.apk",
+            features = listOf(
+                "Added reader font weight controls for EPUB reading settings",
+                "Added a reader text normalization setting",
+                "Added a sleep timer postpone prompt"
+            ),
+            bugFixes = listOf(
+                "Removed redundant Android reader fragment state saving during activity shutdown"
+            ),
+            improvements = listOf(
+                "Reorganized and refined reader settings controls",
+                "Improved reader gestures, input dialogs, and screen-awake behavior while reading",
+                "Kept reader controls visible while the sleep timer menu is open",
+                "Moved e-ink display detection into shared base UI platform code"
+            )
+        ),
+        ParrotRelease(
             version = "0.4.3",
             date = "2026-06-01",
             apkUrl = "/parrot/parrot-0.4.3.apk",
