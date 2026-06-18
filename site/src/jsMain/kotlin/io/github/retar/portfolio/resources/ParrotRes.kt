@@ -12,6 +12,14 @@ data class ParrotRelease(
 object ParrotRes {
     val releases = listOf(
         ParrotRelease(
+            version = "0.4.5",
+            date = "2026-06-18",
+            apkUrl = "/parrot/parrot-0.4.5.apk",
+            bugFixes = listOf(
+                "Fixed crashes when parsing Storyteller series featured fields returned as booleans"
+            )
+        ),
+        ParrotRelease(
             version = "0.4.4",
             date = "2026-06-02",
             apkUrl = "/parrot/parrot-0.4.4.apk",
