@@ -1,58 +1,81 @@
 package io.github.retar.portfolio.styles
 
+import com.varabyte.kobweb.compose.css.CSSLengthNumericValue
 import com.varabyte.kobweb.compose.css.FontWeight
+import com.varabyte.kobweb.compose.css.functions.clamp
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.color
 import com.varabyte.kobweb.compose.ui.modifiers.fontFamily
 import com.varabyte.kobweb.compose.ui.modifiers.fontSize
 import com.varabyte.kobweb.compose.ui.modifiers.fontWeight
-import com.varabyte.kobweb.compose.ui.modifiers.maxWidth
+import com.varabyte.kobweb.compose.ui.modifiers.lineHeight
+import com.varabyte.kobweb.compose.ui.modifiers.letterSpacing
 import com.varabyte.kobweb.silk.style.CssStyle
-import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
+import com.varabyte.kobweb.silk.style.base
+import org.jetbrains.compose.web.css.cssRem
+import org.jetbrains.compose.web.css.em
 import org.jetbrains.compose.web.css.px
+import kotlin.js.unsafeCast
 
-val HeadingXLStyle = CssStyle {
+private fun fluidLength(
+    min: CSSLengthNumericValue,
+    preferred: CSSLengthNumericValue,
+    max: CSSLengthNumericValue,
+): CSSLengthNumericValue = clamp(min, preferred, max)
+
+private fun Modifier.fluidFontSize(
+    min: CSSLengthNumericValue,
+    preferred: CSSLengthNumericValue,
+    max: CSSLengthNumericValue,
+): Modifier = fontSize(fluidLength(min, preferred, max))
+
+private fun lengthCalc(expr: String): CSSLengthNumericValue = "calc($expr)".unsafeCast<CSSLengthNumericValue>()
+
+val DisplayStyle = CssStyle {
     base {
         val palette = sitePalette()
         Modifier
-            .fontSize(64.px)
+            .fluidFontSize(2.75.cssRem, lengthCalc("6vw + 1rem"), 4.5.cssRem)
+            .lineHeight(1.05)
             .fontWeight(FontWeight.Bold)
             .fontFamily("Outfit", "sans-serif")
             .color(palette.textPrimary)
     }
-
-    Breakpoint.ZERO {
-        Modifier.fontSize(40.px)
-    }
 }
 
-val HeadingLStyle = CssStyle {
+val H1Style = CssStyle {
     base {
         val palette = sitePalette()
         Modifier
-            .fontSize(48.px)
-            .fontWeight(FontWeight.Bold)
+            .fluidFontSize(1.875.cssRem, lengthCalc("4vw + 0.5rem"), 3.cssRem)
+            .lineHeight(1.1)
+            .fontWeight(FontWeight.SemiBold)
             .fontFamily("Outfit", "sans-serif")
-            .color(palette.textSecondary)
-    }
-
-    Breakpoint.ZERO {
-        Modifier.fontSize(28.px)
+            .color(palette.textPrimary)
     }
 }
 
-val HeadingMStyle = CssStyle {
+val H2Style = CssStyle {
     base {
         val palette = sitePalette()
         Modifier
-            .fontSize(36.px)
+            .fluidFontSize(1.625.cssRem, lengthCalc("3vw + 0.5rem"), 2.25.cssRem)
+            .lineHeight(1.15)
             .fontWeight(FontWeight.Bold)
             .fontFamily("Outfit", "sans-serif")
             .color(palette.textPrimary)
     }
+}
 
-    Breakpoint.ZERO {
-        Modifier.fontSize(28.px)
+val H3Style = CssStyle {
+    base {
+        val palette = sitePalette()
+        Modifier
+            .fluidFontSize(1.25.cssRem, lengthCalc("2vw + 0.5rem"), 1.5.cssRem)
+            .lineHeight(1.2)
+            .fontWeight(FontWeight.SemiBold)
+            .fontFamily("Outfit", "sans-serif")
+            .color(palette.textPrimary)
     }
 }
 
@@ -60,7 +83,8 @@ val BodyStyle = CssStyle {
     base {
         val palette = sitePalette()
         Modifier
-            .fontSize(16.px)
+            .fluidFontSize(1.cssRem, lengthCalc("0.5vw + 0.875rem"), 1.0625.cssRem)
+            .lineHeight(1.6)
             .fontFamily("Inter", "sans-serif")
             .color(palette.textSecondary)
     }
@@ -70,8 +94,44 @@ val BodySmallStyle = CssStyle {
     base {
         val palette = sitePalette()
         Modifier
+            .fontSize(13.px)
+            .lineHeight(1.5)
+            .fontFamily("Inter", "sans-serif")
+            .color(palette.textSecondary)
+    }
+}
+
+val MonoEyebrowStyle = CssStyle {
+    base {
+        val palette = sitePalette()
+        Modifier
+            .fontSize(13.px)
+            .lineHeight(1.4)
+            .fontFamily("JetBrains Mono", "monospace")
+            .letterSpacing(0.08.em)
+            .color(palette.accent)
+    }
+}
+
+val MonoLabelStyle = CssStyle {
+    base {
+        val palette = sitePalette()
+        Modifier
+            .fontSize(13.px)
+            .lineHeight(1.4)
+            .fontFamily("JetBrains Mono", "monospace")
+            .letterSpacing(0.04.em)
+            .color(palette.textSecondary)
+    }
+}
+
+val CaptionStyle = CssStyle {
+    base {
+        val palette = sitePalette()
+        Modifier
             .fontSize(12.px)
-            .fontFamily("monospace")
+            .lineHeight(1.5)
+            .fontFamily("JetBrains Mono", "monospace")
             .color(palette.textSecondary)
     }
 }
@@ -87,25 +147,15 @@ val LabelStyle = CssStyle {
     }
 }
 
-val MonoAccentStyle = CssStyle {
-    base {
-        val palette = sitePalette()
-        Modifier
-            .fontFamily("monospace")
-            .fontSize(16.px)
-            .color(palette.accent)
-    }
-}
-
 val SubtitleStyle = CssStyle {
     base {
         val palette = sitePalette()
         Modifier
-            .fontSize(18.px)
+            .fluidFontSize(1.0625.cssRem, lengthCalc("1vw + 0.75rem"), 1.25.cssRem)
+            .lineHeight(1.5)
             .fontWeight(FontWeight.Medium)
             .fontFamily("Inter", "sans-serif")
             .color(palette.textSecondary)
-            .maxWidth(650.px)
     }
 }
 
@@ -114,7 +164,18 @@ val DescriptorStyle = CssStyle {
         val palette = sitePalette()
         Modifier
             .fontSize(14.px)
+            .lineHeight(1.4)
             .fontFamily("Inter", "sans-serif")
             .color(palette.textSecondary)
+    }
+}
+
+val MonoAccentStyle = CssStyle {
+    base {
+        val palette = sitePalette()
+        Modifier
+            .fontFamily("JetBrains Mono", "monospace")
+            .fontSize(16.px)
+            .color(palette.accent)
     }
 }
