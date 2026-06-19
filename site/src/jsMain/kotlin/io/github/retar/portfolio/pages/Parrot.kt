@@ -26,14 +26,16 @@ import io.github.retar.portfolio.components.widgets.OutlineButton
 import io.github.retar.portfolio.resources.ImageRes
 import io.github.retar.portfolio.resources.ParrotRelease
 import io.github.retar.portfolio.resources.ParrotRes
-import io.github.retar.portfolio.styles.BodyStyle
+import io.github.retar.portfolio.resources.StringRes
 import io.github.retar.portfolio.styles.BodySmallStyle
-import io.github.retar.portfolio.styles.HeadingLStyle
-import io.github.retar.portfolio.styles.HeadingMStyle
-import io.github.retar.portfolio.styles.HeadingXLStyle
+import io.github.retar.portfolio.styles.BodyStyle
+import io.github.retar.portfolio.styles.H1Style
+import io.github.retar.portfolio.styles.H2Style
+import io.github.retar.portfolio.styles.H3Style
 import io.github.retar.portfolio.styles.LabelStyle
 import io.github.retar.portfolio.styles.SubtitleStyle
 import org.jetbrains.compose.web.css.AlignItems
+import org.jetbrains.compose.web.css.ch
 import org.jetbrains.compose.web.css.px
 
 @Page
@@ -44,7 +46,7 @@ fun ParrotPage() {
         modifier = Modifier
             .fillMaxSize()
             .padding(top = 40.px, bottom = 80.px),
-        contentAlignment = Alignment.TopCenter
+        contentAlignment = Alignment.TopCenter,
     ) {
         Column(
             modifier = Modifier
@@ -53,69 +55,43 @@ fun ParrotPage() {
                 .gap(48.px)
                 .alignItems(AlignItems.Center),
         ) {
-            // Hero Section
-            Column(
-                modifier = Modifier
-                    .gap(24.px)
-                    .alignItems(AlignItems.Center),
-            ) {
-                Image(
-                    src = ImageRes.ParrotIcon.path,
-                    description = "Parrot App Icon",
-                    modifier = Modifier
-                        .size(120.px)
-                        .borderRadius(24.px)
-                )
-
-                SpanText(
-                    text = "Parrot",
-                    modifier = HeadingXLStyle.toModifier(),
-                )
-
-                SpanText(
-                    text = "A beautifully crafted e-reader app and companion app for Storyteller, designed for book lovers who want more than just reading — they want an experience.",
-                    modifier = SubtitleStyle.toModifier()
-                        .fillMaxWidth()
-                        .maxWidth(650.px),
-                )
-            }
-
-            // Download Section
+            ParrotHero()
             LatestReleaseSection()
-
-            // Features Section
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .gap(32.px)
-                    .alignItems(AlignItems.FlexStart),
-            ) {
-                FeatureSection(
-                    title = "Read Your Way",
-                    description = "Every reader is different, and Parrot embraces that. Customize your reading experience down to the finest detail — choose from multiple fonts, adjust text size with a simple pinch gesture, and set margins and line spacing exactly how you like them. Reading at night? Switch to Dark mode. Prefer a warmer tone? Sepia mode reduces eye strain during long reading sessions. And for those using e-ink devices, we've built a dedicated display mode that looks crisp and natural on your screen.\n\nNavigation is intuitive and stays out of your way. Tap the edges of the screen to flip pages, swipe through chapters, or dive into the table of contents to jump to any section instantly. When you want to lose yourself in a story, fullscreen mode removes all distractions, leaving just you and the words."
-                )
-
-                FeatureSection(
-                    title = "Listen and Follow Along",
-                    description = "Parrot isn't just for reading — it's for listening too. Play audiobooks in the background while you commute, exercise, or relax. Control playback directly from your notification bar without ever opening the app.\n\nBut the real magic happens with Read-Aloud books. As the narrator speaks, the text highlights in real-time, word by word or sentence by sentence. It's perfect for language learners, children developing reading skills, or anyone who loves the combination of seeing and hearing a story unfold. Customize the highlight color and style to match your preference — whether you like a soft yellow highlight, a subtle underline, or bold text. Speed up the narration when you're in a hurry, or slow it down to savor every word."
-                )
-
-                FeatureSection(
-                    title = "Track Your Reading Journey",
-                    description = "Building a reading habit is easier when you can see your progress. Parrot tracks your reading time automatically — see how much you've read today, this week, or this month. Watch your reading streak grow as you read consistently day after day. Discover which books you've spent the most time with, and see how your reading splits between ebooks and audiobooks.\n\nEach chapter shows an estimated reading time based on your personal reading speed, so you always know if you have time for \"just one more chapter\" before bed."
-                )
-
-                FeatureSection(
-                    title = "Pick Up Where You Left Off",
-                    description = "Life is busy, and Parrot understands that. Your reading position is saved automatically, so you can seamlessly switch between your phone, tablet, and desktop without losing your place. Tap a notification and jump straight back into your book — no searching, no scrolling, just reading."
-                )
-            }
-
-            // Version History Section (at the bottom)
+            FeaturesSection()
             if (ParrotRes.releases.size > 1) {
                 VersionHistorySection()
             }
         }
+    }
+}
+
+@Composable
+private fun ParrotHero() {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .gap(24.px)
+            .alignItems(AlignItems.Center),
+    ) {
+        Image(
+            src = ImageRes.ParrotIcon.path,
+            description = StringRes.ParrotIconDesc.value,
+            modifier = Modifier
+                .size(120.px)
+                .borderRadius(24.px),
+        )
+
+        SpanText(
+            text = StringRes.ParrotPageHeading.value,
+            modifier = H1Style.toModifier(),
+        )
+
+        SpanText(
+            text = StringRes.ParrotPageSubhead.value,
+            modifier = SubtitleStyle.toModifier()
+                .fillMaxWidth()
+                .maxWidth(65.ch),
+        )
     }
 }
 
@@ -130,26 +106,54 @@ private fun LatestReleaseSection() {
             .alignItems(AlignItems.Center),
     ) {
         SpanText(
-            text = "Download",
-            modifier = HeadingMStyle.toModifier(),
+            text = StringRes.ParrotDownloadSection.value,
+            modifier = H2Style.toModifier(),
         )
 
         DownloadButton(
             url = latestRelease.apkUrl,
-            label = "Download v${latestRelease.version} (APK)",
+            label = StringRes.ParrotDownloadLatest(latestRelease.version).value,
         )
 
-        // Latest Release Changelog
         ReleaseChangelog(latestRelease)
 
-        // Version History Button
         if (ParrotRes.releases.size > 1) {
             OutlineButton(
                 url = "#version-history",
-                label = "View Version History",
-                modifier = Modifier.margin(top = 16.px)
+                label = StringRes.ParrotViewHistory.value,
+                modifier = Modifier.margin(top = 16.px),
             )
         }
+    }
+}
+
+@Composable
+private fun FeaturesSection() {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .gap(32.px)
+            .alignItems(AlignItems.FlexStart),
+    ) {
+        FeatureSection(
+            title = StringRes.ParrotFeature1PageTitle.value,
+            description = StringRes.ParrotFeature1PageDesc.value,
+        )
+
+        FeatureSection(
+            title = StringRes.ParrotFeature2PageTitle.value,
+            description = StringRes.ParrotFeature2PageDesc.value,
+        )
+
+        FeatureSection(
+            title = StringRes.ParrotFeature3PageTitle.value,
+            description = StringRes.ParrotFeature3PageDesc.value,
+        )
+
+        FeatureSection(
+            title = StringRes.ParrotFeature4PageTitle.value,
+            description = StringRes.ParrotFeature4PageDesc.value,
+        )
     }
 }
 
@@ -163,11 +167,11 @@ private fun VersionHistorySection() {
             .margin(top = 48.px),
         ref = ref { element ->
             element.id = "version-history"
-        }
+        },
     ) {
         SpanText(
-            text = "Version History",
-            modifier = HeadingMStyle.toModifier(),
+            text = StringRes.VersionHistory.value,
+            modifier = H2Style.toModifier(),
         )
 
         ParrotRes.releases.drop(1).forEach { release ->
@@ -185,7 +189,7 @@ private fun ReleaseChangelog(release: ParrotRelease) {
             .alignItems(AlignItems.FlexStart),
     ) {
         SpanText(
-            text = "Version ${release.version} (${release.date})",
+            text = StringRes.VersionWithDate(release.version, release.date).value,
             modifier = LabelStyle.toModifier(),
         )
 
@@ -196,7 +200,7 @@ private fun ReleaseChangelog(release: ParrotRelease) {
                     .gap(8.px),
             ) {
                 SpanText(
-                    text = "New Features",
+                    text = StringRes.NewFeatures.value,
                     modifier = BodyStyle.toModifier(),
                 )
                 release.features.forEach { feature ->
@@ -216,7 +220,7 @@ private fun ReleaseChangelog(release: ParrotRelease) {
                     .gap(8.px),
             ) {
                 SpanText(
-                    text = "Bug Fixes",
+                    text = StringRes.BugFixes.value,
                     modifier = BodyStyle.toModifier(),
                 )
                 release.bugFixes.forEach { fix ->
@@ -236,7 +240,7 @@ private fun ReleaseChangelog(release: ParrotRelease) {
                     .gap(8.px),
             ) {
                 SpanText(
-                    text = "Improvements",
+                    text = StringRes.Improvements.value,
                     modifier = BodyStyle.toModifier(),
                 )
                 release.improvements.forEach { improvement ->
@@ -266,7 +270,7 @@ private fun ReleaseHistoryItem(release: ParrotRelease) {
             verticalAlignment = Alignment.CenterVertically,
         ) {
             SpanText(
-                text = "Version ${release.version}",
+                text = StringRes.VersionLabel(release.version).value,
                 modifier = LabelStyle.toModifier(),
             )
             SpanText(
@@ -275,7 +279,7 @@ private fun ReleaseHistoryItem(release: ParrotRelease) {
             )
             DownloadButton(
                 url = release.apkUrl,
-                label = "Download APK",
+                label = StringRes.DownloadApk.value,
             )
         }
 
@@ -286,7 +290,7 @@ private fun ReleaseHistoryItem(release: ParrotRelease) {
                     .gap(4.px),
             ) {
                 SpanText(
-                    text = "New Features:",
+                    text = StringRes.NewFeaturesLabel.value,
                     modifier = BodyStyle.toModifier(),
                 )
                 release.features.forEach { feature ->
@@ -306,7 +310,7 @@ private fun ReleaseHistoryItem(release: ParrotRelease) {
                     .gap(4.px),
             ) {
                 SpanText(
-                    text = "Bug Fixes:",
+                    text = StringRes.BugFixesLabel.value,
                     modifier = BodyStyle.toModifier(),
                 )
                 release.bugFixes.forEach { fix ->
@@ -326,7 +330,7 @@ private fun ReleaseHistoryItem(release: ParrotRelease) {
                     .gap(4.px),
             ) {
                 SpanText(
-                    text = "Improvements:",
+                    text = StringRes.ImprovementsLabel.value,
                     modifier = BodyStyle.toModifier(),
                 )
                 release.improvements.forEach { improvement ->
@@ -350,10 +354,9 @@ private fun FeatureSection(title: String, description: String) {
     ) {
         SpanText(
             text = title,
-            modifier = HeadingMStyle.toModifier(),
+            modifier = H3Style.toModifier(),
         )
 
-        // Split description by newlines to create paragraphs
         description.split("\n\n").forEach { paragraph ->
             SpanText(
                 text = paragraph,
@@ -364,4 +367,3 @@ private fun FeatureSection(title: String, description: String) {
         }
     }
 }
-
