@@ -8,15 +8,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import com.varabyte.kobweb.compose.css.Overflow
 import com.varabyte.kobweb.compose.css.ScrollBehavior
 import com.varabyte.kobweb.compose.ui.Modifier
-import com.varabyte.kobweb.compose.ui.modifiers.fillMaxHeight
 import com.varabyte.kobweb.compose.ui.modifiers.fontFamily
-import com.varabyte.kobweb.compose.ui.modifiers.overflow
 import com.varabyte.kobweb.compose.ui.modifiers.scrollBehavior
 import com.varabyte.kobweb.core.App
 import com.varabyte.kobweb.core.AppGlobals
+import com.varabyte.kobweb.core.init.InitKobweb
+import com.varabyte.kobweb.core.init.InitKobwebContext
 import com.varabyte.kobweb.core.isExporting
 import com.varabyte.kobweb.silk.SilkApp
 import com.varabyte.kobweb.silk.components.layout.Surface
@@ -33,6 +32,7 @@ import com.varabyte.kobweb.silk.theme.colors.systemPreference
 import io.github.retar.portfolio.components.PortfolioSectionId
 import io.github.retar.portfolio.styles.SitePalettes
 import kotlinx.browser.document
+import kotlinx.browser.window
 
 const val COLOR_MODE_KEY = "portfolio:colorMode"
 
@@ -75,16 +75,29 @@ fun initStyles(ctx: InitSilkContext) {
     ctx.theme.palettes.dark.background = SitePalettes.dark.background
     ctx.theme.palettes.dark.color = SitePalettes.dark.textPrimary
 
-    ctx.stylesheet.registerStyleBase("html, body") {
+    ctx.stylesheet.registerStyleBase("body") {
         Modifier
-            .fillMaxHeight()
             .fontFamily("Inter", "system-ui", "sans-serif")
-            .scrollBehavior(ScrollBehavior.Smooth)
-            .overflow { x(Overflow.Hidden) }
+    }
+
+    ctx.stylesheet.registerStyleBase("html") {
+        Modifier.scrollBehavior(ScrollBehavior.Smooth)
     }
 
     ctx.stylesheet.registerStyleBase("code") {
         Modifier.fontFamily("monospace")
+    }
+}
+
+@InitKobweb
+fun initRouter(ctx: InitKobwebContext) {
+    val history = window.history.asDynamic()
+    history.scrollRestoration = "manual"
+
+    val originalPushState = history.pushState.bind(history)
+    history.pushState = { state: dynamic, title: String, url: dynamic ->
+        window.asDynamic().__portfolioNav = "push"
+        originalPushState(state, title, url)
     }
 }
 
