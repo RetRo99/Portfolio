@@ -30,3 +30,6 @@ kotlin-js-store
 
 # Ignore IDE Augment Webview state file
 /.idea/AugmentWebviewStateStore.xml
+
+# Ignore firebender chat history
+/.idea/firebender/
