@@ -361,7 +361,7 @@ private fun HeaderNavItem(
             .toModifier()
             .userSelect(UserSelect.None)
             .cursor(Cursor.Pointer)
-            .color(if (isActive) palette.primary else palette.textSecondary)
+            .color(if (isActive) palette.accent else palette.textSecondary)
             .onClick {
                 onClick()
                 val section = item.section
@@ -485,7 +485,7 @@ private fun LanguageItem(
             modifier = DescriptorStyle
                 .toModifier()
                 .userSelect(UserSelect.None)
-                .color(if (isSelected) palette.primary else palette.textSecondary)
+                .color(if (isSelected) palette.accent else palette.textSecondary)
         )
     }
 }

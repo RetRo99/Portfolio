@@ -13,6 +13,11 @@ enum class NavItem(
         route = "/",
         label = StringRes.NavAbout,
     ),
+    Philosophy(
+        section = PortfolioSectionId.Philosophy,
+        route = "/",
+        label = StringRes.NavPhilosophy,
+    ),
     Projects(
         section = PortfolioSectionId.Projects,
         route = "/",
@@ -24,7 +29,7 @@ enum class NavItem(
         label = StringRes.NavBlog,
     ),
     Contact(
-        section = null,
+        section = PortfolioSectionId.Contact,
         route = "/",
         label = StringRes.NavContact,
     ),
