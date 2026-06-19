@@ -1,8 +1,10 @@
 package io.github.retar.portfolio.utils
 
+import kotlinx.browser.window
+
 /**
  * Umami analytics tracking utilities.
- * 
+ *
  * Umami script is loaded via build.gradle.kts and provides a global `window.umami` object.
  */
 external interface Umami {
@@ -15,7 +17,7 @@ external interface Umami {
  * Returns null if Umami is not loaded (e.g., ad blockers).
  */
 val umami: Umami?
-    get() = js("window.umami") as? Umami
+    get() = window.asDynamic().umami as? Umami
 
 /**
  * Track a custom event with Umami analytics.
