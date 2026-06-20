@@ -349,7 +349,7 @@ private fun ArticlesSection() {
                 subtitle = StringRes.NotesSubtitle.value,
                 gap = 10.px,
             )
-            Column(
+            Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .gap(12.px)
@@ -360,6 +360,12 @@ private fun ArticlesSection() {
                     description = StringRes.InfiniteCarouselArticleDesc.value,
                     route = LinkRes.Internal.InfiniteCarouselArticle,
                     image = ImageRes.InfiniteCarouselArticle,
+                )
+                ArticleCard(
+                    title = StringRes.SQLCipherArticleTitle.value,
+                    description = StringRes.SQLCipherArticleDesc.value,
+                    route = LinkRes.Internal.SQLCipherArticle,
+                    image = ImageRes.SQLCipherArticle,
                 )
             }
         }

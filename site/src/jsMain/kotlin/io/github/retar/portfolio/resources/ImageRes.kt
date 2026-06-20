@@ -5,7 +5,8 @@ enum class ImageRes(val path: String) {
     Bardy2("bardy/Bardy2.avif"),
     Bardy3("bardy/Bardy3.avif"),
 
-    InfiniteCarouselArticle("articles/infinite_carousel.png"),
+    InfiniteCarouselArticle("articles/infinite_carousel.jpeg"),
+    SQLCipherArticle("articles/sqlcipher_kotlin_native.jpeg"),
 
     ParrotIcon("parrot/parrot.png"),
     ParrotScreenshot1("parrot/parrot-screenshot-1.jpeg"),

@@ -374,6 +374,18 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
         lv = "Kā izveidot bezgalīgu, bezstarpīgu karuseli, izmantojot Silk un Kobweb."
     )
 
+    data object SQLCipherArticleTitle : StringRes(
+        en = "Shipping SQLCipher inside a static Kotlin/Native framework (so the iOS team changed nothing)",
+        sl = "Shipping SQLCipher inside a static Kotlin/Native framework (so the iOS team changed nothing)",
+        lv = "Shipping SQLCipher inside a static Kotlin/Native framework (so the iOS team changed nothing)"
+    )
+
+    data object SQLCipherArticleDesc : StringRes(
+        en = "Baking SQLCipher into a static Kotlin/Native framework so the iOS team adds nothing — not even a linker flag.",
+        sl = "Baking SQLCipher into a static Kotlin/Native framework so the iOS team adds nothing — not even a linker flag.",
+        lv = "Baking SQLCipher into a static Kotlin/Native framework so the iOS team adds nothing — not even a linker flag."
+    )
+
     data object ParrotIconDesc : StringRes(
         en = "Parrot App Icon",
         sl = "Ikona aplikacije Parrot",
