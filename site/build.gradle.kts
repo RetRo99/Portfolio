@@ -23,6 +23,9 @@ kobweb {
             faviconPath.set("/favicon.svg")
             head.add {
                 title("Rok Retar — Mobile Engineer (Android & Kotlin Multiplatform)")
+                unsafe {
+                    +"""<meta http-equiv="Content-Security-Policy" content="frame-ancestors 'self';"/>"""
+                }
                 meta(name = "author", content = "Rok Retar")
                 meta(name = "robots", content = "index, follow")
                 link(rel = "canonical", href = "https://www.retar.app/")
@@ -46,6 +49,7 @@ kobweb {
                         {
                           "@context": "https://schema.org",
                           "@type": "Person",
+                          "@id": "https://www.retar.app/#person",
                           "name": "Rok Retar",
                           "jobTitle": "Mobile Engineer",
                           "url": "https://www.retar.app",
@@ -60,7 +64,8 @@ kobweb {
                           ],
                           "sameAs": [
                             "https://github.com/retro99",
-                            "https://www.linkedin.com/in/rok-retar/"
+                            "https://www.linkedin.com/in/rok-retar/",
+                            "https://www.retar.app"
                           ]
                         }
                         """.trimIndent()
@@ -72,13 +77,27 @@ kobweb {
                         {
                           "@context": "https://schema.org",
                           "@type": "WebSite",
+                          "@id": "https://www.retar.app/#website",
                           "name": "Rok Retar",
                           "url": "https://www.retar.app",
                           "description": "Android and Kotlin Multiplatform engineer specializing in KMP migrations taken to production iOS.",
                           "author": {
-                            "@type": "Person",
-                            "name": "Rok Retar",
-                            "url": "https://www.retar.app"
+                            "@id": "https://www.retar.app/#person"
+                          }
+                        }
+                        """.trimIndent()
+                    }
+                }
+                script(type = "application/ld+json") {
+                    unsafe {
+                        +"""
+                        {
+                          "@context": "https://schema.org",
+                          "@type": "ProfilePage",
+                          "dateCreated": "2024-01-01",
+                          "dateModified": "2025-12-01",
+                          "mainEntity": {
+                            "@id": "https://www.retar.app/#person"
                           }
                         }
                         """.trimIndent()
