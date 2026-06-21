@@ -6,7 +6,6 @@ import kotlinx.browser.document
 import org.w3c.dom.Element
 import org.w3c.dom.HTMLLinkElement
 import org.w3c.dom.HTMLMetaElement
-import org.w3c.dom.HTMLTitleElement
 
 private const val SITE_ORIGIN = "https://www.retar.app"
 private const val DEFAULT_OG_IMAGE = "$SITE_ORIGIN/og-image.png"
@@ -57,13 +56,7 @@ fun Seo(
             el.href = href
         }
 
-        val titleEl = document.querySelector("title") as? HTMLTitleElement
-            ?: (document.createElement("title") as HTMLTitleElement).also { newEl ->
-                newEl.setAttribute(SEO_MARKER, "true")
-                document.head!!.appendChild(newEl)
-                created += newEl
-            }
-        titleEl.text = title
+        document.title = title
 
         upsertMeta(name = "description", content = description)
         upsertMeta(name = "robots", content = "index, follow")
