@@ -14,6 +14,7 @@ import com.varabyte.kobweb.compose.css.JustifyContent
 import com.varabyte.kobweb.compose.css.ObjectFit
 import com.varabyte.kobweb.compose.css.StyleVariable
 import com.varabyte.kobweb.compose.css.TextDecorationLine
+import com.varabyte.kobweb.compose.css.Transition
 import com.varabyte.kobweb.compose.css.UserSelect
 import com.varabyte.kobweb.compose.dom.ref
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
@@ -41,8 +42,10 @@ import com.varabyte.kobweb.compose.ui.modifiers.onClick
 import com.varabyte.kobweb.compose.ui.modifiers.opacity
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.modifiers.position
+import com.varabyte.kobweb.compose.ui.modifiers.scale
 import com.varabyte.kobweb.compose.ui.modifiers.size
 import com.varabyte.kobweb.compose.ui.modifiers.textDecorationLine
+import com.varabyte.kobweb.compose.ui.modifiers.transition
 import com.varabyte.kobweb.compose.ui.modifiers.top
 import com.varabyte.kobweb.compose.ui.modifiers.translateX
 import com.varabyte.kobweb.compose.ui.modifiers.translateY
@@ -69,6 +72,7 @@ import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.style.breakpoint.displayIfAtLeast
 import com.varabyte.kobweb.silk.style.breakpoint.displayUntil
 import com.varabyte.kobweb.silk.style.extendedBy
+import com.varabyte.kobweb.silk.style.selectors.hover
 import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.varabyte.kobweb.silk.theme.colors.saveToLocalStorage
@@ -129,6 +133,17 @@ val DropdownStyle = CssStyle.base {
 
 val NavHeaderHeight by StyleVariable<CSSLengthValue>(prefix = "site", defaultFallback = 0.px)
 
+val ProfileImageStyle = CssStyle {
+    base {
+        Modifier
+            .transition(Transition.all(duration = 200.ms))
+    }
+
+    hover {
+        Modifier.scale(1.1)
+    }
+}
+
 @Composable
 fun NavHeader() {
     var isMenuOpen by remember { mutableStateOf(false) }
@@ -186,7 +201,7 @@ fun NavHeader() {
                 Image(
                     src = ImageRes.ProfileImage.path,
                     description = StringRes.ProfileImageDesc.value,
-                    modifier = Modifier
+                    modifier = ProfileImageStyle.toModifier()
                         .size(40.px)
                         .borderRadius(999.px)
                         .objectFit(ObjectFit.Cover)
@@ -369,6 +384,7 @@ private fun HeaderNavItem(
             .userSelect(UserSelect.None)
             .cursor(Cursor.Pointer)
             .color(if (isActive) palette.accent else palette.textSecondary)
+            .transition(Transition.all(duration = 150.ms))
             .onClick {
                 onClick()
                 val section = item.section

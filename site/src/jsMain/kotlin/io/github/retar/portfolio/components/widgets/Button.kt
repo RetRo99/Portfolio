@@ -25,6 +25,7 @@ import com.varabyte.kobweb.silk.components.navigation.Link
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.base
+import com.varabyte.kobweb.silk.style.selectors.active
 import com.varabyte.kobweb.silk.style.selectors.hover
 import com.varabyte.kobweb.silk.style.toModifier
 import io.github.retar.portfolio.styles.DescriptorStyle
@@ -171,6 +172,10 @@ val OutlineButtonStyle = CssStyle {
         Modifier
             .color(palette.buttonText)
             .scale(1.02)
+    }
+
+    active {
+        Modifier.scale(0.98)
     }
 }
 

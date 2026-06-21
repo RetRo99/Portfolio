@@ -6,6 +6,7 @@ import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
+import com.varabyte.kobweb.compose.css.Transition
 import com.varabyte.kobweb.compose.css.functions.clamp
 import com.varabyte.kobweb.compose.dom.ref
 import com.varabyte.kobweb.compose.ui.graphics.Color
@@ -15,11 +16,13 @@ import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.gap
 import com.varabyte.kobweb.compose.ui.modifiers.maxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.padding
+import com.varabyte.kobweb.compose.ui.modifiers.transition
 import com.varabyte.kobweb.silk.components.navigation.Link
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.base
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
+import com.varabyte.kobweb.silk.style.selectors.hover
 import com.varabyte.kobweb.silk.style.toModifier
 import io.github.retar.portfolio.components.PortfolioSection
 import io.github.retar.portfolio.components.PortfolioSectionId
@@ -35,6 +38,7 @@ import io.github.retar.portfolio.styles.MonoEyebrowStyle
 import io.github.retar.portfolio.styles.sitePalette
 import org.jetbrains.compose.web.css.ch
 import org.jetbrains.compose.web.css.cssRem
+import org.jetbrains.compose.web.css.ms
 import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.css.vw
@@ -42,6 +46,16 @@ import kotlin.js.Date
 
 private val FooterTextPrimary = Color.rgb(250, 250, 250)
 private val FooterTextSecondary = Color.rgb(161, 161, 170)
+
+val FooterLinkStyle = CssStyle {
+    base {
+        Modifier.transition(Transition.all(duration = 150.ms))
+    }
+
+    hover {
+        Modifier.color(FooterTextPrimary)
+    }
+}
 
 val FooterContainerStyle = CssStyle {
     base {
@@ -155,6 +169,7 @@ private fun FooterLinksRow() {
         Link(
             path = LinkRes.External.GitHub,
             modifier = CaptionStyle.toModifier()
+                .then(FooterLinkStyle.toModifier())
                 .color(FooterTextSecondary),
             ref = ref { it.asDynamic().setAttribute("rel", "noopener noreferrer") },
         ) {
@@ -168,6 +183,7 @@ private fun FooterLinksRow() {
         Link(
             path = LinkRes.External.LinkedIn,
             modifier = CaptionStyle.toModifier()
+                .then(FooterLinkStyle.toModifier())
                 .color(FooterTextSecondary),
             ref = ref { it.asDynamic().setAttribute("rel", "noopener noreferrer") },
         ) {
@@ -181,6 +197,7 @@ private fun FooterLinksRow() {
         Link(
             path = LinkRes.External.Email,
             modifier = CaptionStyle.toModifier()
+                .then(FooterLinkStyle.toModifier())
                 .color(FooterTextSecondary),
             ref = ref { it.asDynamic().setAttribute("rel", "noopener noreferrer") },
         ) {

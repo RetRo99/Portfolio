@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.borderLeft
+import com.varabyte.kobweb.compose.ui.modifiers.boxShadow
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.gap
 import com.varabyte.kobweb.compose.ui.modifiers.padding
@@ -16,6 +17,7 @@ import io.github.retar.portfolio.styles.MonoEyebrowStyle
 import io.github.retar.portfolio.styles.sitePalette
 import org.jetbrains.compose.web.css.LineStyle
 import org.jetbrains.compose.web.css.px
+import org.jetbrains.compose.web.css.rgba
 
 val CalloutStyle = CssStyle {
     base {
@@ -24,6 +26,7 @@ val CalloutStyle = CssStyle {
             .fillMaxWidth()
             .borderLeft(3.px, LineStyle.Solid, palette.accent)
             .padding(leftRight = 24.px, topBottom = 20.px)
+            .boxShadow(-2.px, 0.px, 12.px, (-2).px, rgba(245, 158, 11, 0.15))
     }
 }
 
