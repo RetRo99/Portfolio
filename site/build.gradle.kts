@@ -29,16 +29,16 @@ kobweb {
                 link(rel = "canonical", href = "https://www.retar.app/")
                 unsafe {
                     +"""
-                    <meta property="og:site_name" content="Rok Retar">
-                    <meta property="og:locale" content="en_US">
-                    <meta property="og:type" content="website">
-                    <meta property="og:title" content="Rok Retar — Mobile Engineer (Android &amp; Kotlin Multiplatform)">
-                    <meta property="og:description" content="Android and Kotlin Multiplatform engineer. KMP migrations taken to production. Built natively in Kotlin.">
-                    <meta property="og:url" content="https://www.retar.app/">
-                    <meta property="og:image" content="https://www.retar.app/og-image.png">
-                    <meta property="og:image:width" content="1200">
-                    <meta property="og:image:height" content="630">
-                    <meta property="og:image:alt" content="Rok Retar — Mobile Engineer (Android &amp; Kotlin Multiplatform)">
+                    <meta property="og:site_name" content="Rok Retar" />
+                    <meta property="og:locale" content="en_US" />
+                    <meta property="og:type" content="website" />
+                    <meta property="og:title" content="Rok Retar — Mobile Engineer (Android &amp; Kotlin Multiplatform)" />
+                    <meta property="og:description" content="Android and Kotlin Multiplatform engineer. KMP migrations taken to production. Built natively in Kotlin." />
+                    <meta property="og:url" content="https://www.retar.app/" />
+                    <meta property="og:image" content="https://www.retar.app/og-image.png" />
+                    <meta property="og:image:width" content="1200" />
+                    <meta property="og:image:height" content="630" />
+                    <meta property="og:image:alt" content="Rok Retar — Mobile Engineer (Android &amp; Kotlin Multiplatform)" />
                     """.trimIndent()
                 }
                 meta(name = "twitter:card", content = "summary_large_image")
