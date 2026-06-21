@@ -421,6 +421,8 @@ private fun LanguageSwitcher(
     var language by Language.currentState
     var isOpen by remember { mutableStateOf(false) }
     val palette = sitePalette()
+    val ctx = rememberPageContext()
+    val currentPath = ctx.route.path
 
     LaunchedEffect(language) {
         language.saveToLocalStorage()
@@ -428,6 +430,10 @@ private fun LanguageSwitcher(
 
     LaunchedEffect(isMenuOpen) {
         if (isMenuOpen) isOpen = false
+    }
+
+    LaunchedEffect(currentPath) {
+        isOpen = false
     }
     Box(
         modifier = modifier.position(Position.Relative).userSelect(UserSelect.None),

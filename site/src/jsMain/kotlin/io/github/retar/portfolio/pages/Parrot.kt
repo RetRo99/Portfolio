@@ -1,6 +1,7 @@
 package io.github.retar.portfolio.pages
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import com.varabyte.kobweb.compose.dom.ref
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
@@ -15,12 +16,16 @@ import com.varabyte.kobweb.compose.ui.modifiers.gap
 import com.varabyte.kobweb.compose.ui.modifiers.margin
 import com.varabyte.kobweb.compose.ui.modifiers.maxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.padding
+import com.varabyte.kobweb.compose.ui.modifiers.scrollMargin
 import com.varabyte.kobweb.compose.ui.modifiers.size
 import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.core.layout.Layout
 import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.toModifier
+import io.github.retar.portfolio.LocalSetActiveSection
+import io.github.retar.portfolio.components.PortfolioSectionId
+import io.github.retar.portfolio.components.header.NavHeaderHeight
 import io.github.retar.portfolio.components.widgets.DownloadButton
 import io.github.retar.portfolio.components.widgets.OutlineButton
 import io.github.retar.portfolio.resources.ImageRes
@@ -46,6 +51,12 @@ import org.jetbrains.compose.web.css.px
 @Layout(".components.layouts.PageLayout")
 @Composable
 fun ParrotPage() {
+    val setActive = LocalSetActiveSection.current
+
+    LaunchedEffect(Unit) {
+        setActive(PortfolioSectionId.Projects)
+    }
+
     Seo(
         title = "Parrot — EPUB Reader & Audiobook Player | Case Study",
         description = "Parrot is a lightweight EPUB e-reader and audiobook player built as the companion app for Storyteller. Typography control, e-ink adaptation, background audio, and read-aloud sync.",
@@ -194,7 +205,8 @@ private fun VersionHistorySection() {
             .fillMaxWidth()
             .gap(24.px)
             .alignItems(AlignItems.FlexStart)
-            .margin(top = 48.px),
+            .margin(top = 48.px)
+            .scrollMargin(top = NavHeaderHeight.value()),
         ref = ref { element ->
             element.id = "version-history"
         },

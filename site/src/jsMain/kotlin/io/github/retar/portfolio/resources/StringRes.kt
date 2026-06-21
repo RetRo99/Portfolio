@@ -254,12 +254,6 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
         lv = "Atvērt Parrot gadījuma izpēti"
     )
 
-    data object CtaDownloadApk : StringRes(
-        en = "Download v0.4.1 APK",
-        sl = "Prenesi v0.4.1 APK",
-        lv = "Lejupielādēt v0.4.1 APK"
-    )
-
     data object NotesEyebrow : StringRes(
         en = "// 03 — engineering notes",
         sl = "// 03 — inženirske zabeležke",
