@@ -109,12 +109,12 @@ private fun HeroSection() {
                 modifier = MonoEyebrowStyle.toModifier(),
             )
 
-            SpanText(
+            H1Text(
                 text = StringRes.HeroName.value,
                 modifier = DisplayStyle.toModifier(),
             )
 
-            H1Text(
+            H2Text(
                 text = StringRes.HeroHeadline.value,
                 modifier = H1Style.toModifier()
                     .measureMax(30),
