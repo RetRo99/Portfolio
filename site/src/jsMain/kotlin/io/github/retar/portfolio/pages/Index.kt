@@ -28,6 +28,7 @@ import com.varabyte.kobweb.silk.style.toModifier
 import org.jetbrains.compose.web.dom.Div
 import io.github.retar.portfolio.components.PortfolioSection
 import io.github.retar.portfolio.components.PortfolioSectionId
+import io.github.retar.portfolio.components.SectionHeader
 import io.github.retar.portfolio.seo.Seo
 import io.github.retar.portfolio.components.widgets.ArticleCard
 import io.github.retar.portfolio.components.widgets.Callout
