@@ -175,7 +175,12 @@ fun NavHeader() {
         ) {
             // Left side: Profile image + Name and subtitle
             Row(
-                modifier = Modifier.gap(12.px),
+                modifier = Modifier
+                    .gap(12.px)
+                    .cursor(Cursor.Pointer)
+                    .onClick {
+                        router.navigateTo("/")
+                    },
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Image(
@@ -186,11 +191,7 @@ fun NavHeader() {
                         .borderRadius(999.px)
                         .objectFit(ObjectFit.Cover)
                         .draggable(false)
-                        .userSelect(UserSelect.None)
-                        .cursor(Cursor.Pointer)
-                        .onClick {
-                            router.navigateTo("/")
-                        },
+                        .userSelect(UserSelect.None),
                 )
                 Column(
                     modifier = Modifier.gap(0.px),
@@ -232,7 +233,10 @@ fun NavHeader() {
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     ThemeToggle()
-                    LanguageSwitcher()
+                    LanguageSwitcher(
+                        isMenuOpen = isMenuOpen,
+                        onMenuClose = { isMenuOpen = false },
+                    )
                     if (isMenuOpen) {
                         CloseIcon(
                             modifier = MenuIconStyle
@@ -409,13 +413,21 @@ private fun ThemeToggle(modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun LanguageSwitcher(modifier: Modifier = Modifier) {
+private fun LanguageSwitcher(
+    modifier: Modifier = Modifier,
+    isMenuOpen: Boolean = false,
+    onMenuClose: () -> Unit = {},
+) {
     var language by Language.currentState
     var isOpen by remember { mutableStateOf(false) }
     val palette = sitePalette()
 
     LaunchedEffect(language) {
         language.saveToLocalStorage()
+    }
+
+    LaunchedEffect(isMenuOpen) {
+        if (isMenuOpen) isOpen = false
     }
     Box(
         modifier = modifier.position(Position.Relative).userSelect(UserSelect.None),
@@ -427,7 +439,10 @@ private fun LanguageSwitcher(modifier: Modifier = Modifier) {
                 .toModifier()
                 .color(palette.textSecondary)
                 .cursor(Cursor.Pointer)
-                .onClick { isOpen = !isOpen }
+                .onClick {
+                    isOpen = !isOpen
+                    if (isOpen) onMenuClose()
+                }
         )
 
         if (isOpen) {

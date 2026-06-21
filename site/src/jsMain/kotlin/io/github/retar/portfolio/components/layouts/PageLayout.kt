@@ -9,6 +9,7 @@ import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.backdropFilter
 import com.varabyte.kobweb.compose.ui.modifiers.borderBottom
+import com.varabyte.kobweb.compose.ui.modifiers.boxShadow
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.id
 import com.varabyte.kobweb.compose.ui.modifiers.minHeight
@@ -31,6 +32,7 @@ import org.jetbrains.compose.web.css.LineStyle
 import org.jetbrains.compose.web.css.Position
 import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
+import org.jetbrains.compose.web.css.rgba
 import org.jetbrains.compose.web.css.vh
 import org.w3c.dom.HTMLElement
 import kotlin.js.json
@@ -57,6 +59,7 @@ val NavHeaderStyle = CssStyle {
             .padding(leftRight = 16.px)
             .borderBottom(1.px, LineStyle.Solid, sitePalette().headerBorder)
             .backdropFilter(blur(15.px))
+            .boxShadow(0.px, 1.px, 3.px, 0.px, rgba(0, 0, 0, 0.05))
     }
     Breakpoint.MD {
         Modifier.padding(leftRight = 32.px)

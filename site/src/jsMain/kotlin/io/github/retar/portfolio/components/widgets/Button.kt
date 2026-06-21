@@ -5,7 +5,6 @@ import com.varabyte.kobweb.compose.css.Cursor
 import com.varabyte.kobweb.compose.css.TextDecorationLine
 import com.varabyte.kobweb.compose.css.Transition
 import com.varabyte.kobweb.compose.ui.Modifier
-import com.varabyte.kobweb.compose.ui.graphics.Color
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.border
 import com.varabyte.kobweb.compose.ui.modifiers.borderRadius
@@ -180,8 +179,8 @@ val PrimaryButtonStyle = CssStyle {
         val palette = sitePalette()
         Modifier
             .setVariable(ButtonVars.BackgroundDefaultColor, palette.accent)
-            .setVariable(ButtonVars.BackgroundHoverColor, Color.rgb(217, 119, 6))
-            .setVariable(ButtonVars.BackgroundPressedColor, Color.rgb(180, 83, 9))
+            .setVariable(ButtonVars.BackgroundHoverColor, palette.accentHover)
+            .setVariable(ButtonVars.BackgroundPressedColor, palette.accentPressed)
             .setVariable(ButtonVars.Color, palette.buttonText)
             .border(2.px, LineStyle.Solid, palette.accent)
             .borderRadius(4.px)

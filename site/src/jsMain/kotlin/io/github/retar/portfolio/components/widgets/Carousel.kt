@@ -49,6 +49,10 @@ fun <T> InfiniteCarousel(
     var isHovered by remember { mutableStateOf(false) }
     var isUserInteracting by remember { mutableStateOf(false) }
 
+    val prefersReducedMotion = remember {
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    }
+
     // Timers
     var touchTimerId by remember { mutableStateOf<Int?>(null) }
 
@@ -61,6 +65,10 @@ fun <T> InfiniteCarousel(
     }
 
     DisposableEffect(Unit) {
+        if (prefersReducedMotion) {
+            return@DisposableEffect onDispose { }
+        }
+
         var lastTime = 0.0
         val speed = 0.08
         var animId = 0
