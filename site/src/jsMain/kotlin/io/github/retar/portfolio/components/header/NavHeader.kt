@@ -24,6 +24,7 @@ import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.alignItems
+import com.varabyte.kobweb.compose.ui.modifiers.rotate
 import com.varabyte.kobweb.compose.ui.modifiers.animation
 import com.varabyte.kobweb.compose.ui.modifiers.backgroundColor
 import com.varabyte.kobweb.compose.ui.modifiers.borderRadius
@@ -96,6 +97,7 @@ import kotlinx.coroutines.launch
 import org.jetbrains.compose.web.css.CSSLengthValue
 import org.jetbrains.compose.web.css.AlignItems
 import org.jetbrains.compose.web.css.Position
+import org.jetbrains.compose.web.css.deg
 import org.jetbrains.compose.web.css.ms
 import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
@@ -103,6 +105,15 @@ import org.jetbrains.compose.web.css.rgba
 import org.jetbrains.compose.web.css.vh
 import org.jetbrains.compose.web.css.vw
 import org.w3c.dom.HTMLElement
+
+val ThemeToggleSpinKeyframes = Keyframes {
+    from {
+        Modifier.rotate(0.deg)
+    }
+    to {
+        Modifier.rotate(360.deg)
+    }
+}
 
 val MobileNavSlideDownKeyframes = Keyframes {
     from {
@@ -459,6 +470,7 @@ private fun HeaderNavItem(
 private fun ThemeToggle(modifier: Modifier = Modifier) {
     var colorMode by ColorMode.currentState
     val palette = sitePalette()
+    var spinKey by remember { mutableStateOf(0) }
 
     LaunchedEffect(colorMode) {
         colorMode.saveToLocalStorage(COLOR_MODE_KEY)
@@ -469,13 +481,22 @@ private fun ThemeToggle(modifier: Modifier = Modifier) {
         .then(modifier)
         .cursor(Cursor.Pointer)
         .onClick {
+            spinKey++
             colorMode = colorMode.opposite
         }
 
-    if (colorMode == ColorMode.LIGHT) {
-        SunIcon(modifier = iconModifier)
+    val spinModifier = if (spinKey > 0) {
+        Modifier.animation(
+            ThemeToggleSpinKeyframes.toAnimation(duration = 500.ms),
+        )
     } else {
-        MoonIcon(modifier = iconModifier)
+        Modifier
+    }
+
+    if (colorMode == ColorMode.LIGHT) {
+        SunIcon(modifier = iconModifier.then(spinModifier))
+    } else {
+        MoonIcon(modifier = iconModifier.then(spinModifier))
     }
 }
 

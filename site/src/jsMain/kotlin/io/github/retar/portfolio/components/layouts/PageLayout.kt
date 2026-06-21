@@ -2,6 +2,10 @@ package io.github.retar.portfolio.components.layouts
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import com.varabyte.kobweb.compose.css.functions.blur
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
@@ -11,12 +15,15 @@ import com.varabyte.kobweb.compose.ui.modifiers.backdropFilter
 import com.varabyte.kobweb.compose.ui.modifiers.borderBottom
 import com.varabyte.kobweb.compose.ui.modifiers.boxShadow
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
+import com.varabyte.kobweb.compose.ui.modifiers.height
 import com.varabyte.kobweb.compose.ui.modifiers.id
 import com.varabyte.kobweb.compose.ui.modifiers.minHeight
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.modifiers.position
 import com.varabyte.kobweb.compose.ui.modifiers.top
+import com.varabyte.kobweb.compose.ui.modifiers.width
 import com.varabyte.kobweb.compose.ui.modifiers.zIndex
+import com.varabyte.kobweb.compose.ui.modifiers.backgroundColor
 import com.varabyte.kobweb.core.layout.Layout
 import com.varabyte.kobweb.core.rememberPageContext
 import com.varabyte.kobweb.silk.style.CssStyle
@@ -74,6 +81,7 @@ val NavHeaderStyle = CssStyle {
 fun PageLayout(content: @Composable () -> Unit) {
     val ctx = rememberPageContext()
     val currentPath = ctx.route.path
+    var scrollProgress by remember { mutableStateOf(0.percent) }
 
     DisposableEffect(currentPath) {
         val isPush = ScrollHistory.consumePushFlag()
@@ -95,12 +103,41 @@ fun PageLayout(content: @Composable () -> Unit) {
         }
     }
 
+    DisposableEffect(Unit) {
+        val onScroll: (org.w3c.dom.events.Event) -> Unit = { _ ->
+            val scrollHeight = document.documentElement?.scrollHeight?.toDouble() ?: 0.0
+            val scrollTop = window.scrollY
+            val clientHeight = document.documentElement?.clientHeight?.toDouble() ?: 0.0
+            val maxScroll = (scrollHeight - clientHeight).coerceAtLeast(0.0)
+            val progress = if (maxScroll > 0) (scrollTop / maxScroll) * 100.0 else 0.0
+            scrollProgress = progress.toInt().percent
+        }
+        window.addEventListener("scroll", onScroll)
+        onDispose { window.removeEventListener("scroll", onScroll) }
+    }
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .minHeight(100.vh),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(3.px)
+                .position(Position.Fixed)
+                .top(0.px)
+                .zIndex(2)
+        ) {
+            Box(
+                modifier = Modifier
+                    .height(3.px)
+                    .width(scrollProgress)
+                    .backgroundColor(sitePalette().accent),
+            )
+        }
 
         Box(
             modifier = NavHeaderStyle

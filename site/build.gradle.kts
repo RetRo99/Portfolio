@@ -21,9 +21,10 @@ kobweb {
         index {
             description.set("Rok Retar — mobile engineer specializing in Android and Kotlin Multiplatform. KMP migrations, native architecture, and the Parrot e-reader case study.")
             faviconPath.set("/favicon.svg")
-            head.add {
-                unsafe {
+head.add {
+            unsafe {
                     +"""<meta http-equiv="Content-Security-Policy" content="frame-ancestors 'self';"/>"""
+                    +"""<style>::selection { background-color: rgb(245, 158, 11); color: rgb(24, 24, 27); }</style>"""
                 }
                 meta(name = "author", content = "Rok Retar")
                 meta(content = "Rok Retar") { attributes["property"] = "og:site_name" }
