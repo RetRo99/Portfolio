@@ -82,8 +82,8 @@ kobweb {
                         {
                           "@context": "https://schema.org",
                           "@type": "ProfilePage",
-                          "dateCreated": "2024-01-01",
-                          "dateModified": "2025-12-01",
+                          "dateCreated": "2024-01-01T00:00:00Z",
+                          "dateModified": "2026-06-21T00:00:00Z",
                           "mainEntity": {
                             "@id": "https://www.retar.app/#person"
                           }
