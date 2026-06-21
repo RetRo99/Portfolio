@@ -2,8 +2,9 @@
 routeOverride: "/blog/sqlcipher-static-kotlin-native-framework"
 title: "Shipping SQLCipher inside a static Kotlin/Native framework (so the iOS team changed nothing)"
 description: "Baking SQLCipher into a static Kotlin/Native framework so the iOS team adds nothing, not even a linker flag."
+date: "2026-06-21"
 ---
-## Shipping SQLCipher inside a static Kotlin/Native framework (so the iOS team changed nothing)
+# Shipping SQLCipher inside a static Kotlin/Native framework (so the iOS team changed nothing)
 
 I work on a KMP app. Shared code (networking, domain logic, a Room database) compiles into a single static framework the iOS app links against. One day the requirement landed: the on-device Room cache on iOS needs to be encrypted, same as it already is on Android with SQLCipher.
 
@@ -11,7 +12,7 @@ The interesting part was the constraint. The iOS team shouldn't have to add a de
 
 That constraint is why the standard recipe didn't work, and it's why this took me a while.
 
-### Why the standard recipe doesn't apply
+## Why the standard recipe doesn't apply
 
 Google "SQLCipher iOS" and you get the same thing everywhere:
 
@@ -31,7 +32,7 @@ So this is a symbol-resolution fight. That's why `-force_load libsqlcipher.a` as
 
 The symbols had to get *into* `SharedKit` some other way.
 
-### Building SQLCipher as a static library
+## Building SQLCipher as a static library
 
 Nothing exotic here. A script clones a pinned SQLCipher tag and compiles it per arch (`ios-arm64`, `ios-simulator-arm64`) with Apple's CommonCrypto as the crypto backend, so there's no OpenSSL to vendor:
 
@@ -54,7 +55,7 @@ cp .libs/libsqlcipher.a "$output_dir/libsqlcipher.a"
 
 The flags that matter: `-DSQLITE_HAS_CODEC` turns on the encryption codec, and `-DSQLCIPHER_CRYPTO_CC` (with `--with-crypto-lib=commoncrypto`) routes crypto through CommonCrypto, which lives in Apple's `Security` framework. Out comes `libsqlcipher.a` per arch. These are gitignored and built on demand, not checked in.
 
-### Merging SQLCipher into the framework binary
+## Merging SQLCipher into the framework binary
 
 This is the move nobody documents, and I got it wrong before I got it right.
 
@@ -100,7 +101,7 @@ linkerOpts("-S", "-framework", "Security")
 
 That's the build-side iOS story. The iOS team links the `.xcframework` exactly as before, no SPM package, no linker flags. The encrypted SQLite engine is already in it.
 
-### Using it, and proving it's on
+## Using it, and proving it's on
 
 A custom `SQLiteDriver` opens the connection via cinterop and immediately sets the key, then checks that the SQLite it's talking to is really SQLCipher:
 
@@ -124,7 +125,7 @@ private fun verifyCipherAvailable(connection: SQLiteConnection) {
 
 `PRAGMA cipher_version` returns a row only on SQLCipher. On plain SQLite it returns nothing. If the merge ever silently stops working, this fires.
 
-### The one thing iOS still owns: the key
+## The one thing iOS still owns: the key
 
 "iOS changes nothing" is true for the SQLCipher integration: the engine and its linkage are fully inside the framework. But the `encryptionKey` in the snippets above has to come from somewhere. The framework does the encryption. It does not invent or store the secret. That was deliberate:
 
@@ -156,7 +157,7 @@ internal fun recreateDatabaseIfKeyInvalid(fileName: String, encryptionKey: ByteA
 
 `canDecrypt` opens the file, sets the key, and forces a read of page 1 (`SELECT count(*) FROM sqlite_master`) so a bad key trips *here* rather than inside Room. Because this database is a cache, deleting and recreating is safe. You lose cached data, not user data.
 
-### Sharp edges
+## Sharp edges
 
 The worst one: **if you misconfigure it, you get plaintext instead of a build failure.** The merge task just skips a slice if the `.a` is missing:
 

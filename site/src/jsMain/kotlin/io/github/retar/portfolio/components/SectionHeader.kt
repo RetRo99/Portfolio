@@ -8,6 +8,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.gap
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.toModifier
 import io.github.retar.portfolio.styles.H2Style
+import io.github.retar.portfolio.styles.H2Text
 import io.github.retar.portfolio.styles.MonoEyebrowStyle
 import io.github.retar.portfolio.styles.SubtitleStyle
 import org.jetbrains.compose.web.css.CSSSizeValue
@@ -45,7 +46,7 @@ fun SectionEyebrow(text: String) {
 
 @Composable
 fun SectionTitle(text: String) {
-    SpanText(
+    H2Text(
         text = text,
         modifier = H2Style.toModifier()
             .fillMaxWidth(),

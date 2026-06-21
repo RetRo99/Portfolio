@@ -29,6 +29,7 @@ import io.github.retar.portfolio.resources.StringRes
 import io.github.retar.portfolio.styles.BodyStyle
 import io.github.retar.portfolio.styles.CaptionStyle
 import io.github.retar.portfolio.styles.H2Style
+import io.github.retar.portfolio.styles.H2Text
 import io.github.retar.portfolio.styles.MonoEyebrowStyle
 import io.github.retar.portfolio.styles.sitePalette
 import org.jetbrains.compose.web.css.ch
@@ -88,7 +89,7 @@ fun Footer() {
                     modifier = MonoEyebrowStyle.toModifier(),
                 )
 
-                SpanText(
+                H2Text(
                     text = StringRes.ContactHeading.value,
                     modifier = H2Style.toModifier()
                         .fillMaxWidth()

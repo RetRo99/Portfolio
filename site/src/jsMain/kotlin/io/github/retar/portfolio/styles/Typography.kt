@@ -1,5 +1,6 @@
 package io.github.retar.portfolio.styles
 
+import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.compose.css.CSSLengthNumericValue
 import com.varabyte.kobweb.compose.css.FontWeight
 import com.varabyte.kobweb.compose.css.functions.clamp
@@ -10,11 +11,16 @@ import com.varabyte.kobweb.compose.ui.modifiers.fontSize
 import com.varabyte.kobweb.compose.ui.modifiers.fontWeight
 import com.varabyte.kobweb.compose.ui.modifiers.lineHeight
 import com.varabyte.kobweb.compose.ui.modifiers.letterSpacing
+import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.base
 import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.em
 import org.jetbrains.compose.web.css.px
+import org.jetbrains.compose.web.dom.H1
+import org.jetbrains.compose.web.dom.H2
+import org.jetbrains.compose.web.dom.H3
+import org.jetbrains.compose.web.dom.Text
 import kotlin.js.unsafeCast
 
 private fun fluidLength(
@@ -178,4 +184,19 @@ val MonoAccentStyle = CssStyle {
             .fontSize(16.px)
             .color(palette.accent)
     }
+}
+
+@Composable
+fun H1Text(text: String, modifier: Modifier = Modifier) {
+    H1(attrs = modifier.toAttrs()) { Text(text) }
+}
+
+@Composable
+fun H2Text(text: String, modifier: Modifier = Modifier) {
+    H2(attrs = modifier.toAttrs()) { Text(text) }
+}
+
+@Composable
+fun H3Text(text: String, modifier: Modifier = Modifier) {
+    H3(attrs = modifier.toAttrs()) { Text(text) }
 }

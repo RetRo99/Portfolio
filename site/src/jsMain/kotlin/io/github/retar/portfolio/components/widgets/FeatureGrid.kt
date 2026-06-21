@@ -17,6 +17,7 @@ import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.style.toModifier
 import io.github.retar.portfolio.styles.BodyStyle
 import io.github.retar.portfolio.styles.H3Style
+import io.github.retar.portfolio.styles.H3Text
 import io.github.retar.portfolio.styles.MonoAccentStyle
 import org.jetbrains.compose.web.css.DisplayStyle
 import org.jetbrains.compose.web.css.fr
@@ -75,7 +76,7 @@ private fun FeatureCell(item: FeatureItem) {
             text = item.index,
             modifier = MonoAccentStyle.toModifier(),
         )
-        SpanText(
+        H3Text(
             text = item.title,
             modifier = H3Style.toModifier()
                 .fillMaxWidth(),

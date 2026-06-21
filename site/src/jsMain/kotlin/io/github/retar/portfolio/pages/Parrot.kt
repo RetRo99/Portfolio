@@ -31,8 +31,11 @@ import io.github.retar.portfolio.seo.Seo
 import io.github.retar.portfolio.styles.BodySmallStyle
 import io.github.retar.portfolio.styles.BodyStyle
 import io.github.retar.portfolio.styles.H1Style
+import io.github.retar.portfolio.styles.H1Text
 import io.github.retar.portfolio.styles.H2Style
+import io.github.retar.portfolio.styles.H2Text
 import io.github.retar.portfolio.styles.H3Style
+import io.github.retar.portfolio.styles.H3Text
 import io.github.retar.portfolio.styles.LabelStyle
 import io.github.retar.portfolio.styles.SubtitleStyle
 import org.jetbrains.compose.web.css.AlignItems
@@ -108,7 +111,7 @@ private fun ParrotHero() {
                 .borderRadius(24.px),
         )
 
-        SpanText(
+        H1Text(
             text = StringRes.ParrotPageHeading.value,
             modifier = H1Style.toModifier(),
         )
@@ -132,7 +135,7 @@ private fun LatestReleaseSection() {
             .gap(24.px)
             .alignItems(AlignItems.Center),
     ) {
-        SpanText(
+        H2Text(
             text = StringRes.ParrotDownloadSection.value,
             modifier = H2Style.toModifier(),
         )
@@ -196,7 +199,7 @@ private fun VersionHistorySection() {
             element.id = "version-history"
         },
     ) {
-        SpanText(
+        H2Text(
             text = StringRes.VersionHistory.value,
             modifier = H2Style.toModifier(),
         )
@@ -379,7 +382,7 @@ private fun FeatureSection(title: String, description: String) {
             .fillMaxWidth()
             .gap(12.px),
     ) {
-        SpanText(
+        H3Text(
             text = title,
             modifier = H3Style.toModifier(),
         )

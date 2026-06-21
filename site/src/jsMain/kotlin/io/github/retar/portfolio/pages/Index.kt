@@ -48,7 +48,9 @@ import io.github.retar.portfolio.styles.BodyStyle
 import io.github.retar.portfolio.styles.CaptionStyle
 import io.github.retar.portfolio.styles.DisplayStyle
 import io.github.retar.portfolio.styles.H1Style
+import io.github.retar.portfolio.styles.H1Text
 import io.github.retar.portfolio.styles.H2Style
+import io.github.retar.portfolio.styles.H2Text
 import io.github.retar.portfolio.styles.MonoAccentStyle
 import io.github.retar.portfolio.styles.MonoEyebrowStyle
 import io.github.retar.portfolio.styles.SubtitleStyle
@@ -111,7 +113,7 @@ private fun HeroSection() {
                 modifier = DisplayStyle.toModifier(),
             )
 
-            SpanText(
+            H1Text(
                 text = StringRes.HeroHeadline.value,
                 modifier = H1Style.toModifier()
                     .measureMax(30),
@@ -180,7 +182,7 @@ private fun PhilosophySection() {
                         text = StringRes.PhilosophyEyebrow.value,
                         modifier = MonoEyebrowStyle.toModifier(),
                     )
-                    SpanText(
+                    H2Text(
                         text = StringRes.PhilosophyHeading.value,
                         modifier = H2Style.toModifier()
                             .fillMaxWidth(),
@@ -272,7 +274,7 @@ private fun ParrotShowcaseSection() {
                 text = StringRes.ParrotEyebrow.value,
                 modifier = MonoEyebrowStyle.toModifier(),
             )
-            SpanText(
+            H2Text(
                 text = StringRes.ParrotHeading.value,
                 modifier = H2Style.toModifier(),
             )

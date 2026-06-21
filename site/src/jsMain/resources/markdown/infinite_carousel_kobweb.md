@@ -2,8 +2,9 @@
 routeOverride: "/blog/infinite-carousel"
 title: "Building a Smooth, Infinite Carousel in Kobweb"
 description: "How to build a smooth, infinite carousel in Kobweb with Silk."
+date: "2025-11-17"
 ---
-## Building a Smooth, Infinite Carousel in Kobweb
+# Building a Smooth, Infinite Carousel in Kobweb
 
 If you’ve ever tried to build a carousel in the browser, you’ve probably run into some of these problems:
 

@@ -25,6 +25,7 @@ fun MarkdownPage(content: @Composable () -> Unit) {
         ?: "Engineering Notes — Rok Retar"
     val description = fm?.get("description")?.firstOrNull()
         ?: "Engineering notes on Kotlin Multiplatform, Kobweb, and Compose by Rok Retar."
+    val date = fm?.get("date")?.firstOrNull()
     val path = ctx.route.path
 
     Seo(
@@ -38,6 +39,7 @@ fun MarkdownPage(content: @Composable () -> Unit) {
               "@type": "BlogPosting",
               "headline": ${jsonString(title)},
               "description": ${jsonString(description)},
+              ${if (date != null) "\"datePublished\": ${jsonString(date)}," else ""}
               "author": {
                 "@type": "Person",
                 "name": "Rok Retar",

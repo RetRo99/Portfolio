@@ -9,6 +9,7 @@ import com.varabyte.kobweb.compose.css.Cursor
 import com.varabyte.kobweb.compose.css.ObjectFit
 import com.varabyte.kobweb.compose.css.Overflow
 import com.varabyte.kobweb.compose.css.PointerEvents
+import com.varabyte.kobweb.compose.css.TextDecorationLine
 import com.varabyte.kobweb.compose.css.Transition
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.ui.Alignment
@@ -25,10 +26,11 @@ import com.varabyte.kobweb.compose.ui.modifiers.onMouseLeave
 import com.varabyte.kobweb.compose.ui.modifiers.overflow
 import com.varabyte.kobweb.compose.ui.modifiers.pointerEvents
 import com.varabyte.kobweb.compose.ui.modifiers.scale
+import com.varabyte.kobweb.compose.ui.modifiers.textDecorationLine
 import com.varabyte.kobweb.compose.ui.modifiers.transition
 import com.varabyte.kobweb.compose.ui.modifiers.width
-import com.varabyte.kobweb.core.rememberPageContext
 import com.varabyte.kobweb.silk.components.graphics.Image
+import com.varabyte.kobweb.silk.components.navigation.Link
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.selectors.hover
 import com.varabyte.kobweb.silk.style.toModifier
@@ -110,15 +112,15 @@ fun ProjectCard(
     route: String,
     modifier: Modifier = Modifier,
 ) {
-    val router = rememberPageContext().router
-
-    ImageCard(
-        image = image,
-        modifier = modifier,
-        onClick = {
-            router.navigateTo(route)
-        },
-    )
+    Link(
+        path = route,
+        modifier = Modifier.textDecorationLine(TextDecorationLine.None),
+    ) {
+        ImageCard(
+            image = image,
+            modifier = modifier,
+        )
+    }
 }
 
 @Composable
@@ -129,15 +131,15 @@ fun ArticleCard(
     image: ImageRes,
     modifier: Modifier = Modifier,
 ) {
-    val router = rememberPageContext().router
-
-    ImageCard(
-        image = image,
-        modifier = modifier,
-        contentDescription = title,
-        onClick = {
-            router.navigateTo(route)
-        },
-    )
+    Link(
+        path = route,
+        modifier = Modifier.textDecorationLine(TextDecorationLine.None),
+    ) {
+        ImageCard(
+            image = image,
+            modifier = modifier,
+            contentDescription = title,
+        )
+    }
 }
 
