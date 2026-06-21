@@ -53,6 +53,7 @@ import io.github.retar.portfolio.styles.LabelStyle
 import io.github.retar.portfolio.styles.MonoEyebrowStyle
 import io.github.retar.portfolio.styles.SubtitleStyle
 import io.github.retar.portfolio.styles.sitePalette
+import io.github.retar.portfolio.utils.trackEvent
 import org.jetbrains.compose.web.css.AlignItems
 import org.jetbrains.compose.web.css.LineStyle
 import org.jetbrains.compose.web.css.ch
@@ -195,6 +196,7 @@ private fun LatestReleaseSection() {
                 url = "#version-history",
                 label = StringRes.ParrotViewHistory.value,
                 modifier = Modifier.margin(top = 16.px),
+                onClick = { trackEvent("view-version-history") },
             )
         }
     }

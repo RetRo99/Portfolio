@@ -36,7 +36,9 @@ import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.selectors.hover
 import com.varabyte.kobweb.silk.style.toModifier
 import io.github.retar.portfolio.resources.ImageRes
+import io.github.retar.portfolio.utils.trackEvent
 import org.jetbrains.compose.web.css.ms
+import kotlin.js.json
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.css.rgba
 
@@ -120,7 +122,9 @@ fun ProjectCard(
 ) {
     Link(
         path = route,
-        modifier = Modifier.textDecorationLine(TextDecorationLine.None),
+        modifier = Modifier
+            .textDecorationLine(TextDecorationLine.None)
+            .onClick { trackEvent("project-card-click", json("route" to route)) },
     ) {
         ImageCard(
             image = image,
@@ -141,7 +145,9 @@ fun ArticleCard(
 ) {
     Link(
         path = route,
-        modifier = Modifier.textDecorationLine(TextDecorationLine.None),
+        modifier = Modifier
+            .textDecorationLine(TextDecorationLine.None)
+            .onClick { trackEvent("article-open", json("route" to route)) },
     ) {
         ImageCard(
             image = image,

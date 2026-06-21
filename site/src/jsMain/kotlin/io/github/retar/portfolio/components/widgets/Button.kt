@@ -50,11 +50,15 @@ fun OutlineButton(
     url: String,
     label: String,
     modifier: Modifier = Modifier,
+    onClick: (() -> Unit)? = null,
 ) {
     val ctx = rememberPageContext()
 
     Button(
-        onClick = { ctx.router.navigateTo(url) },
+        onClick = {
+            onClick?.invoke()
+            ctx.router.navigateTo(url)
+        },
         modifier = OutlineButtonStyle.toModifier()
             .then(modifier),
         size = ButtonSize.MD,
@@ -69,11 +73,13 @@ fun PrimaryButton(
     label: String,
     modifier: Modifier = Modifier,
     openExternally: Boolean = false,
+    onClick: (() -> Unit)? = null,
 ) {
     val ctx = rememberPageContext()
 
     Button(
         onClick = {
+            onClick?.invoke()
             if (openExternally) {
                 window.open(url, OpenLinkStrategy.IN_PLACE)
             } else {
@@ -140,6 +146,7 @@ fun TextLink(
     url: String,
     label: String,
     modifier: Modifier = Modifier,
+    onClick: (() -> Unit)? = null,
 ) {
     Link(
         path = url,
@@ -148,7 +155,8 @@ fun TextLink(
             .cursor(Cursor.Pointer)
             .textDecorationLine(TextDecorationLine.None)
             .transition(Transition.all(duration = 150.ms))
-            .then(modifier),
+            .then(modifier)
+            .onClick { onClick?.invoke() },
     ) {
         SpanText(
             text = label,

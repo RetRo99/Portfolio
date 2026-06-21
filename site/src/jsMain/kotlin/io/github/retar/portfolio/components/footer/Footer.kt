@@ -15,6 +15,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.color
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.gap
 import com.varabyte.kobweb.compose.ui.modifiers.maxWidth
+import com.varabyte.kobweb.compose.ui.modifiers.onClick
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.modifiers.transition
 import com.varabyte.kobweb.silk.components.navigation.Link
@@ -36,6 +37,8 @@ import io.github.retar.portfolio.styles.H2Style
 import io.github.retar.portfolio.styles.H2Text
 import io.github.retar.portfolio.styles.MonoEyebrowStyle
 import io.github.retar.portfolio.styles.sitePalette
+import io.github.retar.portfolio.utils.trackEvent
+import kotlin.js.json
 import org.jetbrains.compose.web.css.ch
 import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.ms
@@ -150,6 +153,7 @@ private fun FooterCtaRow() {
             url = LinkRes.External.Email,
             label = StringRes.CtaEmail.value,
             openExternally = true,
+            onClick = { trackEvent("contact-email-click") },
         )
         ResumeDownloadButton(
             url = LinkRes.External.Resume,
@@ -170,7 +174,8 @@ private fun FooterLinksRow() {
             path = LinkRes.External.GitHub,
             modifier = CaptionStyle.toModifier()
                 .then(FooterLinkStyle.toModifier())
-                .color(FooterTextSecondary),
+                .color(FooterTextSecondary)
+                .onClick { trackEvent("social-link-click", json("platform" to "github")) },
             ref = ref { it.asDynamic().setAttribute("rel", "noopener noreferrer") },
         ) {
             SpanText(text = StringRes.Github.value)
@@ -184,7 +189,8 @@ private fun FooterLinksRow() {
             path = LinkRes.External.LinkedIn,
             modifier = CaptionStyle.toModifier()
                 .then(FooterLinkStyle.toModifier())
-                .color(FooterTextSecondary),
+                .color(FooterTextSecondary)
+                .onClick { trackEvent("social-link-click", json("platform" to "linkedin")) },
             ref = ref { it.asDynamic().setAttribute("rel", "noopener noreferrer") },
         ) {
             SpanText(text = StringRes.LinkedIn.value)
@@ -198,7 +204,8 @@ private fun FooterLinksRow() {
             path = LinkRes.External.Email,
             modifier = CaptionStyle.toModifier()
                 .then(FooterLinkStyle.toModifier())
-                .color(FooterTextSecondary),
+                .color(FooterTextSecondary)
+                .onClick { trackEvent("social-link-click", json("platform" to "email")) },
             ref = ref { it.asDynamic().setAttribute("rel", "noopener noreferrer") },
         ) {
             SpanText(text = StringRes.EmailAddress.value)

@@ -64,6 +64,7 @@ import io.github.retar.portfolio.styles.H2Text
 import io.github.retar.portfolio.styles.MonoAccentStyle
 import io.github.retar.portfolio.styles.MonoEyebrowStyle
 import io.github.retar.portfolio.styles.SubtitleStyle
+import io.github.retar.portfolio.utils.trackEvent
 import org.jetbrains.compose.web.css.AlignItems
 import org.jetbrains.compose.web.css.DisplayStyle as WebDisplayStyle
 import org.jetbrains.compose.web.css.FlexWrap
@@ -160,6 +161,7 @@ private fun HeroCtaRow() {
         PrimaryButton(
             url = PortfolioSectionId.Projects.path,
             label = StringRes.CtaReviewWork.value,
+            onClick = { trackEvent("cta-review-work") },
         )
         ResumeDownloadButton(
             url = LinkRes.External.Resume,
@@ -168,6 +170,7 @@ private fun HeroCtaRow() {
         TextLink(
             url = PortfolioSectionId.Blog.path,
             label = StringRes.CtaReadNotes.value,
+            onClick = { trackEvent("cta-read-notes") },
         )
     }
 }
@@ -371,6 +374,7 @@ private fun ParrotCtaRow() {
         PrimaryButton(
             url = LinkRes.Internal.Parrot,
             label = StringRes.CtaOpenCaseStudy.value,
+            onClick = { trackEvent("case-study-open") },
         )
         DownloadButton(
             url = ParrotRes.latestRelease.apkUrl,
@@ -401,6 +405,7 @@ private fun ArticlesSection() {
                 modifier = Modifier
                     .fillMaxWidth()
                     .gap(12.px)
+                    .flexWrap(FlexWrap.Wrap)
                     .margin(top = 16.px),
             ) {
                 ArticleCard(

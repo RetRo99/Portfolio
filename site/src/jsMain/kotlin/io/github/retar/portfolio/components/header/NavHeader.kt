@@ -91,6 +91,7 @@ import io.github.retar.portfolio.styles.DescriptorStyle
 import io.github.retar.portfolio.styles.LabelStyle
 import io.github.retar.portfolio.styles.sitePalette
 import io.github.retar.portfolio.styles.toSitePalette
+import io.github.retar.portfolio.utils.trackEvent
 import kotlinx.browser.document
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -105,6 +106,7 @@ import org.jetbrains.compose.web.css.rgba
 import org.jetbrains.compose.web.css.vh
 import org.jetbrains.compose.web.css.vw
 import org.w3c.dom.HTMLElement
+import kotlin.js.json
 
 val ThemeToggleSpinKeyframes = Keyframes {
     from {
@@ -205,10 +207,11 @@ fun NavHeader() {
             Row(
                 modifier = Modifier
                     .gap(12.px)
-                    .cursor(Cursor.Pointer)
-                    .onClick {
-                        router.navigateTo("/")
-                    },
+                .cursor(Cursor.Pointer)
+                .onClick {
+                    trackEvent("logo-click")
+                    router.navigateTo("/")
+                },
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Image(
@@ -282,7 +285,10 @@ fun NavHeader() {
                             modifier = MenuIconStyle
                                 .toModifier()
                                 .color(palette.textSecondary)
-                                .onClick { isMenuOpen = true },
+                                .onClick {
+                                    isMenuOpen = true
+                                    trackEvent("mobile-menu-open")
+                                },
                         )
                     }
                 }
@@ -312,7 +318,8 @@ private fun HeaderSocialIcons() {
             ref = ref { it.asDynamic().setAttribute("rel", "noopener noreferrer") },
         ) {
             FaGithub(
-                modifier = iconModifier,
+                modifier = iconModifier
+                    .onClick { trackEvent("social-link-click", json("platform" to "github")) },
                 size = IconSize.LG,
             )
         }
@@ -322,7 +329,8 @@ private fun HeaderSocialIcons() {
             ref = ref { it.asDynamic().setAttribute("rel", "noopener noreferrer") },
         ) {
             FaLinkedin(
-                modifier = iconModifier,
+                modifier = iconModifier
+                    .onClick { trackEvent("social-link-click", json("platform" to "linkedin")) },
                 size = IconSize.LG,
             )
         }
@@ -332,7 +340,8 @@ private fun HeaderSocialIcons() {
             ref = ref { it.asDynamic().setAttribute("rel", "noopener noreferrer") },
         ) {
             FaEnvelope(
-                modifier = iconModifier,
+                modifier = iconModifier
+                    .onClick { trackEvent("social-link-click", json("platform" to "email")) },
                 size = IconSize.LG,
             )
         }
@@ -369,6 +378,7 @@ private fun DesktopNavItem(item: NavItem) {
             .color(if (isActive) palette.accent else palette.textSecondary)
             .transition(Transition.all(duration = 150.ms))
             .onClick {
+                trackEvent("nav-click", json("item" to item.name))
                 val section = item.section
                 if (section != null) {
                     router.tryRoutingTo(item.route + section.path)
@@ -449,6 +459,7 @@ private fun HeaderNavItem(
             .transition(Transition.all(duration = 150.ms))
             .onClick {
                 onClick()
+                trackEvent("nav-click", json("item" to item.name))
                 val section = item.section
 
                 if (section != null) {
@@ -483,6 +494,7 @@ private fun ThemeToggle(modifier: Modifier = Modifier) {
         .onClick {
             spinKey++
             colorMode = colorMode.opposite
+            trackEvent("theme-toggle", json("mode" to colorMode.name.lowercase()))
         }
 
     val spinModifier = if (spinKey > 0) {
@@ -566,8 +578,13 @@ private fun LanguageSwitcher(
                         language = item,
                         isSelected = item == language,
                         onClick = {
+                            val previousLanguage = language.code
                             language = item
                             isOpen = false
+                            trackEvent(
+                                "language-change",
+                                json("from" to previousLanguage, "to" to item.code),
+                            )
                         }
                     )
                 }

@@ -29,6 +29,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.scrollbarWidth
 import com.varabyte.kobweb.compose.ui.modifiers.width
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.toModifier
+import io.github.retar.portfolio.utils.trackEvent
 import kotlinx.browser.window
 import org.jetbrains.compose.web.css.DisplayStyle
 import org.jetbrains.compose.web.css.FlexDirection
@@ -139,6 +140,7 @@ fun <T> InfiniteCarousel(
             .onTouchStart {
                 isUserInteracting = true
                 touchTimerId?.let { window.clearTimeout(it) }
+                trackEvent("carousel-interaction")
             }
             .onTouchEnd {
                 resumePlayAfterDelay(touchTimerId) { touchTimerId = it }
