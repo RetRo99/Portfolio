@@ -1,7 +1,9 @@
 import com.varabyte.kobweb.common.text.isSurrounded
 import com.varabyte.kobweb.gradle.application.util.configAsKobwebApplication
 import kotlinx.html.link
+import kotlinx.html.meta
 import kotlinx.html.script
+import kotlinx.html.title
 import kotlinx.html.unsafe
 
 plugins {
@@ -20,6 +22,48 @@ kobweb {
             description.set("Personal portfolio of Rok Retar, showcasing projects, experience, and skills.")
             faviconPath.set("/favicon.svg")
             head.add {
+                title("Rok Retar — Mobile Engineer (Android & Kotlin Multiplatform)")
+                meta(name = "description", content = "Rok Retar — mobile engineer specializing in Android and Kotlin Multiplatform. KMP migrations, native architecture, and the Parrot e-reader case study.")
+                meta(name = "author", content = "Rok Retar")
+                meta(name = "robots", content = "index, follow")
+                link(rel = "canonical", href = "https://www.retar.app/")
+                meta(property = "og:site_name", content = "Rok Retar")
+                meta(property = "og:locale", content = "en_US")
+                meta(property = "og:type", content = "website")
+                meta(property = "og:title", content = "Rok Retar — Mobile Engineer (Android & Kotlin Multiplatform)")
+                meta(property = "og:description", content = "Android and Kotlin Multiplatform engineer. KMP migrations taken to production. Built natively in Kotlin.")
+                meta(property = "og:url", content = "https://www.retar.app/")
+                meta(property = "og:image", content = "https://www.retar.app/og-image.png")
+                meta(name = "twitter:card", content = "summary_large_image")
+                meta(name = "twitter:title", content = "Rok Retar — Mobile Engineer (Android & Kotlin Multiplatform)")
+                meta(name = "twitter:description", content = "Android and Kotlin Multiplatform engineer. KMP migrations taken to production. Built natively in Kotlin.")
+                meta(name = "twitter:image", content = "https://www.retar.app/og-image.png")
+                script(type = "application/ld+json") {
+                    unsafe {
+                        +"""
+                        {
+                          "@context": "https://schema.org",
+                          "@type": "Person",
+                          "name": "Rok Retar",
+                          "jobTitle": "Mobile Engineer",
+                          "url": "https://www.retar.app",
+                          "email": "mailto:rok.retar@gmail.com",
+                          "knowsAbout": [
+                            "Android",
+                            "Kotlin",
+                            "Kotlin Multiplatform",
+                            "Jetpack Compose",
+                            "Kobweb",
+                            "Software Architecture"
+                          ],
+                          "sameAs": [
+                            "https://github.com/retro99",
+                            "https://www.linkedin.com/in/rok-retar/"
+                          ]
+                        }
+                        """.trimIndent()
+                    }
+                }
                 link(rel = "preconnect", href = "https://fonts.googleapis.com")
                 link(
                     rel = "preconnect",
@@ -33,6 +77,7 @@ kobweb {
                     rel = "stylesheet",
                     href = "/prism/prism.css",
                 )
+                link(rel = "sitemap", type = "application/xml", href = "/sitemap.xml")
                 script {
                     src = "/prism/prism.js"
                 }

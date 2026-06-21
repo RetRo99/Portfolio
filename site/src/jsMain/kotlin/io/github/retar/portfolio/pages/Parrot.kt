@@ -27,6 +27,7 @@ import io.github.retar.portfolio.resources.ImageRes
 import io.github.retar.portfolio.resources.ParrotRelease
 import io.github.retar.portfolio.resources.ParrotRes
 import io.github.retar.portfolio.resources.StringRes
+import io.github.retar.portfolio.seo.Seo
 import io.github.retar.portfolio.styles.BodySmallStyle
 import io.github.retar.portfolio.styles.BodyStyle
 import io.github.retar.portfolio.styles.H1Style
@@ -42,6 +43,32 @@ import org.jetbrains.compose.web.css.px
 @Layout(".components.layouts.PageLayout")
 @Composable
 fun ParrotPage() {
+    Seo(
+        title = "Parrot — EPUB Reader & Audiobook Player | Case Study",
+        description = "Parrot is a lightweight EPUB e-reader and audiobook player built as the companion app for Storyteller. Typography control, e-ink adaptation, background audio, and read-aloud sync.",
+        path = "/parrot",
+        ogType = "article",
+        jsonLd = """
+            {
+              "@context": "https://schema.org",
+              "@type": "SoftwareApplication",
+              "name": "Parrot",
+              "applicationCategory": "BookApplication",
+              "operatingSystem": "Android",
+              "description": "A lightweight EPUB e-reader and audiobook player — the companion app for Storyteller.",
+              "author": {
+                "@type": "Person",
+                "name": "Rok Retar",
+                "url": "https://www.retar.app"
+              },
+              "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "EUR"
+              }
+            }
+        """.trimIndent(),
+    )
     Box(
         modifier = Modifier
             .fillMaxSize()

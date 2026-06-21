@@ -28,7 +28,7 @@ import com.varabyte.kobweb.silk.style.toModifier
 import org.jetbrains.compose.web.dom.Div
 import io.github.retar.portfolio.components.PortfolioSection
 import io.github.retar.portfolio.components.PortfolioSectionId
-import io.github.retar.portfolio.components.SectionHeader
+import io.github.retar.portfolio.seo.Seo
 import io.github.retar.portfolio.components.widgets.ArticleCard
 import io.github.retar.portfolio.components.widgets.Callout
 import io.github.retar.portfolio.components.widgets.DownloadButton
@@ -65,6 +65,11 @@ import org.jetbrains.compose.web.css.vw
 @Layout(".components.layouts.PageLayout")
 @Composable
 fun IndexPage() {
+    Seo(
+        title = "Rok Retar — Mobile Engineer (Android & Kotlin Multiplatform)",
+        description = "Android and Kotlin Multiplatform engineer specializing in KMP migrations taken to production iOS. One Kotlin codebase, two platforms, native feel intact.",
+        path = "/",
+    )
     Column(
         modifier = Modifier
             .fillMaxSize()

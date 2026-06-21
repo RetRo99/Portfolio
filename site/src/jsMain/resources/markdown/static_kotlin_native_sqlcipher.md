@@ -7,7 +7,7 @@ description: "Baking SQLCipher into a static Kotlin/Native framework so the iOS 
 
 I work on a KMP app. Shared code (networking, domain logic, a Room database) compiles into a single static framework the iOS app links against. One day the requirement landed: the on-device Room cache on iOS needs to be encrypted, same as it already is on Android with SQLCipher.
 
-The interesting part was the constraint. The iOS team shouldn't have to add a dependency, set a build flag, or manage SQLCipher at all. They link one framework today; they should link the same one tomorrow and encryption comes with it. No SPM package, no `-force_load` flag. They do still hand over the encryption key, but that's a runtime argument, a `ByteArray`, not a build change. I'll get to that.
+The interesting part was the constraint. The iOS team shouldn't have to add a dependency, set a build flag, or manage SQLCipher at all. They link one framework today, they should link the same one tomorrow, and encryption comes with it. No SPM package, no `-force_load` flag. They do still hand over the encryption key, but that's a runtime argument, a `ByteArray`, not a build change. I'll get to that.
 
 That constraint is why the standard recipe didn't work, and it's why this took me a while.
 
@@ -25,21 +25,13 @@ My situation breaks this in two ways:
 - `SharedKit` is a *static* framework (`isStatic = true`). There's no app-level link step I control the way that recipe assumes. By the time the iOS app links it, the `sqlite3_*` symbols inside the framework are already set in stone.
 - The iOS team adds nothing. Pushing an SPM package and a linker flag onto them is exactly what I was told to avoid.
 
-But there's a subtler problem underneath, and that's the real root cause. Room's iOS support comes through `androidx.sqlite:sqlite-framework`. That artifact gives me the cinterop bindings my driver uses (`NativeSQLiteConnection`, `sqlite3_open_v2`, and friends), but it binds them against the **system** `libsqlite3` baked into iOS. System SQLite has no encryption codec. SQLCipher is a drop-in replacement: same `sqlite3_*` symbol names, but with encryption. The whole game is making SQLCipher's `sqlite3_*` symbols win over the system ones at the point my framework resolves them.
+But there's a subtler problem. Room's iOS support comes through `androidx.sqlite:sqlite-framework`. That artifact gives me the cinterop bindings my driver uses (`NativeSQLiteConnection`, `sqlite3_open_v2`, and friends), but it binds them against the **system** `libsqlite3` baked into iOS. System SQLite has no encryption codec. SQLCipher is a drop-in replacement: same `sqlite3_*` symbol names, but with encryption. The challenge is getting SQLCipher's `sqlite3_*` symbols to win over the system ones at the point my framework resolves them.
 
-So the problem is winning a symbol-resolution fight, not adding a library. And that's why `-force_load libsqlcipher.a` as a Kotlin/Native `linkerOpt` was the wrong tool, even though that's where I started.
+So this is a symbol-resolution fight. That's why `-force_load libsqlcipher.a` as a Kotlin/Native `linkerOpt` was the wrong tool, even though that's where I started.
 
 The symbols had to get *into* `SharedKit` some other way.
 
-### The shape of it
-
-Three parts:
-
-1. Build SQLCipher from source as a static `.a`, per architecture. Normal.
-2. After Kotlin/Native emits the framework, **merge SQLCipher's object files into the framework binary** so its `sqlite3_*` symbols are the ones that ship. This is the unusual part.
-3. At runtime, open the database through a driver that issues `PRAGMA key`, and verify the SQLite you're talking to is actually SQLCipher. Normal, but also my safety net.
-
-#### Building SQLCipher as a static library
+### Building SQLCipher as a static library
 
 Nothing exotic here. A script clones a pinned SQLCipher tag and compiles it per arch (`ios-arm64`, `ios-simulator-arm64`) with Apple's CommonCrypto as the crypto backend, so there's no OpenSSL to vendor:
 
@@ -62,7 +54,7 @@ cp .libs/libsqlcipher.a "$output_dir/libsqlcipher.a"
 
 The flags that matter: `-DSQLITE_HAS_CODEC` turns on the encryption codec, and `-DSQLCIPHER_CRYPTO_CC` (with `--with-crypto-lib=commoncrypto`) routes crypto through CommonCrypto, which lives in Apple's `Security` framework. Out comes `libsqlcipher.a` per arch. These are gitignored and built on demand, not checked in.
 
-#### Merging SQLCipher into the framework binary
+### Merging SQLCipher into the framework binary
 
 This is the move nobody documents, and I got it wrong before I got it right.
 
@@ -108,7 +100,7 @@ linkerOpts("-S", "-framework", "Security")
 
 That's the build-side iOS story. The iOS team links the `.xcframework` exactly as before, no SPM package, no linker flags. The encrypted SQLite engine is already in it.
 
-#### Using it, and proving it's on
+### Using it, and proving it's on
 
 A custom `SQLiteDriver` opens the connection via cinterop and immediately sets the key, then checks that the SQLite it's talking to is really SQLCipher:
 
@@ -130,11 +122,11 @@ private fun verifyCipherAvailable(connection: SQLiteConnection) {
 }
 ```
 
-`PRAGMA cipher_version` returns a row only on SQLCipher; on plain SQLite it returns nothing. If the merge ever silently stops working, this fires.
+`PRAGMA cipher_version` returns a row only on SQLCipher. On plain SQLite it returns nothing. If the merge ever silently stops working, this fires.
 
 ### The one thing iOS still owns: the key
 
-"iOS changes nothing" is true for the SQLCipher integration: the engine and its linkage are fully inside the framework. But the `encryptionKey` in the snippets above has to come from somewhere. The framework does the encryption; it does not invent or store the secret. That was deliberate:
+"iOS changes nothing" is true for the SQLCipher integration: the engine and its linkage are fully inside the framework. But the `encryptionKey` in the snippets above has to come from somewhere. The framework does the encryption. It does not invent or store the secret. That was deliberate:
 
 ```kotlin
 fun getDatabaseBuilder(
@@ -144,12 +136,12 @@ fun getDatabaseBuilder(
 ): RoomDatabase.Builder<AppDatabase>
 ```
 
-The key arrives as a `ByteArray` when the iOS app constructs the shared SDK entry point (something like `SharedSDK(httpTransport, encryptionKey, ...)`), and flows down to the driver. Generating a random key on first launch and persisting it in the iOS Keychain is a platform concern, so it stays on the iOS side; the framework has no business owning a Keychain item. The split:
+The key arrives as a `ByteArray` when the iOS app constructs the shared SDK entry point (something like `SharedSDK(httpTransport, encryptionKey, ...)`), and flows down to the driver. Generating a random key on first launch and persisting it in the iOS Keychain is a platform concern, so it stays on the iOS side. The framework has no business owning a Keychain item. The split:
 
 - Framework owns the engine: SQLCipher, the driver, `PRAGMA key`, the encrypted reads/writes.
 - iOS owns the secret: generate it, store it in the Keychain, hand it over as a `ByteArray`.
 
-This is a one-argument contract, not a build-system change, so it doesn't violate the "no SPM, no linker flags" goal. It does have a consequence worth designing for: if the key ever stops matching the database (Keychain reset on reinstall, a key rotation), the existing file is undecryptable. SQLCipher surfaces that as "file is not a database" the first time it reads an encrypted page, deep inside Room's connection setup, where there's no clean recovery.
+This is a one-argument contract, not a build-system change, so it doesn't violate the "no SPM, no linker flags" goal. It does have a consequence worth designing for: if the key ever stops matching the database (Keychain reset on reinstall, a key rotation), the existing file is undecryptable. SQLCipher surfaces that as "file is not a database" the first time it reads an encrypted page, deep inside Room's connection setup, where the error doesn't say "your key is wrong."
 
 So before Room ever opens the file, I pre-flight it with the supplied key:
 
@@ -162,11 +154,9 @@ internal fun recreateDatabaseIfKeyInvalid(fileName: String, encryptionKey: ByteA
 }
 ```
 
-`canDecrypt` opens the file, sets the key, and forces a read of page 1 (`SELECT count(*) FROM sqlite_master`) so a bad key trips *here* rather than inside Room. Because this database is a cache, deleting and recreating is a safe recovery; you lose cached data, not user data.
+`canDecrypt` opens the file, sets the key, and forces a read of page 1 (`SELECT count(*) FROM sqlite_master`) so a bad key trips *here* rather than inside Room. Because this database is a cache, deleting and recreating is safe. You lose cached data, not user data.
 
 ### Sharp edges
-
-This works, but it's still build-time binary surgery, and it has specific ways it bites.
 
 The worst one: **if you misconfigure it, you get plaintext instead of a build failure.** The merge task just skips a slice if the `.a` is missing:
 
@@ -174,15 +164,15 @@ The worst one: **if you misconfigure it, you get plaintext instead of a build fa
 if (!binary.exists() || !sqlcipherLib.exists()) return@forEach
 ```
 
-So if someone forgets to build the SQLCipher libs, the framework builds *successfully*, just unencrypted. The only signal is the runtime log line from above, not a red build. For a feature whose entire job is "don't store user data in plaintext," silent-plaintext-on-misconfiguration is the failure mode to respect. Making that path fail the build is the first hardening I'd do, and it's why the runtime check exists as a backstop in the meantime.
+So if someone forgets to build the SQLCipher libs, the framework builds *successfully*, just unencrypted. The only signal is the runtime log line from above, not a red build. An unencrypted framework that ships as if encrypted is the worst outcome I can think of here. The merge task should fail loudly when a `.a` is missing instead of skipping. I haven't done that yet, and until I do, the runtime check is the only thing catching it.
 
 Two more:
 
-- Symbol resolution is the load-bearing assumption. The system `libsqlite3` and SQLCipher both define `sqlite3_*`. Merging SQLCipher's objects into the framework binary is what tips resolution toward SQLCipher, but that's exactly the kind of thing a Room or Kotlin/Native version bump can disturb. This is what the `PRAGMA cipher_version` check is guarding.
+- The system `libsqlite3` and SQLCipher both define `sqlite3_*`. Merging SQLCipher's objects into the framework binary is what tips resolution toward SQLCipher, but a Room or Kotlin/Native version bump is exactly the kind of thing that can disturb that. The `PRAGMA cipher_version` check is what guards it.
 - `-arch arm64` is hardcoded in the `ld -r` step, matching the two arm64 slices shipped (device + Apple-silicon simulator). Add an x86_64 simulator slice and this needs to learn about arch.
 
-None of these are reasons not to do it. They're reasons to keep the runtime check, pin the toolchain, and know where to look when it breaks.
+The runtime check is the only one actually in place today. Failing the build on a missing `.a` and pinning the Room and Kotlin/Native versions are still on the to-do list.
 
-The transferable part isn't SQLCipher. When you need a third-party static library baked into a static Kotlin/Native framework, the answer is the same `ar`/`libtool` archive operations the framework was built with, applied one stage later (`ar x` → `ld -r` → `libtool -static`). `-force_load` is for the final `ld` link; a static framework doesn't have one inside your build. Knowing which tool the artifact actually goes through is what matters.
+When you need a third-party static library baked into a static Kotlin/Native framework, the same `ar`/`libtool` archive operations that built the framework do the job, applied one stage later (`ar x` → `ld -r` → `libtool -static`). `-force_load` is for the final `ld` link, and a static framework doesn't go through one inside its own build.
 
-And underneath: the constraint ("iOS adds no dependency or build config") drove the design. The easy answer existed. It just pushed the integration cost onto another team. Absorbing that into the build, while leaving iOS the one thing it should own (the key), was the job.
+The constraint "iOS adds no dependency or build config" drove the design. The easy answer, `addSpm` plus `-force_load`, shifted the integration cost onto the iOS team. The build here absorbed it. iOS constructs the SDK with a `ByteArray` encryption key and otherwise links the framework exactly as before.
