@@ -1,0 +1,22 @@
+{
+  "name": "Rok Retar — Mobile Engineer",
+  "short_name": "Rok Retar",
+  "description": "Android and Kotlin Multiplatform engineer specializing in KMP migrations taken to production iOS.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fafafa",
+  "theme_color": "#18181b",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/favicon-android.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}

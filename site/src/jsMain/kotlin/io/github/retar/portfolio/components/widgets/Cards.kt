@@ -30,6 +30,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.textDecorationLine
 import com.varabyte.kobweb.compose.ui.modifiers.transition
 import com.varabyte.kobweb.compose.ui.modifiers.width
 import com.varabyte.kobweb.silk.components.graphics.Image
+import com.varabyte.kobweb.silk.components.graphics.ImageLoading
 import com.varabyte.kobweb.silk.components.navigation.Link
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.selectors.hover
@@ -89,7 +90,10 @@ fun ImageCard(
                 modifier = Modifier
                     .fillMaxSize()
                     .objectFit(ObjectFit.Cover)
-                    .draggable(false)
+                    .draggable(false),
+                width = image.intrinsicWidth,
+                height = image.intrinsicHeight,
+                loading = ImageLoading.Lazy,
             )
         }
 
@@ -111,6 +115,7 @@ fun ProjectCard(
     image: ImageRes,
     route: String,
     modifier: Modifier = Modifier,
+    contentDescription: String? = null,
 ) {
     Link(
         path = route,
@@ -119,6 +124,7 @@ fun ProjectCard(
         ImageCard(
             image = image,
             modifier = modifier,
+            contentDescription = contentDescription,
         )
     }
 }

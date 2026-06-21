@@ -362,6 +362,36 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
         lv = "Roka Retara portrets"
     )
 
+    data object ParrotScreenshot1Desc : StringRes(
+        en = "Parrot e-reader in light mode showing custom typography and margins",
+        sl = "Bralnik Parrot v svetlem načinu s poljubno tipografijo in robovi",
+        lv = "Lasītājs Parrot gaišajā režīmā ar pielāgotu tipogrāfiju un malām"
+    )
+
+    data object ParrotScreenshot2Desc : StringRes(
+        en = "Parrot e-reader in dark fullscreen mode with distraction-free reading",
+        sl = "Bralnik Parrot v temnem celozaslonskem načinu za nemoteno branje",
+        lv = "Lasītājs Parrot tumšajā pilnekrāna režīmā bez traucējumiem"
+    )
+
+    data object ParrotScreenshot3Desc : StringRes(
+        en = "Parrot audiobook player with background notification and chapter controls",
+        sl = "Predvajalnik zvočnih knjig Parrot z obvestili v ozadju in kontrolami poglavij",
+        lv = "Audio grāmatu atskaņotājs Parrot ar fona paziņojumiem un nodaļu vadību"
+    )
+
+    data object ParrotScreenshot4Desc : StringRes(
+        en = "Parrot e-ink display mode on a specialized reader device",
+        sl = "Način za e-ink zaslon na specializirani bralni napravi",
+        lv = "E-ink displeja režīms uz specializētas lasīšanas ierīces"
+    )
+
+    data object ParrotScreenshot5Desc : StringRes(
+        en = "Parrot Read-Aloud sync with word-by-word text highlighting",
+        sl = "Sinhronizacija Read-Aloud z osvetljevanjem besede za besedo",
+        lv = "Read-Aloud sinhronizācija ar vārds pa vārdam izcelšanu"
+    )
+
     data object InfiniteCarouselArticleTitle : StringRes(
         en = "Building a Smooth, Infinite Carousel in Kobweb",
         sl = "Gradnja gladkega, neskončnega vrtiljaka v Kobwebu",

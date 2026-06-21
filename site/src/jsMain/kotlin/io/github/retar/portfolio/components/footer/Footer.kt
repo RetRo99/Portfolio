@@ -7,6 +7,7 @@ import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.css.functions.clamp
+import com.varabyte.kobweb.compose.dom.ref
 import com.varabyte.kobweb.compose.ui.graphics.Color
 import com.varabyte.kobweb.compose.ui.modifiers.backgroundColor
 import com.varabyte.kobweb.compose.ui.modifiers.color
@@ -155,6 +156,7 @@ private fun FooterLinksRow() {
             path = LinkRes.External.GitHub,
             modifier = CaptionStyle.toModifier()
                 .color(FooterTextSecondary),
+            ref = ref { setAttribute("rel", "noopener noreferrer") },
         ) {
             SpanText(text = StringRes.Github.value)
         }
@@ -167,6 +169,7 @@ private fun FooterLinksRow() {
             path = LinkRes.External.LinkedIn,
             modifier = CaptionStyle.toModifier()
                 .color(FooterTextSecondary),
+            ref = ref { setAttribute("rel", "noopener noreferrer") },
         ) {
             SpanText(text = StringRes.LinkedIn.value)
         }
@@ -179,6 +182,7 @@ private fun FooterLinksRow() {
             path = LinkRes.External.Email,
             modifier = CaptionStyle.toModifier()
                 .color(FooterTextSecondary),
+            ref = ref { setAttribute("rel", "noopener noreferrer") },
         ) {
             SpanText(text = StringRes.EmailAddress.value)
         }

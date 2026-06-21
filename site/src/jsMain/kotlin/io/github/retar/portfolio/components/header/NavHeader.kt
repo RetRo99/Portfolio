@@ -272,6 +272,7 @@ private fun HeaderSocialIcons() {
         Link(
             path = LinkRes.External.GitHub,
             modifier = Modifier.textDecorationLine(TextDecorationLine.None),
+            ref = ref { setAttribute("rel", "noopener noreferrer") },
         ) {
             FaGithub(
                 modifier = iconModifier,
@@ -281,6 +282,7 @@ private fun HeaderSocialIcons() {
         Link(
             path = LinkRes.External.LinkedIn,
             modifier = Modifier.textDecorationLine(TextDecorationLine.None),
+            ref = ref { setAttribute("rel", "noopener noreferrer") },
         ) {
             FaLinkedin(
                 modifier = iconModifier,
@@ -290,6 +292,7 @@ private fun HeaderSocialIcons() {
         Link(
             path = "mailto:rok.retar@gmail.com",
             modifier = Modifier.textDecorationLine(TextDecorationLine.None),
+            ref = ref { setAttribute("rel", "noopener noreferrer") },
         ) {
             FaEnvelope(
                 modifier = iconModifier,

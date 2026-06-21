@@ -292,8 +292,9 @@ private fun ParrotShowcaseSection() {
                     .margin(top = 16.px, bottom = 16.px),
             ) { projectImage ->
                 ProjectCard(
-                    image = projectImage,
+                    image = projectImage.image,
                     route = LinkRes.Internal.Parrot,
+                    contentDescription = projectImage.description.value,
                 )
             }
 

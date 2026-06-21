@@ -19,28 +19,23 @@ version = "1.0-SNAPSHOT"
 kobweb {
     app {
         index {
-            description.set("Personal portfolio of Rok Retar, showcasing projects, experience, and skills.")
+            description.set("Rok Retar — mobile engineer specializing in Android and Kotlin Multiplatform. KMP migrations, native architecture, and the Parrot e-reader case study.")
             faviconPath.set("/favicon.svg")
             head.add {
                 title("Rok Retar — Mobile Engineer (Android & Kotlin Multiplatform)")
-                meta(name = "description", content = "Rok Retar — mobile engineer specializing in Android and Kotlin Multiplatform. KMP migrations, native architecture, and the Parrot e-reader case study.")
                 meta(name = "author", content = "Rok Retar")
                 meta(name = "robots", content = "index, follow")
                 link(rel = "canonical", href = "https://www.retar.app/")
-                unsafe {
-                    +"""
-                    <meta property="og:site_name" content="Rok Retar" />
-                    <meta property="og:locale" content="en_US" />
-                    <meta property="og:type" content="website" />
-                    <meta property="og:title" content="Rok Retar — Mobile Engineer (Android &amp; Kotlin Multiplatform)" />
-                    <meta property="og:description" content="Android and Kotlin Multiplatform engineer. KMP migrations taken to production. Built natively in Kotlin." />
-                    <meta property="og:url" content="https://www.retar.app/" />
-                    <meta property="og:image" content="https://www.retar.app/og-image.png" />
-                    <meta property="og:image:width" content="1200" />
-                    <meta property="og:image:height" content="630" />
-                    <meta property="og:image:alt" content="Rok Retar — Mobile Engineer (Android &amp; Kotlin Multiplatform)" />
-                    """.trimIndent()
-                }
+                meta(content = "Rok Retar") { attributes["property"] = "og:site_name" }
+                meta(content = "en_US") { attributes["property"] = "og:locale" }
+                meta(content = "website") { attributes["property"] = "og:type" }
+                meta(content = "Rok Retar — Mobile Engineer (Android & Kotlin Multiplatform)") { attributes["property"] = "og:title" }
+                meta(content = "Android and Kotlin Multiplatform engineer. KMP migrations taken to production. Built natively in Kotlin.") { attributes["property"] = "og:description" }
+                meta(content = "https://www.retar.app/") { attributes["property"] = "og:url" }
+                meta(content = "https://www.retar.app/og-image.png") { attributes["property"] = "og:image" }
+                meta(content = "1200") { attributes["property"] = "og:image:width" }
+                meta(content = "630") { attributes["property"] = "og:image:height" }
+                meta(content = "Rok Retar — Mobile Engineer (Android & Kotlin Multiplatform)") { attributes["property"] = "og:image:alt" }
                 meta(name = "twitter:card", content = "summary_large_image")
                 meta(name = "twitter:title", content = "Rok Retar — Mobile Engineer (Android & Kotlin Multiplatform)")
                 meta(name = "twitter:description", content = "Android and Kotlin Multiplatform engineer. KMP migrations taken to production. Built natively in Kotlin.")
@@ -71,6 +66,25 @@ kobweb {
                         """.trimIndent()
                     }
                 }
+                script(type = "application/ld+json") {
+                    unsafe {
+                        +"""
+                        {
+                          "@context": "https://schema.org",
+                          "@type": "WebSite",
+                          "name": "Rok Retar",
+                          "url": "https://www.retar.app",
+                          "description": "Android and Kotlin Multiplatform engineer specializing in KMP migrations taken to production iOS.",
+                          "author": {
+                            "@type": "Person",
+                            "name": "Rok Retar",
+                            "url": "https://www.retar.app"
+                          }
+                        }
+                        """.trimIndent()
+                    }
+                }
+                link(rel = "manifest", href = "/site.webmanifest")
                 link(rel = "preconnect", href = "https://fonts.googleapis.com")
                 link(
                     rel = "preconnect",

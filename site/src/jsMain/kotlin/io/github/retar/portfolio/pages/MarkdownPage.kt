@@ -36,24 +36,50 @@ fun MarkdownPage(content: @Composable () -> Unit) {
         jsonLd = """
             {
               "@context": "https://schema.org",
-              "@type": "BlogPosting",
-              "headline": ${jsonString(title)},
-              "description": ${jsonString(description)},
-              ${if (date != null) "\"datePublished\": ${jsonString(date)}," else ""}
-              "author": {
-                "@type": "Person",
-                "name": "Rok Retar",
-                "url": "https://www.retar.app"
-              },
-              "publisher": {
-                "@type": "Person",
-                "name": "Rok Retar",
-                "url": "https://www.retar.app"
-              },
-              "mainEntityOfPage": {
-                "@type": "WebPage",
-                "@id": "https://www.retar.app$path"
-              }
+              "@graph": [
+                {
+                  "@type": "BlogPosting",
+                  "headline": ${jsonString(title)},
+                  "description": ${jsonString(description)},
+                  ${if (date != null) "\"datePublished\": ${jsonString(date)}," else ""}
+                  "author": {
+                    "@type": "Person",
+                    "name": "Rok Retar",
+                    "url": "https://www.retar.app"
+                  },
+                  "publisher": {
+                    "@type": "Person",
+                    "name": "Rok Retar",
+                    "url": "https://www.retar.app"
+                  },
+                  "mainEntityOfPage": {
+                    "@type": "WebPage",
+                    "@id": "https://www.retar.app$path"
+                  }
+                },
+                {
+                  "@type": "BreadcrumbList",
+                  "itemListElement": [
+                    {
+                      "@type": "ListItem",
+                      "position": 1,
+                      "name": "Home",
+                      "item": "https://www.retar.app/"
+                    },
+                    {
+                      "@type": "ListItem",
+                      "position": 2,
+                      "name": "Engineering Notes",
+                      "item": "https://www.retar.app/#notes"
+                    },
+                    {
+                      "@type": "ListItem",
+                      "position": 3,
+                      "name": ${jsonString(title)}
+                    }
+                  ]
+                }
+              ]
             }
         """.trimIndent(),
     )
