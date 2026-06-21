@@ -222,18 +222,23 @@ fun NavHeader() {
                 }
             }
 
-            // Right side: Social icons (desktop)
+            // Right side: Nav items + Social icons (desktop)
             Row(
                 modifier = Modifier
-                    .gap(16.px)
-                    .displayIfAtLeast(Breakpoint.MD),
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically,
+                    .gap(24.px)
+                    .displayIfAtLeast(Breakpoint.MD)
+                    .alignItems(AlignItems.Center),
             ) {
-                HeaderSocialIcons()
-                Row(modifier = Modifier.gap(12.px)) {
-                    ThemeToggle()
-                    LanguageSwitcher()
+                DesktopNavItems()
+                Row(
+                    modifier = Modifier.gap(16.px),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    HeaderSocialIcons()
+                    Row(modifier = Modifier.gap(12.px)) {
+                        ThemeToggle()
+                        LanguageSwitcher()
+                    }
                 }
             }
 
@@ -319,6 +324,50 @@ private fun HeaderSocialIcons() {
             )
         }
     }
+}
+
+@Composable
+private fun DesktopNavItems() {
+    Row(
+        modifier = Modifier.gap(20.px),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        NavItem.entries.forEach { item ->
+            DesktopNavItem(item)
+        }
+    }
+}
+
+@Composable
+private fun DesktopNavItem(item: NavItem) {
+    val router = rememberPageContext().router
+    val activeSection = LocalActiveSection.current
+    val setActiveSection = LocalSetActiveSection.current
+    val isActive = item.section == activeSection
+    val palette = sitePalette()
+    val coroutineScope = rememberCoroutineScope()
+
+    SpanText(
+        text = item.label.value,
+        modifier = DescriptorStyle
+            .toModifier()
+            .userSelect(UserSelect.None)
+            .cursor(Cursor.Pointer)
+            .color(if (isActive) palette.accent else palette.textSecondary)
+            .transition(Transition.all(duration = 150.ms))
+            .onClick {
+                val section = item.section
+                if (section != null) {
+                    router.tryRoutingTo(item.route + section.path)
+                } else {
+                    router.navigateTo(item.route)
+                }
+                coroutineScope.launch {
+                    delay(200)
+                    setActiveSection(item.section)
+                }
+            },
+    )
 }
 
 @Composable
