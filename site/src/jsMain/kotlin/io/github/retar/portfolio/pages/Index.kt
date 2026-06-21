@@ -1,12 +1,21 @@
 package io.github.retar.portfolio.pages
 
 import androidx.compose.runtime.Composable
+import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
+import com.varabyte.kobweb.compose.ui.graphics.Colors
+import com.varabyte.kobweb.compose.ui.modifiers.backgroundColor
+import com.varabyte.kobweb.compose.ui.modifiers.borderRadius
+import com.varabyte.kobweb.compose.ui.modifiers.fontSize
+import com.varabyte.kobweb.compose.ui.modifiers.fontFamily
+import com.varabyte.kobweb.compose.ui.modifiers.color
+import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.css.CSSLengthNumericValue
 import com.varabyte.kobweb.compose.css.functions.clamp
+import com.varabyte.kobweb.compose.css.ObjectFit
 import com.varabyte.kobweb.compose.ui.modifiers.alignItems
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
@@ -62,6 +71,7 @@ import org.jetbrains.compose.web.css.ch
 import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.fr
 import org.jetbrains.compose.web.css.px
+import org.jetbrains.compose.web.css.rgba
 import org.jetbrains.compose.web.css.vw
 
 @Page
@@ -265,45 +275,74 @@ private fun ParrotShowcaseSection() {
         section = PortfolioSectionId.Projects,
         modifier = Modifier.fillMaxWidth(),
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .gap(24.px)
-                .sectionPadding(),
+        Box(
+            modifier = Modifier.fillMaxWidth(),
         ) {
-            SpanText(
-                text = StringRes.ParrotEyebrow.value,
-                modifier = MonoEyebrowStyle.toModifier(),
-            )
-            H2Text(
-                text = StringRes.ParrotHeading.value,
-                modifier = H2Style.toModifier(),
-            )
-            SpanText(
-                text = StringRes.ParrotSubhead.value,
-                modifier = SubtitleStyle.toModifier()
-                    .measureMax(70),
-            )
-
-            InfiniteCarousel(
-                items = ProjectsRes.SelectedProjects,
+            Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .margin(top = 16.px, bottom = 16.px),
-            ) { projectImage ->
-                ProjectCard(
-                    image = projectImage.image,
-                    route = LinkRes.Internal.Parrot,
-                    contentDescription = projectImage.description.value,
+                    .gap(24.px)
+                    .sectionPadding(),
+            ) {
+                SpanText(
+                    text = StringRes.ParrotEyebrow.value,
+                    modifier = MonoEyebrowStyle.toModifier(),
                 )
+                H2Text(
+                    text = StringRes.ParrotHeading.value,
+                    modifier = H2Style.toModifier(),
+                )
+                SpanText(
+                    text = StringRes.ParrotSubhead.value,
+                    modifier = SubtitleStyle.toModifier()
+                        .measureMax(70),
+                )
+
+                InfiniteCarousel(
+                    items = ProjectsRes.SelectedProjects,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .margin(top = 16.px, bottom = 16.px),
+                ) { projectImage ->
+                    val index = ProjectsRes.SelectedProjects.indexOf(projectImage) + 1
+                    val total = ProjectsRes.SelectedProjects.size
+                    ProjectCard(
+                        image = projectImage.image,
+                        route = LinkRes.Internal.Parrot,
+                        contentDescription = projectImage.description.value,
+                        overlay = {
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .padding(8.px),
+                                contentAlignment = Alignment.BottomEnd,
+                            ) {
+                                Box(
+                                    modifier = Modifier
+                                        .backgroundColor(rgba(0, 0, 0, 0.6))
+                                        .borderRadius(4.px)
+                                        .padding(leftRight = 8.px, topBottom = 4.px),
+                                ) {
+                                    SpanText(
+                                        text = "$index / $total",
+                                        modifier = Modifier
+                                            .fontSize(12.px)
+                                            .color(Colors.White)
+                                            .fontFamily("JetBrains Mono", "monospace"),
+                                    )
+                                }
+                            }
+                        },
+                    )
+                }
+
+                FeatureGrid(
+                    items = parrotFeatures(),
+                    modifier = Modifier.margin(top = 16.px),
+                )
+
+                ParrotCtaRow()
             }
-
-            FeatureGrid(
-                items = parrotFeatures(),
-                modifier = Modifier.margin(top = 16.px),
-            )
-
-            ParrotCtaRow()
         }
     }
 }

@@ -116,6 +116,7 @@ fun ProjectCard(
     route: String,
     modifier: Modifier = Modifier,
     contentDescription: String? = null,
+    overlay: (@Composable () -> Unit)? = null,
 ) {
     Link(
         path = route,
@@ -125,6 +126,7 @@ fun ProjectCard(
             image = image,
             modifier = modifier,
             contentDescription = contentDescription,
+            overlay = overlay,
         )
     }
 }

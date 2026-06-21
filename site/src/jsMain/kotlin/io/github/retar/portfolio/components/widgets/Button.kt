@@ -1,13 +1,16 @@
 package io.github.retar.portfolio.components.widgets
 
 import androidx.compose.runtime.Composable
+import com.varabyte.kobweb.compose.css.AnimationIterationCount
 import com.varabyte.kobweb.compose.css.Cursor
 import com.varabyte.kobweb.compose.css.TextDecorationLine
 import com.varabyte.kobweb.compose.css.Transition
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
+import com.varabyte.kobweb.compose.ui.modifiers.animation
 import com.varabyte.kobweb.compose.ui.modifiers.border
 import com.varabyte.kobweb.compose.ui.modifiers.borderRadius
+import com.varabyte.kobweb.compose.ui.modifiers.boxShadow
 import com.varabyte.kobweb.compose.ui.modifiers.color
 import com.varabyte.kobweb.compose.ui.modifiers.cursor
 import com.varabyte.kobweb.compose.ui.modifiers.onClick
@@ -24,6 +27,8 @@ import com.varabyte.kobweb.silk.components.forms.ButtonVars
 import com.varabyte.kobweb.silk.components.navigation.Link
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.CssStyle
+import com.varabyte.kobweb.silk.style.animation.Keyframes
+import com.varabyte.kobweb.silk.style.animation.toAnimation
 import com.varabyte.kobweb.silk.style.base
 import com.varabyte.kobweb.silk.style.selectors.active
 import com.varabyte.kobweb.silk.style.selectors.hover
@@ -34,7 +39,9 @@ import io.github.retar.portfolio.utils.trackEvent
 import kotlinx.browser.window
 import org.jetbrains.compose.web.css.LineStyle
 import org.jetbrains.compose.web.css.ms
+import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
+import org.jetbrains.compose.web.css.rgba
 import org.jetbrains.compose.web.dom.Text
 import kotlin.js.json
 
@@ -96,6 +103,12 @@ fun DownloadButton(
             window.open(url, OpenLinkStrategy.IN_PLACE)
         },
         modifier = OutlineButtonStyle.toModifier()
+            .animation(
+                DownloadButtonPulseKeyframes.toAnimation(
+                    duration = 2000.ms,
+                    iterationCount = AnimationIterationCount.Infinite,
+                ),
+            )
             .then(modifier),
         size = ButtonSize.MD,
     ) {
@@ -141,6 +154,21 @@ fun TextLink(
             text = label,
             modifier = Modifier,
         )
+    }
+}
+
+val DownloadButtonPulseKeyframes = Keyframes {
+    from {
+        Modifier
+            .boxShadow(0.px, 0.px, 0.px, 0.px, rgba(245, 158, 11, 0.3))
+    }
+    50.percent {
+        Modifier
+            .boxShadow(0.px, 0.px, 0.px, 4.px, rgba(245, 158, 11, 0))
+    }
+    to {
+        Modifier
+            .boxShadow(0.px, 0.px, 0.px, 0.px, rgba(245, 158, 11, 0))
     }
 }
 

@@ -8,16 +8,24 @@ import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
+import com.varabyte.kobweb.compose.ui.graphics.Color
 import com.varabyte.kobweb.compose.ui.modifiers.alignItems
+import com.varabyte.kobweb.compose.ui.modifiers.backgroundColor
+import com.varabyte.kobweb.compose.ui.modifiers.border
 import com.varabyte.kobweb.compose.ui.modifiers.borderRadius
+import com.varabyte.kobweb.compose.ui.modifiers.color
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
+import com.varabyte.kobweb.compose.ui.modifiers.fontSize
+import com.varabyte.kobweb.compose.ui.modifiers.fontFamily
 import com.varabyte.kobweb.compose.ui.modifiers.gap
+import com.varabyte.kobweb.compose.ui.modifiers.height
 import com.varabyte.kobweb.compose.ui.modifiers.margin
 import com.varabyte.kobweb.compose.ui.modifiers.maxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.modifiers.scrollMargin
 import com.varabyte.kobweb.compose.ui.modifiers.size
+import com.varabyte.kobweb.compose.ui.modifiers.width
 import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.core.layout.Layout
 import com.varabyte.kobweb.silk.components.graphics.Image
@@ -42,10 +50,15 @@ import io.github.retar.portfolio.styles.H2Text
 import io.github.retar.portfolio.styles.H3Style
 import io.github.retar.portfolio.styles.H3Text
 import io.github.retar.portfolio.styles.LabelStyle
+import io.github.retar.portfolio.styles.MonoEyebrowStyle
 import io.github.retar.portfolio.styles.SubtitleStyle
+import io.github.retar.portfolio.styles.sitePalette
 import org.jetbrains.compose.web.css.AlignItems
+import org.jetbrains.compose.web.css.LineStyle
 import org.jetbrains.compose.web.css.ch
+import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
+import org.jetbrains.compose.web.css.vw
 
 @Page
 @Layout(".components.layouts.PageLayout")
@@ -146,10 +159,29 @@ private fun LatestReleaseSection() {
             .gap(24.px)
             .alignItems(AlignItems.Center),
     ) {
-        H2Text(
-            text = StringRes.ParrotDownloadSection.value,
-            modifier = H2Style.toModifier(),
-        )
+        Row(
+            modifier = Modifier.gap(12.px),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            H2Text(
+                text = StringRes.ParrotDownloadSection.value,
+                modifier = H2Style.toModifier(),
+            )
+            Box(
+                modifier = Modifier
+                    .backgroundColor(sitePalette().accent)
+                    .borderRadius(999.px)
+                    .padding(leftRight = 10.px, topBottom = 4.px),
+            ) {
+                SpanText(
+                    text = "Latest",
+                    modifier = Modifier
+                        .fontSize(12.px)
+                        .color(sitePalette().buttonText)
+                        .fontFamily("JetBrains Mono", "monospace"),
+                )
+            }
+        }
 
         DownloadButton(
             url = latestRelease.apkUrl,
@@ -200,6 +232,8 @@ private fun FeaturesSection() {
 
 @Composable
 private fun VersionHistorySection() {
+    val palette = sitePalette()
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -216,8 +250,42 @@ private fun VersionHistorySection() {
             modifier = H2Style.toModifier(),
         )
 
-        ParrotRes.releases.drop(1).forEach { release ->
-            ReleaseHistoryItem(release)
+        ParrotRes.releases.drop(1).forEachIndexed { index, release ->
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .gap(16.px),
+                verticalAlignment = Alignment.Top,
+            ) {
+                Column(
+                    modifier = Modifier.gap(0.px),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .size(12.px)
+                            .borderRadius(999.px)
+                            .backgroundColor(palette.accent),
+                    )
+                    if (index < ParrotRes.releases.size - 2) {
+                        Box(
+                            modifier = Modifier
+                                .width(2.px)
+                                .height(100.percent)
+                                .backgroundColor(palette.border),
+                        )
+                    }
+                }
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .gap(12.px)
+                        .alignItems(AlignItems.FlexStart)
+                        .margin(bottom = 32.px),
+                ) {
+                    ReleaseHistoryItem(release)
+                }
+            }
         }
     }
 }
