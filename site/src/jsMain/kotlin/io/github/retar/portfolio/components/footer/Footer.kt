@@ -156,7 +156,7 @@ private fun FooterLinksRow() {
             path = LinkRes.External.GitHub,
             modifier = CaptionStyle.toModifier()
                 .color(FooterTextSecondary),
-            ref = ref { setAttribute("rel", "noopener noreferrer") },
+            ref = ref { it.asDynamic().setAttribute("rel", "noopener noreferrer") },
         ) {
             SpanText(text = StringRes.Github.value)
         }
@@ -169,7 +169,7 @@ private fun FooterLinksRow() {
             path = LinkRes.External.LinkedIn,
             modifier = CaptionStyle.toModifier()
                 .color(FooterTextSecondary),
-            ref = ref { setAttribute("rel", "noopener noreferrer") },
+            ref = ref { it.asDynamic().setAttribute("rel", "noopener noreferrer") },
         ) {
             SpanText(text = StringRes.LinkedIn.value)
         }
@@ -182,7 +182,7 @@ private fun FooterLinksRow() {
             path = LinkRes.External.Email,
             modifier = CaptionStyle.toModifier()
                 .color(FooterTextSecondary),
-            ref = ref { setAttribute("rel", "noopener noreferrer") },
+            ref = ref { it.asDynamic().setAttribute("rel", "noopener noreferrer") },
         ) {
             SpanText(text = StringRes.EmailAddress.value)
         }
