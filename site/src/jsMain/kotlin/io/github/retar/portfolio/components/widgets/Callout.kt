@@ -26,7 +26,7 @@ val CalloutStyle = CssStyle {
             .fillMaxWidth()
             .borderLeft(3.px, LineStyle.Solid, palette.accent)
             .padding(leftRight = 24.px, topBottom = 20.px)
-            .boxShadow(-2.px, 0.px, 12.px, (-2).px, rgba(245, 158, 11, 0.15))
+            .boxShadow((-2).px, 0.px, 12.px, 0.px, rgba(245, 158, 11, 0.15))
     }
 }
 
