@@ -32,6 +32,8 @@ head.add {
                 meta(content = "1200") { attributes["property"] = "og:image:width" }
                 meta(content = "630") { attributes["property"] = "og:image:height" }
                 meta(content = "Rok Retar — Mobile Engineer (Android & Kotlin Multiplatform)") { attributes["property"] = "og:image:alt" }
+                link(rel = "me", href = "https://github.com/retro99")
+                link(rel = "me", href = "https://www.linkedin.com/in/rok-retar/")
                 script(type = "application/ld+json") {
                     unsafe {
                         +"""
@@ -40,9 +42,16 @@ head.add {
                           "@type": "Person",
                           "@id": "https://www.retar.app/#person",
                           "name": "Rok Retar",
+                          "givenName": "Rok",
+                          "familyName": "Retar",
                           "jobTitle": "Mobile Engineer",
                           "url": "https://www.retar.app",
                           "email": "mailto:rok.retar@gmail.com",
+                          "gender": "Male",
+                          "nationality": {
+                            "@type": "Country",
+                            "name": "Slovenia"
+                          },
                           "knowsAbout": [
                             "Android",
                             "Kotlin",
@@ -84,7 +93,7 @@ head.add {
                           "@context": "https://schema.org",
                           "@type": "ProfilePage",
                           "dateCreated": "2024-01-01T00:00:00Z",
-                          "dateModified": "2026-06-21T00:00:00Z",
+                          "dateModified": "2026-06-24T00:00:00Z",
                           "mainEntity": {
                             "@id": "https://www.retar.app/#person"
                           }

@@ -1,6 +1,6 @@
 # Rok Retar — Mobile Engineer
 
-> Rok Retar is a mobile engineer specializing in Android and Kotlin Multiplatform. This site showcases projects, engineering articles, and professional experience. The site itself is built natively in Kotlin with Kobweb.
+> Rok Retar is a Slovenian mobile engineer specializing in Android and Kotlin Multiplatform. He architected and executed a complete corporate migration transitioning production iOS systems to shared Kotlin. This site showcases projects, engineering articles, and professional experience. The site itself is built natively in Kotlin with Kobweb.
 
 ## Pages
 - [Home](https://www.retar.app/)
@@ -9,7 +9,7 @@
 - [Shipping SQLCipher inside a static Kotlin/Native framework](https://www.retar.app/blog/sqlcipher-static-kotlin-native-framework)
 
 ## About
-Rok Retar engineers Android and Kotlin Multiplatform systems, including migrating a company's iOS app to shared Kotlin. Specializations include KMP migrations, native architecture, Jetpack Compose, and Kobweb.
+Rok Retar is a mobile engineer based in Slovenia. He engineers Android and Kotlin Multiplatform systems, including migrating a company's iOS app to shared Kotlin. Specializations include KMP migrations, native architecture, Jetpack Compose, and Kobweb. He has shipped production iOS apps backed by shared Kotlin code — not prototypes, but live products in the field.
 
 ## Contact
 - Email: rok.retar@gmail.com
