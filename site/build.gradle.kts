@@ -21,7 +21,12 @@ kobweb {
         index {
             description.set("Rok Retar — mobile engineer specializing in Android and Kotlin Multiplatform. KMP migrations, native architecture, and the Parrot e-reader case study.")
             faviconPath.set("/favicon.svg")
-head.add {
+            head.add {
+                link(rel = "icon", href = "/favicon.ico", type = "image/x-icon")
+                link(rel = "icon", href = "/favicon-32.png", type = "image/png", sizes = "32x32")
+                link(rel = "icon", href = "/favicon-192.png", type = "image/png", sizes = "192x192")
+                link(rel = "icon", href = "/favicon-512.png", type = "image/png", sizes = "512x512")
+                link(rel = "apple-touch-icon", href = "/apple-touch-icon.png")
             unsafe {
                     +"""<meta http-equiv="Content-Security-Policy" content="frame-ancestors 'self';"/>"""
                     +"""<style>::selection { background-color: rgb(245, 158, 11); color: rgb(24, 24, 27); }</style>"""
