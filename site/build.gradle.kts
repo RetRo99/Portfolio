@@ -23,9 +23,11 @@ kobweb {
             faviconPath.set("/favicon.svg")
             head.add {
                 link(rel = "icon", href = "/favicon.ico", type = "image/x-icon")
-                link(rel = "icon", href = "/favicon-32.png", type = "image/png", sizes = "32x32")
-                link(rel = "icon", href = "/favicon-192.png", type = "image/png", sizes = "192x192")
-                link(rel = "icon", href = "/favicon-512.png", type = "image/png", sizes = "512x512")
+                unsafe {
+                    +"""<link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32"/>"""
+                    +"""<link rel="icon" href="/favicon-192.png" type="image/png" sizes="192x192"/>"""
+                    +"""<link rel="icon" href="/favicon-512.png" type="image/png" sizes="512x512"/>"""
+                }
                 link(rel = "apple-touch-icon", href = "/apple-touch-icon.png")
             unsafe {
                     +"""<meta http-equiv="Content-Security-Policy" content="frame-ancestors 'self';"/>"""
