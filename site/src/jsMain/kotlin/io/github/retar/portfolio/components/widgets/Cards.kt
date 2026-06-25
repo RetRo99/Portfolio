@@ -11,6 +11,7 @@ import com.varabyte.kobweb.compose.css.Overflow
 import com.varabyte.kobweb.compose.css.PointerEvents
 import com.varabyte.kobweb.compose.css.TextDecorationLine
 import com.varabyte.kobweb.compose.css.Transition
+import com.varabyte.kobweb.compose.dom.ref
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
@@ -125,6 +126,11 @@ fun ProjectCard(
         modifier = Modifier
             .textDecorationLine(TextDecorationLine.None)
             .onClick { trackEvent("project-card-click", json("route" to route)) },
+        ref = ref { element ->
+            contentDescription?.let { desc ->
+                element.asDynamic().setAttribute("aria-label", desc)
+            }
+        },
     ) {
         ImageCard(
             image = image,
@@ -148,6 +154,7 @@ fun ArticleCard(
         modifier = Modifier
             .textDecorationLine(TextDecorationLine.None)
             .onClick { trackEvent("article-open", json("route" to route)) },
+        ref = ref { it.asDynamic().setAttribute("aria-label", title) },
     ) {
         ImageCard(
             image = image,

@@ -61,6 +61,8 @@ import io.github.retar.portfolio.styles.H1Style
 import io.github.retar.portfolio.styles.H1Text
 import io.github.retar.portfolio.styles.H2Style
 import io.github.retar.portfolio.styles.H2Text
+import io.github.retar.portfolio.styles.H3Style
+import io.github.retar.portfolio.styles.H3Text
 import io.github.retar.portfolio.styles.MonoAccentStyle
 import io.github.retar.portfolio.styles.MonoEyebrowStyle
 import io.github.retar.portfolio.styles.SubtitleStyle
@@ -91,6 +93,7 @@ fun IndexPage() {
     ) {
         HeroSection()
         PhilosophySection()
+        ExperienceSection()
         ParrotShowcaseSection()
         ArticlesSection()
     }
@@ -268,6 +271,50 @@ private fun PrinciplesList() {
                         .weight(1f),
                 )
             }
+        }
+    }
+}
+
+@Composable
+private fun ExperienceSection() {
+    PortfolioSection(
+        section = PortfolioSectionId.Philosophy,
+        modifier = Modifier.fillMaxWidth(),
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .gap(24.px)
+                .sectionPadding(),
+        ) {
+            SpanText(
+                text = StringRes.ExperienceEyebrow.value,
+                modifier = MonoEyebrowStyle.toModifier(),
+            )
+
+            H2Text(
+                text = StringRes.ExperienceStackTitle.value,
+                modifier = H2Style.toModifier()
+                    .fillMaxWidth(),
+            )
+
+            SpanText(
+                text = StringRes.ExperienceStackBody.value,
+                modifier = BodyStyle.toModifier()
+                    .measureMax(75),
+            )
+
+            H3Text(
+                text = StringRes.ExperienceMigrationTitle.value,
+                modifier = H3Style.toModifier()
+                    .fillMaxWidth(),
+            )
+
+            SpanText(
+                text = StringRes.ExperienceMigrationBody.value,
+                modifier = BodyStyle.toModifier()
+                    .measureMax(75),
+            )
         }
     }
 }

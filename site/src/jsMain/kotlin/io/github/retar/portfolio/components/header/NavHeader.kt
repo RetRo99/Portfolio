@@ -223,6 +223,8 @@ fun NavHeader() {
                         .objectFit(ObjectFit.Cover)
                         .draggable(false)
                         .userSelect(UserSelect.None),
+                    width = 40,
+                    height = 40,
                 )
                 Column(
                     modifier = Modifier.gap(0.px),
@@ -315,7 +317,10 @@ private fun HeaderSocialIcons() {
         Link(
             path = LinkRes.External.GitHub,
             modifier = Modifier.textDecorationLine(TextDecorationLine.None),
-            ref = ref { it.asDynamic().setAttribute("rel", "noopener noreferrer") },
+            ref = ref {
+                it.asDynamic().setAttribute("rel", "noopener noreferrer")
+                it.asDynamic().setAttribute("aria-label", "Rok Retar on GitHub")
+            },
         ) {
             FaGithub(
                 modifier = iconModifier
@@ -326,7 +331,10 @@ private fun HeaderSocialIcons() {
         Link(
             path = LinkRes.External.LinkedIn,
             modifier = Modifier.textDecorationLine(TextDecorationLine.None),
-            ref = ref { it.asDynamic().setAttribute("rel", "noopener noreferrer") },
+            ref = ref {
+                it.asDynamic().setAttribute("rel", "noopener noreferrer")
+                it.asDynamic().setAttribute("aria-label", "Rok Retar on LinkedIn")
+            },
         ) {
             FaLinkedin(
                 modifier = iconModifier
@@ -337,7 +345,10 @@ private fun HeaderSocialIcons() {
         Link(
             path = "mailto:rok.retar@gmail.com",
             modifier = Modifier.textDecorationLine(TextDecorationLine.None),
-            ref = ref { it.asDynamic().setAttribute("rel", "noopener noreferrer") },
+            ref = ref {
+                it.asDynamic().setAttribute("rel", "noopener noreferrer")
+                it.asDynamic().setAttribute("aria-label", "Email Rok Retar")
+            },
         ) {
             FaEnvelope(
                 modifier = iconModifier

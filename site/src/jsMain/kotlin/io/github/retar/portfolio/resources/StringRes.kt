@@ -565,4 +565,40 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
         sl = "rok.retar@gmail.com",
         lv = "rok.retar@gmail.com"
     )
+
+    data object ExperienceEyebrow : StringRes(
+        en = "// experience",
+        sl = "// izkušnje",
+        lv = "// pieredze"
+    )
+
+    data object ExperienceStackTitle : StringRes(
+        en = "Technology stack and specialization",
+        sl = "Tehnološki sklop in specializacija",
+        lv = "Tehnoloģiju steks un specializācija"
+    )
+
+    data object ExperienceStackBody : StringRes(
+        en = "I'm a mobile engineer based in Slovenia. Android is where I started, and Kotlin Multiplatform is where I ended up. The stack I reach for daily: Kotlin, Jetpack Compose, Compose Multiplatform, Kobweb, SQLDelight, SQLCipher, Ktor, Koin, and Decompose.\n\nThe architecture I build is multi-module with strict dependency rules. Domain stays pure Kotlin. Data layers handle persistence and networking. UI stays native where the platform earns it. For Swift interop I use SKIE. For databases, SQLDelight with SQLCipher. Ktor handles networking, Koin handles DI, and Decompose handles navigation and lifecycle. This site is built in Kotlin with Kobweb and Compose for Web. If you're reading this, the proof is already loading.",
+        sl = "Sem mobilni inženir s sedežem v Sloveniji. Android je moj izhodiščni svet, Kotlin Multiplatform pa tja, kamor sem pripeljal. Tehnologije, ki jih uporabljam vsak dan: Kotlin, Jetpack Compose, Compose Multiplatform, Kobweb, SQLDelight, SQLCipher, Ktor, Koin in Decompose.\n\nArhitektura, ki jo gradim, je multimodulska s strogimi pravili odvisnosti. Domena ostane čisti Kotlin. Podatkovne plasti obravnavajo vztrajnost in omrežje. UI ostane izvoren tam, kjer platforma to zasluži. Za Swift interop uporabljam SKIE. Za podatkovne baze SQLDelight s SQLCipher. Ktor obravnava omrežje, Koin injiciranje odvisnosti, Decompose pa navigacijo in življenjski cikel. Ta stran je zgrajena v Kotlinu s Kobweb in Compose for Web. Če to bereš, se dokaz že nalaga.",
+        lv = "Es esmu mobilo lietotņu inženieris no Slovēnijas. Android ir mana sākumu vieta, un Kotlin Multiplatform ir vieta, kur es nonācu. Tehnoloģijas, ko lietoju ikdienā: Kotlin, Jetpack Compose, Compose Multiplatform, Kobweb, SQLDelight, SQLCipher, Ktor, Koin un Decompose.\n\nArhitektūra, ko es veidoju, ir multimoduļu ar stingrām atkarību noteikumiem. Domēns paliek tīrs Kotlin. Datu slāņi apstrādā noturību un tīklošanu. UI paliek vietējs tur, kur platforma to pelna. Swift interopam es izmantoju SKIE. Datubāzēm SQLDelight ar SQLCipher. Ktor apstrādā tīklu, Koin atkarību injicēšanu, bet Decompose navigāciju un dzīves ciklu. Šī vietne ir būvēta Kotlinā ar Kobweb un Compose for Web. Ja tu to lasi, pierādījums jau ielādējas."
+    )
+
+    data object ExperienceMigrationTitle : StringRes(
+        en = "Production KMP migration",
+        sl = "Produkcijska KMP selitev",
+        lv = "Ražošanas KMP migrācija"
+    )
+
+    data object ExperienceMigrationBody : StringRes(
+        en = "The headline work: migrating production iOS to shared Kotlin. I architected the whole thing. Shared business logic, data layers with SQLCipher encryption, domain models. All written once in Kotlin, compiled to a static Kotlin/Native framework. The iOS team plugged it in without adding a single linker flag. Android and iOS now run on one Kotlin codebase. In production. Shipping to real users.\n\nI've also shipped production apps in three very different domains. An AI platform with real-time chat, timelines, and push notifications. A gaming app with NFC, biometric auth, cashless payments, and whitelabel multi-app deployment. And Parrot, a cross-platform EPUB reader and audiobook player with Read-Aloud sync, e-ink support, and reading analytics. Each one pushed KMP in a different direction. Shared networking and database layers in one. Full shared UI with Compose Multiplatform in another.",
+        sl = "Glavno delo: selitev produkcijskega iOS na skupni Kotlin. Celoto sem arhitektiral. Skupna poslovna logika, podatkovne plasti s SQLCipher šifriranjem, domenski modeli. Vsi napisani enkrat v Kotlinu, prevedeni v statični Kotlin/Native okvir. Ekipa iOS ga je vstavila brez dodajanja enega samega linker flag-a. Android in iOS zdaj tečeta na eni Kotlin koda bazi. V produkciji. Odposlano realnim uporabnikom.\n\nPrav tako sem odposlal produkcijske aplikacije v treh zelo različnih domenah. AI platformo z realno-časovnim klepetom, časovnicami in push obvestili. Igralniško aplikacijo z NFC, biometrično avtentikacijo, brezgotovinskimi plačili in whitelabel več-app namestitvijo. In Parrot, bralnik EPUB in predvajalnik zvočnih knjig z Read-Aloud sinhronizacijo, e-ink podporo in bralno analitiko. Vsak projekt je potisnil KMP v drugo smer. Skupne omrežne in podatkovne plasti v enem. Poln skupni UI z Compose Multiplatform v drugem.",
+        lv = "Galvenais darbs: ražošanas iOS migrācija uz kopīgu Kotlin. Es arhitektēju visu. Kopīga biznesa loģika, datu slāņi ar SQLCipher šifrēšanu, domēna modeļi. Visi uzrakstīti vienreiz Kotlinā, kompilēti statiskā Kotlin/Native ietvarā. iOS komanda to pievienoja, nepievienojot nevienu linker karogu. Android un iOS tagad darbojas uz vienas Kotlin kodbāzes. Ražošanā. Nosūtīts reāliem lietotājiem.\n\nEsmu arī nosūtījis ražošanas lietotnes trīs diezgan atšķirīgos domēnos. AI platformu ar reāllaika čatu, laika līnijām un push paziņojumiem. Spēļu lietotni ar NFC, biometrisko autentifikāciju, bezskaidras naudas maksājumiem un whitelabel daudzlietotņu izvietošanu. Un Parrot, EPUB lasītāju un audio grāmatu atskaņotāju ar Read-Aloud sinhronizāciju, e-ink atbalstu un lasīšanas analītiku. Katrs projekts pavirzīja KMP citā virzienā. Kopīgus tīkla un datu slāņus vienā. Pilnu kopīgu UI ar Compose Multiplatform citā."
+    )
+
+    data object ExperienceContactBody : StringRes(
+        en = "I'm open to senior mobile engineering roles, KMP migration projects, and Android architecture consulting. Based in Slovenia, available for remote work across the EU. Email me at rok.retar@gmail.com. Full-time role, migration assessment, or just a technical conversation about Kotlin Multiplatform. All welcome.",
+        sl = "Odprt sem za višje mobilno-inženirske vloge, projekte selitve KMP in svetovanje o arhitekturi Android. S sedežem v Sloveniji, na voljo za delo na daljavo po EU. Piši mi na rok.retar@gmail.com. Polna zaposlitev, ocena selitve ali samo tehnični pogovor o Kotlin Multiplatform. Vse dobrodošlo.",
+        lv = "Esmu atvērts seniora mobilo lietotņu inženiera lomām, KMP migrācijas projektiem un Android arhitektūras konsultācijām. Bāzēts Slovēnijā, pieejams attālinātam darbam visā ES. Raksti man uz rok.retar@gmail.com. Pilnvietas amats, migrācijas novērtējums vai vienkārši tehniska saruna par Kotlin Multiplatform. Viss laipni gaidīts."
+    )
 }

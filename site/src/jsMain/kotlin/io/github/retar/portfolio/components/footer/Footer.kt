@@ -115,7 +115,7 @@ fun Footer() {
                 )
 
                 SpanText(
-                    text = StringRes.ContactBody.value,
+                    text = StringRes.ExperienceContactBody.value,
                     modifier = BodyStyle.toModifier()
                         .color(FooterTextSecondary)
                         .maxWidth(52.ch),

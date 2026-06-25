@@ -87,6 +87,14 @@ kobweb {
                           "description": "Android and Kotlin Multiplatform engineer specializing in KMP migrations taken to production iOS.",
                           "author": {
                             "@id": "https://www.retar.app/#person"
+                          },
+                          "potentialAction": {
+                            "@type": "SearchAction",
+                            "target": {
+                              "@type": "EntryPoint",
+                              "urlTemplate": "https://www.retar.app/?q={search_term_string}"
+                            },
+                            "query-input": "required name=search_term_string"
                           }
                         }
                         """.trimIndent()
