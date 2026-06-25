@@ -20,7 +20,6 @@ kobweb {
     app {
         index {
             description.set("Rok Retar — mobile engineer specializing in Android and Kotlin Multiplatform. KMP migrations, native architecture, and the Parrot e-reader case study.")
-            faviconPath.set("/favicon.svg")
             head.add {
                 link(rel = "icon", href = "/favicon.ico", type = "image/x-icon")
                 unsafe {
