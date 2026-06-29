@@ -386,6 +386,18 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
         lv = "Read-Aloud sinhronizācija ar vārds pa vārdam izcelšanu"
     )
 
+    data object AppsFlyerArticleTitle : StringRes(
+        en = "Wrapping the AppsFlyer SDK into a Kotlin Multiplatform library",
+        sl = "Wrapping the AppsFlyer SDK into a Kotlin Multiplatform library",
+        lv = "Wrapping the AppsFlyer SDK into a Kotlin Multiplatform library"
+    )
+
+    data object AppsFlyerArticleDesc : StringRes(
+        en = "A coroutine-first, expect/actual wrapper around the AppsFlyer SDKs — one Kotlin API, two native delegates, zero callbacks.",
+        sl = "A coroutine-first, expect/actual wrapper around the AppsFlyer SDKs — one Kotlin API, two native delegates, zero callbacks.",
+        lv = "A coroutine-first, expect/actual wrapper around the AppsFlyer SDKs — one Kotlin API, two native delegates, zero callbacks."
+    )
+
     data object InfiniteCarouselArticleTitle : StringRes(
         en = "Building a Smooth, Infinite Carousel in Kobweb",
         sl = "Izdelava gladkega, neskončnega vrtiljaka v Kobwebu",

@@ -9,6 +9,7 @@ object LinkRes {
     }
 
     object Internal {
+        const val AppsFlyerArticle = "/blog/appsflyer-kmp-wrapper"
         const val InfiniteCarouselArticle = "/blog/infinite-carousel"
         const val SQLCipherArticle = "/blog/sqlcipher-static-kotlin-native-framework"
         const val Parrot = "/parrot"

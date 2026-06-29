@@ -9,6 +9,7 @@ enum class ImageRes(
     Bardy2("/bardy/Bardy2.avif"),
     Bardy3("/bardy/Bardy3.avif"),
 
+    AppsFlyerArticle("/articles/appsflyer_kmp.jpeg", 1024, 565),
     InfiniteCarouselArticle("/articles/infinite_carousel.jpeg", 1024, 565),
     SQLCipherArticle("/articles/sqlcipher_kotlin_native.jpeg", 1024, 559),
 

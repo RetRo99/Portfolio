@@ -456,6 +456,12 @@ private fun ArticlesSection() {
                     .margin(top = 16.px),
             ) {
                 ArticleCard(
+                    title = StringRes.AppsFlyerArticleTitle.value,
+                    description = StringRes.AppsFlyerArticleDesc.value,
+                    route = LinkRes.Internal.AppsFlyerArticle,
+                    image = ImageRes.AppsFlyerArticle,
+                )
+                ArticleCard(
                     title = StringRes.InfiniteCarouselArticleTitle.value,
                     description = StringRes.InfiniteCarouselArticleDesc.value,
                     route = LinkRes.Internal.InfiniteCarouselArticle,
