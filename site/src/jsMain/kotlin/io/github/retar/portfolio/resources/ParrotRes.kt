@@ -12,6 +12,31 @@ data class ParrotRelease(
 object ParrotRes {
     val releases = listOf(
         ParrotRelease(
+            version = "0.5.0",
+            date = "2026-07-02",
+            apkUrl = "/parrot/parrot-0.5.0.apk",
+            features = listOf(
+                "Added Audiobookshelf server support with login, library browsing, downloads, and progress sync",
+                "Added a dedicated audiobook player with immersive controls",
+                "Added reader bookmarks with reordering, renaming, relative timestamps, and duplicate prevention",
+                "Added an audiobook quick filter and a clear quick filters action"
+            ),
+            bugFixes = listOf(
+                "Fixed Audiobookshelf ebook and audiobook detection edge cases",
+                "Fixed Audiobookshelf chapter parsing and progress update compatibility",
+                "Fixed authenticated Storyteller cover loading",
+                "Fixed Storyteller token expiry conversion and mixed boolean/integer featured field parsing",
+                "Fixed status bar backdrop and reader content inset issues across screens"
+            ),
+            improvements = listOf(
+                "Redesigned the book detail, welcome, login, and server management screens",
+                "Redesigned the table of contents sheet with expandable hierarchy, search, and chapter navigation",
+                "Decluttered the reader screen with an overflow menu and collapsible read-aloud controls",
+                "Consolidated book list filtering into a compact toolbar and dedicated server type filter",
+                "Improved iOS playback, Now Playing integration, EPUB metadata extraction, and reader re-entry behavior"
+            )
+        ),
+        ParrotRelease(
             version = "0.4.5",
             date = "2026-06-18",
             apkUrl = "/parrot/parrot-0.4.5.apk",
@@ -47,7 +72,7 @@ object ParrotRes {
                 "Removed the extra user lookup after OAuth login that could fail with a 401"
             ),
             improvements = listOf(
-                "Added sanitized analytics diagnostics for OAuth login failures"
+                "Added sanitized diagnostics for OAuth login failures"
             )
         ),
         ParrotRelease(
