@@ -58,7 +58,7 @@ import org.jetbrains.compose.web.dom.Ol
 fun IndexPage() {
     Seo(
         title = "Rok Retar · Android and Kotlin Multiplatform engineer",
-        description = "Rok Retar is a mobile engineer in Slovenia who builds Android apps and takes Kotlin Multiplatform to production on iOS. Work, engineering notes and contact.",
+        description = "Rok Retar is a mobile engineer in Slovenia who builds Android apps and moved a company's iOS app onto shared Kotlin. Work, engineering notes and contact.",
         path = "/",
         jsonLd = """
             {
