@@ -476,6 +476,24 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
         lv = "Android · Bez maksas · Kotlin Multiplatform"
     )
 
+    data object ParrotTourEyebrow : StringRes(
+        en = "// the short version",
+        sl = "// na kratko",
+        lv = "// īsumā"
+    )
+
+    data object ParrotTourCaption : StringRes(
+        en = "Parrot in 20 seconds: read-along, moving your place between versions, and connecting your library. The video has no sound.",
+        sl = "Parrot v 20 sekundah: branje s poudarjanjem, premik mesta med različicami in povezava knjižnice. Video nima zvoka.",
+        lv = "Parrot 20 sekundēs: lasīšana ar izcēlumu, vietas pārnešana starp versijām un bibliotēkas pievienošana. Video nav skaņas."
+    )
+
+    data object ParrotTourFallback : StringRes(
+        en = "Watch the 20-second tour (MP4)",
+        sl = "Oglejte si 20-sekundni ogled (MP4)",
+        lv = "Skatīt 20 sekunžu apskatu (MP4)"
+    )
+
     data object ArticleBack : StringRes(
         en = "All notes",
         sl = "Vsi zapisi",

@@ -44,7 +44,13 @@ import io.github.retar.portfolio.styles.SubtitleStyle
 import io.github.retar.portfolio.styles.eyebrowText
 import io.github.retar.portfolio.styles.sitePalette
 import io.github.retar.portfolio.utils.trackEvent
+import org.jetbrains.compose.web.dom.A
 import org.jetbrains.compose.web.dom.Div
+import org.jetbrains.compose.web.dom.Source
+import org.jetbrains.compose.web.dom.Text
+import org.jetbrains.compose.web.dom.Video
+import com.varabyte.kobweb.browser.dom.observers.IntersectionObserver
+import kotlinx.browser.window
 
 private const val VERSION_HISTORY_ID = "version-history"
 
@@ -88,6 +94,7 @@ fun ParrotPage() {
     Div(attrs = Modifier.styleModifier { property("width", "100%") }.toAttrs()) {
         ParrotHero()
         ScreensRow()
+        TourSection()
         FeaturesSection()
         LatestReleaseSection()
         if (ParrotRes.releases.size > 1) {
@@ -225,6 +232,62 @@ private fun ScreensRow() {
                 modifier = PhoneRowItemStyle.toModifier().styleModifier { property("--offset", offset) },
             )
         }
+    }
+}
+
+/**
+ * The 20-second tour from Parrot's own website. It is silent and loads nothing until it scrolls
+ * into view. It plays on its own only when the visitor hasn't asked for reduced motion; otherwise
+ * it waits behind its poster with controls, so it plays only on request.
+ */
+@Composable
+private fun TourSection() {
+    val palette = sitePalette()
+    EditorialGrid(eyebrow = StringRes.ParrotTourEyebrow.value, modifier = Modifier.sectionSpacing()) {
+        Video(
+            attrs = Modifier.styleModifier {
+                property("display", "block")
+                property("width", "100%")
+                property("height", "auto")
+                property("aspect-ratio", "16 / 9")
+                property("border-radius", "8px")
+                property("border", "1px solid ${palette.border}")
+                property("background", "#F3EDE3")
+            }.toAttrs {
+                attr("width", "1280")
+                attr("height", "720")
+                attr("poster", "/parrot/parrot-tour.jpg")
+                attr("preload", "none")
+                attr("playsinline", "")
+                attr("controls", "")
+                attr("loop", "")
+                attr("muted", "")
+                attr("aria-describedby", "parrot-tour-note")
+                ref { video ->
+                    val el = video.asDynamic()
+                    el.muted = true
+                    val calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+                    val observer = IntersectionObserver(IntersectionObserver.Options(thresholds = listOf(0.4))) { entries ->
+                        val visible = entries.any { entry -> entry.isIntersecting }
+                        if (visible && !calm) el.play()?.catch { _: dynamic -> }
+                        if (!visible && el.paused == false) el.pause()
+                    }
+                    observer.observe(video)
+                    onDispose { observer.disconnect() }
+                }
+            },
+        ) {
+            Source(attrs = {
+                attr("src", "/parrot/parrot-tour.mp4")
+                attr("type", "video/mp4")
+            })
+            A(href = "/parrot/parrot-tour.mp4") { Text(StringRes.ParrotTourFallback.value) }
+        }
+        SpanText(
+            text = StringRes.ParrotTourCaption.value,
+            modifier = CaptionStyle.toModifier().styleModifier { property("max-width", "60ch") },
+            ref = ref { it.id = "parrot-tour-note"; },
+        )
     }
 }
 
