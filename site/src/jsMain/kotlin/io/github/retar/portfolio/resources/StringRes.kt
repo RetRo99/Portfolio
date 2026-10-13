@@ -404,6 +404,18 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
         lv = "Project Gutenberg OPDS kataloga pārlūkošana"
     )
 
+    data object OnDeviceTtsArticleTitle : StringRes(
+        en = "Neural voices on an e-ink reader: on-device TTS with sherpa-onnx",
+        sl = "Nevronski glasovi na bralniku e-ink: TTS na napravi s sherpa-onnx",
+        lv = "Neironu balsis e-tintes lasītājā: runas sintēze ierīcē ar sherpa-onnx"
+    )
+
+    data object OnDeviceTtsArticleDesc : StringRes(
+        en = "How Parrot reads any ebook aloud with Kokoro and Supertonic running on the phone, prepares chapters ahead, and survived a lambda that crashed every synthesis.",
+        sl = "Kako Parrot z modeloma Kokoro in Supertonic na telefonu bere katerokoli e-knjigo, vnaprej pripravi poglavja in preživel lambdo, ki je zrušila vsako sintezo.",
+        lv = "Kā Parrot ar Kokoro un Supertonic tālrunī nolasa jebkuru e-grāmatu, iepriekš sagatavo nodaļas un pārdzīvoja lambda funkciju, kas avarēja katrā sintēzē."
+    )
+
     data object AppsFlyerArticleTitle : StringRes(
         en = "Wrapping the AppsFlyer SDK into a Kotlin Multiplatform library",
         sl = "Wrapping the AppsFlyer SDK into a Kotlin Multiplatform library",

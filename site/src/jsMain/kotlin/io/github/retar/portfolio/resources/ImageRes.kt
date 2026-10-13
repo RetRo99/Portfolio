@@ -6,6 +6,7 @@ enum class ImageRes(
     val intrinsicHeight: Int? = null,
 ) {
 
+    OnDeviceTtsArticle("/articles/on_device_tts.webp", 640, 353),
     AppsFlyerArticle("/articles/appsflyer_kmp.webp", 640, 353),
     InfiniteCarouselArticle("/articles/infinite_carousel.webp", 640, 353),
     SQLCipherArticle("/articles/sqlcipher_kotlin_native.webp", 640, 349),
