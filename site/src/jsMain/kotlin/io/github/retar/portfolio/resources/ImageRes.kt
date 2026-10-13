@@ -20,5 +20,5 @@ enum class ImageRes(
     ParrotScreenshot4("/parrot/parrot-screenshot-4.jpeg", 945, 2048),
     ParrotScreenshot5("/parrot/parrot-screenshot-5.jpeg", 945, 2048),
 
-    ProfileImage("/profile/profile_image.png", 512, 374),
+    ProfileImage("/profile/profile_image.png", 299, 374),
 }
