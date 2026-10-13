@@ -1,5 +1,7 @@
 site:
   title: "Rok Retar"
+  basePath: ""
+
 server:
   files:
     dev:
@@ -9,4 +11,5 @@ server:
     prod:
       script: "build/kotlin-webpack/js/productionExecutable/portfolio.js"
       siteRoot: ".kobweb/site"
+
   port: 8080
