@@ -54,17 +54,21 @@ fun MarkdownPage(content: @Composable () -> Unit) {
                 {
                   "@type": "BlogPosting",
                   "headline": ${jsonString(title)},
+                  "inLanguage": "en",
+                  "image": "https://www.retar.app/og-image.png",
                   "description": ${jsonString(description)},
                   ${if (date != null) "\"datePublished\": ${jsonString(date)}," else ""}
                   "author": {
                     "@type": "Person",
+                    "@id": "https://www.retar.app/#person",
                     "name": "Rok Retar",
-                    "url": "https://www.retar.app"
+                    "url": "https://www.retar.app/"
                   },
                   "publisher": {
                     "@type": "Person",
+                    "@id": "https://www.retar.app/#person",
                     "name": "Rok Retar",
-                    "url": "https://www.retar.app"
+                    "url": "https://www.retar.app/"
                   },
                   "mainEntityOfPage": {
                     "@type": "WebPage",

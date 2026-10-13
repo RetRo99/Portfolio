@@ -73,8 +73,9 @@ fun ParrotPage() {
               "description": "A reader for your own ebooks and audiobooks on Android, with read-along highlighting, on-device voices and Storyteller, Audiobookshelf and Parrot Cloud libraries.",
               "author": {
                 "@type": "Person",
+                "@id": "https://www.retar.app/#person",
                 "name": "Rok Retar",
-                "url": "https://www.retar.app"
+                "url": "https://www.retar.app/"
               },
               "offers": {
                 "@type": "Offer",

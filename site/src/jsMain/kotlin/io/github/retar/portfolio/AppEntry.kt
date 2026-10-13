@@ -112,6 +112,12 @@ fun AppEntry(content: @Composable () -> Unit) {
         document.getElementById("initial-hide")?.remove()
     }
 
+    // Keep <html lang> in sync with the selected language so crawlers and screen readers see it
+    val language = Language.current
+    LaunchedEffect(language) {
+        document.documentElement?.setAttribute("lang", language.code)
+    }
+
     SilkApp {
         Surface(SmoothColorStyle.toModifier()) {
             var active by remember { mutableStateOf<PortfolioSectionId?>(null) }

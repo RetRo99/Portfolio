@@ -57,6 +57,18 @@ fun IndexPage() {
         title = "Rok Retar · Android and Kotlin Multiplatform engineer",
         description = "Rok Retar is a mobile engineer in Slovenia who builds Android apps and takes Kotlin Multiplatform to production on iOS. Work, engineering notes and contact.",
         path = "/",
+        jsonLd = """
+            {
+              "@context": "https://schema.org",
+              "@type": "ProfilePage",
+              "@id": "https://www.retar.app/#profile",
+              "url": "https://www.retar.app/",
+              "name": "Rok Retar",
+              "dateModified": "2026-10-13",
+              "mainEntity": { "@id": "https://www.retar.app/#person" },
+              "isPartOf": { "@id": "https://www.retar.app/#website" }
+            }
+        """.trimIndent(),
     )
     Div(attrs = Modifier.styleModifier { property("width", "100%") }.toAttrs()) {
         HeroSection()

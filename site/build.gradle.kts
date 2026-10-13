@@ -63,8 +63,19 @@ kobweb {
                           "name": "Rok Retar",
                           "givenName": "Rok",
                           "familyName": "Retar",
+                          "alternateName": "RetRo99",
                           "jobTitle": "Mobile Engineer",
-                          "url": "https://www.retar.app",
+                          "description": "Mobile engineer in Slovenia building Android apps and taking Kotlin Multiplatform to production on iOS.",
+                          "url": "https://www.retar.app/",
+                          "image": "https://www.retar.app/profile/profile_image.png",
+                          "mainEntityOfPage": "https://www.retar.app/",
+                          "homeLocation": {
+                            "@type": "Place",
+                            "address": {
+                              "@type": "PostalAddress",
+                              "addressCountry": "SI"
+                            }
+                          },
                           "email": "mailto:rok.retar@gmail.com",
                           "gender": "Male",
                           "nationality": {
@@ -81,8 +92,7 @@ kobweb {
                           ],
                           "sameAs": [
                             "https://github.com/retro99",
-                            "https://www.linkedin.com/in/rok-retar/",
-                            "https://www.retar.app"
+                            "https://www.linkedin.com/in/rok-retar/"
                           ]
                         }
                         """.trimIndent()
@@ -96,32 +106,10 @@ kobweb {
                           "@type": "WebSite",
                           "@id": "https://www.retar.app/#website",
                           "name": "Rok Retar",
-                          "url": "https://www.retar.app",
+                          "url": "https://www.retar.app/",
+                          "inLanguage": ["en", "sl", "lv"],
                           "description": "Android and Kotlin Multiplatform engineer specializing in KMP migrations taken to production iOS.",
                           "author": {
-                            "@id": "https://www.retar.app/#person"
-                          },
-                          "potentialAction": {
-                            "@type": "SearchAction",
-                            "target": {
-                              "@type": "EntryPoint",
-                              "urlTemplate": "https://www.retar.app/?q={search_term_string}"
-                            },
-                            "query-input": "required name=search_term_string"
-                          }
-                        }
-                        """.trimIndent()
-                    }
-                }
-                script(type = "application/ld+json") {
-                    unsafe {
-                        +"""
-                        {
-                          "@context": "https://schema.org",
-                          "@type": "ProfilePage",
-                          "dateCreated": "2024-01-01T00:00:00Z",
-                          "dateModified": "2026-06-24T00:00:00Z",
-                          "mainEntity": {
                             "@id": "https://www.retar.app/#person"
                           }
                         }
