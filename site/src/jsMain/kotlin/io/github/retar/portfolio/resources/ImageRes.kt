@@ -13,7 +13,7 @@ enum class ImageRes(
     InfiniteCarouselArticle("/articles/infinite_carousel.jpeg", 1024, 565),
     SQLCipherArticle("/articles/sqlcipher_kotlin_native.jpeg", 1024, 559),
 
-    ParrotIcon("/parrot/parrot.png"),
+    ParrotIcon("/parrot/parrot-icon.png", 256, 256),
     ParrotScreenshot1("/parrot/parrot-screenshot-1.jpeg", 945, 2048),
     ParrotScreenshot2("/parrot/parrot-screenshot-2.jpeg", 945, 2048),
     ParrotScreenshot3("/parrot/parrot-screenshot-3.jpeg", 945, 2048),

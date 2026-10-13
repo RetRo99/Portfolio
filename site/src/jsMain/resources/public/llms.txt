@@ -1,15 +1,18 @@
-# Rok Retar — Mobile Engineer
+# Rok Retar, mobile engineer
 
-> Rok Retar is a Slovenian mobile engineer specializing in Android and Kotlin Multiplatform. He architected and executed a complete corporate migration transitioning production iOS systems to shared Kotlin. This site showcases projects, engineering articles, and professional experience. The site itself is built natively in Kotlin with Kobweb.
+> Rok Retar is a mobile engineer in Slovenia who builds Android apps and takes Kotlin Multiplatform to production. He designed and led the move of a company's production iOS app onto shared Kotlin. He also builds Parrot, an ebook and audiobook reader for Android. This site is written in Kotlin with Kobweb.
 
 ## Pages
 - [Home](https://www.retar.app/)
-- [Parrot — EPUB Reader & Audiobook Player](https://www.retar.app/parrot)
-- [Building a Smooth, Infinite Carousel in Kobweb](https://www.retar.app/blog/infinite-carousel)
+- [Parrot: ebook and audiobook reader](https://www.retar.app/parrot)
+- [Wrapping the AppsFlyer SDK into a Kotlin Multiplatform library](https://www.retar.app/blog/appsflyer-kmp-wrapper)
+- [Building a smooth, infinite carousel in Kobweb](https://www.retar.app/blog/infinite-carousel)
 - [Shipping SQLCipher inside a static Kotlin/Native framework](https://www.retar.app/blog/sqlcipher-static-kotlin-native-framework)
 
 ## About
-Rok Retar is a mobile engineer based in Slovenia. He engineers Android and Kotlin Multiplatform systems, including migrating a company's iOS app to shared Kotlin. Specializations include KMP migrations, native architecture, Jetpack Compose, and Kobweb. He has shipped production iOS apps backed by shared Kotlin code — not prototypes, but live products in the field.
+Rok works across Android and Kotlin Multiplatform: shared domain and data layers in Kotlin, with native UI where the platform does it better. His daily stack is Kotlin, Jetpack Compose, Compose Multiplatform, Ktor, Koin, Decompose, SQLDelight with SQLCipher, and SKIE. Besides the iOS migration, he has shipped an AI platform with real-time chat, a gaming app with NFC and cashless payments, and Parrot.
+
+He is open to senior mobile engineering roles, Kotlin Multiplatform migrations and Android architecture work, remote across the EU.
 
 ## Contact
 - Email: rok.retar@gmail.com

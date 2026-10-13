@@ -77,7 +77,7 @@ fun initStyles(ctx: InitSilkContext) {
 
     ctx.stylesheet.registerStyleBase("body") {
         Modifier
-            .fontFamily("Inter", "system-ui", "sans-serif")
+            .fontFamily("Geist", "system-ui", "sans-serif")
     }
 
     ctx.stylesheet.registerStyleBase("html") {
@@ -85,7 +85,7 @@ fun initStyles(ctx: InitSilkContext) {
     }
 
     ctx.stylesheet.registerStyleBase("code") {
-        Modifier.fontFamily("monospace")
+        Modifier.fontFamily("Geist Mono", "ui-monospace", "monospace")
     }
 }
 

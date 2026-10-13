@@ -7,7 +7,7 @@ import com.varabyte.kobweb.compose.css.TextDecorationLine
 import com.varabyte.kobweb.compose.css.Transition
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
-import com.varabyte.kobweb.compose.ui.modifiers.animation
+import com.varabyte.kobweb.compose.ui.styleModifier
 import com.varabyte.kobweb.compose.ui.modifiers.border
 import com.varabyte.kobweb.compose.ui.modifiers.borderRadius
 import com.varabyte.kobweb.compose.ui.modifiers.boxShadow
@@ -109,12 +109,6 @@ fun DownloadButton(
             window.open(url, OpenLinkStrategy.IN_PLACE)
         },
         modifier = OutlineButtonStyle.toModifier()
-            .animation(
-                DownloadButtonPulseKeyframes.toAnimation(
-                    duration = 2000.ms,
-                    iterationCount = AnimationIterationCount.Infinite,
-                ),
-            )
             .then(modifier),
         size = ButtonSize.MD,
     ) {
@@ -165,29 +159,28 @@ fun TextLink(
     }
 }
 
-val DownloadButtonPulseKeyframes = Keyframes {
-    from {
-        Modifier
-            .boxShadow(0.px, 0.px, 0.px, 0.px, rgba(245, 158, 11, 0.3))
-    }
-    50.percent {
-        Modifier
-            .boxShadow(0.px, 0.px, 0.px, 4.px, rgba(245, 158, 11, 0))
-    }
-    to {
-        Modifier
-            .boxShadow(0.px, 0.px, 0.px, 0.px, rgba(245, 158, 11, 0))
-    }
-}
+// Press feedback: a quick scale-down on :active, eased out so it responds instantly.
+private const val PRESS_TRANSITION =
+    "transform 160ms cubic-bezier(0.23, 1, 0.32, 1), background-color 160ms ease, color 160ms ease, border-color 160ms ease"
 
 val TextLinkStyle = CssStyle {
     base {
-        Modifier
+        val palette = sitePalette()
+        Modifier.styleModifier {
+            property("color", palette.textPrimary.toString())
+            property("text-decoration", "underline")
+            property("text-decoration-color", palette.border.toString())
+            property("text-underline-offset", "0.3em")
+            property("text-decoration-thickness", "1px")
+        }
     }
 
     hover {
         val palette = sitePalette()
-        Modifier.color(palette.accent)
+        Modifier.styleModifier {
+            property("color", palette.accent.toString())
+            property("text-decoration-color", palette.accent.toString())
+        }
     }
 }
 
@@ -196,22 +189,24 @@ val OutlineButtonStyle = CssStyle {
         val palette = sitePalette()
         Modifier
             .setVariable(ButtonVars.BackgroundDefaultColor, Colors.Transparent)
-            .setVariable(ButtonVars.BackgroundHoverColor, palette.accent)
-            .setVariable(ButtonVars.BackgroundPressedColor, palette.accent)
-            .setVariable(ButtonVars.Color, palette.accent)
-            .border(2.px, LineStyle.Solid, palette.accent)
-            .borderRadius(4.px)
+            .setVariable(ButtonVars.BackgroundHoverColor, palette.surface)
+            .setVariable(ButtonVars.BackgroundPressedColor, palette.surface)
+            .setVariable(ButtonVars.Color, palette.textPrimary)
+            .border(1.px, LineStyle.Solid, palette.border)
+            .borderRadius(6.px)
+            .styleModifier {
+                property("font-weight", "500")
+                property("transition", PRESS_TRANSITION)
+            }
     }
 
     hover {
         val palette = sitePalette()
-        Modifier
-            .color(palette.buttonText)
-            .scale(1.02)
+        Modifier.border(1.px, LineStyle.Solid, palette.textSecondary)
     }
 
     active {
-        Modifier.scale(0.98)
+        Modifier.scale(0.97)
     }
 }
 
@@ -223,11 +218,15 @@ val PrimaryButtonStyle = CssStyle {
             .setVariable(ButtonVars.BackgroundHoverColor, palette.accentHover)
             .setVariable(ButtonVars.BackgroundPressedColor, palette.accentPressed)
             .setVariable(ButtonVars.Color, palette.buttonText)
-            .border(2.px, LineStyle.Solid, palette.accent)
-            .borderRadius(4.px)
+            .border(1.px, LineStyle.Solid, Colors.Transparent)
+            .borderRadius(6.px)
+            .styleModifier {
+                property("font-weight", "500")
+                property("transition", PRESS_TRANSITION)
+            }
     }
 
-    hover {
-        Modifier.scale(1.02)
+    active {
+        Modifier.scale(0.97)
     }
 }

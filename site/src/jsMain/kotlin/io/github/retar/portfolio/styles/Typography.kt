@@ -11,6 +11,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.fontSize
 import com.varabyte.kobweb.compose.ui.modifiers.fontWeight
 import com.varabyte.kobweb.compose.ui.modifiers.lineHeight
 import com.varabyte.kobweb.compose.ui.modifiers.letterSpacing
+import com.varabyte.kobweb.compose.ui.styleModifier
 import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.base
@@ -41,11 +42,13 @@ val DisplayStyle = CssStyle {
     base {
         val palette = sitePalette()
         Modifier
-            .fluidFontSize(2.75.cssRem, lengthCalc("6vw + 1rem"), 4.5.cssRem)
-            .lineHeight(1.05)
-            .fontWeight(FontWeight.Bold)
-            .fontFamily("Outfit", "sans-serif")
+            .fluidFontSize(3.5.cssRem, lengthCalc("9vw + 1rem"), 8.5.cssRem)
+            .lineHeight(0.92)
+            .fontWeight(FontWeight.Normal)
+            .letterSpacing((-0.02).em)
+            .fontFamily("Instrument Serif", "Iowan Old Style", "Georgia", "serif")
             .color(palette.textPrimary)
+            .styleModifier { property("text-wrap", "balance") }
     }
 }
 
@@ -53,11 +56,13 @@ val H1Style = CssStyle {
     base {
         val palette = sitePalette()
         Modifier
-            .fluidFontSize(1.875.cssRem, lengthCalc("4vw + 0.5rem"), 3.cssRem)
-            .lineHeight(1.1)
-            .fontWeight(FontWeight.SemiBold)
-            .fontFamily("Outfit", "sans-serif")
+            .fluidFontSize(1.25.cssRem, lengthCalc("1.2vw + 0.9rem"), 1.75.cssRem)
+            .lineHeight(1.3)
+            .fontWeight(FontWeight.Medium)
+            .letterSpacing((-0.01).em)
+            .fontFamily("Geist", "system-ui", "sans-serif")
             .color(palette.textPrimary)
+            .styleModifier { property("text-wrap", "balance") }
     }
 }
 
@@ -65,11 +70,13 @@ val H2Style = CssStyle {
     base {
         val palette = sitePalette()
         Modifier
-            .fluidFontSize(1.625.cssRem, lengthCalc("3vw + 0.5rem"), 2.25.cssRem)
-            .lineHeight(1.15)
-            .fontWeight(FontWeight.Bold)
-            .fontFamily("Outfit", "sans-serif")
+            .fluidFontSize(2.25.cssRem, lengthCalc("4vw + 0.75rem"), 4.cssRem)
+            .lineHeight(1.0)
+            .fontWeight(FontWeight.Normal)
+            .letterSpacing((-0.015).em)
+            .fontFamily("Instrument Serif", "Iowan Old Style", "Georgia", "serif")
             .color(palette.textPrimary)
+            .styleModifier { property("text-wrap", "balance") }
     }
 }
 
@@ -77,10 +84,11 @@ val H3Style = CssStyle {
     base {
         val palette = sitePalette()
         Modifier
-            .fluidFontSize(1.25.cssRem, lengthCalc("2vw + 0.5rem"), 1.5.cssRem)
-            .lineHeight(1.2)
+            .fluidFontSize(1.0625.cssRem, lengthCalc("0.6vw + 0.9rem"), 1.25.cssRem)
+            .lineHeight(1.3)
             .fontWeight(FontWeight.SemiBold)
-            .fontFamily("Outfit", "sans-serif")
+            .letterSpacing((-0.01).em)
+            .fontFamily("Geist", "system-ui", "sans-serif")
             .color(palette.textPrimary)
     }
 }
@@ -89,10 +97,11 @@ val BodyStyle = CssStyle {
     base {
         val palette = sitePalette()
         Modifier
-            .fluidFontSize(1.cssRem, lengthCalc("0.5vw + 0.875rem"), 1.0625.cssRem)
-            .lineHeight(1.6)
-            .fontFamily("Inter", "sans-serif")
+            .fluidFontSize(1.cssRem, lengthCalc("0.4vw + 0.9rem"), 1.0625.cssRem)
+            .lineHeight(1.65)
+            .fontFamily("Geist", "system-ui", "sans-serif")
             .color(palette.textSecondary)
+            .styleModifier { property("text-wrap", "pretty") }
     }
 }
 
@@ -102,7 +111,7 @@ val BodySmallStyle = CssStyle {
         Modifier
             .fontSize(13.px)
             .lineHeight(1.5)
-            .fontFamily("Inter", "sans-serif")
+            .fontFamily("Geist", "system-ui", "sans-serif")
             .color(palette.textSecondary)
     }
 }
@@ -111,11 +120,12 @@ val MonoEyebrowStyle = CssStyle {
     base {
         val palette = sitePalette()
         Modifier
-            .fontSize(13.px)
+            .fontSize(12.px)
             .lineHeight(1.4)
-            .fontFamily("JetBrains Mono", "monospace")
-            .letterSpacing(0.08.em)
-            .color(palette.accent)
+            .fontWeight(FontWeight.Medium)
+            .fontFamily("Geist Mono", "ui-monospace", "monospace")
+            .letterSpacing(0.02.em)
+            .color(palette.textSecondary)
     }
 }
 
@@ -125,7 +135,7 @@ val MonoLabelStyle = CssStyle {
         Modifier
             .fontSize(13.px)
             .lineHeight(1.4)
-            .fontFamily("JetBrains Mono", "monospace")
+            .fontFamily("Geist Mono", "ui-monospace", "monospace")
             .letterSpacing(0.04.em)
             .color(palette.textSecondary)
     }
@@ -137,7 +147,7 @@ val CaptionStyle = CssStyle {
         Modifier
             .fontSize(12.px)
             .lineHeight(1.5)
-            .fontFamily("JetBrains Mono", "monospace")
+            .fontFamily("Geist Mono", "ui-monospace", "monospace")
             .color(palette.textSecondary)
     }
 }
@@ -148,7 +158,7 @@ val LabelStyle = CssStyle {
         Modifier
             .fontSize(16.px)
             .fontWeight(FontWeight.Bold)
-            .fontFamily("Outfit", "sans-serif")
+            .fontFamily("Geist", "system-ui", "sans-serif")
             .color(palette.textPrimary)
     }
 }
@@ -160,7 +170,7 @@ val SubtitleStyle = CssStyle {
             .fluidFontSize(1.0625.cssRem, lengthCalc("1vw + 0.75rem"), 1.25.cssRem)
             .lineHeight(1.5)
             .fontWeight(FontWeight.Medium)
-            .fontFamily("Inter", "sans-serif")
+            .fontFamily("Geist", "system-ui", "sans-serif")
             .color(palette.textSecondary)
     }
 }
@@ -171,7 +181,7 @@ val DescriptorStyle = CssStyle {
         Modifier
             .fontSize(14.px)
             .lineHeight(1.4)
-            .fontFamily("Inter", "sans-serif")
+            .fontFamily("Geist", "system-ui", "sans-serif")
             .color(palette.textSecondary)
     }
 }
@@ -180,8 +190,9 @@ val MonoAccentStyle = CssStyle {
     base {
         val palette = sitePalette()
         Modifier
-            .fontFamily("JetBrains Mono", "monospace")
-            .fontSize(16.px)
+            .fontFamily("Geist Mono", "ui-monospace", "monospace")
+            .fontSize(12.px)
+            .letterSpacing(0.04.em)
             .color(palette.accent)
     }
 }
@@ -200,3 +211,12 @@ fun H2Text(text: String, modifier: Modifier = Modifier) {
 fun H3Text(text: String, modifier: Modifier = Modifier) {
     H3(attrs = modifier.toAttrs()) { Text(text) }
 }
+
+/**
+ * Eyebrow copy in the string resources is written as `// 01 — label`. The editorial design drops the
+ * code-comment prefix and the section number (the order changed), and sets the label in sentence case.
+ */
+fun String.eyebrowText(): String =
+    removePrefix("//").trim()
+        .replace(Regex("^\\d+\\s*—\\s*"), "")
+        .replaceFirstChar { it.uppercase() }

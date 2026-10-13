@@ -15,9 +15,9 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
         }
 
     data object HeroEyebrow : StringRes(
-        en = "// mobile engineer",
-        sl = "// mobilni inženir",
-        lv = "// mobilo lietotņu inženieris"
+        en = "// mobile engineer in Slovenia",
+        sl = "// mobilni inženir iz Slovenije",
+        lv = "// mobilo lietotņu inženieris Slovēnijā"
     )
 
     data object HeroName : StringRes(
@@ -27,45 +27,45 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
     )
 
     data object HeroHeadline : StringRes(
-        en = "I engineer Android and Kotlin Multiplatform systems — including migrating a company's iOS app to shared Kotlin.",
-        sl = "Razvijam sisteme za Android in Kotlin Multiplatform — vključno s selitvijo aplikacije podjetja za iOS na skupno platformo Kotlin.",
-        lv = "Veidoju sistēmas Android un Kotlin Multiplatform platformām — tostarp migrēju uzņēmuma iOS lietotni uz kopīgu Kotlin kodu."
+        en = "I build Android apps, and I moved a company's iOS app onto shared Kotlin.",
+        sl = "Razvijam aplikacije za Android in sem iOS aplikacijo podjetja preselil na skupni Kotlin.",
+        lv = "Es veidoju Android lietotnes un pārcēlu uzņēmuma iOS lietotni uz kopīgu Kotlin kodu."
     )
 
     data object HeroSubtitle : StringRes(
-        en = "Mobile development rooted in the Android ecosystem. I take Kotlin Multiplatform to production — one codebase serving two platforms without surrendering native feel. This page is built natively in Kotlin.",
-        sl = "Razvoj mobilnih aplikacij, zasnovan na ekosistemu Android. V produkcijo uvajam Kotlin Multiplatform – eno kodno bazo, ki podpira dve platformi, ne da bi pri tem izgubila občutek nativne aplikacije. Ta stran je nativno razvita v jeziku Kotlin.",
-        lv = "Mobilā lietotņu izstrāde, kas balstās uz Android ekosistēmu. Es ieviešu Kotlin Multiplatform ražošanas vidē — viena kodbāze, kas apkalpo divas platformas, nezaudējot lietotnes dabisko izjūtu. Šī lapa ir izstrādāta, izmantojot Kotlin valodu."
+        en = "Android is where I started. Today I take Kotlin Multiplatform into production: one codebase for an app's logic and data, while each platform keeps its own native UI. On the side I build Parrot, an ebook and audiobook reader.",
+        sl = "Začel sem z Androidom. Danes Kotlin Multiplatform uvajam v produkcijo: ena kodna baza za logiko in podatke aplikacije, vsaka platforma pa obdrži svoj nativni vmesnik. Ob tem razvijam Parrot, bralnik e-knjig in zvočnih knjig.",
+        lv = "Sāku ar Android. Šodien es ieviešu Kotlin Multiplatform ražošanā: viena kodbāze lietotnes loģikai un datiem, bet katra platforma saglabā savu nativo saskarni. Brīvajā laikā veidoju Parrot, e-grāmatu un audiogrāmatu lasītāju."
     )
 
     data object HeroStatusStrip : StringRes(
-        en = "Kotlin · KMP · Android · Kobweb / Compose for Web",
-        sl = "Kotlin · KMP · Android · Kobweb / Compose for Web",
-        lv = "Kotlin · KMP · Android · Kobweb / Compose for Web"
+        en = "Kotlin · Kotlin Multiplatform · Android · Compose",
+        sl = "Kotlin · Kotlin Multiplatform · Android · Compose",
+        lv = "Kotlin · Kotlin Multiplatform · Android · Compose"
     )
 
     data object CtaReviewWork : StringRes(
-        en = "Review the Work",
-        sl = "Preglejte delo",
-        lv = "Apskatīt darbus"
+        en = "See my work",
+        sl = "Poglejte moje delo",
+        lv = "Apskatīt manu darbu"
     )
 
     data object CtaDownloadResume : StringRes(
-        en = "Download Resume",
-        sl = "Prenesite življenjepis",
+        en = "Download resume",
+        sl = "Prenesi življenjepis",
         lv = "Lejupielādēt CV"
     )
 
     data object CtaReadNotes : StringRes(
-        en = "Engineering notes",
-        sl = "Inženirske zabeležke",
-        lv = "Inženierijas piezīmes"
+        en = "Read my engineering notes",
+        sl = "Preberite moje inženirske zapise",
+        lv = "Lasīt manas inženiertehniskās piezīmes"
     )
 
     data object Descriptor : StringRes(
-        en = "Mobile Developer",
-        sl = "Razvijalec mobilnih aplikacij",
-        lv = "Mobilo lietotņu izstrādātājs"
+        en = "Mobile engineer",
+        sl = "Mobilni inženir",
+        lv = "Mobilo lietotņu inženieris"
     )
 
     data object Github : StringRes(
@@ -81,75 +81,75 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
     )
 
     data object PhilosophyEyebrow : StringRes(
-        en = "// 01 — engineering",
-        sl = "// 01 — inženirstvo",
-        lv = "// 01 — inženierija"
+        en = "// how I work",
+        sl = "// kako delam",
+        lv = "// kā es strādāju"
     )
 
     data object PhilosophyHeading : StringRes(
-        en = "One codebase. Two platforms. Native discipline intact.",
-        sl = "Ena kodna baza. Dve platformi. Naravna disciplina ohranjena.",
-        lv = "Viena kodbāze. Divas platformas. Vietējā disciplīna saglabāta."
+        en = "Share what should be shared. Keep native what should feel native.",
+        sl = "Deli, kar je smiselno deliti. Nativno pusti, kar mora delovati nativno.",
+        lv = "Kopīgo to, kas jākopīgo. Atstāj nativu to, kam jājūtas nativam."
     )
 
     data object PhilosophyBody1 : StringRes(
-        en = "My specialization is the Android ecosystem and Kotlin Multiplatform. I treat the codebase as the source of truth: shared business logic, shared data layers, shared domain models — with UI remaining native where it earns its keep.",
-        sl = "Moja specializacija je ekosistem Android in Kotlin Multiplatform. Kodno bazo obravnavam kot vir resnice: skupna poslovna logika, skupne podatkovne plasti in skupni domenski modeli – pri čemer uporabniški vmesnik ostaja nativni tam, kjer to prinaša največ koristi.",
-        lv = "Mana specializācija ir Android ekosistēma un Kotlin Multiplatform. Es uzskatu kodbāzi par patiesības avotu: kopīga biznesa loģika, kopīgi datu slāņi, kopīgi domēna modeļi — turklāt lietotāja saskarne paliek nativā, ja tas ir lietderīgi."
+        en = "I write business logic, data layers and domain models once in Kotlin and share them between Android and iOS. The UI stays native wherever the platform does it better.",
+        sl = "Poslovno logiko, podatkovne plasti in domenske modele napišem enkrat v Kotlinu in jih delim med Androidom in iOS. Uporabniški vmesnik ostane nativen povsod, kjer ga platforma naredi bolje.",
+        lv = "Biznesa loģiku, datu slāņus un domēna modeļus es uzrakstu vienreiz Kotlin valodā un kopīgoju starp Android un iOS. Lietotāja saskarne paliek nativa visur, kur platforma to dara labāk."
     )
 
     data object PhilosophyBody2 : StringRes(
-        en = "I architected and executed a complete corporate migration, transitioning production systems to Kotlin Multiplatform for iOS. Shared Kotlin now backs an iOS app in the field — not a prototype, not a branch, a shipped product.",
-        sl = "Načrtoval in izvedel sem celovito migracijo podjetja, v okviru katere smo produkcijske sisteme prešli na Kotlin Multiplatform za iOS. Skupni Kotlin zdaj podpira aplikacijo za iOS, ki je že v uporabi – ne gre za prototip in ne za razvojno vejo, temveč za izdan produkt.",
-        lv = "Es izstrādāju un īstenoju pilnīgu uzņēmuma migrāciju, pārnesot ražošanas sistēmas uz Kotlin Multiplatform iOS vajadzībām. Kopīgais Kotlin tagad nodrošina iOS lietotnes darbību reālajā vidē — tas nav ne prototips, ne izstrādes atzars, bet gan tirgū laists produkts."
+        en = "For a company's production iOS app, I designed and led the move to shared Kotlin. It shipped, and real users run it today.",
+        sl = "Za produkcijsko iOS aplikacijo podjetja sem zasnoval in vodil prehod na skupni Kotlin. Izšla je in danes jo uporabljajo resnični uporabniki.",
+        lv = "Uzņēmuma ražošanas iOS lietotnei es izstrādāju un vadīju pāreju uz kopīgu Kotlin kodu. Tā ir izlaista, un šodien to lieto īsti lietotāji."
     )
 
     data object PhilosophyBody3 : StringRes(
-        en = "The discipline is architectural, not ideological. Shared code goes where it reduces drift and risk; platform code stays where it delivers native performance and feel. The boundary is deliberate, tested, and enforced by module structure — domain never depends on data or UI.",
-        sl = "Ta pristop je arhitekturne narave, ne ideološke. Skupna koda se uporablja tam, kjer zmanjšuje odstopanja in tveganje; koda platforme pa ostane tam, kjer zagotavlja izvirno zmogljivost in uporabniško izkušnjo. Ta ločnica je namerna, preizkušena in se uveljavlja prek strukture modulov – domena nikoli ni odvisna od podatkov ali uporabniškega vmesnika.",
-        lv = "Šī pieeja ir arhitektoniska, nevis ideoloģiska. Kopīgais kods tiek izmantots tur, kur tas samazina novirzes un riskus; platformas kods paliek tur, kur tas nodrošina sistēmai raksturīgo veiktspēju un lietošanas sajūtu. Šī robežšķirtne ir apzināti izveidota, pārbaudīta un tiek nodrošināta ar moduļu struktūru — domēns nekad nav atkarīgs no datiem vai lietotāja saskarnes."
+        en = "Where the line between shared and native code sits is an engineering decision, not a belief. Module boundaries enforce it: the domain depends on nothing, and data and UI depend on the domain.",
+        sl = "Kje poteka meja med skupno in nativno kodo, je inženirska odločitev, ne prepričanje. Uveljavljajo jo meje modulov: domena ni odvisna od ničesar, podatki in vmesnik pa so odvisni od domene.",
+        lv = "Kur atrodas robeža starp kopīgo un nativo kodu, ir inženiertehnisks lēmums, nevis pārliecība. To nodrošina moduļu robežas: domēns nav atkarīgs ne no kā, bet dati un saskarne ir atkarīgi no domēna."
     )
 
     data object PhilosophyPrinciple1 : StringRes(
-        en = "Shared domain and data layers; native UI where the platform earns it.",
-        sl = "Skupni domenski in podatkovni sloji; nativni uporabniški vmesnik tam, kjer si ga platforma zasluži.",
-        lv = "Kopīgi domēna un datu slāņi; platformai piemērota lietotāja saskarne tur, kur tas ir nepieciešams."
+        en = "Share the domain and data layers; keep the UI native where the platform does it better.",
+        sl = "Deli domensko in podatkovno plast; vmesnik naj ostane nativen, kjer ga platforma naredi bolje.",
+        lv = "Kopīgo domēna un datu slāņus; saskarni atstāj nativu, kur platforma to dara labāk."
     )
 
     data object PhilosophyPrinciple2 : StringRes(
-        en = "Module boundaries that enforce dependency direction — domain stays pure Kotlin.",
-        sl = "Meje modulov, ki določajo smer odvisnosti — domena ostaja v čistem Kotlinu.",
-        lv = "Moduļu robežas, kas nosaka atkarību virzienu — domēns paliek tīrā Kotlin."
+        en = "Let module boundaries enforce dependency direction, so the domain stays plain Kotlin.",
+        sl = "Naj meje modulov določajo smer odvisnosti, da domena ostane čisti Kotlin.",
+        lv = "Ļauj moduļu robežām noteikt atkarību virzienu, lai domēns paliek tīrs Kotlin."
     )
 
     data object PhilosophyPrinciple3 : StringRes(
-        en = "KMP taken to production iOS, not demoed on a branch.",
-        sl = "KMP je bil prenesen v produkcijsko okolje iOS, ni bil predstavljen na razvojni veji.",
-        lv = "KMP ir ieviests iOS ražošanas vidē, nevis demonstrēts atzarā."
+        en = "Ship to production, not to a demo branch.",
+        sl = "Izdaj v produkcijo, ne v demo vejo.",
+        lv = "Izlaid ražošanā, nevis demonstrācijas zarā."
     )
 
     data object PhilosophyPrinciple4 : StringRes(
-        en = "The portfolio itself is built natively in Kotlin — the medium is the evidence.",
-        sl = "Portfelj je v celoti razvit v jeziku Kotlin — to dokazuje tudi sam medij.",
-        lv = "Pats portfelis ir izstrādāts tieši Kotlin valodā — par to liecina šis piemērs."
+        en = "Use Kotlin wherever it fits, including this website.",
+        sl = "Uporabi Kotlin povsod, kjer je smiselno, tudi za to spletno stran.",
+        lv = "Izmanto Kotlin visur, kur tas der, arī šai vietnei."
     )
 
     data object MigrationCalloutLabel : StringRes(
-        en = "// migration",
-        sl = "// selitev",
-        lv = "// migrācija"
+        en = "// shipped",
+        sl = "// izdano",
+        lv = "// izlaists"
     )
 
     data object MigrationCalloutBody : StringRes(
-        en = "Production iOS now runs on shared Kotlin. The migration is complete and shipped — Android and iOS backed by a single Kotlin codebase.",
-        sl = "Proizvodna različica za iOS zdaj deluje na skupni platformi v jeziku Kotlin. Migracija je zaključena in izdana – Android in iOS temeljita na eni sami kodni bazi v jeziku Kotlin.",
-        lv = "Ražošanas iOS tagad darbojas uz kopīgu Kotlin kodbāzi. Migrācija ir pabeigta un izlaista — gan Android, gan iOS balstās uz vienu Kotlin kodbāzi."
+        en = "A company's production iOS app now runs on shared Kotlin, packaged as a static framework the iOS team added without changing their build.",
+        sl = "Produkcijska iOS aplikacija podjetja zdaj teče na skupnem Kotlinu, zapakiranem v statično ogrodje, ki ga je ekipa iOS dodala brez sprememb v svoji gradnji.",
+        lv = "Uzņēmuma ražošanas iOS lietotne tagad darbojas uz kopīga Kotlin koda, iepakota statiskā ietvarā, ko iOS komanda pievienoja, nemainot savu būvēšanas procesu."
     )
 
     data object ParrotEyebrow : StringRes(
-        en = "// 02 — signature work",
-        sl = "// 02 — prepoznavno delo",
-        lv = "// 02 — galvenais darbs"
+        en = "// my own app",
+        sl = "// moja aplikacija",
+        lv = "// mana lietotne"
     )
 
     data object ParrotHeading : StringRes(
@@ -159,105 +159,123 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
     )
 
     data object ParrotSubhead : StringRes(
-        en = "A lightweight EPUB e-reader and audiobook player — the companion app for Storyteller, built for readers who want a calibrated, immersive experience over generic digital layouts.",
-        sl = "Lahki bralnik e-knjig v formatu EPUB in predvajalnik zvočnih knjig — spremljevalna aplikacija za Storyteller, zasnovana za bralce, ki si želijo natančno prilagojeno, vživajočo izkušnjo namesto običajnih digitalnih postavitev.",
-        lv = "Viegla EPUB e-grāmatu lasīšanas un audio grāmatu atskaņošanas lietotne — Storyteller papildu lietotne, kas izstrādāta lasītājiem, kuri vēlas precīzi pielāgotu, aizraujošu pieredzi, nevis standarta digitālos noformējumus."
+        en = "A reader for your own ebooks and audiobooks on Android phones, tablets and e-ink readers. It highlights the text as the narrator reads and remembers where you are in every version of a book. Built with Kotlin Multiplatform; an iPhone version is in the works.",
+        sl = "Bralnik za lastne e-knjige in zvočne knjige na telefonih, tablicah in bralnikih e-ink z Androidom. Med pripovedovanjem označuje besedilo in si zapomni, kje ste v vsaki različici knjige. Zgrajen s Kotlin Multiplatform; različica za iPhone je v pripravi.",
+        lv = "Lasītājs jūsu e-grāmatām un audiogrāmatām Android tālruņos, planšetēs un e-ink lasītājos. Tas izceļ tekstu, kamēr diktors lasa, un atceras, kur esat katrā grāmatas versijā. Veidots ar Kotlin Multiplatform; iPhone versija top."
     )
 
     data object ParrotFeature1Title : StringRes(
-        en = "Typography & text control",
-        sl = "Tipografija in upravljanje besedila",
-        lv = "Tipogrāfija un teksta vadība"
+        en = "Read-along",
+        sl = "Branje s poslušanjem",
+        lv = "Lasīšana kopā ar audio"
     )
 
     data object ParrotFeature1Desc : StringRes(
-        en = "User-defined font configurations and pinch-to-zoom text sizing. Every reader calibrates type, size, margins, and line height to their own ergonomics.",
-        sl = "Uporabniško določene nastavitve pisav in spreminjanje velikosti besedila s ščipkanjem. Vsak bralec prilagodi vrsto pisave, velikost, robove in višino vrstice svojim ergonomskim potrebam.",
-        lv = "Lietotāja definētas fontu konfigurācijas un teksta izmēra maiņa ar divu pirkstu pieskārienu. Katrs lasītājs pielāgo burtveidu, izmēru, malu atstarpes un rindu augstumu atbilstoši savām ergonomiskajām vajadzībām."
+        en = "For ebooks with synced narration, such as those made with Storyteller, each sentence lights up as it is read.",
+        sl = "Pri e-knjigah s sinhronizirano pripovedjo, na primer tistih iz Storytellerja, se vsak stavek osvetli, ko je prebran.",
+        lv = "E-grāmatām ar sinhronizētu stāstījumu, piemēram, no Storyteller, katrs teikums iedegas, kad tas tiek nolasīts."
     )
 
     data object ParrotFeature2Title : StringRes(
-        en = "Reading modes",
-        sl = "Načini branja",
-        lv = "Lasīšanas režīmi"
+        en = "Voices on your device",
+        sl = "Glasovi na napravi",
+        lv = "Balsis jūsu ierīcē"
     )
 
     data object ParrotFeature2Desc : StringRes(
-        en = "Intuitive page-flip navigation and a true fullscreen mode that strips away every chrome element, leaving only the text. Dark, sepia, and a dedicated e-ink display mode.",
-        sl = "Intuitivna navigacija z obračanjem strani in pravi način polnega zaslona, ki odstrani vse elemente vmesnika in pusti le besedilo. Na voljo so načini temnega zaslona, sepije in posebni način zaslona e-ink.",
-        lv = "Intuitīva navigācija, kas atgādina lappušu pāršķiršanu, un īsts pilnekrāna režīms, kurā tiek noņemti visi interfeisa elementi, atstājot tikai tekstu. Tumšais, sepijas un īpašais e-ink displeja režīms."
+        en = "No audiobook? A downloaded voice reads any ebook aloud. Chapters are prepared ahead so playback has no gaps, and the text never leaves the phone.",
+        sl = "Ni zvočne knjige? Prenesen glas prebere katero koli e-knjigo. Poglavja se pripravijo vnaprej, zato predvajanje teče brez premorov, besedilo pa ne zapusti telefona.",
+        lv = "Nav audiogrāmatas? Lejupielādēta balss nolasa jebkuru e-grāmatu. Nodaļas tiek sagatavotas iepriekš, lai atskaņošana būtu bez pauzēm, un teksts nepamet tālruni."
     )
 
     data object ParrotFeature3Title : StringRes(
-        en = "E-ink adaptation",
-        sl = "Prilagoditev za e-ink",
-        lv = "Pielāgojums e-ink"
+        en = "One place in every version",
+        sl = "Isto mesto v vsaki različici",
+        lv = "Viena vieta katrā versijā"
     )
 
     data object ParrotFeature3Desc : StringRes(
-        en = "A display mode built specifically for e-ink screens — high contrast, no decorative motion, refresh behavior that respects the hardware. Crisp and natural on specialized devices.",
-        sl = "Način prikazovanja, zasnovan posebej za zaslone e-ink – visok kontrast, brez okrasnih gibov, način osveževanja, ki upošteva zmogljivosti strojne opreme. Jasna in naravna slika na specializiranih napravah.",
-        lv = "Ekrāna režīms, kas izstrādāts īpaši e-ink ekrāniem — augsts kontrasts, bez dekoratīvām kustībām, atjaunošanas darbība, kas ņem vērā aparatūras iespējas. Skaidrs un dabīgs attēls specializētās ierīcēs."
+        en = "Link the ebook and the audiobook of a book and Parrot shows where you are in each, then moves the others to the matching place when you ask.",
+        sl = "Povežite e-knjigo in zvočno knjigo in Parrot pokaže, kje ste v vsaki, ter na zahtevo premakne ostale na ustrezno mesto.",
+        lv = "Sasaistiet grāmatas e-grāmatu un audiogrāmatu, un Parrot parāda, kur esat katrā no tām, un pēc pieprasījuma pārvieto pārējās uz atbilstošo vietu."
     )
 
     data object ParrotFeature4Title : StringRes(
-        en = "Background audio",
-        sl = "Zvok v ozadju",
-        lv = "Fona audio"
+        en = "Your library, your server",
+        sl = "Vaša knjižnica, vaš strežnik",
+        lv = "Jūsu bibliotēka, jūsu serveris"
     )
 
     data object ParrotFeature4Desc : StringRes(
-        en = "Audiobook playback that continues in the background with persistent system notification controls. Skip chapters, scrub, and set speed without ever opening the app.",
-        sl = "Predvajanje avdio knjige, ki poteka v ozadju, s stalnimi nadzornimi elementi v sistemskih obvestilih. Preskakujte poglavja, premikajte se po posnetku in nastavljajte hitrost predvajanja, ne da bi sploh odprli aplikacijo.",
-        lv = "Audio grāmatas atskaņošana, kas turpinās fonā, izmantojot pastāvīgus sistēmas paziņojumu vadības elementus. Varat pārlēkt uz nākamo nodaļu, pārvietoties pa ierakstu un mainīt atskaņošanas ātrumu, pat neatraujot lietotni."
+        en = "Connect the Storyteller or Audiobookshelf server you already run, or browse OPDS catalogues such as Project Gutenberg. Books go straight from the server to the device.",
+        sl = "Povežite strežnik Storyteller ali Audiobookshelf, ki ga že uporabljate, ali brskajte po katalogih OPDS, kot je Project Gutenberg. Knjige gredo neposredno s strežnika na napravo.",
+        lv = "Pievienojiet savu Storyteller vai Audiobookshelf serveri vai pārlūkojiet OPDS katalogus, piemēram, Project Gutenberg. Grāmatas nonāk tieši no servera ierīcē."
     )
 
     data object ParrotFeature5Title : StringRes(
-        en = "Read-Aloud sync",
-        sl = "Sinhronizacija Read-Aloud",
-        lv = "Read-Aloud sinhronizācija"
+        en = "Highlights, notes and a dictionary",
+        sl = "Poudarki, opombe in slovar",
+        lv = "Izcēlumi, piezīmes un vārdnīca"
     )
 
     data object ParrotFeature5Desc : StringRes(
-        en = "Real-time, word-by-word highlighted text synchronization. As the narrator speaks, the text tracks the audio precisely — for language learners, developing readers, and anyone who reads with their ears.",
-        sl = "Sinhronizacija besedila v realnem času z označevanjem posameznih besed. Medtem ko pripovedovalec govori, besedilo natančno sledi avdio posnetku — za tiste, ki se učijo jezika, za začetnike v branju in za vse, ki berejo z ušesi.",
-        lv = "Teksta sinhronizācija reāllaikā, izceļot katru vārdu. Kamēr stāstītājs runā, teksts precīzi seko līdzi audio ierakstam — valodu apguvējiem, lasīšanas prasmes pilnveidotājiem un ikvienam, kurš lasa, klausoties."
+        en = "Four highlight colours, notes in the margin and one list of everything you marked, exportable as Markdown. Tap a word for an offline definition.",
+        sl = "Štiri barve poudarkov, opombe ob robu in en seznam vsega, kar ste označili, z izvozom v Markdown. Tapnite besedo za razlago brez povezave.",
+        lv = "Četras izcēlumu krāsas, piezīmes malās un viens saraksts ar visu atzīmēto, ko var eksportēt kā Markdown. Pieskarieties vārdam, lai redzētu skaidrojumu bezsaistē."
     )
 
     data object ParrotFeature6Title : StringRes(
-        en = "Reading analytics",
-        sl = "Analitika branja",
-        lv = "Lasīšanas analītika"
+        en = "Parrot Cloud",
+        sl = "Parrot Cloud",
+        lv = "Parrot Cloud"
     )
 
     data object ParrotFeature6Desc : StringRes(
-        en = "Automated local background analytics that map reading durations and calculate personalized reading-speed estimates per chapter. No servers, no telemetry — the math runs on-device.",
-        sl = "Avtomatizirana lokalna analiza ozadja, ki beleži trajanje branja in izračuna prilagojene ocene hitrosti branja za vsako poglavje. Brez strežnikov, brez telemetrije – izračuni potekajo na sami napravi.",
-        lv = "Automatizēta vietējā fona analītika, kas fiksē lasīšanas ilgumu un aprēķina personalizētus lasīšanas ātruma novērtējumus katrai nodaļai. Nav ne serveru, ne telemetrijas — aprēķini tiek veikti pašā ierīcē."
+        en = "No server? Parrot Cloud keeps your books, reading position, highlights and statistics in sync on every device you sign in to. In early access.",
+        sl = "Nimate strežnika? Parrot Cloud sinhronizira vaše knjige, mesto branja, poudarke in statistiko na vseh napravah, v katere se prijavite. V zgodnjem dostopu.",
+        lv = "Nav servera? Parrot Cloud sinhronizē jūsu grāmatas, lasīšanas vietu, izcēlumus un statistiku visās ierīcēs, kurās piesakāties. Agrīnajā piekļuvē."
     )
 
     data object ParrotFeature7Title : StringRes(
-        en = "Companion architecture",
-        sl = "Arhitektura spremljevalca",
-        lv = "Pavadlietotnes arhitektūra"
+        en = "Made for e-ink",
+        sl = "Narejeno za e-ink",
+        lv = "Radīts e-ink ekrāniem"
     )
 
     data object ParrotFeature7Desc : StringRes(
-        en = "Built as the companion client for Storyteller. Reading position and progress sync so a reader moves between phone, tablet, and desktop without losing their place.",
-        sl = "Narejen je bil kot spremljevalni odjemalec za aplikacijo Storyteller. Sinhronizira se položaj branja in napredek, tako da bralec lahko preklaplja med telefonom, tablico in namiznim računalnikom, ne da bi izgubil mesto, kjer je prenehal brati.",
-        lv = "Izstrādāts kā papildklients programmai Storyteller. Lasīšanas pozīcija un progress tiek sinhronizēti, tādējādi lasītājs var pārslēgties starp tālruni, planšetdatoru un datoru, nezaudējot lasīšanas vietu."
+        en = "A black-and-white theme with no animation, clear outlines and larger type, for e-readers that run Android.",
+        sl = "Črno-bela tema brez animacij, z jasnimi obrobami in večjo pisavo, za bralnike z Androidom.",
+        lv = "Melnbalta tēma bez animācijām, ar skaidrām kontūrām un lielāku burtu izmēru e-lasītājiem ar Android."
+    )
+
+    data object ParrotFeature8Desc : StringRes(
+        en = "Time read and listened by day and by book, streaks and every session, computed on the device and synced through Parrot Cloud.",
+        sl = "Čas branja in poslušanja po dnevih in knjigah, nizi in vsaka seja, izračunani na napravi in sinhronizirani prek Parrot Cloud.",
+        lv = "Lasīšanas un klausīšanās laiks pa dienām un grāmatām, sērijas un katra sesija, aprēķināti ierīcē un sinhronizēti caur Parrot Cloud."
+    )
+
+    data object ParrotFeature8Title : StringRes(
+        en = "Reading statistics",
+        sl = "Statistika branja",
+        lv = "Lasīšanas statistika"
+    )
+
+    data object CtaReadNote : StringRes(
+        en = "Read the note",
+        sl = "Preberi zapis",
+        lv = "Lasīt piezīmi"
     )
 
     data object CtaOpenCaseStudy : StringRes(
-        en = "Open the Parrot case study",
-        sl = "Odpri študijski primer Parrot",
-        lv = "Atvērt Parrot piemēra izpēti"
+        en = "Read the Parrot case study",
+        sl = "Preberite študijo primera Parrot",
+        lv = "Lasīt Parrot gadījuma izpēti"
     )
 
     data object NotesEyebrow : StringRes(
-        en = "// 03 — engineering notes",
-        sl = "// 03 — inženirske zabeležke",
-        lv = "// 03 — inženierijas piezīmes"
+        en = "// writing",
+        sl = "// pisanje",
+        lv = "// raksti"
     )
 
     data object NotesTitle : StringRes(
@@ -267,33 +285,33 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
     )
 
     data object NotesSubtitle : StringRes(
-        en = "Occasional deep-tech write-ups on how I build things — Kobweb, Compose, and Kotlin under the hood.",
-        sl = "Občasni prispevki o »deep-tech« tehnologijah, v katerih opisujem, kako razvijam svoje projekte — Kobweb, Compose in Kotlin v ozadju.",
-        lv = "Laiku pa laikam publicēju rakstus par tehnoloģiskām tēmām, kuros aprakstu, kā es veidoju savus projektus — Kobweb, Compose un Kotlin no iekšpuses."
+        en = "Write-ups of problems I solved in Kotlin, Kotlin Multiplatform and Kobweb, with the code.",
+        sl = "Zapisi o problemih, ki sem jih rešil v Kotlinu, Kotlin Multiplatform in Kobwebu, skupaj s kodo.",
+        lv = "Apraksti par problēmām, ko atrisināju ar Kotlin, Kotlin Multiplatform un Kobweb, kopā ar kodu."
     )
 
     data object ContactEyebrow : StringRes(
-        en = "// 03 — contact",
-        sl = "// 03 — kontakt",
-        lv = "// 03 — kontakti"
+        en = "// contact",
+        sl = "// kontakt",
+        lv = "// kontakti"
     )
 
     data object ContactHeading : StringRes(
-        en = "Let's build something precise.",
-        sl = "Naredimo nekaj natančnega.",
-        lv = "Uzbūvēsim kaut ko precīzu."
+        en = "Have a Kotlin Multiplatform project in mind?",
+        sl = "Načrtujete projekt s Kotlin Multiplatform?",
+        lv = "Plānojat Kotlin Multiplatform projektu?"
     )
 
     data object ContactBody : StringRes(
-        en = "I'm open to senior mobile engineering roles, KMP migrations, and Android architecture work. The fastest path is email.",
-        sl = "Zainteresiran sem za vodilne položaje na področju mobilnega inženirstva, migracije KMP in delo na področju arhitekture sistema Android. Najhitrejši način za stik je prek e-pošte.",
-        lv = "Esmu ieinteresēts vadošajos amatos mobilo ierīču inženierijas jomā, KMP migrācijās un darbā ar Android arhitektūru. Ātrākais veids, kā ar mani sazināties, ir e-pasts."
+        en = "I'm open to senior mobile engineering roles, Kotlin Multiplatform migrations and Android architecture work. Email is the quickest way to reach me.",
+        sl = "Odprt sem za vodilne vloge v mobilnem razvoju, selitve na Kotlin Multiplatform in arhitekturo Android. Najhitreje me dosežete po e-pošti.",
+        lv = "Esmu atvērts vecākā mobilo lietotņu inženiera lomām, Kotlin Multiplatform migrācijām un Android arhitektūras darbam. Ātrāk mani sazināt pa e-pastu."
     )
 
     data object CtaEmail : StringRes(
-        en = "Email Rok Retar",
-        sl = "Pošljite e-pošto Roku Retarju",
-        lv = "Sūtīt e-pastu Roku Retaram"
+        en = "Email me",
+        sl = "Pišite mi",
+        lv = "Rakstiet man"
     )
 
     data object FooterLinks : StringRes(
@@ -303,9 +321,9 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
     )
 
     data object FooterMeta : StringRes(
-        en = "Built natively in Kotlin with Kobweb",
-        sl = "Izvorno zgrajeno v Kotlinu s Kobwebom",
-        lv = "Veidots vietēji Kotlinā ar Kobweb"
+        en = "Built in Kotlin with Kobweb",
+        sl = "Zgrajeno v Kotlinu s Kobwebom",
+        lv = "Veidots ar Kotlin un Kobweb"
     )
 
     data object HeaderTitle : StringRes(
@@ -321,9 +339,9 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
     )
 
     data object NavPhilosophy : StringRes(
-        en = "Engineering",
-        sl = "Inženirstvo",
-        lv = "Inženierija"
+        en = "How I work",
+        sl = "Kako delam",
+        lv = "Kā strādāju"
     )
 
     data object NavProjects : StringRes(
@@ -357,33 +375,33 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
     )
 
     data object ParrotScreenshot1Desc : StringRes(
-        en = "Parrot e-reader in light mode showing custom typography and margins",
-        sl = "Bralnik Parrot v svetlem načinu s prilagojeno tipografijo in robovi",
-        lv = "Lasītājs Parrot gaišajā režīmā ar pielāgotu tipogrāfiju un malām"
+        en = "The reader with a highlighted passage and a note in the margin, in the day theme",
+        sl = "Bralnik s poudarjenim odlomkom in opombo ob robu v dnevni temi",
+        lv = "Lasītājs ar izceltu fragmentu un piezīmi malā dienas tēmā"
     )
 
     data object ParrotScreenshot2Desc : StringRes(
-        en = "Parrot e-reader in dark fullscreen mode with distraction-free reading",
-        sl = "Bralnik Parrot v temnem celozaslonskem načinu za nemoteno branje",
-        lv = "Lasītājs Parrot tumšajā pilnekrāna režīmā bez traucējumiem"
+        en = "Listening with an on-device voice: sentence controls, voice, rate and sleep timer",
+        sl = "Poslušanje z glasom na napravi: krmiljenje po stavkih, glas, hitrost in časovnik za spanje",
+        lv = "Klausīšanās ar ierīces balsi: teikumu vadība, balss, ātrums un miega taimeris"
     )
 
     data object ParrotScreenshot3Desc : StringRes(
-        en = "Parrot audiobook player with background notification and chapter controls",
-        sl = "Predvajalnik zvočnih knjig Parrot z obvestili v ozadju in upravljanjem poglavij",
-        lv = "Audio grāmatu atskaņotājs Parrot ar fona paziņojumiem un nodaļu vadību"
+        en = "Reading positions across the ebook and audiobook versions of one book",
+        sl = "Mesta branja v e-knjigi in zvočni knjigi iste knjige",
+        lv = "Lasīšanas vietas vienas grāmatas e-grāmatas un audiogrāmatas versijās"
     )
 
     data object ParrotScreenshot4Desc : StringRes(
-        en = "Parrot e-ink display mode on a specialized reader device",
-        sl = "Način e-ink prikaza Parrot na specializirani bralni napravi",
-        lv = "E-ink displeja režīms uz specializētas lasīšanas ierīces"
+        en = "A short recap of where you stopped last time, shown when you return to a book",
+        sl = "Kratek povzetek, kje ste nazadnje končali, ko se vrnete h knjigi",
+        lv = "Īss kopsavilkums par to, kur pēdējo reizi apstājāties, kad atgriežaties pie grāmatas"
     )
 
     data object ParrotScreenshot5Desc : StringRes(
-        en = "Parrot Read-Aloud sync with word-by-word text highlighting",
-        sl = "Sinhronizacija Read-Aloud v aplikaciji Parrot z osvetljevanjem besede za besedo",
-        lv = "Read-Aloud sinhronizācija ar vārds pa vārdam izcelšanu"
+        en = "Browsing the Project Gutenberg OPDS catalogue",
+        sl = "Brskanje po katalogu OPDS Project Gutenberg",
+        lv = "Project Gutenberg OPDS kataloga pārlūkošana"
     )
 
     data object AppsFlyerArticleTitle : StringRes(
@@ -393,21 +411,21 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
     )
 
     data object AppsFlyerArticleDesc : StringRes(
-        en = "A coroutine-first, expect/actual wrapper around the AppsFlyer SDKs — one Kotlin API, two native delegates, zero callbacks.",
-        sl = "A coroutine-first, expect/actual wrapper around the AppsFlyer SDKs — one Kotlin API, two native delegates, zero callbacks.",
-        lv = "A coroutine-first, expect/actual wrapper around the AppsFlyer SDKs — one Kotlin API, two native delegates, zero callbacks."
+        en = "A coroutine-first, expect/actual wrapper around the AppsFlyer SDKs: one Kotlin API, two native delegates, no callbacks.",
+        sl = "Ovoj okoli SDK-jev AppsFlyer z expect/actual, zasnovan na korutinah: en Kotlin API, dva nativna delegata, brez povratnih klicev.",
+        lv = "Uz korutīnām balstīts expect/actual apvalks AppsFlyer SDK: viens Kotlin API, divi nativi delegāti, bez atzvaniem."
     )
 
     data object InfiniteCarouselArticleTitle : StringRes(
-        en = "Building a Smooth, Infinite Carousel in Kobweb",
-        sl = "Izdelava gladkega, neskončnega vrtiljaka v Kobwebu",
-        lv = "Gludas bezgalīgas karuseļa komponentes izveide ar Kobweb"
+        en = "Building a smooth, infinite carousel in Kobweb",
+        sl = "Gladek, neskončen vrtiljak v Kobwebu",
+        lv = "Gluda, bezgalīga karuseļa izveide ar Kobweb"
     )
 
     data object InfiniteCarouselArticleDesc : StringRes(
-        en = "How to build an infinite, gapless carousel using Silk and Kobweb.",
-        sl = "Kako izdelati neskončni brezšivni vrtiljak s pomočjo knjižnic Silk in Kobweb.",
-        lv = "Kā izveidot bezgalīgu, bezstarpīgu karuseli, izmantojot Silk un Kobweb."
+        en = "How to build a gapless, endlessly looping carousel with Kobweb and Silk.",
+        sl = "Kako s Kobwebom in Silkom zgraditi vrtiljak brez vrzeli, ki se neskončno ponavlja.",
+        lv = "Kā ar Kobweb un Silk izveidot karuseli bez spraugām, kas griežas bezgalīgi."
     )
 
     data object SQLCipherArticleTitle : StringRes(
@@ -417,13 +435,49 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
     )
 
     data object SQLCipherArticleDesc : StringRes(
-        en = "Baking SQLCipher into a static Kotlin/Native framework so the iOS team adds nothing — not even a linker flag.",
-        sl = "Baking SQLCipher into a static Kotlin/Native framework so the iOS team adds nothing — not even a linker flag.",
-        lv = "Baking SQLCipher into a static Kotlin/Native framework so the iOS team adds nothing — not even a linker flag."
+        en = "Baking SQLCipher into a static Kotlin/Native framework, so the iOS team adds nothing, not even a linker flag.",
+        sl = "Kako SQLCipher vgraditi v statično ogrodje Kotlin/Native, da ekipi iOS ni treba dodati ničesar, niti zastavice povezovalnika.",
+        lv = "Kā iebūvēt SQLCipher statiskā Kotlin/Native ietvarā, lai iOS komandai nekas nav jāpievieno, pat ne saistītāja karogs."
+    )
+
+    data object ParrotCaseStudyEyebrow : StringRes(
+        en = "// case study",
+        sl = "// študija primera",
+        lv = "// gadījuma izpēte"
+    )
+
+    data object ParrotWhatItDoes : StringRes(
+        en = "// what it does",
+        sl = "// kaj zmore",
+        lv = "// ko tā dara"
+    )
+
+    data object ParrotLatestRelease : StringRes(
+        en = "// latest release",
+        sl = "// zadnja različica",
+        lv = "// jaunākā versija"
+    )
+
+    data object ParrotMeta : StringRes(
+        en = "Android · Free · Kotlin Multiplatform",
+        sl = "Android · Brezplačno · Kotlin Multiplatform",
+        lv = "Android · Bez maksas · Kotlin Multiplatform"
+    )
+
+    data object ArticleBack : StringRes(
+        en = "All notes",
+        sl = "Vsi zapisi",
+        lv = "Visas piezīmes"
+    )
+
+    data class ArticleMinutes(val minutes: Int) : StringRes(
+        en = "$minutes min read",
+        sl = "$minutes min branja",
+        lv = "$minutes min lasīšanai"
     )
 
     data object ParrotIconDesc : StringRes(
-        en = "Parrot App Icon",
+        en = "Parrot app icon",
         sl = "Ikona aplikacije Parrot",
         lv = "Parrot lietotnes ikona"
     )
@@ -435,9 +489,9 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
     )
 
     data object ParrotPageSubhead : StringRes(
-        en = "A lightweight EPUB e-reader and audiobook player — the companion app for Storyteller, built for readers who want a calibrated, immersive experience over generic digital layouts.",
-        sl = "Lahki bralnik e-knjig v formatu EPUB in predvajalnik zvočnih knjig — spremljevalna aplikacija za Storyteller, zasnovana za bralce, ki si želijo natančno prilagojeno, vživajočo izkušnjo namesto običajnih digitalnih postavitev.",
-        lv = "Viegla EPUB e-grāmatu lasīšanas un audio grāmatu atskaņošanas lietotne — Storyteller papildu lietotne, kas izstrādāta lasītājiem, kuri vēlas precīzi pielāgotu, aizraujošu pieredzi, nevis standarta digitālos noformējumus."
+        en = "A reader for your own ebooks and audiobooks on Android phones, tablets and e-ink readers. It highlights the text as the narrator reads, can read any ebook aloud with a voice on your device, and remembers where you are in every version of a book. Built with Kotlin Multiplatform; an iPhone version is in the works.",
+        sl = "Bralnik za lastne e-knjige in zvočne knjige na telefonih, tablicah in bralnikih e-ink z Androidom. Med pripovedovanjem označuje besedilo, katero koli e-knjigo lahko prebere z glasom na napravi in si zapomni, kje ste v vsaki različici knjige. Zgrajen s Kotlin Multiplatform; različica za iPhone je v pripravi.",
+        lv = "Lasītājs jūsu e-grāmatām un audiogrāmatām Android tālruņos, planšetēs un e-ink lasītājos. Tas izceļ tekstu, kamēr diktors lasa, var nolasīt jebkuru e-grāmatu ar balsi jūsu ierīcē un atceras, kur esat katrā grāmatas versijā. Veidots ar Kotlin Multiplatform; iPhone versija top."
     )
 
     data object ParrotDownloadSection : StringRes(
@@ -453,61 +507,61 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
     )
 
     data object ParrotViewHistory : StringRes(
-        en = "View Version History",
+        en = "View version history",
         sl = "Prikaži zgodovino različic",
         lv = "Skatīt versiju vēsturi"
     )
 
     data object ParrotFeature1PageTitle : StringRes(
-        en = "Typography & Reading Modes",
-        sl = "Tipografija in bralni načini",
-        lv = "Tipogrāfija un lasīšanas režīmi"
+        en = "Reading your way",
+        sl = "Branje po vaše",
+        lv = "Lasīšana jūsu veidā"
     )
 
     data object ParrotFeature1PageDesc : StringRes(
-        en = "Every reader calibrates differently. Parrot exposes user-defined font configurations and pinch-to-zoom text sizing, so type, size, margins, and line height adapt to the reader's ergonomics — not a generic default.\n\nNavigation stays out of the way: tap the screen edges to flip pages, swipe through chapters, or jump from the table of contents. A true fullscreen mode strips every chrome element away, leaving only the text. Dark, sepia, and a dedicated e-ink display mode handle the rest.",
-        sl = "Vsak bralec umerja drugače. Parrot omogoča uporabniško določene nastavitve pisave in povečevanje besedila s stiskanjem, tako da se pisava, velikost, robovi in višina vrstice prilagajajo ergonomiji bralca — in ne kaki splošni privzeti vrednosti.\n\nKrmarjenje ni na poti: z dotikom robov zaslona listate po straneh, z vlečenjem se premikate med poglavji ali pa skočite iz kazala. Pravi celozaslonski način odstrani vse elemente vmesnika in pusti le besedilo. Preostalo poskrbijo temni način, sepia in poseben način za e-ink zaslone.",
-        lv = "Katrs lasītājs kalibrē atšķirīgi. Parrot piedāvā lietotāja definētus fontu iestatījumus un teksta izmēra pielāgošanu ar kniebšanas žestu, lai fonts, izmērs, malas un rindas augstums pielāgotos lasītāja ergonomijai — nevis vispārīgam noklusējumam.\n\nNavigācija netraucē: pieskarieties ekrāna malām, lai pāršķirtu lapas, slīdiet cauri nodaļām vai pārlēciet no satura rādītāja. Īstais pilnekrāna režīms noņem visus UI elementus un atstāj tikai tekstu. Pārējo nodrošina tumšais, sēpijas un īpašais e-ink displeja režīms."
+        en = "Choose the font, weight, size, margins and line height, and Parrot keeps them for every book. Day, night and e-ink themes cover the rest; the e-ink theme drops animation and uses clear outlines and larger type.\n\nTap the screen edges or use the volume buttons to turn pages, search inside the book, jump from the contents, and tap any word for an offline dictionary definition. Highlights in four colours and notes in the margin collect in one list you can export as Markdown.",
+        sl = "Izberite pisavo, debelino, velikost, robove in razmik med vrsticami, Parrot pa jih ohrani za vsako knjigo. Za ostalo poskrbijo dnevna, nočna in e-ink tema; tema e-ink opusti animacije ter uporablja jasne obrobe in večjo pisavo.\n\nStrani obračate s tapom ob robu zaslona ali z gumbi za glasnost, iščete po knjigi, skočite iz kazala in tapnete katero koli besedo za razlago v slovarju brez povezave. Poudarki v štirih barvah in opombe ob robu se zberejo v enem seznamu, ki ga lahko izvozite v Markdown.",
+        lv = "Izvēlieties fontu, biezumu, izmēru, malas un rindstarpu, un Parrot tos saglabā katrai grāmatai. Pārējo nodrošina dienas, nakts un e-ink tēmas; e-ink tēma atsakās no animācijām un izmanto skaidras kontūras un lielāku burtu izmēru.\n\nPāršķiriet lapas, pieskaroties ekrāna malām vai ar skaļuma pogām, meklējiet grāmatā, pārejiet no satura rādītāja un pieskarieties jebkuram vārdam, lai bezsaistē redzētu vārdnīcas skaidrojumu. Izcēlumi četrās krāsās un piezīmes malās tiek apkopoti vienā sarakstā, ko var eksportēt kā Markdown."
     )
 
     data object ParrotFeature2PageTitle : StringRes(
-        en = "Background Audio & Read-Aloud Sync",
-        sl = "Zvok v ozadju in sinhronizacija Read-Aloud",
-        lv = "Fona audio un Read-Aloud sinhronizācija"
+        en = "Listen, or have it read to you",
+        sl = "Poslušajte ali naj vam prebere",
+        lv = "Klausieties vai ļaujiet nolasīt"
     )
 
     data object ParrotFeature2PageDesc : StringRes(
-        en = "Audiobook playback continues in the background with persistent system notification controls — skip chapters, scrub, and set speed without opening the app.\n\nThe Read-Aloud system is where reading and listening converge. As the narrator speaks, the text highlights in real time, word by word, tracking the audio precisely. It's built for language learners, developing readers, and anyone who reads with their ears. Highlight color and style are configurable; narration speed scales to taste.",
-        sl = "Predvajanje zvočnih knjig teče v ozadju s stalnimi sistemskimi obvestili za nadzor — preskakujete lahko poglavja, premikate se po posnetku in nastavljate hitrost, ne da bi odprli aplikacijo.\n\nSistem Read-Aloud je točka, kjer se branje in poslušanje združita. Ko pripovedovalec govori, se besedilo v realnem času osvetljuje beseda za besedo in natančno sledi zvoku. Namenjen je učečim se jezikov, bralcem, ki šele razvijajo bralne spretnosti, in vsem, ki berejo z ušesi. Barva in slog osvetlitve sta nastavljiva; hitrost pripovedi se prilagaja okusu.",
-        lv = "Audio grāmatu atskaņošana turpinās fonā ar pastāvīgiem sistēmas paziņojumu vadības elementiem — var pāršķirstīt nodaļas, ritināt un iestatīt ātrumu, ne atverot lietotni.\n\nRead-Aloud ir vieta, kur lasīšana un klausīšanās saplūst. Kad runātājs runā, teksts reāllaikā izceļas vārds pa vārdam un precīzi seko audio. Tas radīts valodu apguvējiem, lasītprasmi apguvējiem un ikvienam, kas lasa ar ausīm. Izcelšanas krāsas un stila iestatījumi ir pielāgojami; runāšanas ātrumu var pielāgot pēc patikas."
+        en = "For ebooks with synced narration, such as those made with Storyteller, each sentence lights up as it is read, and you can switch between reading and listening without losing your place. Audio keeps playing in the background, with chapter controls in the notification and on Android Auto, plus a sleep timer.\n\nNo audiobook? Download a voice and Parrot reads any ebook aloud. Chapters are prepared ahead so playback has no gaps, and the text is processed on the device.",
+        sl = "Pri e-knjigah s sinhronizirano pripovedjo, na primer tistih iz Storytellerja, se vsak stavek osvetli, ko je prebran, med branjem in poslušanjem pa preklapljate, ne da bi izgubili mesto. Zvok se predvaja v ozadju, poglavja upravljate iz obvestila in prek Android Auto, na voljo je tudi časovnik za spanje.\n\nNimate zvočne knjige? Prenesite glas in Parrot bo prebral katero koli e-knjigo. Poglavja se pripravijo vnaprej, zato predvajanje teče brez premorov, besedilo pa se obdela na napravi.",
+        lv = "E-grāmatām ar sinhronizētu stāstījumu, piemēram, no Storyteller, katrs teikums iedegas, kad tas tiek nolasīts, un jūs varat pārslēgties starp lasīšanu un klausīšanos, nezaudējot vietu. Audio turpina skanēt fonā, nodaļas var pārslēgt paziņojumā un Android Auto, un ir arī miega taimeris.\n\nNav audiogrāmatas? Lejupielādējiet balsi, un Parrot nolasīs jebkuru e-grāmatu. Nodaļas tiek sagatavotas iepriekš, lai atskaņošana būtu bez pauzēm, un teksts tiek apstrādāts ierīcē."
     )
 
     data object ParrotFeature3PageTitle : StringRes(
-        en = "Local Reading Analytics",
-        sl = "Lokalna analitika branja",
-        lv = "Vietējā lasīšanas analītika"
+        en = "Reading statistics",
+        sl = "Statistika branja",
+        lv = "Lasīšanas statistika"
     )
 
     data object ParrotFeature3PageDesc : StringRes(
-        en = "Reading habits are mapped locally, on-device, with no servers and no telemetry. Parrot tracks reading durations across days, weeks, and months, and calculates personalized reading-speed estimates per chapter — so you always know whether there's time for one more chapter before bed.",
-        sl = "Bralne navade se zbirajo lokalno, na sami napravi — brez strežnikov in brez telemetrije. Parrot sledi trajanju branja skozi dni, tedne in mesece ter za posamezno poglavje izračuna prilagojeno oceno hitrosti branja — tako vedno veste, ali je pred spanjem čas še za eno poglavje.",
-        lv = "Lasīšanas ieradumi tiek apkopoti vietēji — uz ierīces, bez serveriem un bez telemetrijas. Parrot seko lasīšanas ilgumiem dienas, nedēļas un mēneša griezumā un katrai nodaļai aprēķina personalizētu lasīšanas ātruma novērtējumu — lai vienmēr zinātu, vai pirms gulētiešanas pagūsiet izlasīt vēl vienu nodaļu."
+        en = "See how long you read and listened, by day and by book, with streaks and a record of every session. When you come back to a book, an optional recap reminds you where you stopped.",
+        sl = "Oglejte si, koliko časa ste brali in poslušali, po dnevih in po knjigah, z nizi in zapisom vsake seje. Ko se vrnete h knjigi, vas neobvezni povzetek spomni, kje ste končali.",
+        lv = "Redziet, cik ilgi lasījāt un klausījāties, pa dienām un pa grāmatām, ar sērijām un katras sesijas ierakstu. Kad atgriežaties pie grāmatas, neobligāts kopsavilkums atgādina, kur apstājāties."
     )
 
     data object ParrotFeature4PageTitle : StringRes(
-        en = "Companion Sync",
-        sl = "Sinhronizacija spremljevalca",
-        lv = "Pavadlietotnes sinhronizācija"
+        en = "Your library, on every device",
+        sl = "Vaša knjižnica na vseh napravah",
+        lv = "Jūsu bibliotēka visās ierīcēs"
     )
 
     data object ParrotFeature4PageDesc : StringRes(
-        en = "Parrot is the companion client for Storyteller. Reading position and progress sync across phone, tablet, and desktop, so a reader picks up exactly where they left off — no searching, no scrolling, just reading.",
-        sl = "Parrot je odjemalec-spremljevalec za Storyteller. Položaj in napredek branja se sinhronizirata med telefonom, tablico in namizjem, tako da bralec nadaljuje točno tam, kjer je končal — brez iskanja, brez pomikanja, samo branje.",
-        lv = "Parrot ir Storyteller pavadklients. Lasīšanas vieta un progress sinhronizējas starp telefonu, planšeti un datoru, tā ka lasītājs turpina tieši tur, kur pārtrauca — bez meklēšanas, bez ritināšanas, tikai lasīšana."
+        en = "Connect the Storyteller or Audiobookshelf server you already run, or browse OPDS catalogues such as Project Gutenberg. No server? Parrot Cloud keeps your books, place, highlights and notes on every device you sign in to.\n\nLink the ebook and audiobook of the same book and Parrot shows where you are in each, then moves the others to the matching place when you ask. Downloaded books work offline, and your place syncs the next time you are online.",
+        sl = "Povežite strežnik Storyteller ali Audiobookshelf, ki ga že uporabljate, ali brskajte po katalogih OPDS, kot je Project Gutenberg. Nimate strežnika? Parrot Cloud ohrani vaše knjige, mesto branja, poudarke in opombe na vseh napravah, v katere se prijavite.\n\nPovežite e-knjigo in zvočno knjigo iste knjige in Parrot pokaže, kje ste v vsaki, ter na zahtevo premakne ostale na ustrezno mesto. Prenesene knjige delujejo brez povezave, mesto branja pa se sinhronizira, ko ste spet na spletu.",
+        lv = "Pievienojiet savu Storyteller vai Audiobookshelf serveri vai pārlūkojiet OPDS katalogus, piemēram, Project Gutenberg. Nav servera? Parrot Cloud saglabā jūsu grāmatas, vietu, izcēlumus un piezīmes visās ierīcēs, kurās piesakāties.\n\nSasaistiet vienas grāmatas e-grāmatu un audiogrāmatu, un Parrot parāda, kur esat katrā, un pēc pieprasījuma pārvieto pārējās uz atbilstošo vietu. Lejupielādētās grāmatas darbojas bezsaistē, un vieta tiek sinhronizēta, kad atkal esat tiešsaistē."
     )
 
     data object VersionHistory : StringRes(
-        en = "Version History",
+        en = "Version history",
         sl = "Zgodovina različic",
         lv = "Versiju vēsture"
     )
@@ -519,13 +573,13 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
     )
 
     data object NewFeatures : StringRes(
-        en = "New Features",
+        en = "New features",
         sl = "Nove funkcije",
         lv = "Jaunas funkcijas"
     )
 
     data object BugFixes : StringRes(
-        en = "Bug Fixes",
+        en = "Bug fixes",
         sl = "Popravki napak",
         lv = "Kļūdu labojumi"
     )
@@ -537,13 +591,13 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
     )
 
     data object NewFeaturesLabel : StringRes(
-        en = "New Features:",
+        en = "New features:",
         sl = "Nove funkcije:",
         lv = "Jaunas funkcijas:"
     )
 
     data object BugFixesLabel : StringRes(
-        en = "Bug Fixes:",
+        en = "Bug fixes:",
         sl = "Popravki napak:",
         lv = "Kļūdu labojumi:"
     )
@@ -585,32 +639,32 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
     )
 
     data object ExperienceStackTitle : StringRes(
-        en = "Technology stack and specialization",
-        sl = "Tehnološki sklop in specializacija",
-        lv = "Tehnoloģiju steks un specializācija"
+        en = "The tools I use every day",
+        sl = "Orodja, ki jih uporabljam vsak dan",
+        lv = "Rīki, ko lietoju katru dienu"
     )
 
     data object ExperienceStackBody : StringRes(
-        en = "I'm a mobile engineer based in Slovenia. Android is where I started, and Kotlin Multiplatform is where I ended up. The stack I reach for daily: Kotlin, Jetpack Compose, Compose Multiplatform, Kobweb, SQLDelight, SQLCipher, Ktor, Koin, and Decompose.\n\nThe architecture I build is multi-module with strict dependency rules. Domain stays pure Kotlin. Data layers handle persistence and networking. UI stays native where the platform earns it. For Swift interop I use SKIE. For databases, SQLDelight with SQLCipher. Ktor handles networking, Koin handles DI, and Decompose handles navigation and lifecycle. This site is built in Kotlin with Kobweb and Compose for Web. If you're reading this, the proof is already loading.",
-        sl = "Sem mobilni inženir iz Slovenije. Začel sem z Androidom, končal pa sem pri Kotlin Multiplatform. Tehnološki stack, ki ga uporabljam vsak dan: Kotlin, Jetpack Compose, Compose Multiplatform, Kobweb, SQLDelight, SQLCipher, Ktor, Koin in Decompose.\n\nArhitektura, ki jo gradim, je večmodulna s strogimi pravili odvisnosti. Domena ostaja izključno v Kotlinu. Podatkovni sloji skrbijo za trajnost in omrežne povezave. Uporabniški vmesnik ostaja nativni, kjer si to platforma zasluži. Za medopravilnost s Swiftom uporabljam SKIE. Za baze podatkov uporabljam SQLDelight s SQLCipherjem. Ktor skrbi za omrežje, Koin za DI, Decompose pa za navigacijo in življenjski cikel. Ta spletna stran je zgrajena v Kotlinu s Kobwebom in Compose for Web. Če to bereš, se dokaz že nalaga.",
-        lv = "Esmu mobilo lietotņu inženieris, kas dzīvo Slovēnijā. Savu karjeru sāku ar Android, bet nonācu pie Kotlin Multiplatform. Tehnoloģiju kopums, ko ikdienā izmantoju: Kotlin, Jetpack Compose, Compose Multiplatform, Kobweb, SQLDelight, SQLCipher, Ktor, Koin un Decompose.\n\nEs veidoju daudzmoduļu arhitektūru ar stingriem atkarību noteikumiem. Domēns paliek tīrā Kotlin. Datu slāņi nodrošina datu saglabāšanu un tīkla darbību. Lietotāja saskarne paliek nativā, ja platforma to atbalsta. Swift sadarbībai es izmantoju SKIE. Datubāzēm — SQLDelight kopā ar SQLCipher. Ktor nodrošina tīkla savienojumus, Koin — atkarību injekciju (DI), bet Decompose — navigāciju un dzīves ciklu. Šī vietne ir izstrādāta Kotlin valodā, izmantojot Kobweb un Compose for Web. Ja jūs to lasāt, pierādījums jau tiek ielādēts."
+        en = "My daily stack is Kotlin, Jetpack Compose, Compose Multiplatform, Ktor, Koin, Decompose, SQLDelight with SQLCipher, and SKIE for Swift interop.\n\nI build multi-module apps with strict dependency rules: the domain is plain Kotlin, data layers handle storage and networking, and the UI is native where that matters. This site is written in Kotlin too, with Kobweb and Compose for Web.",
+        sl = "Moj vsakdanji nabor je Kotlin, Jetpack Compose, Compose Multiplatform, Ktor, Koin, Decompose, SQLDelight s SQLCipherjem in SKIE za povezavo s Swiftom.\n\nGradim večmodulne aplikacije s strogimi pravili odvisnosti: domena je čisti Kotlin, podatkovne plasti skrbijo za shranjevanje in omrežje, vmesnik pa je nativen tam, kjer je to pomembno. Tudi ta stran je napisana v Kotlinu, s Kobwebom in Compose for Web.",
+        lv = "Mans ikdienas komplekts ir Kotlin, Jetpack Compose, Compose Multiplatform, Ktor, Koin, Decompose, SQLDelight ar SQLCipher un SKIE sadarbībai ar Swift.\n\nEs veidoju daudzmoduļu lietotnes ar stingriem atkarību noteikumiem: domēns ir tīrs Kotlin, datu slāņi rūpējas par glabāšanu un tīklu, bet saskarne ir nativa tur, kur tas ir svarīgi. Arī šī vietne ir rakstīta Kotlin valodā ar Kobweb un Compose for Web."
     )
 
     data object ExperienceMigrationTitle : StringRes(
-        en = "Production KMP migration",
-        sl = "Produkcijska selitev na KMP",
-        lv = "Ražošanas KMP migrācija"
+        en = "Production apps I've shipped",
+        sl = "Produkcijske aplikacije, ki sem jih izdal",
+        lv = "Ražošanas lietotnes, ko esmu izlaidis"
     )
 
     data object ExperienceMigrationBody : StringRes(
-        en = "The headline work: migrating production iOS to shared Kotlin. I architected the whole thing. Shared business logic, data layers with SQLCipher encryption, domain models. All written once in Kotlin, compiled to a static Kotlin/Native framework. The iOS team plugged it in without adding a single linker flag. Android and iOS now run on one Kotlin codebase. In production. Shipping to real users.\n\nI've also shipped production apps in three very different domains. An AI platform with real-time chat, timelines, and push notifications. A gaming app with NFC, biometric auth, cashless payments, and whitelabel multi-app deployment. And Parrot, a cross-platform EPUB reader and audiobook player with Read-Aloud sync, e-ink support, and reading analytics. Each one pushed KMP in a different direction. Shared networking and database layers in one. Full shared UI with Compose Multiplatform in another.",
-        sl = "Glavni projekt: migracija produkcijskega iOS-a na skupni Kotlin. Celotno arhitekturo sem zasnoval sam. Skupna poslovna logika, podatkovne plasti s šifriranjem SQLCipher, domenski modeli. Vse je bilo enkrat napisano v Kotlinu in kompilirano v statični okvir Kotlin/Native. Ekipa za iOS je to vključila brez dodajanja enega samega zastavka povezovalnika. Android in iOS zdaj delujeta na eni kodni bazi v Kotlinu. V produkciji. Na voljo resničnim uporabnikom.\n\nPrav tako sem izdal produkcijske aplikacije v treh zelo različnih področjih. Platforma umetne inteligence s klepetom v realnem času, časovnicami in push obvestili. Igralna aplikacija z NFC, biometrično avtentifikacijo, brezgotovinskimi plačili in uvajanjem več aplikacij pod lastno blagovno znamko. In Parrot, večplatformski bralnik EPUB in predvajalnik zvočnih knjig s sinhronizacijo glasovnega branja, podporo za e-ink in analitiko branja. Vsaka od njih je KMP popeljala v drugo smer. Skupne omrežne in podatkovne plasti v enem primeru. Popolnoma skupni uporabniški vmesnik s Compose Multiplatform v drugem.",
-        lv = "Galvenais uzdevums: iOS ražošanas vides migrēšana uz kopīgo Kotlin vidi. Es izstrādāju visus arhitektūras risinājumus. Kopīga biznesa loģika, datu slāņi ar SQLCipher šifrēšanu, domēna modeļi. Viss vienreiz uzrakstīts Kotlin valodā un kompilēts statiskā Kotlin/Native frameworkā. iOS komanda to integrēja, nepievienojot nevienu linkera karodziņu. Tagad Android un iOS darbojas uz vienas Kotlin kodbāzes. Ražošanas vidē. Piegādāts reāliem lietotājiem.\n\nEsmu arī izlaidis ražošanas lietotnes trīs ļoti atšķirīgās jomās. AI platforma ar reāllaika čatu, laika joslām un push paziņojumiem. Spēļu lietotne ar NFC, biometrisko autentifikāciju, bezskaidras naudas maksājumiem un vairāku lietotņu izvietošanu ar balto zīmolu. Un Parrot — daudzplatformu EPUB lasītājs un audio grāmatu atskaņotājs ar sinhronizāciju ar skaļas lasīšanas funkciju, e-ink atbalstu un lasīšanas analītiku. Katra no tām virzīja KMP citā virzienā. Vienā gadījumā — kopīgi tīkla un datubāzes slāņi. Citā gadījumā — pilnībā kopīga lietotāja saskarne ar Compose Multiplatform."
+        en = "The biggest was moving a company's production iOS app to shared Kotlin. I designed the architecture and built the shared code: business logic, domain models and SQLCipher-encrypted data layers, compiled into a static Kotlin/Native framework. The iOS team added it without a single new linker flag.\n\nI've also shipped an AI platform with real-time chat, timelines and push notifications; a gaming app with NFC, biometric sign-in, cashless payments and white-label builds; and Parrot. Each used Kotlin Multiplatform differently, from shared networking and database layers to fully shared Compose UI.",
+        sl = "Največji projekt je bil prehod produkcijske iOS aplikacije podjetja na skupni Kotlin. Zasnoval sem arhitekturo in napisal skupno kodo: poslovno logiko, domenske modele in podatkovne plasti, šifrirane s SQLCipherjem, prevedene v statično ogrodje Kotlin/Native. Ekipa iOS ga je dodala brez ene same nove zastavice povezovalnika.\n\nIzdal sem tudi platformo z umetno inteligenco s klepetom v realnem času, časovnicami in potisnimi obvestili; igralniško aplikacijo z NFC, biometrično prijavo, brezgotovinskim plačevanjem in različicami pod tujo blagovno znamko; ter Parrot. Vsaka je Kotlin Multiplatform uporabila drugače, od skupnih omrežnih in podatkovnih plasti do povsem skupnega vmesnika v Compose.",
+        lv = "Lielākais bija uzņēmuma ražošanas iOS lietotnes pārcelšana uz kopīgu Kotlin kodu. Es izstrādāju arhitektūru un uzrakstīju kopīgo kodu: biznesa loģiku, domēna modeļus un ar SQLCipher šifrētus datu slāņus, kompilētus statiskā Kotlin/Native ietvarā. iOS komanda to pievienoja bez neviena jauna saistītāja karoga.\n\nEsmu izlaidis arī mākslīgā intelekta platformu ar reāllaika tērzēšanu, laika joslām un push paziņojumiem; spēļu lietotni ar NFC, biometrisko pieteikšanos, bezskaidras naudas maksājumiem un white-label versijām; un Parrot. Katrā Kotlin Multiplatform tika izmantots citādi, no kopīgiem tīkla un datubāzes slāņiem līdz pilnībā kopīgai Compose saskarnei."
     )
 
     data object ExperienceContactBody : StringRes(
-        en = "I'm open to senior mobile engineering roles, KMP migration projects, and Android architecture consulting. Based in Slovenia, available for remote work across the EU. Email me at rok.retar@gmail.com. Full-time role, migration assessment, or just a technical conversation about Kotlin Multiplatform. All welcome.",
-        sl = "Zainteresiran sem za vodilne inženirske položaje na področju mobilnih tehnologij, projekte migracije KMP ter svetovanje na področju arhitekture sistema Android. Prebivam v Sloveniji in sem na voljo za delo na daljavo po vsej EU. Pišite mi na rok.retar@gmail.com. Bodisi za polno zaposlitev, oceno migracije ali pa zgolj za strokovni pogovor o Kotlin Multiplatform – vse je dobrodošlo.",
-        lv = "Esmu ieinteresēts vecāko mobilo inženieru amatos, KMP migrācijas projektos un konsultācijās par Android arhitektūru. Atrodos Slovēnijā, esmu pieejams attālinātajam darbam visā ES. Rakstiet man uz e-pastu rok.retar@gmail.com. Pilna laika darbs, migrācijas novērtējums vai vienkārši tehniska saruna par Kotlin Multiplatform — viss ir laipni gaidīts."
+        en = "I'm open to senior mobile engineering roles, Kotlin Multiplatform migrations and Android architecture work. I'm based in Slovenia and work remotely across the EU. A job offer, a migration review or just a question about KMP: email me at rok.retar@gmail.com.",
+        sl = "Odprt sem za vodilne vloge v mobilnem razvoju, selitve na Kotlin Multiplatform in arhitekturo Android. Živim v Sloveniji in delam na daljavo po vsej EU. Ponudba za delo, pregled selitve ali le vprašanje o KMP: pišite mi na rok.retar@gmail.com.",
+        lv = "Esmu atvērts vecākā mobilo lietotņu inženiera lomām, Kotlin Multiplatform migrācijām un Android arhitektūras darbam. Dzīvoju Slovēnijā un strādāju attālināti visā ES. Darba piedāvājums, migrācijas pārskats vai vienkārši jautājums par KMP: rakstiet man uz rok.retar@gmail.com."
     )
 }

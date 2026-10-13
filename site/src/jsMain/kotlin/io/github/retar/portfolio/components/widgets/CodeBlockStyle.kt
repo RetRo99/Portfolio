@@ -51,7 +51,7 @@ val CodeBlockStyle = CssStyle.base(extraModifier = { SmoothColorStyle.toModifier
     Modifier
         .backgroundColor(palette.codeBackground)
         .color(palette.codeText)
-        .borderRadius(10.px)
+        .borderRadius(6.px)
         .maxWidth(100.percent)
         .overflow { x(Overflow.Auto) }
         .whiteSpace(WhiteSpace.Pre)
@@ -61,15 +61,13 @@ val CodeBlockStyle = CssStyle.base(extraModifier = { SmoothColorStyle.toModifier
 val CodeLabelStyle = CssStyle.base {
     Modifier
         .position(Position.Absolute)
-        .backgroundColor("var(--syntax-gutter-background-color-selected)".unsafeCast<CSSColorValue>())
-        .color("var(--mono-1)".unsafeCast<CSSColorValue>())
-//        .border(1.px, LineStyle.Solid, DividerColor.value())
+        .color("var(--mono-2)".unsafeCast<CSSColorValue>())
         .fontSize(0.75.em)
-        .top((-1).em)
-        .left(1.em)
-        .padding(topBottom = 0.em, leftRight = 0.5.em)
+        .top((-1.75).em)
+        .left(0.em)
         .borderRadius(5.px)
         .pointerEvents(PointerEvents.None)
+        .styleModifier { property("font-family", "'Geist Mono', ui-monospace, monospace") }
 }
 
 /**

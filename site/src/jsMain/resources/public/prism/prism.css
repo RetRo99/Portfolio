@@ -14,57 +14,41 @@
     - Changing the `--mono-3` color in both color modes to improve readability/contrast
  */
 
+/* Editorial paper/ink syntax theme: warm neutrals with the site's rust accent for keywords. */
 .silk-light {
-    --mono-1: hsl(230, 8%, 24%);
-    --mono-2: hsl(230, 6%, 44%);
-    /* Custom change: this increases contrast with the background, making comments more readable */
-    --mono-3: hsl(230, 4%, 54%); /*Original value:  hsl(230, 4%, 64%); */
-    --hue-1: hsl(198, 99%, 37%);
-    --hue-2: hsl(221, 87%, 60%);
-    --hue-3: hsl(301, 63%, 40%);
-    --hue-4: hsl(119, 34%, 47%);
-    --hue-5: hsl(5, 74%, 59%);
-    --hue-5-2: hsl(344, 84%, 43%);
-    --hue-6: hsl(35, 99%, 36%);
-    /*--hue-6-2: hsl(35, 99%, 40%);*/
-    /*--syntax-fg: hsl(230, 8%, 24%);*/
-    --syntax-bg: rgb(240, 240, 244);
-    /*--syntax-gutter: hsl(230, 1%, 62%);*/
-    /*--syntax-guide: hsla(230, 8%, 24%, 0.2);*/
-    /*--syntax-accent: hsl(230, 100%, 66%);*/
-    --syntax-selection-color: hsl(230, 1%, 90%);
-    --syntax-gutter-background-color-selected: hsl(230, 1%, 90%);
-    /* Custom change: increase alpha (used to be 0.05), highlights were too hard to see */
-    --syntax-cursor-line: hsla(230, 8%, 24%, 0.1);
-
-    /* An extra color used but not defined in the original variable list */
-    --syntax-extra-1: hsl(230, 1%, 78%);
+    --mono-1: #1C1A17;
+    --mono-2: #5E584E;
+    --mono-3: #766E61;
+    --hue-1: #2C6B66;
+    --hue-2: #2F5A86;
+    --hue-3: #B24522;
+    --hue-4: #57682B;
+    --hue-5: #9E3A34;
+    --hue-5-2: #9E3A34;
+    --hue-6: #87580F;
+    --syntax-bg: #EDE8DD;
+    --syntax-selection-color: #DDD5C7;
+    --syntax-gutter-background-color-selected: #F6F3EC;
+    --syntax-cursor-line: rgba(178, 69, 34, 0.09);
+    --syntax-extra-1: #DDD5C7;
 }
 
 .silk-dark {
-    --mono-1: hsl(220, 14%, 71%);
-    --mono-2: hsl(220, 9%, 55%);
-    /* Custom change: this increases contrast with the background, making comments more readable */
-    --mono-3: hsl(220, 10%, 48%); /* Original value: hsl(220, 10%, 40%); */
-    --hue-1: hsl(187, 47%, 55%);
-    --hue-2: hsl(207, 82%, 66%);
-    --hue-3: hsl(286, 60%, 67%);
-    --hue-4: hsl(95, 38%, 62%);
-    --hue-5: hsl(355, 65%, 65%);
-    --hue-5-2: hsl(5, 48%, 51%);
-    --hue-6: hsl(29, 54%, 61%);
-    /*--hue-6-2: hsl(39, 67%, 69%);*/
-    /*--syntax-fg: hsl(220, 14%, 71%);*/
-    --syntax-bg: rgb(39, 39, 42);
-    /*--syntax-gutter: hsl(220, 14%, 45%);*/
-    /*--syntax-guide: hsla(220, 14%, 71%, 0.15);*/
-    /*--syntax-accent: hsl(220, 100%, 66%);*/
-    --syntax-selection-color: hsl(220, 13%, 28%);
-    --syntax-gutter-background-color-selected: hsl(220, 13%, 26%);
-    /* Custom change: increase alpha (used to be 0.04), highlights were too hard to see */
-    --syntax-cursor-line: hsla(220, 100%, 80%, 0.15);
-    /* An extra color used but not defined in the original variable list */
-    --syntax-extra-1: var(--syntax-selection-color);
+    --mono-1: #EEE8DC;
+    --mono-2: #A79F90;
+    --mono-3: #8C8476;
+    --hue-1: #7FBDB4;
+    --hue-2: #8DB3D8;
+    --hue-3: #E27C54;
+    --hue-4: #A9B96C;
+    --hue-5: #E0897E;
+    --hue-5-2: #E0897E;
+    --hue-6: #D8A75B;
+    --syntax-bg: #1F1C18;
+    --syntax-selection-color: #34302A;
+    --syntax-gutter-background-color-selected: #151310;
+    --syntax-cursor-line: rgba(226, 124, 84, 0.12);
+    --syntax-extra-1: #34302A;
 }
 
 code[class*="language-"],

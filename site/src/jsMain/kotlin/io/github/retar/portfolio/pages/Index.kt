@@ -1,59 +1,37 @@
 package io.github.retar.portfolio.pages
 
 import androidx.compose.runtime.Composable
-import com.varabyte.kobweb.compose.foundation.layout.Box
-import com.varabyte.kobweb.compose.foundation.layout.Column
-import com.varabyte.kobweb.compose.foundation.layout.Row
-import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
-import com.varabyte.kobweb.compose.ui.graphics.Colors
-import com.varabyte.kobweb.compose.ui.modifiers.backgroundColor
-import com.varabyte.kobweb.compose.ui.modifiers.borderRadius
-import com.varabyte.kobweb.compose.ui.modifiers.fontSize
-import com.varabyte.kobweb.compose.ui.modifiers.fontFamily
-import com.varabyte.kobweb.compose.ui.modifiers.color
-import com.varabyte.kobweb.compose.ui.modifiers.padding
-import com.varabyte.kobweb.compose.css.CSSLengthNumericValue
-import com.varabyte.kobweb.compose.css.functions.clamp
-import com.varabyte.kobweb.compose.css.ObjectFit
-import com.varabyte.kobweb.compose.ui.modifiers.alignItems
-import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
-import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
-import com.varabyte.kobweb.compose.ui.modifiers.flexWrap
-import com.varabyte.kobweb.compose.ui.modifiers.display
-import com.varabyte.kobweb.compose.ui.modifiers.gap
-import com.varabyte.kobweb.compose.ui.modifiers.gridTemplateColumns
-import com.varabyte.kobweb.compose.ui.modifiers.margin
-import com.varabyte.kobweb.compose.ui.modifiers.maxWidth
-import com.varabyte.kobweb.compose.ui.modifiers.padding
+import com.varabyte.kobweb.compose.ui.styleModifier
 import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.core.layout.Layout
+import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.base
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.style.toModifier
-import org.jetbrains.compose.web.dom.Div
 import io.github.retar.portfolio.components.PortfolioSection
 import io.github.retar.portfolio.components.PortfolioSectionId
-import io.github.retar.portfolio.components.SectionHeader
-import io.github.retar.portfolio.seo.Seo
-import io.github.retar.portfolio.components.widgets.ArticleCard
+import io.github.retar.portfolio.components.widgets.ArticleRow
 import io.github.retar.portfolio.components.widgets.Callout
 import io.github.retar.portfolio.components.widgets.DownloadButton
-import io.github.retar.portfolio.components.widgets.FeatureGrid
-import io.github.retar.portfolio.components.widgets.FeatureItem
-import io.github.retar.portfolio.components.widgets.InfiniteCarousel
+import io.github.retar.portfolio.components.widgets.EditorialGrid
+import io.github.retar.portfolio.components.widgets.FactList
+import io.github.retar.portfolio.components.widgets.PhoneRowItemStyle
+import io.github.retar.portfolio.components.widgets.PhoneRowStyle
+import io.github.retar.portfolio.components.widgets.PhoneShot
 import io.github.retar.portfolio.components.widgets.PrimaryButton
-import io.github.retar.portfolio.components.widgets.ProjectCard
 import io.github.retar.portfolio.components.widgets.ResumeDownloadButton
 import io.github.retar.portfolio.components.widgets.TextLink
+import io.github.retar.portfolio.components.widgets.rise
 import io.github.retar.portfolio.resources.ImageRes
 import io.github.retar.portfolio.resources.LinkRes
 import io.github.retar.portfolio.resources.ParrotRes
 import io.github.retar.portfolio.resources.ProjectsRes
 import io.github.retar.portfolio.resources.StringRes
+import io.github.retar.portfolio.seo.Seo
 import io.github.retar.portfolio.styles.BodyStyle
 import io.github.retar.portfolio.styles.CaptionStyle
 import io.github.retar.portfolio.styles.DisplayStyle
@@ -66,101 +44,142 @@ import io.github.retar.portfolio.styles.H3Text
 import io.github.retar.portfolio.styles.MonoAccentStyle
 import io.github.retar.portfolio.styles.MonoEyebrowStyle
 import io.github.retar.portfolio.styles.SubtitleStyle
+import io.github.retar.portfolio.styles.eyebrowText
+import io.github.retar.portfolio.styles.sitePalette
 import io.github.retar.portfolio.utils.trackEvent
-import org.jetbrains.compose.web.css.AlignItems
-import org.jetbrains.compose.web.css.DisplayStyle as WebDisplayStyle
-import org.jetbrains.compose.web.css.FlexWrap
-import org.jetbrains.compose.web.css.ch
-import org.jetbrains.compose.web.css.cssRem
-import org.jetbrains.compose.web.css.fr
-import org.jetbrains.compose.web.css.px
-import org.jetbrains.compose.web.css.rgba
-import org.jetbrains.compose.web.css.vw
+import org.jetbrains.compose.web.dom.Div
 
 @Page
 @Layout(".components.layouts.PageLayout")
 @Composable
 fun IndexPage() {
     Seo(
-        title = "Rok Retar — Mobile Engineer (Android & Kotlin Multiplatform)",
-        description = "Android and Kotlin Multiplatform engineer specializing in KMP migrations taken to production iOS. One Kotlin codebase, two platforms, native feel intact.",
+        title = "Rok Retar · Android and Kotlin Multiplatform engineer",
+        description = "Rok Retar is a mobile engineer in Slovenia who builds Android apps and takes Kotlin Multiplatform to production on iOS. Work, engineering notes and contact.",
         path = "/",
     )
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .alignItems(AlignItems.FlexStart),
-    ) {
+    Div(attrs = Modifier.styleModifier { property("width", "100%") }.toAttrs()) {
         HeroSection()
+        ParrotShowcaseSection()
         PhilosophySection()
         ExperienceSection()
-        ParrotShowcaseSection()
         ArticlesSection()
     }
 }
 
-private fun Modifier.sectionPadding(
-    top: CSSLengthNumericValue = clamp(4.cssRem, 8.vw, 7.cssRem),
-    bottom: CSSLengthNumericValue = clamp(4.cssRem, 8.vw, 7.cssRem),
-): Modifier = padding(top = top, bottom = bottom)
+private fun Modifier.sectionSpacing(): Modifier =
+    styleModifier { property("padding-block", "clamp(3.5rem, 8vw, 7rem)") }
 
-private fun Modifier.measureMax(charWidth: Int): Modifier = maxWidth(charWidth.ch)
+private fun Modifier.measure(ch: Int): Modifier =
+    styleModifier { property("max-width", "${ch}ch") }
+
+private fun Modifier.column(gap: String): Modifier = styleModifier {
+    property("display", "flex")
+    property("flex-direction", "column")
+    property("gap", gap)
+}
+
+private fun Modifier.actionRow(): Modifier = styleModifier {
+    property("display", "flex")
+    property("flex-wrap", "wrap")
+    property("align-items", "center")
+    property("gap", "0.75rem 1.25rem")
+}
+
+val HeroGridStyle = CssStyle {
+    base {
+        Modifier.styleModifier {
+            property("display", "grid")
+            property("grid-template-columns", "minmax(0, 1fr)")
+            property("gap", "2rem")
+            property("align-items", "end")
+            property("padding-block", "clamp(2.5rem, 7vw, 6rem) clamp(3.5rem, 8vw, 7rem)")
+        }
+    }
+    Breakpoint.MD {
+        Modifier.styleModifier {
+            property("grid-template-columns", "minmax(0, 8fr) minmax(0, 4fr)")
+            property("gap", "3rem")
+        }
+    }
+}
+
+val HeroPortraitStyle = CssStyle {
+    base {
+        val palette = sitePalette()
+        Modifier.styleModifier {
+            property("width", "min(46vw, 180px)")
+            property("aspect-ratio", "4 / 5")
+            property("border-radius", "10px")
+            property("overflow", "hidden")
+            property("background", palette.surface.toString())
+            property("order", "-1")
+        }
+    }
+    Breakpoint.MD {
+        Modifier.styleModifier {
+            property("width", "100%")
+            property("max-width", "300px")
+            property("justify-self", "end")
+            property("order", "0")
+        }
+    }
+}
 
 @Composable
 private fun HeroSection() {
     PortfolioSection(
         section = PortfolioSectionId.About,
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.styleModifier { property("width", "100%") },
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .gap(16.px)
-                .sectionPadding(top = clamp(3.cssRem, 6.vw, 5.cssRem)),
-        ) {
-            SpanText(
-                text = StringRes.HeroEyebrow.value,
-                modifier = MonoEyebrowStyle.toModifier(),
-            )
+        Div(attrs = HeroGridStyle.toModifier().toAttrs()) {
+            Div(attrs = Modifier.column("1.5rem").toAttrs()) {
+                SpanText(
+                    text = StringRes.HeroEyebrow.value.eyebrowText(),
+                    modifier = MonoEyebrowStyle.toModifier().rise(0),
+                )
+                H1Text(
+                    text = StringRes.HeroName.value,
+                    modifier = DisplayStyle.toModifier().rise(1),
+                )
+                Div(attrs = Modifier.column("1rem").rise(2).toAttrs()) {
+                    SpanText(
+                        text = StringRes.HeroHeadline.value,
+                        modifier = H1Style.toModifier().measure(34),
+                    )
+                    SpanText(
+                        text = StringRes.HeroSubtitle.value,
+                        modifier = BodyStyle.toModifier().measure(60),
+                    )
+                }
+                HeroCtaRow()
+                SpanText(
+                    text = StringRes.HeroStatusStrip.value,
+                    modifier = CaptionStyle.toModifier().rise(4),
+                )
+            }
 
-            H1Text(
-                text = StringRes.HeroName.value,
-                modifier = DisplayStyle.toModifier(),
-            )
-
-            H2Text(
-                text = StringRes.HeroHeadline.value,
-                modifier = H1Style.toModifier()
-                    .measureMax(30),
-            )
-
-            SpanText(
-                text = StringRes.HeroSubtitle.value,
-                modifier = BodyStyle.toModifier()
-                    .measureMax(65),
-            )
-
-            HeroCtaRow()
-
-            SpanText(
-                text = StringRes.HeroStatusStrip.value,
-                modifier = CaptionStyle.toModifier()
-                    .margin(top = 8.px),
-            )
+            Div(attrs = HeroPortraitStyle.toModifier().rise(2).toAttrs()) {
+                Image(
+                    src = ImageRes.ProfileImage.path,
+                    description = "Portrait of Rok Retar",
+                    modifier = Modifier.styleModifier {
+                        property("width", "100%")
+                        property("height", "100%")
+                        property("object-fit", "cover")
+                        property("display", "block")
+                    },
+                    width = ImageRes.ProfileImage.intrinsicWidth,
+                    height = ImageRes.ProfileImage.intrinsicHeight,
+                )
+            }
         }
     }
 }
 
 @Composable
 private fun HeroCtaRow() {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .gap(16.px)
-            .flexWrap(FlexWrap.Wrap)
-            .alignItems(AlignItems.Center)
-            .margin(top = 24.px),
-    ) {
+    Div(attrs = Modifier.actionRow().rise(3).styleModifier { property("margin-top", "0.5rem") }.toAttrs()) {
         PrimaryButton(
             url = PortfolioSectionId.Projects.path,
             label = StringRes.CtaReviewWork.value,
@@ -179,62 +198,85 @@ private fun HeroCtaRow() {
 }
 
 @Composable
-private fun PhilosophySection() {
+private fun ParrotShowcaseSection() {
     PortfolioSection(
-        section = PortfolioSectionId.Philosophy,
-        modifier = Modifier.fillMaxWidth(),
+        section = PortfolioSectionId.Projects,
+        modifier = Modifier.styleModifier { property("width", "100%") },
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .sectionPadding(),
-        ) {
-            Div(
-                attrs = PhilosophyGridStyle.toModifier().toAttrs(),
-            ) {
-                Column(
-                    modifier = Modifier.gap(16.px),
-                ) {
-                    SpanText(
-                        text = StringRes.PhilosophyEyebrow.value,
-                        modifier = MonoEyebrowStyle.toModifier(),
-                    )
-                    H2Text(
-                        text = StringRes.PhilosophyHeading.value,
-                        modifier = H2Style.toModifier()
-                            .fillMaxWidth(),
-                    )
-                }
+        EditorialGrid(eyebrow = StringRes.ParrotEyebrow.value, modifier = Modifier.sectionSpacing()) {
+            Div(attrs = Modifier.column("1rem").toAttrs()) {
+                H2Text(text = StringRes.ParrotHeading.value, modifier = H2Style.toModifier())
+                SpanText(
+                    text = StringRes.ParrotSubhead.value,
+                    modifier = SubtitleStyle.toModifier().measure(58),
+                )
+            }
 
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .gap(24.px),
-                ) {
-                    SpanText(
-                        text = StringRes.PhilosophyBody1.value,
-                        modifier = BodyStyle.toModifier()
-                            .measureMax(70),
-                    )
-                    SpanText(
-                        text = StringRes.PhilosophyBody2.value,
-                        modifier = BodyStyle.toModifier()
-                            .measureMax(70),
-                    )
-                    SpanText(
-                        text = StringRes.PhilosophyBody3.value,
-                        modifier = BodyStyle.toModifier()
-                            .measureMax(70),
-                    )
-
-                    PrinciplesList()
-
-                    Callout(
-                        label = StringRes.MigrationCalloutLabel.value,
-                        body = StringRes.MigrationCalloutBody.value,
+            Div(attrs = PhoneRowStyle.toModifier().toAttrs()) {
+                ProjectsRes.SelectedProjects.forEachIndexed { index, shot ->
+                    // Alternate vertical offsets give the row a loose, hand-placed rhythm on desktop.
+                    val offset = listOf("0", "2.5rem", "1rem", "3rem", "0.5rem")[index % 5]
+                    PhoneShot(
+                        image = shot.image,
+                        description = shot.description.value,
+                        modifier = PhoneRowItemStyle.toModifier().styleModifier {
+                            property("--offset", offset)
+                        },
                     )
                 }
             }
+
+            FactList(items = parrotFeatures())
+
+            Div(attrs = Modifier.actionRow().toAttrs()) {
+                PrimaryButton(
+                    url = LinkRes.Internal.Parrot,
+                    label = StringRes.CtaOpenCaseStudy.value,
+                    onClick = { trackEvent("case-study-open") },
+                )
+                DownloadButton(
+                    url = ParrotRes.latestRelease.apkUrl,
+                    label = StringRes.DownloadVersionApk(ParrotRes.latestRelease.version).value,
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun parrotFeatures(): List<Pair<String, String>> = listOf(
+    StringRes.ParrotFeature1Title.value to StringRes.ParrotFeature1Desc.value,
+    StringRes.ParrotFeature2Title.value to StringRes.ParrotFeature2Desc.value,
+    StringRes.ParrotFeature3Title.value to StringRes.ParrotFeature3Desc.value,
+    StringRes.ParrotFeature4Title.value to StringRes.ParrotFeature4Desc.value,
+    StringRes.ParrotFeature5Title.value to StringRes.ParrotFeature5Desc.value,
+    StringRes.ParrotFeature6Title.value to StringRes.ParrotFeature6Desc.value,
+    StringRes.ParrotFeature7Title.value to StringRes.ParrotFeature7Desc.value,
+    StringRes.ParrotFeature8Title.value to StringRes.ParrotFeature8Desc.value,
+)
+
+@Composable
+private fun PhilosophySection() {
+    PortfolioSection(
+        section = PortfolioSectionId.Philosophy,
+        modifier = Modifier.styleModifier { property("width", "100%") },
+    ) {
+        EditorialGrid(eyebrow = StringRes.PhilosophyEyebrow.value, modifier = Modifier.sectionSpacing()) {
+            H2Text(
+                text = StringRes.PhilosophyHeading.value,
+                modifier = H2Style.toModifier().measure(22),
+            )
+            Div(attrs = Modifier.column("1.25rem").measure(66).toAttrs()) {
+                SpanText(text = StringRes.PhilosophyBody1.value, modifier = BodyStyle.toModifier())
+                SpanText(text = StringRes.PhilosophyBody2.value, modifier = BodyStyle.toModifier())
+                SpanText(text = StringRes.PhilosophyBody3.value, modifier = BodyStyle.toModifier())
+            }
+            PrinciplesList()
+            Callout(
+                label = StringRes.MigrationCalloutLabel.value,
+                body = StringRes.MigrationCalloutBody.value,
+                modifier = Modifier.measure(66),
+            )
         }
     }
 }
@@ -247,29 +289,24 @@ private fun PrinciplesList() {
         StringRes.PhilosophyPrinciple3.value,
         StringRes.PhilosophyPrinciple4.value,
     )
+    val palette = sitePalette()
 
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .gap(16.px)
-            .margin(top = 8.px),
-    ) {
-        principles.forEachIndexed { index, principle ->
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .gap(16.px),
-                verticalAlignment = Alignment.Top,
+    Div(attrs = Modifier.measure(66).toAttrs()) {
+        principles.forEach { principle ->
+            Div(
+                attrs = Modifier.styleModifier {
+                    property("display", "grid")
+                    property("grid-template-columns", "1.25rem minmax(0, 1fr)")
+                    property("gap", "0.75rem")
+                    property("padding", "0.875rem 0")
+                    property("border-top", "1px solid ${palette.border}")
+                }.toAttrs(),
             ) {
                 SpanText(
-                    text = (index + 1).toString().padStart(2, '0'),
-                    modifier = MonoAccentStyle.toModifier(),
+                    text = "—",
+                    modifier = MonoAccentStyle.toModifier().styleModifier { property("line-height", "1.65") },
                 )
-                SpanText(
-                    text = principle,
-                    modifier = BodyStyle.toModifier()
-                        .weight(1f),
-                )
+                SpanText(text = principle, modifier = BodyStyle.toModifier())
             }
         }
     }
@@ -277,156 +314,27 @@ private fun PrinciplesList() {
 
 @Composable
 private fun ExperienceSection() {
-    PortfolioSection(
-        section = PortfolioSectionId.Philosophy,
-        modifier = Modifier.fillMaxWidth(),
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .gap(24.px)
-                .sectionPadding(),
-        ) {
-            SpanText(
-                text = StringRes.ExperienceEyebrow.value,
-                modifier = MonoEyebrowStyle.toModifier(),
-            )
-
-            H2Text(
-                text = StringRes.ExperienceStackTitle.value,
-                modifier = H2Style.toModifier()
-                    .fillMaxWidth(),
-            )
-
-            SpanText(
-                text = StringRes.ExperienceStackBody.value,
-                modifier = BodyStyle.toModifier()
-                    .measureMax(75),
-            )
-
+    // Shares the Philosophy anchor for nav highlighting, but needs its own DOM id to stay valid HTML.
+    Div(attrs = Modifier.styleModifier { property("width", "100%") }.toAttrs()) {
+        EditorialGrid(eyebrow = StringRes.ExperienceEyebrow.value, modifier = Modifier.sectionSpacing()) {
+            H2Text(text = StringRes.ExperienceStackTitle.value, modifier = H2Style.toModifier().measure(22))
+            Paragraphs(StringRes.ExperienceStackBody.value)
             H3Text(
                 text = StringRes.ExperienceMigrationTitle.value,
-                modifier = H3Style.toModifier()
-                    .fillMaxWidth(),
+                modifier = H3Style.toModifier().styleModifier { property("margin-top", "0.5rem") },
             )
-
-            SpanText(
-                text = StringRes.ExperienceMigrationBody.value,
-                modifier = BodyStyle.toModifier()
-                    .measureMax(75),
-            )
+            Paragraphs(StringRes.ExperienceMigrationBody.value)
         }
     }
 }
 
+/** Copy blocks separate paragraphs with a blank line; render each as its own paragraph. */
 @Composable
-private fun ParrotShowcaseSection() {
-    PortfolioSection(
-        section = PortfolioSectionId.Projects,
-        modifier = Modifier.fillMaxWidth(),
-    ) {
-        Box(
-            modifier = Modifier.fillMaxWidth(),
-        ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .gap(24.px)
-                    .sectionPadding(),
-            ) {
-                SpanText(
-                    text = StringRes.ParrotEyebrow.value,
-                    modifier = MonoEyebrowStyle.toModifier(),
-                )
-                H2Text(
-                    text = StringRes.ParrotHeading.value,
-                    modifier = H2Style.toModifier(),
-                )
-                SpanText(
-                    text = StringRes.ParrotSubhead.value,
-                    modifier = SubtitleStyle.toModifier()
-                        .measureMax(70),
-                )
-
-                InfiniteCarousel(
-                    items = ProjectsRes.SelectedProjects,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .margin(top = 16.px, bottom = 16.px),
-                ) { projectImage ->
-                    val index = ProjectsRes.SelectedProjects.indexOf(projectImage) + 1
-                    val total = ProjectsRes.SelectedProjects.size
-                    ProjectCard(
-                        image = projectImage.image,
-                        route = LinkRes.Internal.Parrot,
-                        contentDescription = projectImage.description.value,
-                        overlay = {
-                            Box(
-                                modifier = Modifier
-                                    .fillMaxSize()
-                                    .padding(8.px),
-                                contentAlignment = Alignment.BottomEnd,
-                            ) {
-                                Box(
-                                    modifier = Modifier
-                                        .backgroundColor(rgba(0, 0, 0, 0.6))
-                                        .borderRadius(4.px)
-                                        .padding(leftRight = 8.px, topBottom = 4.px),
-                                ) {
-                                    SpanText(
-                                        text = "$index / $total",
-                                        modifier = Modifier
-                                            .fontSize(12.px)
-                                            .color(Colors.White)
-                                            .fontFamily("JetBrains Mono", "monospace"),
-                                    )
-                                }
-                            }
-                        },
-                    )
-                }
-
-                FeatureGrid(
-                    items = parrotFeatures(),
-                    modifier = Modifier.margin(top = 16.px),
-                )
-
-                ParrotCtaRow()
-            }
+private fun Paragraphs(text: String) {
+    Div(attrs = Modifier.column("1.25rem").measure(66).toAttrs()) {
+        text.split("\n\n").forEach { paragraph ->
+            SpanText(text = paragraph.trim(), modifier = BodyStyle.toModifier())
         }
-    }
-}
-
-@Composable
-private fun parrotFeatures(): List<FeatureItem> = listOf(
-    FeatureItem("01", StringRes.ParrotFeature1Title.value, StringRes.ParrotFeature1Desc.value),
-    FeatureItem("02", StringRes.ParrotFeature2Title.value, StringRes.ParrotFeature2Desc.value),
-    FeatureItem("03", StringRes.ParrotFeature3Title.value, StringRes.ParrotFeature3Desc.value),
-    FeatureItem("04", StringRes.ParrotFeature4Title.value, StringRes.ParrotFeature4Desc.value),
-    FeatureItem("05", StringRes.ParrotFeature5Title.value, StringRes.ParrotFeature5Desc.value),
-    FeatureItem("06", StringRes.ParrotFeature6Title.value, StringRes.ParrotFeature6Desc.value),
-    FeatureItem("07", StringRes.ParrotFeature7Title.value, StringRes.ParrotFeature7Desc.value),
-)
-
-@Composable
-private fun ParrotCtaRow() {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .gap(16.px)
-            .flexWrap(FlexWrap.Wrap)
-            .alignItems(AlignItems.Center)
-            .margin(top = 16.px),
-    ) {
-        PrimaryButton(
-            url = LinkRes.Internal.Parrot,
-            label = StringRes.CtaOpenCaseStudy.value,
-            onClick = { trackEvent("case-study-open") },
-        )
-        DownloadButton(
-            url = ParrotRes.latestRelease.apkUrl,
-            label = StringRes.DownloadVersionApk(ParrotRes.latestRelease.version).value,
-        )
     }
 }
 
@@ -434,65 +342,39 @@ private fun ParrotCtaRow() {
 private fun ArticlesSection() {
     PortfolioSection(
         section = PortfolioSectionId.Blog,
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.styleModifier { property("width", "100%") },
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .gap(16.px)
-                .sectionPadding(),
-        ) {
-            SectionHeader(
-                eyebrow = StringRes.NotesEyebrow.value,
-                title = StringRes.NotesTitle.value,
-                subtitle = StringRes.NotesSubtitle.value,
-                gap = 10.px,
-            )
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .gap(12.px)
-                    .flexWrap(FlexWrap.Wrap)
-                    .margin(top = 16.px),
-            ) {
-                ArticleCard(
+        EditorialGrid(eyebrow = StringRes.NotesEyebrow.value, modifier = Modifier.sectionSpacing()) {
+            Div(attrs = Modifier.column("1rem").toAttrs()) {
+                H2Text(text = StringRes.NotesTitle.value, modifier = H2Style.toModifier())
+                SpanText(
+                    text = StringRes.NotesSubtitle.value,
+                    modifier = SubtitleStyle.toModifier().measure(58),
+                )
+            }
+            Div {
+                ArticleRow(
                     title = StringRes.AppsFlyerArticleTitle.value,
                     description = StringRes.AppsFlyerArticleDesc.value,
                     route = LinkRes.Internal.AppsFlyerArticle,
                     image = ImageRes.AppsFlyerArticle,
+                    readLabel = StringRes.CtaReadNote.value,
                 )
-                ArticleCard(
+                ArticleRow(
                     title = StringRes.InfiniteCarouselArticleTitle.value,
                     description = StringRes.InfiniteCarouselArticleDesc.value,
                     route = LinkRes.Internal.InfiniteCarouselArticle,
                     image = ImageRes.InfiniteCarouselArticle,
+                    readLabel = StringRes.CtaReadNote.value,
                 )
-                ArticleCard(
+                ArticleRow(
                     title = StringRes.SQLCipherArticleTitle.value,
                     description = StringRes.SQLCipherArticleDesc.value,
                     route = LinkRes.Internal.SQLCipherArticle,
                     image = ImageRes.SQLCipherArticle,
+                    readLabel = StringRes.CtaReadNote.value,
                 )
             }
-        }
-    }
-}
-
-val PhilosophyGridStyle = CssStyle {
-    base {
-        Modifier
-            .fillMaxWidth()
-            .display(WebDisplayStyle.Grid)
-            .gridTemplateColumns {
-                size(1.fr)
-            }
-            .gap(32.px)
-    }
-
-    Breakpoint.MD {
-        Modifier.gridTemplateColumns {
-            minmax(0.px, 5.fr)
-            minmax(0.px, 7.fr)
         }
     }
 }

@@ -11,6 +11,7 @@ import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
+import com.varabyte.kobweb.compose.ui.styleModifier
 import com.varabyte.kobweb.compose.ui.modifiers.backdropFilter
 import com.varabyte.kobweb.compose.ui.modifiers.borderBottom
 import com.varabyte.kobweb.compose.ui.modifiers.boxShadow
@@ -46,16 +47,12 @@ import kotlin.js.json
 
 val PageContentStyle = CssStyle {
     base {
-        Modifier
-            .fillMaxWidth(95.percent)
-            .padding(top = 24.px)
-
-    }
-    Breakpoint.MD {
-        Modifier.fillMaxWidth(85.percent)
-    }
-    Breakpoint.LG {
-        Modifier.fillMaxWidth(70.percent)
+        Modifier.styleModifier {
+            property("width", "100%")
+            property("max-width", "1200px")
+            property("padding-inline", "clamp(1rem, 4vw, 2.5rem)")
+            property("box-sizing", "border-box")
+        }
     }
 }
 
@@ -63,16 +60,11 @@ const val Header_domId = "header"
 val NavHeaderStyle = CssStyle {
     base {
         Modifier
-            .padding(leftRight = 16.px)
             .borderBottom(1.px, LineStyle.Solid, sitePalette().headerBorder)
             .backdropFilter(blur(15.px))
-            .boxShadow(0.px, 1.px, 3.px, 0.px, rgba(0, 0, 0, 0.05))
-    }
-    Breakpoint.MD {
-        Modifier.padding(leftRight = 32.px)
-    }
-    Breakpoint.LG {
-        Modifier.padding(leftRight = 64.px)
+            .styleModifier {
+                property("background-color", "color-mix(in srgb, ${sitePalette().background} 84%, transparent)")
+            }
     }
 }
 
@@ -126,14 +118,14 @@ fun PageLayout(content: @Composable () -> Unit) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(3.px)
+                .height(2.px)
                 .position(Position.Fixed)
                 .top(0.px)
                 .zIndex(2)
         ) {
             Box(
                 modifier = Modifier
-                    .height(3.px)
+                    .height(2.px)
                     .width(scrollProgress)
                     .backgroundColor(sitePalette().accent),
             )

@@ -10,6 +10,7 @@ import com.varabyte.kobweb.silk.style.toModifier
 import io.github.retar.portfolio.styles.H2Style
 import io.github.retar.portfolio.styles.H2Text
 import io.github.retar.portfolio.styles.MonoEyebrowStyle
+import io.github.retar.portfolio.styles.eyebrowText
 import io.github.retar.portfolio.styles.SubtitleStyle
 import org.jetbrains.compose.web.css.CSSSizeValue
 import org.jetbrains.compose.web.css.CSSUnit
@@ -39,7 +40,7 @@ fun SectionHeader(
 @Composable
 fun SectionEyebrow(text: String) {
     SpanText(
-        text = text,
+        text = text.eyebrowText(),
         modifier = MonoEyebrowStyle.toModifier(),
     )
 }

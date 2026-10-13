@@ -24,42 +24,43 @@ data class SitePalette(
 )
 
 object SitePalettes {
+    // Warm paper and ink. One accent (a muted vermilion) carries every highlight.
     val light =
         SitePalette(
-            background = Color.rgb(250, 250, 250),
-            surface = Color.rgb(244, 244, 245),
-            footerBg = Color.rgb(9, 9, 11),
-            textPrimary = Color.rgb(24, 24, 27),
-            textSecondary = Color.rgb(82, 82, 91),
-            border = Color.rgb(228, 228, 231),
-            accent = Color.rgb(245, 158, 11),
-            accentHover = Color.rgb(217, 119, 6),
-            accentPressed = Color.rgb(180, 83, 9),
-            codeBackground = Color.rgb(240, 240, 244),
-            codeText = Color.rgb(24, 24, 27),
-            drawerBackground = Color.rgb(250, 250, 250),
-            headerBorder = Color.rgb(228, 228, 231),
-            buttonText = Color.rgb(9, 9, 11),
-            dropdownBackground = Color.rgb(255, 255, 255),
+            background = Color.rgb(246, 243, 236),
+            surface = Color.rgb(237, 232, 221),
+            footerBg = Color.rgb(237, 232, 221),
+            textPrimary = Color.rgb(28, 26, 23),
+            textSecondary = Color.rgb(94, 88, 78),
+            border = Color.rgb(221, 213, 199),
+            accent = Color.rgb(178, 69, 34),
+            accentHover = Color.rgb(154, 58, 27),
+            accentPressed = Color.rgb(128, 48, 22),
+            codeBackground = Color.rgb(237, 232, 221),
+            codeText = Color.rgb(28, 26, 23),
+            drawerBackground = Color.rgb(246, 243, 236),
+            headerBorder = Color.rgb(221, 213, 199),
+            buttonText = Color.rgb(251, 248, 242),
+            dropdownBackground = Color.rgb(251, 248, 242),
         )
 
     val dark =
         SitePalette(
-            background = Color.rgb(24, 24, 27),
-            surface = Color.rgb(39, 39, 42),
-            footerBg = Color.rgb(0, 0, 0),
-            textPrimary = Color.rgb(250, 250, 250),
-            textSecondary = Color.rgb(161, 161, 170),
-            border = Color.rgb(63, 63, 70),
-            accent = Color.rgb(245, 158, 11),
-            accentHover = Color.rgb(217, 119, 6),
-            accentPressed = Color.rgb(180, 83, 9),
-            codeBackground = Color.rgb(39, 39, 42),
-            codeText = Color.rgb(236, 239, 244),
-            drawerBackground = Color.rgb(39, 39, 42),
-            headerBorder = Color.rgb(63, 63, 70),
-            buttonText = Color.rgb(9, 9, 11),
-            dropdownBackground = Color.rgb(39, 39, 42),
+            background = Color.rgb(21, 19, 16),
+            surface = Color.rgb(31, 28, 24),
+            footerBg = Color.rgb(31, 28, 24),
+            textPrimary = Color.rgb(238, 232, 220),
+            textSecondary = Color.rgb(167, 159, 144),
+            border = Color.rgb(52, 48, 42),
+            accent = Color.rgb(226, 124, 84),
+            accentHover = Color.rgb(236, 146, 110),
+            accentPressed = Color.rgb(204, 104, 66),
+            codeBackground = Color.rgb(31, 28, 24),
+            codeText = Color.rgb(238, 232, 220),
+            drawerBackground = Color.rgb(31, 28, 24),
+            headerBorder = Color.rgb(52, 48, 42),
+            buttonText = Color.rgb(21, 19, 16),
+            dropdownBackground = Color.rgb(31, 28, 24),
         )
 }
 

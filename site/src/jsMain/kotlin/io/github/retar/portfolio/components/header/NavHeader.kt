@@ -54,6 +54,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.translateY
 import com.varabyte.kobweb.compose.ui.modifiers.userSelect
 import com.varabyte.kobweb.compose.ui.modifiers.width
 import com.varabyte.kobweb.compose.ui.modifiers.zIndex
+import com.varabyte.kobweb.compose.ui.styleModifier
 import com.varabyte.kobweb.core.rememberPageContext
 import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.icons.CloseIcon
@@ -89,6 +90,7 @@ import io.github.retar.portfolio.saveToLocalStorage
 import io.github.retar.portfolio.styles.BodySmallStyle
 import io.github.retar.portfolio.styles.DescriptorStyle
 import io.github.retar.portfolio.styles.LabelStyle
+import io.github.retar.portfolio.styles.MonoEyebrowStyle
 import io.github.retar.portfolio.styles.sitePalette
 import io.github.retar.portfolio.styles.toSitePalette
 import io.github.retar.portfolio.utils.trackEvent
@@ -142,8 +144,31 @@ val DropdownStyle = CssStyle.base {
     Modifier
         .backgroundColor(colorMode.toSitePalette().dropdownBackground)
         .borderRadius(8.px)
-        .boxShadow(0.px, 4.px, 12.px, 0.px, rgba(0, 0, 0, 0.1))
+        .styleModifier {
+            property("border", "1px solid ${colorMode.toSitePalette().border}")
+            property("box-shadow", "0 16px 32px -16px rgba(40, 28, 16, 0.25)")
+        }
         .zIndex(10)
+}
+
+val NavLinkStyle = CssStyle {
+    base {
+        Modifier
+            .userSelect(UserSelect.None)
+            .cursor(Cursor.Pointer)
+            .styleModifier {
+                property("color", "var(--nav-color)")
+                property("font-size", "14px")
+                property("line-height", "1.4")
+                property("text-decoration-line", "underline")
+                property("text-decoration-thickness", "1px")
+                property("text-underline-offset", "6px")
+                property("transition", "color 160ms ease, text-decoration-color 160ms ease")
+            }
+    }
+    hover {
+        Modifier.color(colorMode.toSitePalette().textPrimary)
+    }
 }
 
 val NavHeaderHeight by StyleVariable<CSSLengthValue>(prefix = "site", defaultFallback = 0.px)
@@ -192,13 +217,19 @@ fun NavHeader() {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .position(Position.Relative),
+            .position(Position.Relative)
+            .styleModifier {
+                property("max-width", "1200px")
+                property("margin-inline", "auto")
+                property("padding-inline", "clamp(1rem, 4vw, 2.5rem)")
+                property("box-sizing", "border-box")
+            },
         contentAlignment = Alignment.Center,
         ref = ref { element -> headerElement = element }
     ) {
         Row(
             modifier = Modifier
-                .padding(topBottom = 16.px, leftRight = 16.px)
+                .padding(topBottom = 18.px, leftRight = 0.px)
                 .width(100.percent)
                 .justifyContent(JustifyContent.SpaceBetween),
             verticalAlignment = Alignment.CenterVertically
@@ -206,38 +237,28 @@ fun NavHeader() {
             // Left side: Profile image + Name and subtitle
             Row(
                 modifier = Modifier
-                    .gap(12.px)
+                    .gap(14.px)
+                    .alignItems(AlignItems.Baseline)
                 .cursor(Cursor.Pointer)
                 .onClick {
                     trackEvent("logo-click")
                     router.navigateTo("/")
                 },
-                verticalAlignment = Alignment.CenterVertically,
             ) {
-                Image(
-                    src = ImageRes.ProfileImage.path,
-                    description = StringRes.ProfileImageDesc.value,
-                    modifier = ProfileImageStyle.toModifier()
-                        .size(40.px)
-                        .borderRadius(999.px)
-                        .objectFit(ObjectFit.Cover)
-                        .draggable(false)
-                        .userSelect(UserSelect.None),
-                    width = 40,
-                    height = 40,
+                SpanText(
+                    text = StringRes.HeaderTitle.value,
+                    modifier = Modifier.styleModifier {
+                        property("font-family", "'Instrument Serif', Georgia, serif")
+                        property("font-size", "1.625rem")
+                        property("line-height", "1")
+                        property("letter-spacing", "-0.01em")
+                        property("color", palette.textPrimary.toString())
+                    },
                 )
-                Column(
-                    modifier = Modifier.gap(0.px),
-                ) {
-                    SpanText(
-                        text = StringRes.HeaderTitle.value,
-                        modifier = LabelStyle.toModifier(),
-                    )
-                    SpanText(
-                        text = StringRes.Descriptor.value,
-                        modifier = BodySmallStyle.toModifier(),
-                    )
-                }
+                SpanText(
+                    text = StringRes.Descriptor.value,
+                    modifier = MonoEyebrowStyle.toModifier().displayIfAtLeast(Breakpoint.LG),
+                )
             }
 
             // Right side: Nav items + Social icons (desktop)
@@ -248,6 +269,12 @@ fun NavHeader() {
                     .alignItems(AlignItems.Center),
             ) {
                 DesktopNavItems()
+                Box(
+                    modifier = Modifier
+                        .width(1.px)
+                        .height(16.px)
+                        .backgroundColor(palette.border),
+                )
                 Row(
                     modifier = Modifier.gap(16.px),
                     verticalAlignment = Alignment.CenterVertically,
@@ -382,12 +409,12 @@ private fun DesktopNavItem(item: NavItem) {
 
     SpanText(
         text = item.label.value,
-        modifier = DescriptorStyle
+        modifier = NavLinkStyle
             .toModifier()
-            .userSelect(UserSelect.None)
-            .cursor(Cursor.Pointer)
-            .color(if (isActive) palette.accent else palette.textSecondary)
-            .transition(Transition.all(duration = 150.ms))
+            .styleModifier {
+                property("--nav-color", (if (isActive) palette.textPrimary else palette.textSecondary).toString())
+                property("text-decoration-color", if (isActive) palette.accent.toString() else "transparent")
+            }
             .onClick {
                 trackEvent("nav-click", json("item" to item.name))
                 val section = item.section
@@ -425,23 +452,25 @@ private fun MobileNavDropdown(onClose: () -> Unit) {
             .top(100.percent)
             .left(0.px)
             .width(100.percent)
-            .margin(top = 10.px)
-            .padding(16.px)
-            .gap(16.px)
-            .animation(MobileNavSlideDownKeyframes.toAnimation(duration = 300.ms))
+            .margin(top = 4.px)
+            .padding(topBottom = 8.px, leftRight = 20.px)
+            .animation(MobileNavSlideDownKeyframes.toAnimation(duration = 240.ms))
+            .styleModifier { property("animation-timing-function", "var(--ease-out)") }
             .onClick { it.stopPropagation() },
-        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         NavItems(onItemClick = onClose)
-        HeaderSocialIcons()
+        Box(modifier = Modifier.padding(topBottom = 20.px)) {
+            HeaderSocialIcons()
+        }
     }
 }
 
 @Composable
 private fun NavItems(onItemClick: () -> Unit) {
-    NavItem.entries.forEach { item ->
+    NavItem.entries.forEachIndexed { index, item ->
         HeaderNavItem(
             item = item,
+            index = index,
             onClick = onItemClick,
         )
     }
@@ -450,6 +479,7 @@ private fun NavItems(onItemClick: () -> Unit) {
 @Composable
 private fun HeaderNavItem(
     item: NavItem,
+    index: Int,
     onClick: () -> Unit,
 ) {
     val pageContext = rememberPageContext()
@@ -460,14 +490,15 @@ private fun HeaderNavItem(
     val palette = sitePalette()
 
     val coroutineScope = rememberCoroutineScope()
-    SpanText(
-        text = item.label.value,
-        modifier = DescriptorStyle
-            .toModifier()
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .gap(16.px)
+            .alignItems(AlignItems.Baseline)
+            .padding(topBottom = 14.px)
             .userSelect(UserSelect.None)
             .cursor(Cursor.Pointer)
-            .color(if (isActive) palette.accent else palette.textSecondary)
-            .transition(Transition.all(duration = 150.ms))
+            .styleModifier { property("border-bottom", "1px solid ${palette.border}") }
             .onClick {
                 onClick()
                 trackEvent("nav-click", json("item" to item.name))
@@ -485,7 +516,21 @@ private fun HeaderNavItem(
                     setActiveSection(item.section)
                 }
             },
-    )
+    ) {
+        SpanText(
+            text = (index + 1).toString().padStart(2, '0'),
+            modifier = MonoEyebrowStyle.toModifier(),
+        )
+        SpanText(
+            text = item.label.value,
+            modifier = Modifier.styleModifier {
+                property("font-family", "'Instrument Serif', Georgia, serif")
+                property("font-size", "2rem")
+                property("line-height", "1.05")
+                property("color", (if (isActive) palette.accent else palette.textPrimary).toString())
+            },
+        )
+    }
 }
 
 @Composable
@@ -552,7 +597,7 @@ private fun LanguageSwitcher(
     ) {
         SpanText(
             text = language.code.uppercase(),
-            modifier = DescriptorStyle
+            modifier = MonoEyebrowStyle
                 .toModifier()
                 .color(palette.textSecondary)
                 .cursor(Cursor.Pointer)
