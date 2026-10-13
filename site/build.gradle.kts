@@ -24,6 +24,8 @@ kobweb {
         index {
             description.set("Rok Retar is a mobile engineer in Slovenia who builds Android apps and takes Kotlin Multiplatform to production on iOS. Work, engineering notes and contact.")
             faviconPath.set("/favicon.ico")
+            // The pages are pre-rendered, so the app script must not hold up first paint.
+            scriptAttributes.put("defer", "")
             head.add {
                 unsafe {
                     +"""<link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32"/>"""
@@ -32,7 +34,6 @@ kobweb {
                 }
                 link(rel = "apple-touch-icon", href = "/apple-touch-icon.png")
             unsafe {
-                    +"""<meta http-equiv="Content-Security-Policy" content="frame-ancestors 'self';"/>"""
                     +"""<style>::selection { background-color: rgb(178, 69, 34); color: rgb(251, 248, 242); }</style>"""
                     // Motion system: one strong ease-out, a staggered entrance, visible focus, and a
                     // reduced-motion escape hatch that turns every animation off.
@@ -142,15 +143,6 @@ kobweb {
                     }
                 }
                 link(rel = "manifest", href = "/site.webmanifest")
-                link(rel = "preconnect", href = "https://fonts.googleapis.com")
-                link(
-                    rel = "preconnect",
-                    href = "https://fonts.gstatic.com",
-                ) { attributes["crossorigin"] = "" }
-                link(
-                    href = "https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap",
-                    rel = "stylesheet",
-                )
                 link(
                     rel = "stylesheet",
                     href = "/prism/prism.css",
@@ -296,7 +288,6 @@ kotlin {
             implementation(libs.compose.html.core)
             implementation(libs.kobweb.core)
             implementation(libs.kobweb.silk)
-            implementation(libs.silk.icons.fa)
             implementation(libs.kobwebx.markdown)
 
         }

@@ -56,7 +56,7 @@ fun MiniPage(
                 eyebrow = group.eyebrow.value,
                 modifier = Modifier.styleModifier { property("padding-block", "clamp(2rem, 5vw, 4rem)") },
             ) {
-                FactList(items = group.entries.map { it.title.value to it.body.value })
+                FactList(items = group.entries.map { it.title.value to it.body.value }, underH1 = true)
             }
         }
 

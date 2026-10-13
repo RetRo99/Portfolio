@@ -21,6 +21,7 @@ import com.varabyte.kobweb.silk.style.toModifier
 import io.github.retar.portfolio.resources.ImageRes
 import io.github.retar.portfolio.styles.BodyStyle
 import io.github.retar.portfolio.styles.H3Style
+import io.github.retar.portfolio.styles.H2Text
 import io.github.retar.portfolio.styles.H3Text
 import io.github.retar.portfolio.styles.MonoEyebrowStyle
 import io.github.retar.portfolio.styles.eyebrowText
@@ -101,7 +102,7 @@ val PhoneFrameStyle = CssStyle {
 }
 
 @Composable
-fun PhoneShot(image: ImageRes, description: String, modifier: Modifier = Modifier) {
+fun PhoneShot(image: ImageRes, description: String, modifier: Modifier = Modifier, eager: Boolean = false) {
     Div(attrs = PhoneFrameStyle.toModifier().then(modifier).toAttrs()) {
         Image(
             src = image.path,
@@ -114,7 +115,8 @@ fun PhoneShot(image: ImageRes, description: String, modifier: Modifier = Modifie
             },
             width = image.intrinsicWidth,
             height = image.intrinsicHeight,
-            loading = ImageLoading.Lazy,
+            loading = if (eager) ImageLoading.Eager else ImageLoading.Lazy,
+            ref = ref { if (eager) it.setAttribute("fetchpriority", "high") },
         )
     }
 }
@@ -193,11 +195,12 @@ val FactStyle = CssStyle {
 }
 
 @Composable
-fun FactList(items: List<Pair<String, String>>, modifier: Modifier = Modifier) {
+fun FactList(items: List<Pair<String, String>>, modifier: Modifier = Modifier, underH1: Boolean = false) {
     Div(attrs = FactListStyle.toModifier().then(modifier).toAttrs()) {
         items.forEach { (title, body) ->
             Div(attrs = FactStyle.toModifier().toAttrs()) {
-                H3Text(text = title, modifier = H3Style.toModifier())
+                // Keeps the outline in order on pages whose only heading above is the h1.
+                if (underH1) H2Text(text = title, modifier = H3Style.toModifier()) else H3Text(text = title, modifier = H3Style.toModifier())
                 SpanText(text = body, modifier = BodyStyle.toModifier())
             }
         }
@@ -243,7 +246,6 @@ fun ArticleRow(
         modifier = ArticleRowStyle.toModifier()
             .textDecorationLine(TextDecorationLine.None)
             .onClick { trackEvent("article-open", json("route" to route)) },
-        ref = ref { it.asDynamic().setAttribute("aria-label", title) },
     ) {
         Div(
             attrs = Modifier.styleModifier {

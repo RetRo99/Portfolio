@@ -205,6 +205,7 @@ private fun ParrotHero() {
             image = heroShot.image,
             description = heroShot.description.value,
             modifier = ParrotHeroPhoneStyle.toModifier().rise(2),
+            eager = true,
         )
     }
 }
