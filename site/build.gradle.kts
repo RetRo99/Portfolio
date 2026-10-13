@@ -22,7 +22,7 @@ version = "1.0-SNAPSHOT"
 kobweb {
     app {
         index {
-            description.set("Rok Retar is a mobile engineer in Slovenia who builds Android apps and moved a company's iOS app onto shared Kotlin. Work, engineering notes and contact.")
+            description.set("Rok Retar is a mobile engineer in Slovenia. He builds apps in Kotlin, for Android and iOS. Work, engineering notes and contact.")
             faviconPath.set("/favicon.ico")
             // The pages are pre-rendered, so the app script must not hold up first paint.
             scriptAttributes.put("defer", "")
@@ -58,7 +58,7 @@ kobweb {
                 meta(content = "en_US") { attributes["property"] = "og:locale" }
                 meta(content = "1200") { attributes["property"] = "og:image:width" }
                 meta(content = "630") { attributes["property"] = "og:image:height" }
-                meta(content = "Rok Retar, mobile engineer: I build Android apps, and I moved a company's iOS app onto shared Kotlin.") { attributes["property"] = "og:image:alt" }
+                meta(content = "Rok Retar, mobile engineer: I build mobile apps in Kotlin, for Android and iOS.") { attributes["property"] = "og:image:alt" }
                 link(rel = "me", href = "https://github.com/retro99")
                 link(rel = "me", href = "https://www.linkedin.com/in/rok-retar/")
                 script(type = "application/ld+json") {
@@ -91,7 +91,7 @@ kobweb {
                               "url": "https://openclassrooms.com"
                             }
                           ],
-                          "description": "Mobile engineer in Slovenia who builds Android apps and moved a company's iOS app onto shared Kotlin.",
+                          "description": "Mobile engineer in Slovenia who builds apps in Kotlin, for Android and iOS.",
                           "url": "https://www.retar.app/",
                           "image": "https://www.retar.app/profile/profile_image.png",
                           "mainEntityOfPage": "https://www.retar.app/",
@@ -134,7 +134,7 @@ kobweb {
                           "name": "Rok Retar",
                           "url": "https://www.retar.app/",
                           "inLanguage": ["en", "sl", "lv"],
-                          "description": "Android and Kotlin Multiplatform engineer who moves existing iOS apps onto shared Kotlin.",
+                          "description": "Mobile engineer who builds apps in Kotlin, for Android and iOS.",
                           "author": {
                             "@id": "https://www.retar.app/#person"
                           }

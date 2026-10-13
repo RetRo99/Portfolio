@@ -27,9 +27,9 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
     )
 
     data object HeroHeadline : StringRes(
-        en = "I build Android apps, and I moved a company's iOS app onto shared Kotlin.",
-        sl = "Razvijam aplikacije za Android in sem iOS aplikacijo podjetja preselil na skupni Kotlin.",
-        lv = "Es veidoju Android lietotnes un pārcēlu uzņēmuma iOS lietotni uz kopīgu Kotlin kodu."
+        en = "I build mobile apps in Kotlin, for Android and iOS.",
+        sl = "Razvijam mobilne aplikacije v Kotlinu, za Android in iOS.",
+        lv = "Es veidoju mobilās lietotnes ar Kotlin, Android un iOS."
     )
 
     data object HeroSubtitle : StringRes(
