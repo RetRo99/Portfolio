@@ -5,6 +5,9 @@ import kotlinx.html.meta
 import kotlinx.html.script
 import kotlinx.html.title
 import kotlinx.html.unsafe
+import java.time.LocalDate
+import java.time.ZoneOffset
+import java.time.format.DateTimeFormatter
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
@@ -39,6 +42,10 @@ kobweb {
                         @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
                         .rise { animation: rise 560ms var(--ease-out) both; animation-delay: calc(var(--i, 0) * 70ms + 60ms); }
                         :focus-visible { outline: 2px solid rgb(178, 69, 34); outline-offset: 3px; border-radius: 4px; }
+                        .skip-link { position: fixed; left: 1rem; top: 0.75rem; z-index: 10; padding: 0.625rem 1rem; border-radius: 6px; background: rgb(178, 69, 34); color: rgb(251, 248, 242); font: 500 0.9375rem Geist, system-ui, sans-serif; text-decoration: none; transform: translateY(-200%); }
+                        .skip-link:focus { transform: none; }
+                        #main { scroll-margin-top: 5rem; }
+                        #main:focus { outline: none; }
                         .silk-dark :focus-visible { outline-color: rgb(226, 124, 84); }
                         @media (prefers-reduced-motion: reduce) {
                           *, *::before, *::after { animation-duration: 1ms !important; animation-delay: 0ms !important; transition-duration: 1ms !important; scroll-behavior: auto !important; }
@@ -150,8 +157,8 @@ kobweb {
                 )
                 link(rel = "stylesheet", href = "/editorial.css")
                 link(rel = "sitemap", type = "application/xml", href = "/sitemap.xml")
-                script {
-                    src = "/prism/prism.js"
+                link(rel = "alternate", type = "application/rss+xml", href = "/feed.xml") {
+                    attributes["title"] = "Rok Retar · Engineering notes"
                 }
                 script {
                     defer = true
@@ -222,6 +229,64 @@ kobweb {
     }
 }
 
+// Builds /feed.xml for the engineering notes from the Markdown front matter, so a new note
+// shows up in the feed without touching anything else.
+val generateNotesFeed by tasks.registering {
+    val markdownDir = layout.projectDirectory.dir("src/jsMain/resources/markdown")
+    val outputDir = layout.buildDirectory.dir("generated/feed")
+    inputs.dir(markdownDir)
+    outputs.dir(outputDir)
+
+    doLast {
+        fun String.xmlEscaped() = replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;")
+        fun rfc822(date: String) = LocalDate.parse(date)
+            .atTime(12, 0).atZone(ZoneOffset.UTC)
+            .format(DateTimeFormatter.RFC_1123_DATE_TIME)
+
+        val notes = markdownDir.asFile.listFiles { file -> file.extension == "md" }.orEmpty().mapNotNull { file ->
+            val frontMatter = file.readText().substringAfter("---\n").substringBefore("\n---")
+            val fields = frontMatter.lines()
+                .filter { ":" in it }
+                .associate { line -> line.substringBefore(":").trim() to line.substringAfter(":").trim().removeSurrounding("\"") }
+            val route = fields["routeOverride"] ?: return@mapNotNull null
+            val date = fields["date"] ?: return@mapNotNull null
+            listOf(route, fields["title"].orEmpty(), fields["description"].orEmpty(), date)
+        }.sortedByDescending { it[3] }
+
+        val items = notes.joinToString("\n") { (route, title, description, date) ->
+            """
+            |    <item>
+            |      <title>${title.xmlEscaped()}</title>
+            |      <link>https://www.retar.app$route</link>
+            |      <guid isPermaLink="true">https://www.retar.app$route</guid>
+            |      <description>${description.xmlEscaped()}</description>
+            |      <pubDate>${rfc822(date)}</pubDate>
+            |    </item>
+            """.trimMargin()
+        }
+        val feed = """
+            |<?xml version="1.0" encoding="UTF-8"?>
+            |<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+            |  <channel>
+            |    <title>Rok Retar · Engineering notes</title>
+            |    <link>https://www.retar.app/#notes</link>
+            |    <atom:link href="https://www.retar.app/feed.xml" rel="self" type="application/rss+xml"/>
+            |    <description>Write-ups of problems Rok Retar solved in Kotlin, Kotlin Multiplatform and Kobweb, with the code.</description>
+            |    <language>en</language>
+            |    <lastBuildDate>${notes.firstOrNull()?.let { rfc822(it[3]) }.orEmpty()}</lastBuildDate>
+            |$items
+            |  </channel>
+            |</rss>
+            |
+        """.trimMargin()
+
+        outputDir.get().file("public/feed.xml").asFile.apply {
+            parentFile.mkdirs()
+            writeText(feed)
+        }
+    }
+}
+
 kotlin {
     configAsKobwebApplication("portfolio")
 
@@ -234,6 +299,9 @@ kotlin {
             implementation(libs.silk.icons.fa)
             implementation(libs.kobwebx.markdown)
 
+        }
+        jsMain {
+            resources.srcDir(generateNotesFeed)
         }
     }
 }

@@ -1,49 +1,34 @@
 ---
 routeOverride: "/blog/infinite-carousel"
-title: "Building a Smooth, Infinite Carousel in Kobweb"
-description: "How to build a smooth, infinite carousel in Kobweb with Silk."
+title: "Building a smooth, infinite carousel in Kobweb"
+description: "A gapless, endlessly looping carousel in Kobweb and Silk: one CSS transform, no timers, no scroll code."
 date: "2025-11-17"
 ---
-# Building a Smooth, Infinite Carousel in Kobweb
+# Building a smooth, infinite carousel in Kobweb
 
-If you’ve ever tried to build a carousel in the browser, you’ve probably run into some of these problems:
+An earlier version of this site had a row of project cards that scrolled forever. My first attempt did it the obvious way: a coroutine that nudged the scroll position every frame and jumped back to the start at the end. It had every problem you'd expect. It stuttered in background tabs, because browsers throttle timers there. It jumped visibly when it reset. And it didn't scroll at all when there were only two or three cards.
 
-- It only scrolls if there are “enough” items.
-- There’s an awkward jump when the carousel resets.
-- You end up running a forever loop in JavaScript / coroutines.
-- Background tabs get throttled and everything stutters.
-
-In Kobweb, you don’t need any of that. You can get a **smooth, infinite, GPU‑accelerated carousel** with:
-
-- Pure CSS transform animation (no manual scrolling)
-- A small, reusable `InfiniteCarousel` composable
-- Silk `CssStyle` and keyframes
-
-This article walks through that pattern step‑by‑step.
+The version that worked has no Kotlin running per frame. It's one CSS transform animation, a duplicated list and about forty lines of Silk.
 
 ---
 
-## 1. The Core Idea: Modern “Marquee” with Transforms
+## The trick: two copies and a 50% slide
 
-The modern carousel pattern is:
+Render the items twice in a single row, `[items][items]`, and animate the whole row from `translateX(0%)` to `translateX(-50%)`.
 
-1. **Duplicate your content** exactly once (so you have `[items][items]`).
-2. Animate the whole track from `translateX(0%)` to `translateX(-50%)`.
-3. Because the second half is identical to the first, when the animation loops, it’s visually seamless.
+When the animation reaches the end, the second copy sits exactly where the first one started, so jumping back to `0%` is invisible. The loop is seamless by construction. There are no timers and no scroll APIs, and transforms are cheap for the browser to animate.
 
-No timers, no scroll APIs, just a transform animation that the browser can optimize on the GPU.
+In Kobweb this takes three pieces:
 
-In Kobweb + Silk, we model this as:
-
-- A **viewport**: `Box` that hides overflow.
-- A **track**: `Box` that lays out items in one row and runs the animation.
-- A **generic composable**: `InfiniteCarousel<T>` that you can feed any item type.
+- a **viewport** that clips overflow,
+- a **track** that lays the items out in one row and runs the animation,
+- a generic **`InfiniteCarousel<T>`** composable that takes any list.
 
 ---
 
-## 2. Define the Keyframes
+## Keyframes
 
-First, we define the scroll keyframes: from `0%` to `-50%`.
+The keyframes slide the track from `0%` to `-50%`, half its own width:
 
 ```kotlin
 val InfiniteCarouselScrollKeyframes = Keyframes {
@@ -56,19 +41,11 @@ val InfiniteCarouselScrollKeyframes = Keyframes {
 }
 ```
 
-This tells the browser:
-
-> Take the whole track and move it left until half of it has slid out of view.
-
 ---
 
-## 3. Style the Track with Silk
+## The track
 
-Next, we build a track style that:
-
-- Uses inline‑flex so items sit in a single row.
-- Has a gap between items.
-- Runs our keyframe animation forever.
+The track keeps everything in one row and runs the keyframes forever, at a constant speed:
 
 ```kotlin
 val InfiniteCarouselTrackStyle = CssStyle {
@@ -85,35 +62,28 @@ val InfiniteCarouselTrackStyle = CssStyle {
                 ),
             )
     }
+    hover {
+        Modifier.animation(
+            InfiniteCarouselScrollKeyframes.toAnimation(
+                duration = 40.s,
+                iterationCount = AnimationIterationCount.Infinite,
+                timingFunction = AnimationTimingFunction.Linear,
+                playState = AnimationPlayState.Paused,
+            ),
+        )
+    }
 }
 ```
 
-This is the heart of the marquee behavior.
+The `hover` block pauses the carousel under the pointer, so people can actually read a card. It changes only `playState` and keeps the same duration, because a different duration would make the track jump to a new position.
 
-### Optional: Pause on Hover
-
-If you want the carousel to pause when the user hovers it, add a `hover` block:
-
-```kotlin
-hover {
-    Modifier.animation(
-        InfiniteCarouselScrollKeyframes.toAnimation(
-            duration = 40.s,
-            iterationCount = AnimationIterationCount.Infinite,
-            timingFunction = AnimationTimingFunction.Linear,
-            playState = AnimationPlayState.Paused,
-        ),
-    )
-}
-```
-
-Note we only change `playState`, not duration. That avoids animation “jumps.”
+`Linear` matters too. With any easing curve, the track slows down and speeds up once per loop, and the seam becomes visible again.
 
 ---
 
-## 4. Style the Viewport
+## The viewport
 
-The viewport is just a flex container that **clips overflow** so we only see one “window” onto the infinite track:
+The viewport is a full-width flex container that hides whatever is outside it:
 
 ```kotlin
 val InfiniteCarouselViewportStyle = CssStyle {
@@ -128,14 +98,7 @@ val InfiniteCarouselViewportStyle = CssStyle {
 
 ---
 
-## 5. Implement the Generic `InfiniteCarousel<T>`
-
-Now we can write a reusable composable that:
-
-- Accepts any item list (`List<T>`)
-- Handles the “too few items” case
-- Duplicates the content
-- Emits your custom `itemContent`
+## The composable
 
 ```kotlin
 @Composable
@@ -144,71 +107,65 @@ fun <T> InfiniteCarousel(
     modifier: Modifier = Modifier,
     itemContent: @Composable (T) -> Unit,
 ) {
+    // With only a few items, one copy is narrower than the screen and the loop shows a gap.
     val baseItems = if (items.size < 4) {
         generateSequence { items }.flatten().take(8).toList()
     } else {
         items
     }
 
-    Box(
-        modifier = InfiniteCarouselViewportStyle
-            .toModifier()
-            .then(modifier),
-    ) {
-        Box(
-            modifier = InfiniteCarouselTrackStyle.toModifier(),
-        ) {
-            (baseItems + baseItems).forEach { itemContent(it) }
+    Box(modifier = InfiniteCarouselViewportStyle.toModifier().then(modifier)) {
+        Box(modifier = InfiniteCarouselTrackStyle.toModifier()) {
+            baseItems.forEach { itemContent(it) }
+            // The second copy only exists to close the loop. Hide it from screen readers
+            // and keyboard focus so the list is announced and tabbed through once.
+            baseItems.forEach { item ->
+                Box(Modifier.attr("aria-hidden", "true").attr("inert", "")) {
+                    itemContent(item)
+                }
+            }
         }
     }
 }
 ```
 
-A couple of important details:
+Two details make this robust.
 
-- **Small lists**: When there are fewer than 4 items, we expand the list by repeating until it feels “long enough” to scroll.
-- **Duplication**: We render `baseItems + baseItems` so the keyframes can move from `0%` to `-50%` and loop perfectly.
+**Short lists.** If one copy of the items is narrower than the viewport, the end of the second copy comes into view before the loop restarts, and you see empty space. Repeating short lists up to eight items fixes that for card-sized content. If your items are tiny, raise the number.
+
+**The duplicate is decoration.** Without `aria-hidden` and `inert`, a screen reader reads every card twice and the keyboard tabs through every link twice. Only the first copy is real content.
 
 ---
 
-## 6. Using the Carousel with Your Own Cards
+## Respect reduced motion
 
-Because `InfiniteCarousel` is generic, you just pass in your data and a composable that knows how to render a single item.
+A carousel that never stops moving is exactly what `prefers-reduced-motion` exists for. Silk names the style's class after the property, so `InfiniteCarouselTrackStyle` becomes `infinite-carousel-track`, and one rule in a stylesheet stops it:
 
-For example, with your `Project` model and `ProjectCard`:
+```css
+@media (prefers-reduced-motion: reduce) {
+    .infinite-carousel-track { animation-play-state: paused !important; }
+}
+```
+
+People who asked their system for less motion get a static row of cards, and nothing else changes.
+
+---
+
+## Using it
+
+Pass a list and say how to draw one item:
 
 ```kotlin
-@Composable
-private fun SelectedProjectsSection() {
-    PortfolioSection {
-        TitleWithSubtitle(
-            title = StringRes.SelectedProjectsTitle.value,
-            subtitle = StringRes.SelectedProjectsSubtitle.value,
-            gap = 10.px,
-        )
-        InfiniteCarousel(
-            items = SelectedProjects,
-            modifier = Modifier
-                .padding(top = 24.px)
-                .fillMaxWidth(),
-        ) { project ->
-            ProjectCard(
-                title = project.title,
-                imagePath = project.imagePath,
-            )
-        }
-    }
+InfiniteCarousel(
+    items = projects,
+    modifier = Modifier.padding(top = 24.px),
+) { project ->
+    ProjectCard(title = project.title, imagePath = project.imagePath)
 }
 ```
 
 ---
 
-## 7. Recap
+## What I'd keep from this
 
-We’ve built a carousel that:
-
-- **Scrolls infinitely**, regardless of how many items you have.
-- Is powered by **CSS transforms** and **Silk keyframes**, not manual JS logic.
-- Is exposed as a simple, reusable `InfiniteCarousel<T>` composable.
-- Plays nicely with Kobweb/Silk patterns for styling and hover effects.
-
+Animate a transform, not the scroll position. Duplicate the content once and slide it by half. Make the loop seamless by construction rather than by timing. Then pause it on hover, hide the copy from assistive tech, and stop it for people who prefer less motion. That's a whole marquee with no per-frame code at all.

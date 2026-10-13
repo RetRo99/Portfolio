@@ -476,6 +476,36 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
         lv = "$minutes min lasīšanai"
     )
 
+    data object ArticleNext : StringRes(
+        en = "Next note",
+        sl = "Naslednji zapis",
+        lv = "Nākamā piezīme"
+    )
+
+    data object ArticleSectionLink : StringRes(
+        en = "Copy link to this section",
+        sl = "Kopiraj povezavo do tega razdelka",
+        lv = "Kopēt saiti uz šo sadaļu"
+    )
+
+    data object ArticleLinkCopied : StringRes(
+        en = "Link copied",
+        sl = "Povezava kopirana",
+        lv = "Saite nokopēta"
+    )
+
+    data object ArticleFeed : StringRes(
+        en = "RSS feed",
+        sl = "Vir RSS",
+        lv = "RSS plūsma"
+    )
+
+    data object SkipToContent : StringRes(
+        en = "Skip to content",
+        sl = "Preskoči na vsebino",
+        lv = "Pāriet uz saturu"
+    )
+
     data object ParrotIconDesc : StringRes(
         en = "Parrot app icon",
         sl = "Ikona aplikacije Parrot",
@@ -660,6 +690,54 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
         en = "The biggest was moving a company's production iOS app to shared Kotlin. I designed the architecture and built the shared code: business logic, domain models and SQLCipher-encrypted data layers, compiled into a static Kotlin/Native framework. The iOS team added it without a single new linker flag.\n\nI've also shipped an AI platform with real-time chat, timelines and push notifications; a gaming app with NFC, biometric sign-in, cashless payments and white-label builds; and Parrot. Each used Kotlin Multiplatform differently, from shared networking and database layers to fully shared Compose UI.",
         sl = "Največji projekt je bil prehod produkcijske iOS aplikacije podjetja na skupni Kotlin. Zasnoval sem arhitekturo in napisal skupno kodo: poslovno logiko, domenske modele in podatkovne plasti, šifrirane s SQLCipherjem, prevedene v statično ogrodje Kotlin/Native. Ekipa iOS ga je dodala brez ene same nove zastavice povezovalnika.\n\nIzdal sem tudi platformo z umetno inteligenco s klepetom v realnem času, časovnicami in potisnimi obvestili; igralniško aplikacijo z NFC, biometrično prijavo, brezgotovinskim plačevanjem in različicami pod tujo blagovno znamko; ter Parrot. Vsaka je Kotlin Multiplatform uporabila drugače, od skupnih omrežnih in podatkovnih plasti do povsem skupnega vmesnika v Compose.",
         lv = "Lielākais bija uzņēmuma ražošanas iOS lietotnes pārcelšana uz kopīgu Kotlin kodu. Es izstrādāju arhitektūru un uzrakstīju kopīgo kodu: biznesa loģiku, domēna modeļus un ar SQLCipher šifrētus datu slāņus, kompilētus statiskā Kotlin/Native ietvarā. iOS komanda to pievienoja bez neviena jauna saistītāja karoga.\n\nEsmu izlaidis arī mākslīgā intelekta platformu ar reāllaika tērzēšanu, laika joslām un push paziņojumiem; spēļu lietotni ar NFC, biometrisko pieteikšanos, bezskaidras naudas maksājumiem un white-label versijām; un Parrot. Katrā Kotlin Multiplatform tika izmantots citādi, no kopīgiem tīkla un datubāzes slāņiem līdz pilnībā kopīgai Compose saskarnei."
+    )
+
+    data object TimelineTitle : StringRes(
+        en = "Where I've worked",
+        sl = "Kje sem delal",
+        lv = "Kur esmu strādājis"
+    )
+
+    data object TimelineDevRevYears : StringRes(
+        en = "2023 – now",
+        sl = "2023 – danes",
+        lv = "2023 – šodien"
+    )
+
+    data object TimelineDevRevRole : StringRes(
+        en = "Senior Android Engineer & Tech Lead",
+        sl = "Višji inženir za Android in tehnični vodja",
+        lv = "Vecākais Android inženieris un tehniskais vadītājs"
+    )
+
+    data object TimelineDevRevBody : StringRes(
+        en = "I lead six Android engineers and set the architecture standards. I moved the app from XML views to Jetpack Compose and rebuilt the CircleCI pipelines, which cut build times across the company.",
+        sl = "Vodim šest inženirjev za Android in postavljam arhitekturne standarde. Aplikacijo sem prenesel s pogledov XML na Jetpack Compose in prenovil cevovode CircleCI, kar je skrajšalo čase gradnje v celotnem podjetju.",
+        lv = "Vadu sešus Android inženierus un nosaku arhitektūras standartus. Pārcēlu lietotni no XML skatiem uz Jetpack Compose un pārbūvēju CircleCI konveijerus, kas saīsināja būvēšanas laiku visā uzņēmumā."
+    )
+
+    data object TimelineNetceteraRole : StringRes(
+        en = "Android Developer",
+        sl = "Razvijalec za Android",
+        lv = "Android izstrādātājs"
+    )
+
+    data object TimelineNetceteraBody : StringRes(
+        en = "I built financial modules for large banking apps under strict security and compliance rules, and split monolithic features into independent modules to shorten the release cycle.",
+        sl = "Razvijal sem finančne module za velike bančne aplikacije s strogimi varnostnimi in regulativnimi zahtevami ter monolitne funkcionalnosti razdelil v neodvisne module, kar je skrajšalo cikel izdaj.",
+        lv = "Izstrādāju finanšu moduļus lielām banku lietotnēm atbilstoši stingrām drošības un atbilstības prasībām un sadalīju monolītas funkcijas neatkarīgos moduļos, lai saīsinātu laidienu ciklu."
+    )
+
+    data object TimelineEducationRole : StringRes(
+        en = "Diploma in Software Development",
+        sl = "Diploma iz razvoja programske opreme",
+        lv = "Programmatūras izstrādes diploms"
+    )
+
+    data object TimelineEducationBody : StringRes(
+        en = "A bachelor-level diploma in software development.",
+        sl = "Diploma na ravni prve bolonjske stopnje iz razvoja programske opreme.",
+        lv = "Bakalaura līmeņa diploms programmatūras izstrādē."
     )
 
     data object ExperienceContactBody : StringRes(

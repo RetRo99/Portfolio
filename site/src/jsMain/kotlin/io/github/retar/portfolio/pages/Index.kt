@@ -28,6 +28,7 @@ import io.github.retar.portfolio.components.widgets.TextLink
 import io.github.retar.portfolio.components.widgets.rise
 import io.github.retar.portfolio.resources.ImageRes
 import io.github.retar.portfolio.resources.LinkRes
+import io.github.retar.portfolio.resources.NotesRes
 import io.github.retar.portfolio.resources.ParrotRes
 import io.github.retar.portfolio.resources.ProjectsRes
 import io.github.retar.portfolio.resources.StringRes
@@ -48,6 +49,8 @@ import io.github.retar.portfolio.styles.eyebrowText
 import io.github.retar.portfolio.styles.sitePalette
 import io.github.retar.portfolio.utils.trackEvent
 import org.jetbrains.compose.web.dom.Div
+import org.jetbrains.compose.web.dom.Li
+import org.jetbrains.compose.web.dom.Ol
 
 @Page
 @Layout(".components.layouts.PageLayout")
@@ -336,6 +339,87 @@ private fun ExperienceSection() {
                 modifier = H3Style.toModifier().styleModifier { property("margin-top", "0.5rem") },
             )
             Paragraphs(StringRes.ExperienceMigrationBody.value)
+            H3Text(
+                text = StringRes.TimelineTitle.value,
+                modifier = H3Style.toModifier().styleModifier { property("margin-top", "0.5rem") },
+            )
+            Timeline(
+                listOf(
+                    TimelineEntry(
+                        years = StringRes.TimelineDevRevYears.value,
+                        role = StringRes.TimelineDevRevRole.value,
+                        place = "DevRev · Ljubljana",
+                        body = StringRes.TimelineDevRevBody.value,
+                    ),
+                    TimelineEntry(
+                        years = "2019 – 2023",
+                        role = StringRes.TimelineNetceteraRole.value,
+                        place = "Netcetera · Ljubljana",
+                        body = StringRes.TimelineNetceteraBody.value,
+                    ),
+                    TimelineEntry(
+                        years = "2020",
+                        role = StringRes.TimelineEducationRole.value,
+                        place = "OpenClassrooms",
+                        body = StringRes.TimelineEducationBody.value,
+                    ),
+                ),
+            )
+        }
+    }
+}
+
+private class TimelineEntry(val years: String, val role: String, val place: String, val body: String)
+
+val TimelineRowStyle = CssStyle {
+    base {
+        val palette = sitePalette()
+        Modifier.styleModifier {
+            property("display", "grid")
+            property("grid-template-columns", "minmax(0, 1fr)")
+            property("gap", "0.375rem")
+            property("padding", "1.125rem 0")
+            property("border-top", "1px solid ${palette.border}")
+        }
+    }
+    Breakpoint.SM {
+        Modifier.styleModifier {
+            property("grid-template-columns", "9rem minmax(0, 1fr)")
+            property("column-gap", "1.5rem")
+        }
+    }
+}
+
+/** Roles as a compact list: years on the left, role, place and one line of what I did on the right. */
+@Composable
+private fun Timeline(entries: List<TimelineEntry>) {
+    val palette = sitePalette()
+    Ol(attrs = Modifier.measure(66).styleModifier {
+        property("list-style", "none")
+        property("margin", "0")
+        property("padding", "0")
+    }.toAttrs()) {
+        entries.forEach { entry ->
+            Li(attrs = TimelineRowStyle.toModifier().toAttrs()) {
+                SpanText(
+                    text = entry.years,
+                    modifier = MonoEyebrowStyle.toModifier().styleModifier { property("padding-top", "0.3rem") },
+                )
+                Div(attrs = Modifier.column("0.25rem").toAttrs()) {
+                    SpanText(
+                        text = entry.role,
+                        modifier = BodyStyle.toModifier().styleModifier {
+                            property("color", palette.textPrimary.toString())
+                            property("font-weight", "600")
+                        },
+                    )
+                    SpanText(text = entry.place, modifier = CaptionStyle.toModifier())
+                    SpanText(
+                        text = entry.body,
+                        modifier = BodyStyle.toModifier().styleModifier { property("margin-top", "0.25rem") },
+                    )
+                }
+            }
         }
     }
 }
@@ -365,27 +449,15 @@ private fun ArticlesSection() {
                 )
             }
             Div {
-                ArticleRow(
-                    title = StringRes.AppsFlyerArticleTitle.value,
-                    description = StringRes.AppsFlyerArticleDesc.value,
-                    route = LinkRes.Internal.AppsFlyerArticle,
-                    image = ImageRes.AppsFlyerArticle,
-                    readLabel = StringRes.CtaReadNote.value,
-                )
-                ArticleRow(
-                    title = StringRes.InfiniteCarouselArticleTitle.value,
-                    description = StringRes.InfiniteCarouselArticleDesc.value,
-                    route = LinkRes.Internal.InfiniteCarouselArticle,
-                    image = ImageRes.InfiniteCarouselArticle,
-                    readLabel = StringRes.CtaReadNote.value,
-                )
-                ArticleRow(
-                    title = StringRes.SQLCipherArticleTitle.value,
-                    description = StringRes.SQLCipherArticleDesc.value,
-                    route = LinkRes.Internal.SQLCipherArticle,
-                    image = ImageRes.SQLCipherArticle,
-                    readLabel = StringRes.CtaReadNote.value,
-                )
+                NotesRes.all.forEach { note ->
+                    ArticleRow(
+                        title = note.title.value,
+                        description = note.description.value,
+                        route = note.route,
+                        image = note.image,
+                        readLabel = StringRes.CtaReadNote.value,
+                    )
+                }
             }
         }
     }

@@ -13,5 +13,8 @@ object LinkRes {
         const val InfiniteCarouselArticle = "/blog/infinite-carousel"
         const val SQLCipherArticle = "/blog/sqlcipher-static-kotlin-native-framework"
         const val Parrot = "/parrot"
+        const val Now = "/now"
+        const val Uses = "/uses"
+        const val Feed = "/feed.xml"
     }
 }

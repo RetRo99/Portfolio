@@ -18,6 +18,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.boxShadow
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.height
 import com.varabyte.kobweb.compose.ui.modifiers.id
+import com.varabyte.kobweb.compose.ui.modifiers.attr
 import com.varabyte.kobweb.compose.ui.modifiers.minHeight
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.modifiers.position
@@ -33,7 +34,10 @@ import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.style.toModifier
 import io.github.retar.portfolio.components.footer.Footer
 import io.github.retar.portfolio.components.header.NavHeader
+import io.github.retar.portfolio.resources.StringRes
 import io.github.retar.portfolio.styles.sitePalette
+import org.jetbrains.compose.web.dom.A
+import org.jetbrains.compose.web.dom.Text
 import kotlinx.browser.document
 import kotlinx.browser.window
 import org.jetbrains.compose.web.css.LineStyle
@@ -57,6 +61,7 @@ val PageContentStyle = CssStyle {
 }
 
 const val Header_domId = "header"
+const val Main_domId = "main"
 val NavHeaderStyle = CssStyle {
     base {
         Modifier
@@ -114,6 +119,9 @@ fun PageLayout(content: @Composable () -> Unit) {
             .minHeight(100.vh),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        A(href = "#$Main_domId", attrs = { classes("skip-link") }) {
+            Text(StringRes.SkipToContent.value)
+        }
 
         Box(
             modifier = Modifier
@@ -144,7 +152,11 @@ fun PageLayout(content: @Composable () -> Unit) {
         }
 
         Box(
-            modifier = PageContentStyle.toModifier().weight(1f),
+            modifier = PageContentStyle.toModifier()
+                .weight(1f)
+                .id(Main_domId)
+                .attr("role", "main")
+                .attr("tabindex", "-1"),
             contentAlignment = Alignment.Center,
         ) {
             content()

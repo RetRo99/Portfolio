@@ -17,6 +17,7 @@ import com.varabyte.kobweb.silk.components.navigation.Link
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.toModifier
 import io.github.retar.portfolio.Language
+import io.github.retar.portfolio.components.widgets.formatLongDate
 import io.github.retar.portfolio.components.widgets.rise
 import io.github.retar.portfolio.resources.StringRes
 import io.github.retar.portfolio.styles.MonoEyebrowStyle
@@ -27,6 +28,17 @@ import io.github.retar.portfolio.LocalSetActiveSection
 import io.github.retar.portfolio.components.PortfolioSectionId
 import io.github.retar.portfolio.seo.Seo
 import kotlinx.browser.window
+import io.github.retar.portfolio.resources.Note
+import io.github.retar.portfolio.resources.NotesRes
+import io.github.retar.portfolio.utils.trackEvent
+import com.varabyte.kobweb.compose.ui.modifiers.onClick
+import kotlinx.browser.document
+import org.jetbrains.compose.web.dom.A
+import org.jetbrains.compose.web.dom.Text
+import org.w3c.dom.Element
+import org.w3c.dom.HTMLAnchorElement
+import org.w3c.dom.HTMLScriptElement
+import kotlin.js.json
 import org.jetbrains.compose.web.dom.Div
 
 @Composable
@@ -103,12 +115,14 @@ fun MarkdownPage(content: @Composable () -> Unit) {
     )
 
     LaunchedEffect(Unit) {
-        window.asDynamic().Prism?.highlightAll()
+        highlightCode()
         setActive(PortfolioSectionId.Blog)
     }
 
     var minutes by remember(path) { mutableStateOf<Int?>(null) }
     val language = Language.current
+    val sectionLinkLabel = StringRes.ArticleSectionLink.value
+    val linkCopiedLabel = StringRes.ArticleLinkCopied.value
 
     Div(attrs = Modifier.classNames("prose").toAttrs()) {
         Div(
@@ -126,7 +140,7 @@ fun MarkdownPage(content: @Composable () -> Unit) {
                 modifier = MonoEyebrowStyle.toModifier().textDecorationLine(TextDecorationLine.None),
             )
             val meta = listOfNotNull(
-                date?.let { formatDate(it, language) },
+                date?.let { formatLongDate(it, language) },
                 minutes?.let { StringRes.ArticleMinutes(it).value },
             )
             if (meta.isNotEmpty()) {
@@ -140,6 +154,7 @@ fun MarkdownPage(content: @Composable () -> Unit) {
                     window.invokeLater {
                         val words = (element.textContent ?: "").split(Regex("\\s+")).count { it.isNotBlank() }
                         if (words > 0) minutes = maxOf(1, (words + 115) / 230)
+                        addHeadingAnchors(element, sectionLinkLabel, linkCopiedLabel)
                     }
                     onDispose { }
                 }
@@ -147,17 +162,85 @@ fun MarkdownPage(content: @Composable () -> Unit) {
         ) {
             content()
         }
+        NotesRes.nextAfter(path)?.let { next -> NextNote(next) }
     }
 }
 
-private fun formatDate(iso: String, language: Language): String {
-    val locale = when (language) {
-        Language.EN -> "en-GB"
-        Language.SL -> "sl-SI"
-        Language.LV -> "lv-LV"
+@Composable
+private fun NextNote(note: Note) {
+    Div(attrs = Modifier.classNames("next-note").toAttrs()) {
+        SpanText(text = StringRes.ArticleNext.value, modifier = MonoEyebrowStyle.toModifier())
+        Link(
+            path = note.route,
+            modifier = Modifier.classNames("next-note-link")
+                .onClick { trackEvent("next-note-open", json("route" to note.route)) },
+        ) {
+            SpanText(text = note.title.value, modifier = Modifier.classNames("next-note-title"))
+            SpanText(text = note.description.value, modifier = Modifier.classNames("next-note-desc"))
+        }
+        Div(attrs = Modifier.classNames("next-note-meta").toAttrs()) {
+            Link(
+                path = "/${PortfolioSectionId.Blog.path}",
+                text = "← ${StringRes.ArticleBack.value}",
+                modifier = MonoEyebrowStyle.toModifier().textDecorationLine(TextDecorationLine.None),
+            )
+            A(href = "/feed.xml", attrs = MonoEyebrowStyle.toModifier().toAttrs()) {
+                Text(StringRes.ArticleFeed.value)
+            }
+        }
     }
-    val options = js("({ year: 'numeric', month: 'long', day: 'numeric' })")
-    return js("new Date(iso + 'T12:00:00')").toLocaleDateString(locale, options) as String
+}
+
+/**
+ * Prism is only needed on notes, so it loads here instead of in every page's head.
+ * Once it has loaded, later notes reuse it straight away.
+ */
+private fun highlightCode() {
+    val prism = window.asDynamic().Prism
+    if (prism != null) {
+        prism.highlightAll()
+        return
+    }
+    if (document.getElementById(PRISM_SCRIPT_ID) != null) return // Still loading; its onload highlights.
+    val script = document.createElement("script") as HTMLScriptElement
+    script.id = PRISM_SCRIPT_ID
+    script.src = "/prism/prism.js"
+    script.async = true
+    script.onload = { window.asDynamic().Prism?.highlightAll() }
+    document.head?.appendChild(script)
+}
+
+private const val PRISM_SCRIPT_ID = "prism-js"
+
+/** Adds a "#" link to every section heading that copies a deep link to it. */
+private fun addHeadingAnchors(root: Element, label: String, copiedLabel: String) {
+    val headings = root.querySelectorAll("h2[id], h3[id]")
+    for (i in 0 until headings.length) {
+        val heading = headings.item(i) as? Element ?: continue
+        if (heading.querySelector(".heading-anchor") != null) continue
+        val id = heading.id
+        val anchor = document.createElement("a") as HTMLAnchorElement
+        anchor.className = "heading-anchor"
+        anchor.href = "#$id"
+        anchor.textContent = "#"
+        anchor.setAttribute("aria-label", label)
+        anchor.title = label
+        anchor.addEventListener("click", { event ->
+            event.preventDefault()
+            window.history.replaceState(null, "", "#$id")
+            heading.scrollIntoView(js("({ behavior: 'smooth', block: 'start' })"))
+            window.navigator.asDynamic().clipboard?.writeText(window.location.href)
+            anchor.classList.add("copied")
+            anchor.setAttribute("aria-label", copiedLabel)
+            anchor.title = copiedLabel
+            window.setTimeout({
+                anchor.classList.remove("copied")
+                anchor.setAttribute("aria-label", label)
+                anchor.title = label
+            }, 1600)
+        })
+        heading.appendChild(anchor)
+    }
 }
 
 private fun jsonString(value: String): String {

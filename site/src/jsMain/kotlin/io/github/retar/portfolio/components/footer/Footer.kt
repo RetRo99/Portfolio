@@ -32,6 +32,10 @@ import io.github.retar.portfolio.components.widgets.EditorialGrid
 import io.github.retar.portfolio.components.widgets.PrimaryButton
 import io.github.retar.portfolio.components.widgets.ResumeDownloadButton
 import io.github.retar.portfolio.resources.LinkRes
+import org.jetbrains.compose.web.dom.Text
+import org.jetbrains.compose.web.dom.A
+import io.github.retar.portfolio.resources.NowRes
+import io.github.retar.portfolio.resources.UsesRes
 import io.github.retar.portfolio.resources.StringRes
 import io.github.retar.portfolio.styles.BodyStyle
 import io.github.retar.portfolio.styles.CaptionStyle
@@ -160,9 +164,28 @@ private fun FooterCtaRow() {
 @Composable
 private fun FooterLinksRow() {
     Row(
-        modifier = Modifier.gap(20.px),
+        modifier = Modifier.gap(20.px).styleModifier { property("flex-wrap", "wrap") },
         verticalAlignment = Alignment.CenterVertically,
     ) {
+        Link(
+            path = LinkRes.Internal.Now,
+            modifier = MonoEyebrowStyle.toModifier().then(FooterLinkStyle.toModifier()),
+        ) {
+            SpanText(text = NowRes.title.value)
+        }
+        Link(
+            path = LinkRes.Internal.Uses,
+            modifier = MonoEyebrowStyle.toModifier().then(FooterLinkStyle.toModifier()),
+        ) {
+            SpanText(text = UsesRes.title.value)
+        }
+        // A plain anchor: the feed is a file, not a page the client-side router knows about.
+        A(
+            href = LinkRes.Internal.Feed,
+            attrs = MonoEyebrowStyle.toModifier().then(FooterLinkStyle.toModifier()).toAttrs(),
+        ) {
+            Text("RSS")
+        }
         Link(
             path = LinkRes.External.GitHub,
             modifier = MonoEyebrowStyle.toModifier()

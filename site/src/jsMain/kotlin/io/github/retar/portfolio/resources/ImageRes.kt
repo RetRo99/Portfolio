@@ -5,20 +5,17 @@ enum class ImageRes(
     val intrinsicWidth: Int? = null,
     val intrinsicHeight: Int? = null,
 ) {
-    Bardy1("/bardy/Bardy1.avif"),
-    Bardy2("/bardy/Bardy2.avif"),
-    Bardy3("/bardy/Bardy3.avif"),
 
-    AppsFlyerArticle("/articles/appsflyer_kmp.jpeg", 1024, 565),
-    InfiniteCarouselArticle("/articles/infinite_carousel.jpeg", 1024, 565),
-    SQLCipherArticle("/articles/sqlcipher_kotlin_native.jpeg", 1024, 559),
+    AppsFlyerArticle("/articles/appsflyer_kmp.webp", 640, 353),
+    InfiniteCarouselArticle("/articles/infinite_carousel.webp", 640, 353),
+    SQLCipherArticle("/articles/sqlcipher_kotlin_native.webp", 640, 349),
 
     ParrotIcon("/parrot/parrot-icon.png", 256, 256),
-    ParrotScreenshot1("/parrot/parrot-screenshot-1.jpeg", 945, 2048),
-    ParrotScreenshot2("/parrot/parrot-screenshot-2.jpeg", 945, 2048),
-    ParrotScreenshot3("/parrot/parrot-screenshot-3.jpeg", 945, 2048),
-    ParrotScreenshot4("/parrot/parrot-screenshot-4.jpeg", 945, 2048),
-    ParrotScreenshot5("/parrot/parrot-screenshot-5.jpeg", 945, 2048),
+    ParrotScreenshot1("/parrot/parrot-screenshot-1.webp", 600, 1300),
+    ParrotScreenshot2("/parrot/parrot-screenshot-2.webp", 600, 1300),
+    ParrotScreenshot3("/parrot/parrot-screenshot-3.webp", 600, 1300),
+    ParrotScreenshot4("/parrot/parrot-screenshot-4.webp", 600, 1300),
+    ParrotScreenshot5("/parrot/parrot-screenshot-5.webp", 600, 1300),
 
-    ProfileImage("/profile/profile_image.png", 299, 374),
+    ProfileImage("/profile/profile_image.webp", 299, 374),
 }
