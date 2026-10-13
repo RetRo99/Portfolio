@@ -46,6 +46,8 @@ import io.github.retar.portfolio.styles.sitePalette
 import io.github.retar.portfolio.utils.trackEvent
 import org.jetbrains.compose.web.dom.A
 import org.jetbrains.compose.web.dom.Div
+import com.varabyte.kobweb.compose.ui.modifiers.classNames
+import org.jetbrains.compose.web.dom.Span
 import org.jetbrains.compose.web.dom.Source
 import org.jetbrains.compose.web.dom.Text
 import org.jetbrains.compose.web.dom.Video
@@ -177,7 +179,7 @@ private fun ParrotHero() {
                 )
             }
             H1Text(text = StringRes.ParrotPageHeading.value, modifier = DisplayStyle.toModifier().rise(1))
-            SpanText(
+            ReadAlongText(
                 text = StringRes.ParrotPageSubhead.value,
                 modifier = SubtitleStyle.toModifier().measure(56).rise(2),
             )
@@ -428,3 +430,30 @@ private fun ChangeGroup(label: String, items: List<String>) {
         }
     }
 }
+
+/**
+ * Highlights [text] once, sentence by sentence, the way Parrot follows the narrator. Each sentence
+ * stays lit for as long as it would take to read aloud (see editorial.css).
+ */
+@Composable
+private fun ReadAlongText(text: String, modifier: Modifier = Modifier) {
+    val sentences = text.split(Regex("(?<=[.!?;])\\s+")).filter { it.isNotBlank() }
+    var startMs = READ_ALONG_DELAY_MS
+    Span(attrs = modifier.classNames("read-along").toAttrs()) {
+        sentences.forEachIndexed { index, sentence ->
+            if (index > 0) Text(" ")
+            val durationMs = maxOf(900, sentence.split(" ").size * 180)
+            val delay = startMs
+            Span(attrs = {
+                classes("ra-sentence")
+                style {
+                    property("--ra-delay", "${delay}ms")
+                    property("--ra-duration", "${durationMs}ms")
+                }
+            }) { Text(sentence) }
+            startMs += durationMs
+        }
+    }
+}
+
+private const val READ_ALONG_DELAY_MS = 700

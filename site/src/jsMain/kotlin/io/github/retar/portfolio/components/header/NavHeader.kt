@@ -109,6 +109,8 @@ import org.jetbrains.compose.web.css.rgba
 import org.jetbrains.compose.web.css.vh
 import org.jetbrains.compose.web.css.vw
 import org.w3c.dom.HTMLElement
+import org.w3c.dom.Element
+import io.github.retar.portfolio.utils.spillTheme
 import kotlin.js.json
 
 val ThemeToggleSpinKeyframes = Keyframes {
@@ -577,15 +579,25 @@ private fun ThemeToggle(modifier: Modifier = Modifier) {
         Modifier
     }
 
+    val toggle = remember { arrayOfNulls<Element>(1) }
     Span(
         attrs = Modifier
             .attr("aria-pressed", (colorMode == ColorMode.DARK).toString())
             .headerButton(StringRes.ToggleTheme.value) {
-                spinKey++
-                colorMode = colorMode.opposite
-                trackEvent("theme-toggle", json("mode" to colorMode.name.lowercase()))
+                val next = colorMode.opposite
+                // The new palette spreads out from the toggle; where that can't play, the icon spins.
+                val rect = toggle[0]?.getBoundingClientRect()
+                val x = rect?.let { it.left + it.width / 2 } ?: 0.0
+                val y = rect?.let { it.top + it.height / 2 } ?: 0.0
+                if (!spillTheme(x, y, toDark = next.isDark) { colorMode = next }) spinKey++
+                trackEvent("theme-toggle", json("mode" to next.name.lowercase()))
             }
-            .toAttrs(),
+            .toAttrs {
+                ref { element ->
+                    toggle[0] = element
+                    onDispose { toggle[0] = null }
+                }
+            },
     ) {
         if (colorMode == ColorMode.LIGHT) {
             SunIcon(modifier = iconModifier.then(spinModifier))

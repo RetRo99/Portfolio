@@ -91,6 +91,8 @@ fun initStyles(ctx: InitSilkContext) {
 
 @InitKobweb
 fun initRouter(ctx: InitKobwebContext) {
+    if (!AppGlobals.isExporting) sayHelloInConsole()
+
     val history = window.history.asDynamic()
     history.scrollRestoration = "manual"
 
@@ -129,4 +131,18 @@ fun AppEntry(content: @Composable () -> Unit) {
             }
         }
     }
+}
+/** A small hello for anyone who opens the browser console. */
+private fun sayHelloInConsole() {
+    val parrot = """
+        |    __
+        |  <(o )___   hi, fellow console-opener.
+        |   ( ._> /   this site is Kotlin all the way down (Kobweb).
+        |    `---'    source: github.com/retro99/portfolio
+    """.trimMargin()
+    console.log(
+        "%c$parrot%c\n\nSay hello: rok.retar@gmail.com",
+        "color: #B24522; font: 12px/1.4 ui-monospace, monospace;",
+        "color: inherit; font: 12px ui-monospace, monospace;",
+    )
 }

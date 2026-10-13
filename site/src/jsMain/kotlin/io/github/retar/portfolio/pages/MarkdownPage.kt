@@ -39,6 +39,10 @@ import org.w3c.dom.Element
 import org.w3c.dom.HTMLAnchorElement
 import org.w3c.dom.HTMLScriptElement
 import kotlin.js.json
+import org.w3c.dom.HTMLElement
+import io.github.retar.portfolio.utils.openNote
+import io.github.retar.portfolio.utils.isPlainClick
+import io.github.retar.portfolio.utils.motionAllowed
 import org.jetbrains.compose.web.dom.Div
 
 @Composable
@@ -171,12 +175,22 @@ fun MarkdownPage(content: @Composable () -> Unit) {
 
 @Composable
 private fun NextNote(note: Note) {
+    val router = rememberPageContext().router
     Div(attrs = Modifier.classNames("next-note").toAttrs()) {
         SpanText(text = StringRes.ArticleNext.value, modifier = MonoEyebrowStyle.toModifier())
         Link(
             path = note.route,
             modifier = Modifier.classNames("next-note-link")
-                .onClick { trackEvent("next-note-open", json("route" to note.route)) },
+                .onClick { event ->
+                    trackEvent("next-note-open", json("route" to note.route))
+                    val native = event.nativeEvent.asDynamic()
+                    if (motionAllowed() && isPlainClick(native)) {
+                        native.preventDefault()
+                        native.stopImmediatePropagation()
+                        val link = event.currentTarget as? Element
+                        openNote(router, note.route, link?.querySelector(".next-note-title") as? HTMLElement)
+                    }
+                },
         ) {
             SpanText(text = note.title.value, modifier = Modifier.classNames("next-note-title"))
             SpanText(text = note.description.value, modifier = Modifier.classNames("next-note-desc"))

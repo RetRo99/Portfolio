@@ -36,7 +36,7 @@ kobweb {
             unsafe {
                     +"""<style>::selection { background-color: rgb(178, 69, 34); color: rgb(251, 248, 242); }</style>"""
                     // Motion system: one strong ease-out, a staggered entrance, visible focus, and a
-                    // reduced-motion escape hatch that turns every animation off.
+                    // reduced-motion path that keeps fades but drops movement.
                     +"""<style>
                         :root { --ease-out: cubic-bezier(0.23, 1, 0.32, 1); }
                         html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
@@ -49,7 +49,9 @@ kobweb {
                         #main:focus { outline: none; }
                         .silk-dark :focus-visible { outline-color: rgb(226, 124, 84); }
                         @media (prefers-reduced-motion: reduce) {
-                          *, *::before, *::after { animation-duration: 1ms !important; animation-delay: 0ms !important; transition-duration: 1ms !important; scroll-behavior: auto !important; }
+                          @keyframes calm-fade { from { opacity: 0; } to { opacity: 1; } }
+                          html { scroll-behavior: auto !important; }
+                          .rise, [style*="animation"]:not(.scroll-linked) { animation-name: calm-fade !important; animation-duration: 240ms !important; animation-delay: 0ms !important; animation-iteration-count: 1 !important; }
                         }
                     </style>"""
                 }

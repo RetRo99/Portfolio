@@ -28,6 +28,12 @@ import io.github.retar.portfolio.styles.eyebrowText
 import io.github.retar.portfolio.styles.sitePalette
 import io.github.retar.portfolio.utils.trackEvent
 import kotlin.js.json
+import org.w3c.dom.HTMLElement
+import org.w3c.dom.Element
+import io.github.retar.portfolio.utils.openNote
+import io.github.retar.portfolio.utils.isPlainClick
+import io.github.retar.portfolio.utils.motionAllowed
+import com.varabyte.kobweb.core.rememberPageContext
 import org.jetbrains.compose.web.dom.Div
 
 /** Adds the staggered "rise" entrance defined in the site head; [order] sets the delay step. */
@@ -243,11 +249,22 @@ fun ArticleRow(
     image: ImageRes,
     readLabel: String,
 ) {
+    val router = rememberPageContext().router
     Link(
         path = route,
         modifier = ArticleRowStyle.toModifier()
             .textDecorationLine(TextDecorationLine.None)
-            .onClick { trackEvent("article-open", json("route" to route)) },
+            .onClick { event ->
+                trackEvent("article-open", json("route" to route))
+                val native = event.nativeEvent.asDynamic()
+                if (motionAllowed() && isPlainClick(native)) {
+                    // Take over the navigation so the title can glide into the article heading.
+                    native.preventDefault()
+                    native.stopImmediatePropagation()
+                    val row = event.currentTarget as? Element
+                    openNote(router, route, row?.querySelector("h3") as? HTMLElement)
+                }
+            },
     ) {
         Div(
             attrs = Modifier.styleModifier {

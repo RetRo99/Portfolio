@@ -2,10 +2,6 @@ package io.github.retar.portfolio.components.layouts
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import com.varabyte.kobweb.compose.css.functions.blur
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
@@ -15,6 +11,7 @@ import com.varabyte.kobweb.compose.ui.styleModifier
 import com.varabyte.kobweb.compose.ui.modifiers.backdropFilter
 import com.varabyte.kobweb.compose.ui.modifiers.borderBottom
 import com.varabyte.kobweb.compose.ui.modifiers.boxShadow
+import com.varabyte.kobweb.compose.ui.modifiers.classNames
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.height
 import com.varabyte.kobweb.compose.ui.modifiers.id
@@ -23,7 +20,6 @@ import com.varabyte.kobweb.compose.ui.modifiers.minHeight
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.modifiers.position
 import com.varabyte.kobweb.compose.ui.modifiers.top
-import com.varabyte.kobweb.compose.ui.modifiers.width
 import com.varabyte.kobweb.compose.ui.modifiers.zIndex
 import com.varabyte.kobweb.compose.ui.modifiers.backgroundColor
 import com.varabyte.kobweb.core.layout.Layout
@@ -42,7 +38,6 @@ import kotlinx.browser.document
 import kotlinx.browser.window
 import org.jetbrains.compose.web.css.LineStyle
 import org.jetbrains.compose.web.css.Position
-import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.css.rgba
 import org.jetbrains.compose.web.css.vh
@@ -78,7 +73,6 @@ val NavHeaderStyle = CssStyle {
 fun PageLayout(content: @Composable () -> Unit) {
     val ctx = rememberPageContext()
     val currentPath = ctx.route.path
-    var scrollProgress by remember { mutableStateOf(0.percent) }
 
     DisposableEffect(currentPath) {
         val isPush = ScrollHistory.consumePushFlag()
@@ -106,16 +100,27 @@ fun PageLayout(content: @Composable () -> Unit) {
         }
     }
 
+    // Browsers with scroll-driven animations fill the reading bar in CSS (editorial.css);
+    // the rest get a rAF-throttled listener that sets the transform directly, without recomposing.
     DisposableEffect(Unit) {
+        val scrollDriven = window.asDynamic().CSS?.supports("animation-timeline: scroll()") == true
+        var frame = 0
         val onScroll: (org.w3c.dom.events.Event) -> Unit = { _ ->
-            val scrollHeight = document.documentElement?.scrollHeight?.toDouble() ?: 0.0
-            val scrollTop = window.scrollY
-            val clientHeight = document.documentElement?.clientHeight?.toDouble() ?: 0.0
-            val maxScroll = (scrollHeight - clientHeight).coerceAtLeast(0.0)
-            val progress = if (maxScroll > 0) (scrollTop / maxScroll) * 100.0 else 0.0
-            scrollProgress = progress.toInt().percent
+            if (frame == 0) {
+                frame = window.requestAnimationFrame {
+                    frame = 0
+                    val root = document.documentElement
+                    val maxScroll = ((root?.scrollHeight ?: 0) - (root?.clientHeight ?: 0)).toDouble()
+                    val progress = if (maxScroll > 0) (window.scrollY / maxScroll).coerceIn(0.0, 1.0) else 0.0
+                    (document.querySelector(".scroll-progress") as? HTMLElement)
+                        ?.style?.transform = "scaleX($progress)"
+                }
+            }
         }
-        window.addEventListener("scroll", onScroll)
+        if (!scrollDriven) {
+            window.addEventListener("scroll", onScroll)
+            onScroll(org.w3c.dom.events.Event("scroll"))
+        }
         onDispose { window.removeEventListener("scroll", onScroll) }
     }
 
@@ -139,8 +144,9 @@ fun PageLayout(content: @Composable () -> Unit) {
         ) {
             Box(
                 modifier = Modifier
+                    .classNames("scroll-progress", "scroll-linked")
                     .height(2.px)
-                    .width(scrollProgress)
+                    .fillMaxWidth()
                     .backgroundColor(sitePalette().accent),
             )
         }

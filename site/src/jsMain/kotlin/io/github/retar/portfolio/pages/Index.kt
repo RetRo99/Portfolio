@@ -37,7 +37,6 @@ import io.github.retar.portfolio.styles.BodyStyle
 import io.github.retar.portfolio.styles.CaptionStyle
 import io.github.retar.portfolio.styles.DisplayStyle
 import io.github.retar.portfolio.styles.H1Style
-import io.github.retar.portfolio.styles.H1Text
 import io.github.retar.portfolio.styles.H2Style
 import io.github.retar.portfolio.styles.H2Text
 import io.github.retar.portfolio.styles.H3Style
@@ -57,6 +56,7 @@ import org.jetbrains.compose.web.dom.Div
 import org.jetbrains.compose.web.dom.H2
 import org.jetbrains.compose.web.dom.Span
 import org.jetbrains.compose.web.dom.Text
+import org.jetbrains.compose.web.dom.H1
 import org.jetbrains.compose.web.dom.Li
 import org.jetbrains.compose.web.dom.Ol
 
@@ -189,10 +189,12 @@ private fun HeroSection() {
                     text = StringRes.HeroEyebrow.value.eyebrowText(),
                     modifier = MonoEyebrowStyle.toModifier().rise(0),
                 )
-                H1Text(
-                    text = StringRes.HeroName.value,
-                    modifier = DisplayStyle.toModifier().rise(1),
-                )
+                // The name rises from behind its own baseline instead of the shared fade-up.
+                H1(attrs = DisplayStyle.toModifier().toAttrs()) {
+                    Span(attrs = { classes("mask-line") }) {
+                        Span { Text(StringRes.HeroName.value) }
+                    }
+                }
                 Div(attrs = Modifier.column("1rem").rise(2).toAttrs()) {
                     SpanText(
                         text = StringRes.HeroHeadline.value,
