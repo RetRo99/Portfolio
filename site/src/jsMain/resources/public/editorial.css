@@ -216,3 +216,7 @@
     margin-top: 1rem;
 }
 .prose .next-note-meta a { text-decoration: none; }
+
+/* Linked headings (the homepage Parrot title): an accent arrow that nudges right on hover. */
+.heading-link-arrow { display: inline-block; margin-left: 0.3em; font-size: 0.7em; vertical-align: 0.12em; color: var(--accent); transition: transform 220ms var(--ease-out); }
+a:hover .heading-link-arrow { transform: translateX(4px); }

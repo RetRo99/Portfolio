@@ -33,4 +33,8 @@ enum class NavItem(
         route = "/",
         label = StringRes.NavContact,
     ),
+    ;
+
+    /** Where the item points: the section's anchor on its page, or the page itself. */
+    val href: String get() = route + (section?.path ?: "")
 }

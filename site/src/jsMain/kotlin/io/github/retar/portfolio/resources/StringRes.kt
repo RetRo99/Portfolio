@@ -566,6 +566,36 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
         lv = "RSS plūsma"
     )
 
+    data object OpenMenu : StringRes(
+        en = "Open menu",
+        sl = "Odpri meni",
+        lv = "Atvērt izvēlni"
+    )
+
+    data object CloseMenu : StringRes(
+        en = "Close menu",
+        sl = "Zapri meni",
+        lv = "Aizvērt izvēlni"
+    )
+
+    data object ToggleTheme : StringRes(
+        en = "Switch between light and dark theme",
+        sl = "Preklopi med svetlo in temno temo",
+        lv = "Pārslēgt gaišo un tumšo motīvu"
+    )
+
+    data object ChooseLanguage : StringRes(
+        en = "Choose language",
+        sl = "Izberi jezik",
+        lv = "Izvēlēties valodu"
+    )
+
+    data object HomeLink : StringRes(
+        en = "Rok Retar, home",
+        sl = "Rok Retar, domov",
+        lv = "Rok Retar, sākums"
+    )
+
     data object SkipToContent : StringRes(
         en = "Skip to content",
         sl = "Preskoči na vsebino",

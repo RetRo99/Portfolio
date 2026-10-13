@@ -82,7 +82,8 @@ fun PageLayout(content: @Composable () -> Unit) {
 
     DisposableEffect(currentPath) {
         val isPush = ScrollHistory.consumePushFlag()
-        val target = if (isPush) 0.0 else ScrollHistory.restore(currentPath) ?: 0.0
+        val saved = if (isPush) null else ScrollHistory.restore(currentPath)
+        val target = saved ?: 0.0
 
         val html = document.documentElement as? HTMLElement
         val style = html?.style?.asDynamic()
@@ -90,8 +91,13 @@ fun PageLayout(content: @Composable () -> Unit) {
         style?.scrollBehavior = "auto"
         html?.scrollTop = target
 
+        // A link to a section ("/#contact" from /parrot, or a shared retar.app/#notes) lands on that
+        // section, unless going back to a page whose scroll position we remember.
+        val anchor = window.location.hash.removePrefix("#").takeIf { it.isNotEmpty() && saved == null }
+
         window.requestAnimationFrame {
-            html?.scrollTop = target
+            val section = anchor?.let { document.getElementById(it) }
+            if (section != null) section.scrollIntoView() else html?.scrollTop = target
             style?.scrollBehavior = previousBehavior ?: ""
         }
 

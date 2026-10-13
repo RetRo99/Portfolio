@@ -153,6 +153,8 @@ val PhoneRowItemStyle = CssStyle {
     base {
         Modifier.styleModifier {
             property("width", "min(62vw, 240px)")
+            property("flex-shrink", "0")
+            property("scroll-snap-align", "center")
         }
     }
     Breakpoint.MD {

@@ -24,6 +24,9 @@ import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.toAttrs
+import com.varabyte.kobweb.compose.ui.modifiers.attr
+import com.varabyte.kobweb.compose.ui.modifiers.onKeyDown
+import com.varabyte.kobweb.compose.ui.thenIf
 import org.jetbrains.compose.web.dom.Span
 import com.varabyte.kobweb.compose.ui.modifiers.alignItems
 import com.varabyte.kobweb.compose.ui.modifiers.rotate
@@ -169,6 +172,31 @@ val NavLinkStyle = CssStyle {
     }
 }
 
+/**
+ * Makes a clickable icon or label behave like a button: reachable with Tab, activated with Enter or
+ * Space, announced with [label], and given a 40px square hit area around the glyph.
+ */
+private fun Modifier.headerButton(label: String, onActivate: () -> Unit): Modifier =
+    this
+        .attr("role", "button")
+        .attr("tabindex", "0")
+        .attr("aria-label", label)
+        .styleModifier {
+            property("display", "inline-flex")
+            property("align-items", "center")
+            property("justify-content", "center")
+            property("min-width", "40px")
+            property("min-height", "40px")
+            property("box-sizing", "border-box")
+        }
+        .onClick { onActivate() }
+        .onKeyDown { event ->
+            if (event.key == "Enter" || event.key == " ") {
+                event.preventDefault()
+                onActivate()
+            }
+        }
+
 val NavHeaderHeight by StyleVariable<CSSLengthValue>(prefix = "site", defaultFallback = 0.px)
 
 val ProfileImageStyle = CssStyle {
@@ -233,15 +261,15 @@ fun NavHeader() {
             verticalAlignment = Alignment.CenterVertically
         ) {
             // Left side: Profile image + Name and subtitle
-            Row(
+            Link(
+                path = "/",
                 modifier = Modifier
                     .gap(14.px)
                     .alignItems(AlignItems.Baseline)
-                .cursor(Cursor.Pointer)
-                .onClick {
-                    trackEvent("logo-click")
-                    router.navigateTo("/")
-                },
+                    .textDecorationLine(TextDecorationLine.None)
+                    .styleModifier { property("display", "flex") }
+                    .attr("aria-label", StringRes.HomeLink.value)
+                    .onClick { trackEvent("logo-click") },
             ) {
                 SpanText(
                     text = StringRes.HeaderTitle.value,
@@ -291,7 +319,7 @@ fun NavHeader() {
                 contentAlignment = Alignment.Center,
             ) {
                 Row(
-                    modifier = Modifier.gap(12.px),
+                    modifier = Modifier.gap(2.px),
                     horizontalArrangement = Arrangement.Center,
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
@@ -300,23 +328,19 @@ fun NavHeader() {
                         isMenuOpen = isMenuOpen,
                         onMenuClose = { isMenuOpen = false },
                     )
-                    if (isMenuOpen) {
-                        CloseIcon(
-                            modifier = MenuIconStyle
-                                .toModifier()
-                                .color(palette.textSecondary)
-                                .onClick { isMenuOpen = false },
-                        )
-                    } else {
-                        HamburgerIcon(
-                            modifier = MenuIconStyle
-                                .toModifier()
-                                .color(palette.textSecondary)
-                                .onClick {
-                                    isMenuOpen = true
-                                    trackEvent("mobile-menu-open")
-                                },
-                        )
+                    val menuLabel = if (isMenuOpen) StringRes.CloseMenu.value else StringRes.OpenMenu.value
+                    Span(
+                        attrs = MenuIconStyle
+                            .toModifier()
+                            .color(palette.textSecondary)
+                            .attr("aria-expanded", isMenuOpen.toString())
+                            .headerButton(menuLabel) {
+                                isMenuOpen = !isMenuOpen
+                                if (isMenuOpen) trackEvent("mobile-menu-open")
+                            }
+                            .toAttrs(),
+                    ) {
+                        if (isMenuOpen) CloseIcon() else HamburgerIcon()
                     }
                 }
             }
@@ -411,22 +435,19 @@ private fun DesktopNavItem(item: NavItem) {
     val palette = sitePalette()
     val coroutineScope = rememberCoroutineScope()
 
-    SpanText(
+    Link(
+        path = item.href,
         text = item.label.value,
         modifier = NavLinkStyle
             .toModifier()
             .styleModifier {
                 property("--nav-color", (if (isActive) palette.textPrimary else palette.textSecondary).toString())
                 property("text-decoration-color", if (isActive) palette.accent.toString() else "transparent")
+                property("padding-block", "10px")
             }
+            .thenIf(isActive, Modifier.attr("aria-current", "true"))
             .onClick {
                 trackEvent("nav-click", json("item" to item.name))
-                val section = item.section
-                if (section != null) {
-                    router.tryRoutingTo(item.route + section.path)
-                } else {
-                    router.navigateTo(item.route)
-                }
                 coroutineScope.launch {
                     delay(200)
                     setActiveSection(item.section)
@@ -494,27 +515,23 @@ private fun HeaderNavItem(
     val palette = sitePalette()
 
     val coroutineScope = rememberCoroutineScope()
-    Row(
+    Link(
+        path = item.href,
         modifier = Modifier
             .fillMaxWidth()
             .gap(16.px)
             .alignItems(AlignItems.Baseline)
             .padding(topBottom = 14.px)
             .userSelect(UserSelect.None)
-            .cursor(Cursor.Pointer)
-            .styleModifier { property("border-bottom", "1px solid ${palette.border}") }
+            .textDecorationLine(TextDecorationLine.None)
+            .styleModifier {
+                property("display", "flex")
+                property("border-bottom", "1px solid ${palette.border}")
+            }
+            .thenIf(isActive, Modifier.attr("aria-current", "true"))
             .onClick {
                 onClick()
                 trackEvent("nav-click", json("item" to item.name))
-                val section = item.section
-
-                if (section != null) {
-                    router.tryRoutingTo(
-                        item.route + section.path
-                    )
-                } else {
-                    router.navigateTo(item.route)
-                }
                 coroutineScope.launch {
                     delay(200)
                     setActiveSection(item.section)
@@ -551,11 +568,6 @@ private fun ThemeToggle(modifier: Modifier = Modifier) {
         .color(palette.textSecondary)
         .then(modifier)
         .cursor(Cursor.Pointer)
-        .onClick {
-            spinKey++
-            colorMode = colorMode.opposite
-            trackEvent("theme-toggle", json("mode" to colorMode.name.lowercase()))
-        }
 
     val spinModifier = if (spinKey > 0) {
         Modifier.animation(
@@ -565,10 +577,21 @@ private fun ThemeToggle(modifier: Modifier = Modifier) {
         Modifier
     }
 
-    if (colorMode == ColorMode.LIGHT) {
-        SunIcon(modifier = iconModifier.then(spinModifier))
-    } else {
-        MoonIcon(modifier = iconModifier.then(spinModifier))
+    Span(
+        attrs = Modifier
+            .attr("aria-pressed", (colorMode == ColorMode.DARK).toString())
+            .headerButton(StringRes.ToggleTheme.value) {
+                spinKey++
+                colorMode = colorMode.opposite
+                trackEvent("theme-toggle", json("mode" to colorMode.name.lowercase()))
+            }
+            .toAttrs(),
+    ) {
+        if (colorMode == ColorMode.LIGHT) {
+            SunIcon(modifier = iconModifier.then(spinModifier))
+        } else {
+            MoonIcon(modifier = iconModifier.then(spinModifier))
+        }
     }
 }
 
@@ -605,7 +628,9 @@ private fun LanguageSwitcher(
                 .toModifier()
                 .color(palette.textSecondary)
                 .cursor(Cursor.Pointer)
-                .onClick {
+                .attr("aria-haspopup", "true")
+                .attr("aria-expanded", isOpen.toString())
+                .headerButton(StringRes.ChooseLanguage.value) {
                     isOpen = !isOpen
                     if (isOpen) onMenuClose()
                 }
@@ -667,7 +692,17 @@ private fun LanguageItem(
             .padding(8.px)
             .cursor(Cursor.Pointer)
             .userSelect(UserSelect.None)
+            .attr("role", "button")
+            .attr("tabindex", "0")
+            .attr("aria-current", if (isSelected) "true" else "false")
+            .attr("lang", language.code)
             .onClick { onClick() }
+            .onKeyDown { event ->
+                if (event.key == "Enter" || event.key == " ") {
+                    event.preventDefault()
+                    onClick()
+                }
+            }
     ) {
         SpanText(
             text = language.label,

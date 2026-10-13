@@ -193,7 +193,7 @@ private fun ParrotHero() {
                 PrimaryButton(
                     url = ParrotRes.latestRelease.apkUrl,
                     label = StringRes.ParrotDownloadLatest(ParrotRes.latestRelease.version).value,
-                    openExternally = true,
+                    download = true,
                     onClick = { trackEvent("apk-download", kotlin.js.json("version" to ParrotRes.latestRelease.version)) },
                 )
                 if (ParrotRes.releases.size > 1) {

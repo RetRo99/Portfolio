@@ -48,7 +48,15 @@ import io.github.retar.portfolio.styles.SubtitleStyle
 import io.github.retar.portfolio.styles.eyebrowText
 import io.github.retar.portfolio.styles.sitePalette
 import io.github.retar.portfolio.utils.trackEvent
+import com.varabyte.kobweb.compose.ui.modifiers.classNames
+import com.varabyte.kobweb.compose.ui.modifiers.onClick
+import com.varabyte.kobweb.silk.components.navigation.Link
+import com.varabyte.kobweb.silk.style.selectors.hover
+import kotlin.js.json
 import org.jetbrains.compose.web.dom.Div
+import org.jetbrains.compose.web.dom.H2
+import org.jetbrains.compose.web.dom.Span
+import org.jetbrains.compose.web.dom.Text
 import org.jetbrains.compose.web.dom.Li
 import org.jetbrains.compose.web.dom.Ol
 
@@ -141,6 +149,34 @@ val HeroPortraitStyle = CssStyle {
     }
 }
 
+/** A heading that links somewhere: no underline, an accent arrow, and the accent colour on hover. */
+val HeadingLinkStyle = CssStyle {
+    base {
+        Modifier.styleModifier {
+            property("color", "inherit")
+            property("text-decoration", "none")
+            property("align-self", "flex-start")
+        }
+    }
+    hover {
+        Modifier.styleModifier { property("color", sitePalette().accent.toString()) }
+    }
+}
+
+/** A screenshot that opens the case study: it lifts slightly on hover. */
+val PhoneLinkStyle = CssStyle {
+    base {
+        Modifier.styleModifier {
+            property("display", "block")
+            property("border-radius", "28px")
+            property("transition", "transform 220ms var(--ease-out)")
+        }
+    }
+    hover {
+        Modifier.styleModifier { property("transform", "translateY(-6px)") }
+    }
+}
+
 @Composable
 private fun HeroSection() {
     PortfolioSection(
@@ -220,7 +256,18 @@ private fun ParrotShowcaseSection() {
     ) {
         EditorialGrid(eyebrow = StringRes.ParrotEyebrow.value, modifier = Modifier.sectionSpacing()) {
             Div(attrs = Modifier.column("1rem").toAttrs()) {
-                H2Text(text = StringRes.ParrotHeading.value, modifier = H2Style.toModifier())
+                Link(
+                    path = LinkRes.Internal.Parrot,
+                    modifier = HeadingLinkStyle.toModifier()
+                        .onClick { trackEvent("case-study-open", json("from" to "heading")) },
+                ) {
+                    H2(attrs = H2Style.toModifier().toAttrs()) {
+                        Text(StringRes.ParrotHeading.value)
+                        Span(attrs = Modifier.classNames("heading-link-arrow").toAttrs { attr("aria-hidden", "true") }) {
+                            Text("→")
+                        }
+                    }
+                }
                 SpanText(
                     text = StringRes.ParrotSubhead.value,
                     modifier = SubtitleStyle.toModifier().measure(58),
@@ -231,13 +278,15 @@ private fun ParrotShowcaseSection() {
                 ProjectsRes.SelectedProjects.forEachIndexed { index, shot ->
                     // Alternate vertical offsets give the row a loose, hand-placed rhythm on desktop.
                     val offset = listOf("0", "2.5rem", "1rem", "3rem", "0.5rem")[index % 5]
-                    PhoneShot(
-                        image = shot.image,
-                        description = shot.description.value,
-                        modifier = PhoneRowItemStyle.toModifier().styleModifier {
-                            property("--offset", offset)
-                        },
-                    )
+                    Link(
+                        path = LinkRes.Internal.Parrot,
+                        modifier = PhoneRowItemStyle.toModifier()
+                            .then(PhoneLinkStyle.toModifier())
+                            .styleModifier { property("--offset", offset) }
+                            .onClick { trackEvent("case-study-open", json("from" to "screenshot")) },
+                    ) {
+                        PhoneShot(image = shot.image, description = shot.description.value)
+                    }
                 }
             }
 

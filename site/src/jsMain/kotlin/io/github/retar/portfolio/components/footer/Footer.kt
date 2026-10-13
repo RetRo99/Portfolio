@@ -59,7 +59,12 @@ import org.jetbrains.compose.web.dom.Div
 
 val FooterLinkStyle = CssStyle {
     base {
+        // Small mono labels: padding gives them a finger-sized target without changing the look.
         Modifier.transition(Transition.all(duration = 150.ms))
+            .styleModifier {
+                property("display", "inline-block")
+                property("padding-block", "0.75rem")
+            }
     }
 
     hover {
@@ -151,7 +156,6 @@ private fun FooterCtaRow() {
         PrimaryButton(
             url = LinkRes.External.Email,
             label = StringRes.CtaEmail.value,
-            openExternally = true,
             onClick = { trackEvent("contact-email-click") },
         )
         ResumeDownloadButton(
@@ -164,7 +168,10 @@ private fun FooterCtaRow() {
 @Composable
 private fun FooterLinksRow() {
     Row(
-        modifier = Modifier.gap(20.px).styleModifier { property("flex-wrap", "wrap") },
+        modifier = Modifier.styleModifier {
+            property("flex-wrap", "wrap")
+            property("column-gap", "20px")
+        },
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Link(
