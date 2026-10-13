@@ -65,6 +65,24 @@ kobweb {
                           "familyName": "Retar",
                           "alternateName": "RetRo99",
                           "jobTitle": "Mobile Engineer",
+                          "disambiguatingDescription": "Android and Kotlin Multiplatform software engineer from Slovenia, author of the Parrot e-reader app.",
+                          "worksFor": {
+                            "@type": "Organization",
+                            "name": "DevRev",
+                            "url": "https://devrev.ai"
+                          },
+                          "alumniOf": [
+                            {
+                              "@type": "CollegeOrUniversity",
+                              "name": "University of Ljubljana",
+                              "url": "https://www.uni-lj.si"
+                            },
+                            {
+                              "@type": "EducationalOrganization",
+                              "name": "OpenClassrooms",
+                              "url": "https://openclassrooms.com"
+                            }
+                          ],
                           "description": "Mobile engineer in Slovenia building Android apps and taking Kotlin Multiplatform to production on iOS.",
                           "url": "https://www.retar.app/",
                           "image": "https://www.retar.app/profile/profile_image.png",
