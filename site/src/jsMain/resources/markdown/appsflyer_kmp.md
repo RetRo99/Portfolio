@@ -1,16 +1,14 @@
 ---
 routeOverride: "/blog/appsflyer-kmp-wrapper"
 title: "Wrapping the AppsFlyer SDK into a Kotlin Multiplatform library (when no official KMP SDK exists)"
-description: "A coroutine-first, expect/actual wrapper around the AppsFlyer Android and iOS SDKs — one Kotlin API, two native delegates, zero callbacks."
+description: "A coroutine-first wrapper around the AppsFlyer Android and iOS SDKs: all the logic in common code, two thin native adapters, deep links as a Flow, and 160 tests that never touch a real SDK."
 date: "2026-06-28"
 ---
 # Wrapping the AppsFlyer SDK into a Kotlin Multiplatform library (when no official KMP SDK exists)
 
-Parrot is a cross-platform EPUB reader and audiobook player. Android and iOS run on the same Kotlin codebase, compiled to a static Kotlin/Native framework. Networking, domain, database, analytics: all shared. When I needed attribution and deep linking, I reached for AppsFlyer. They ship native SDKs for Android and iOS, and the SDKs work. What they don't ship is a KMP SDK.
+AppsFlyer does attribution and deep linking for mobile apps. It ships good native SDKs for Android and iOS. What it doesn't ship is a Kotlin Multiplatform SDK. In a KMP app, where networking, domain logic and analytics already live in shared code, that means writing the integration twice: once in Kotlin against the Android SDK, once against the iOS SDK, each with its own callbacks.
 
-So I had two options. Write the same integration twice, once in `androidMain` and once in Swift, with callback-based APIs that don't compose into coroutines. Or wrap the native SDKs behind a single Kotlin API that looks like what I wanted in the first place.
-
-I wrote [`appsflyer-kmp`](https://github.com/retro99/appsflyer-kmp). It's an unofficial, experimental wrapper that delegates to the native SDKs via `expect`/`actual`. Same surface area on both platforms, suspending functions instead of callbacks, deep links as `Flow`.
+So I wrote [`appsflyer-kmp`](https://github.com/retro99/appsflyer-kmp), an unofficial, experimental wrapper with one Kotlin API on both platforms. Asynchronous calls are suspending functions, and deep links arrive as a `Flow`.
 
 > **Disclaimer:** This is a personal, unofficial project, not affiliated with or endorsed by AppsFlyer. "AppsFlyer" and the AppsFlyer SDK name are trademarks of their respective owners.
 
@@ -18,118 +16,120 @@ I wrote [`appsflyer-kmp`](https://github.com/retro99/appsflyer-kmp). It's an uno
 
 ## The problem with two integrations
 
-The native AppsFlyer SDKs are callback-based:
+The native SDKs are callback-based, and they don't even agree on shape. Android takes a listener at init:
 
 ```kotlin
 AppsFlyerLib.getInstance().init(devKey, conversionDataListener, context)
 AppsFlyerLib.getInstance().start(application)
 ```
 
+iOS uses delegate properties on a shared instance, and its deep links come through a second delegate:
+
 ```swift
-AppsFlyerLib.shared().init(devKey, appId: appId, delegate: self)
+AppsFlyerLib.shared().delegate = self
+AppsFlyerLib.shared().deepLinkDelegate = self
 AppsFlyerLib.shared().start()
 ```
 
-In a KMP codebase that means duplicate integration logic in `androidMain` and `iosMain`. Callback hell for conversion data, deep link results, in-app event delivery, and purchase validation. No coroutine support: each async operation wraps a listener manually. The Android and iOS SDKs don't even expose identical method signatures, so parameter names, delegate patterns, and feature availability all differ.
-
-Parrot's analytics layer is shared. I didn't want `#ifdef` blocks or platform-specific implementations in a codebase I'd already unified.
+Conversion data, deep link results, in-app event delivery and purchase validation all come back through callbacks, and none of them compose with coroutines. Parameter names, delegate patterns and which features exist differ between the two platforms. Every app that wants this in shared code ends up writing the same adapter.
 
 ---
 
-## The approach: `expect`/`actual` with a coroutine-first API
+## The shape: all the logic in common code
 
-The library is structured as a standard KMP module:
-
-```
-appsflyer/
-  src/
-    commonMain/    # shared API + implementation
-    androidMain/   # delegates to af-android-sdk
-    iosMain/       # delegates to AppsFlyerLib via Swift bridge
-    swift/         # Swift bridge wrapping iOS delegates
-```
-
-The common module defines the full API surface using `expect fun`/`expect val` for platform-bridged operations. Each `actual` implementation delegates to the native SDK, mapping results back into shared domain models.
-
-### API design
-
-Everything async is a `suspend fun`. Deep links arrive as a `Flow`:
+The obvious KMP structure is an `expect` declaration for every SDK call, with an `actual` on each platform. I went a different way. There is exactly one `expect` in the library, a factory. Everything else in common code talks to an internal interface that describes the native SDK:
 
 ```kotlin
-suspend fun getStartResult(): StartResult
-suspend fun getConversionData(): CampaignData
-suspend fun logEventForResult(name: String, params: Map<String, Any?>): LogEventResult
-suspend fun validateAndLogInAppPurchase(...): PurchaseValidationResult
+internal interface AppsFlyerSdk {
+    fun configure(
+        config: AppsFlyerConfig,
+        onConversion: (Map<String, Any?>) -> Unit,
+        onConversionError: (String) -> Unit,
+        onDeepLink: (DeepLinkResult) -> Unit,
+        ...
 ```
 
-```kotlin
-val deepLink: Flow<DeepLinkResult>
-```
+Android and iOS each implement that interface as a thin adapter: translate arguments, call the native SDK, hand results back as plain Kotlin values. All the behaviour (turning callbacks into suspending functions, idempotent start, dropping null parameters, mapping attribution payloads into typed results) lives once, in `commonMain`, in a single client class.
 
-No callbacks in user code. No listeners, no manual `Continuation` plumbing.
+The payoff is testing. Because the platform SDK is just an interface, the tests use a `FakeAppsFlyerSdk` and run in common code. There are about 160 of them, and none needs a device, an emulator or an AppsFlyer account. A small JVM target exists only so the code that converts Android's `org.json` payloads into Kotlin maps can be unit tested too.
 
 ---
 
-## Bridging the iOS SDK
+## Callbacks become suspending functions
 
-The iOS SDK uses a delegate pattern (`AppsFlyerLibDelegate`). That doesn't map to Kotlin coroutines on its own, so the `swift/` directory contains a thin Swift bridge that wraps the delegate callbacks and forwards them to a Kotlin interface.
-
-The bridge handles four cases. Conversion data: the delegate's `onConversionDataSuccess` / `onConversionDataFail` methods become a completed `Deferred`. Deep links: `onAppOpenAttribution` and `onDeepLinking` are forwarded into a Kotlin `Flow`. In-app event delivery: the delegate callback becomes the result of `logEventForResult`. Purchase validation: the VAL V2 callback becomes the result of `validateAndLogInAppPurchase`.
-
-The Swift bridge is the only non-Kotlin code in the library. It doesn't make decisions. It translates delegate callbacks into interface calls.
-
----
-
-## Deep links as `Flow`
-
-Deep links were the hardest part to get right. The native SDKs expose them through delegate callbacks (`onAppOpenAttribution` on both platforms). Both fire for direct deep links (app already installed) and deferred deep links (first launch after install).
-
-In the wrapper, deep links are a `Flow<DeepLinkResult>`:
+One-shot callbacks, like "was this event delivered?", turn into a suspending call with `suspendCancellableCoroutine`:
 
 ```kotlin
-sealed interface DeepLinkResult {
-    data class Found(val deepLinkValue: String, val parameters: Map<String, Any?>) : DeepLinkResult
-    data object NotFound : DeepLinkResult
-    data class Error(val message: String) : DeepLinkResult
+override suspend fun logEventForResult(
+    name: String,
+    params: Map<String, Any?>,
+): LogEventResult = suspendCancellableCoroutine { continuation ->
+    sdk.logEventForResult(
+        name = name,
+        params = params.filterValues { value -> value != null },
+    ) { result ->
+        continuation.resume(result)
+    }
 }
 ```
 
-On the platform side, each `actual` implements a `Channel`-backed flow that the delegate callback pushes to. Backpressure is `BufferOverflow.DROP_OLDEST` with a capacity of 1, because deep link events are time-sensitive. A stale deep link is worse than a dropped one.
-
-This was the API I wanted from an attribution SDK. One subscription, all link events, backpressure handled. The native SDKs give you none of that.
-
----
-
-## Feature parity
-
-The wrapper maintains 1:1 API parity with the native SDKs:
-
-- Install attribution / conversion data
-- OneLink deep linking (deferred and direct)
-- In-app event logging with delivery confirmation
-- Ad revenue measurement
-- In-app purchase validation (VAL V2)
-- Uninstall measurement
-- GDPR/DMA consent
-
-APIs that exist on only one platform are no-ops on the other (e.g. `setDisableSKAdNetwork` is iOS-only, `setCollectIMEI` is Android-only). This keeps the common API clean without losing platform-specific functionality where it matters.
-
-Android-only extensions that require `Context`/`Activity`/`Intent` are exposed as extension functions:
+Conversion data and the start result are different: they arrive once, at some point after `start()`, and the app may ask for them before or after that happens. Those go into a `MutableSharedFlow` with `replay = 1`, and the public function is just `first()`:
 
 ```kotlin
-fun AppsFlyerClient.performOnDeepLinking(intent: Intent, context: Context)
-fun AppsFlyerClient.sendPushNotificationData(activity: Activity)
+override suspend fun getConversionData(): CampaignData = conversionRelay.first()
 ```
 
-iOS doesn't need these. The deep link forwarding is handled through the Swift bridge.
+Called early, it suspends until the SDK answers. Called late, it returns the answer immediately. Callers don't have to know which.
+
+`start()` is safe to call more than once. An atomic compare-and-exchange makes sure the native SDK is configured exactly once, however many places in an app call it.
 
 ---
 
-## iOS consumption via SPM
+## Deep links as a `Flow`
 
-The `AppsFlyerLib` SPM dependency is declared via `spmForKmp` in `build.gradle.kts` and resolved automatically. Consumers don't need a manual SPM step.
+Deep links are a stream: one on first launch after install (deferred), and more every time the app is opened from a link (direct). Both SDKs have a newer "unified" deep link API that reports both kinds through one callback, so the wrapper uses that: `subscribeForDeepLink` on Android, `AppsFlyerDeepLinkDelegate` on iOS. The older `onAppOpenAttribution` callback is deliberately a no-op.
 
-To expose the API in Swift, use `export` in your framework:
+In common code, the result is one sealed type:
+
+```kotlin
+sealed interface DeepLinkResult {
+    data class Found(
+        val deepLinkValue: String?,
+        val isDeferred: Boolean,
+        val mediaSource: String?,
+        val campaign: String?,
+        val raw: Map<String, Any?>,
+    ) : DeepLinkResult
+
+    data object NotFound : DeepLinkResult
+
+    data class Error(val message: String?) : DeepLinkResult
+}
+```
+
+The stream is a `MutableSharedFlow` **without** replay. That was a deliberate choice. A deep link is an instruction to navigate somewhere now. Replaying an old one to a screen that subscribes later would send people somewhere they didn't just ask to go. A test pins the behaviour down (`deepLinkFlowDoesNotReplayPastEmissions`).
+
+The consequence is documented in the README: subscribe to `deepLink` before calling `start()`, or the deferred deep link from the first launch can arrive before anyone is listening.
+
+---
+
+## The iOS side: a Swift bridge
+
+The iOS adapter doesn't implement the Objective-C delegates in Kotlin. It talks to a small Swift class compiled into the library. It implements both delegates and turns each callback into a closure that Kotlin passed in:
+
+```swift
+public func configure(
+    ...
+    onConversion: @escaping (NSDictionary) -> Void,
+    onConversionError: @escaping (String?) -> Void,
+    onDeepLinkFound: @escaping (String?, Bool, String?, String?, NSDictionary?) -> Void,
+    onDeepLinkNotFound: @escaping () -> Void,
+    onDeepLinkError: @escaping (String?) -> Void,
+    onStart: @escaping (Bool, Int, String?) -> Void
+)
+```
+
+The bridge makes no decisions; it only translates. The iOS SDK itself comes in through Swift Package Manager, declared with the `spmForKmp` Gradle plugin, so an app that uses the library doesn't add the package by hand. To call the API from Swift, the app exports the library from its own framework:
 
 ```kotlin
 kotlin {
@@ -139,42 +139,33 @@ kotlin {
 }
 ```
 
-Then from Swift:
+---
 
-```swift
-AppsFlyer.shared.initialize(
-    config: AppsFlyerConfig(
-        devKey: "YOUR_AF_DEV_KEY",
-        isDebug: true,
-        iosAppId: "YOUR_APPLE_APP_ID"
-    ),
-    launchOptions: launchOptions
-)
+## Feature parity, and where the platforms differ
+
+The wrapper covers what the native SDKs do: install attribution and conversion data, OneLink deep links (deferred and direct), in-app events with delivery confirmation, ad revenue, purchase validation (VAL V2), uninstall measurement, and GDPR/DMA consent.
+
+Some APIs exist on only one platform, and those are no-ops on the other: 12 iOS-only methods, such as `setDisableSKAdNetwork`, and 14 Android-only ones, such as `setCollectIMEI`. Each says so in its KDoc. A handful behave differently on each platform, for example log levels: Android has six, iOS only has debug on or off. Those are documented too, so nobody finds out in production. Android-only calls that need a `Context`, `Activity` or `Intent` are extension functions in `androidMain`:
+
+```kotlin
+fun AppsFlyerClient.performOnDeepLinking(intent: Intent, context: Context)
+fun AppsFlyerClient.sendPushNotificationData(activity: Activity)
 ```
 
-```swift
-.onOpenURL { url in AppsFlyer.shared.linkHandler.handleOpenUrl(url: url) }
-.onContinueUserActivity(NSUserActivityTypeBrowsingWeb) { activity in
-    AppsFlyer.shared.linkHandler.handleUserActivity(userActivity: activity)
-}
-```
+One normalisation applies everywhere: null values in event, ad revenue, partner data and purchase parameters are dropped before they reach the native SDK, because the two SDKs treat nulls differently.
 
 ---
 
-## What I learned
+## What I'd keep from this
 
-`expect`/`actual` is well suited for SDK wrapping. The common API stays clean, and each `actual` delegates however makes sense: direct method calls on Android, a Swift bridge on iOS.
+Put the logic in common code and keep the platform code dumb. An `expect`/`actual` pair per SDK call spreads behaviour across three source sets. One interface over the native SDK keeps it in one place, where it can be tested with a fake.
 
-Delegates don't map to coroutines for you. The conversion from "SDK calls my delegate method" to "my `suspend fun` returns a value" is manual plumbing. A `CompletableDeferred` per outstanding call, a `Channel` for streams, and you're done. But you have to write it.
-
-Null params should be dropped silently. The native SDKs interpret null values differently, so the wrapper normalizes: null values in `logEvent`, `logAdRevenue`, `setAdditionalData`, `setPartnerData`, and purchase validation params are dropped on both platforms before they reach the native SDK.
-
-The `samples/demo-app` is a Compose Multiplatform app that exercises every API. It's the fastest way to validate that both platforms behave identically. When I wired AppsFlyer into Parrot, the integration was a few lines of Kotlin on each side. That was the goal.
+Pick the flow type by what the event means. Data that arrives once and stays true can be replayed. A navigation instruction can't.
 
 ---
 
 ## Try it
 
-The library is on GitHub: [retro99/appsflyer-kmp](https://github.com/retro99/appsflyer-kmp).
+The library is on GitHub: [retro99/appsflyer-kmp](https://github.com/retro99/appsflyer-kmp). There's a Compose Multiplatform demo app in `samples/demo-app` that exercises the API on Android and iOS.
 
-It's experimental, unofficial, and not affiliated with AppsFlyer. Use in production at your own risk. There's a demo app in `samples/demo-app` that shows the full API on both Android and iOS.
+It's experimental and unofficial, and it isn't affiliated with AppsFlyer. Use it in production at your own risk.

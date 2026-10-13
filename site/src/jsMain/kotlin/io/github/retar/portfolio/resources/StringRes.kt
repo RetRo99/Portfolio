@@ -454,14 +454,14 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
 
     data object AppsFlyerArticleTitle : StringRes(
         en = "Wrapping the AppsFlyer SDK into a Kotlin Multiplatform library",
-        sl = "Wrapping the AppsFlyer SDK into a Kotlin Multiplatform library",
-        lv = "Wrapping the AppsFlyer SDK into a Kotlin Multiplatform library"
+        sl = "Ovoj SDK-ja AppsFlyer v knjižnico Kotlin Multiplatform",
+        lv = "AppsFlyer SDK ietīšana Kotlin Multiplatform bibliotēkā"
     )
 
     data object AppsFlyerArticleDesc : StringRes(
-        en = "A coroutine-first, expect/actual wrapper around the AppsFlyer SDKs: one Kotlin API, two native delegates, no callbacks.",
-        sl = "Ovoj okoli SDK-jev AppsFlyer z expect/actual, zasnovan na korutinah: en Kotlin API, dva nativna delegata, brez povratnih klicev.",
-        lv = "Uz korutīnām balstīts expect/actual apvalks AppsFlyer SDK: viens Kotlin API, divi nativi delegāti, bez atzvaniem."
+        en = "A coroutine-first wrapper around the AppsFlyer Android and iOS SDKs: all the logic in common code, deep links as a Flow, and tests that never touch a real SDK.",
+        sl = "Ovoj okoli SDK-jev AppsFlyer za Android in iOS, zasnovan na korutinah: vsa logika v skupni kodi, globoke povezave kot Flow in testi, ki se nikoli ne dotaknejo pravega SDK-ja.",
+        lv = "Uz korutīnām balstīts apvalks AppsFlyer Android un iOS SDK: visa loģika kopīgajā kodā, dziļās saites kā Flow un testi, kas nekad neizmanto īsto SDK."
     )
 
     data object InfiniteCarouselArticleTitle : StringRes(
@@ -478,8 +478,8 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
 
     data object SQLCipherArticleTitle : StringRes(
         en = "Shipping SQLCipher inside a static Kotlin/Native framework (so the iOS team changed nothing)",
-        sl = "Shipping SQLCipher inside a static Kotlin/Native framework (so the iOS team changed nothing)",
-        lv = "Shipping SQLCipher inside a static Kotlin/Native framework (so the iOS team changed nothing)"
+        sl = "SQLCipher v statičnem ogrodju Kotlin/Native (da ekipi iOS ni bilo treba spremeniti ničesar)",
+        lv = "SQLCipher statiskā Kotlin/Native ietvarā (lai iOS komandai nekas nebūtu jāmaina)"
     )
 
     data object SQLCipherArticleDesc : StringRes(
