@@ -1,0 +1,32 @@
+name: Publish Parrot APKs as releases
+
+# Run by hand from the Actions tab. Creates one GitHub Release per Parrot APK in
+# site/src/jsMain/resources/public/parrot and attaches the APK. Versions that
+# already have a release are skipped, so it is safe to run again.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  releases:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create releases
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          shopt -s nullglob
+          for apk in site/src/jsMain/resources/public/parrot/parrot-*.apk; do
+            v=$(basename "$apk" .apk); v=${v#parrot-}
+            if gh release view "parrot-v$v" >/dev/null 2>&1; then
+              echo "parrot-v$v already exists, skipping"
+              continue
+            fi
+            gh release create "parrot-v$v" "$apk" --target "$GITHUB_SHA" \
+              --title "Parrot $v" \
+              --notes "Parrot $v for Android. Linked from https://www.retar.app/parrot."
+          done
+          gh release list
