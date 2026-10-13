@@ -14,7 +14,7 @@ object ParrotRes {
         ParrotRelease(
             version = "0.5.0",
             date = "2026-07-02",
-            apkUrl = "/parrot/parrot-0.5.0.apk",
+            apkUrl = "https://github.com/RetRo99/Portfolio/releases/download/parrot-v0.5.0/parrot-0.5.0.apk",
             features = listOf(
                 "Added Audiobookshelf server support with login, library browsing, downloads, and progress sync",
                 "Added a dedicated audiobook player with immersive controls",
@@ -39,7 +39,7 @@ object ParrotRes {
         ParrotRelease(
             version = "0.4.5",
             date = "2026-06-18",
-            apkUrl = "/parrot/parrot-0.4.5.apk",
+            apkUrl = "https://github.com/RetRo99/Portfolio/releases/download/parrot-v0.4.5/parrot-0.4.5.apk",
             bugFixes = listOf(
                 "Fixed crashes when parsing Storyteller series featured fields returned as booleans"
             )
@@ -47,7 +47,7 @@ object ParrotRes {
         ParrotRelease(
             version = "0.4.4",
             date = "2026-06-02",
-            apkUrl = "/parrot/parrot-0.4.4.apk",
+            apkUrl = "https://github.com/RetRo99/Portfolio/releases/download/parrot-v0.4.4/parrot-0.4.4.apk",
             features = listOf(
                 "Added reader font weight controls for EPUB reading settings",
                 "Added a reader text normalization setting",
@@ -66,7 +66,7 @@ object ParrotRes {
         ParrotRelease(
             version = "0.4.3",
             date = "2026-06-01",
-            apkUrl = "/parrot/parrot-0.4.3.apk",
+            apkUrl = "https://github.com/RetRo99/Portfolio/releases/download/parrot-v0.4.3/parrot-0.4.3.apk",
             bugFixes = listOf(
                 "Fixed Storyteller browser/OIDC login by completing authentication from the callback app token",
                 "Removed the extra user lookup after OAuth login that could fail with a 401"
@@ -78,7 +78,7 @@ object ParrotRes {
         ParrotRelease(
             version = "0.4.2",
             date = "2026-05-31",
-            apkUrl = "/parrot/parrot-0.4.2.apk",
+            apkUrl = "https://github.com/RetRo99/Portfolio/releases/download/parrot-v0.4.2/parrot-0.4.2.apk",
             bugFixes = listOf(
                 "Fixed Readium navigator restoration crashes after Android process death",
                 "Fixed playback foreground service startup crashes",
@@ -94,7 +94,7 @@ object ParrotRes {
         ParrotRelease(
             version = "0.4.1",
             date = "2026-03-12",
-            apkUrl = "/parrot/parrot-0.4.1.apk",
+            apkUrl = "https://github.com/RetRo99/Portfolio/releases/download/parrot-v0.4.1/parrot-0.4.1.apk",
             bugFixes = listOf(
                 "Fixed fragment restoration crash when multiple EPUB navigator fragments are restored after process death"
             )
@@ -102,7 +102,7 @@ object ParrotRes {
         ParrotRelease(
             version = "0.4.0",
             date = "2026-03-11",
-            apkUrl = "/parrot/parrot-0.4.0.apk",
+            apkUrl = "https://github.com/RetRo99/Portfolio/releases/download/parrot-v0.4.0/parrot-0.4.0.apk",
             features = listOf(
                 "Configurable Tap Navigation - Enable/disable tap navigation and customize left/right tap actions (Next Page or Previous Page)",
                 "Configurable Double-Tap Timeout - Adjust double-tap detection timing (200-800ms) in Settings under Read Aloud section",
@@ -116,7 +116,7 @@ object ParrotRes {
         ParrotRelease(
             version = "0.3.0",
             date = "2026-03-10",
-            apkUrl = "/parrot/parrot-0.3.0.apk",
+            apkUrl = "https://github.com/RetRo99/Portfolio/releases/download/parrot-v0.3.0/parrot-0.3.0.apk",
             features = listOf(
                 "Android Auto Integration - Full Android Auto support with headless playback for listening to audiobooks while driving",
                 "Background Audio Playback - Audio continues playing when the app is in the background with proper notification controls",
@@ -143,7 +143,7 @@ object ParrotRes {
         ParrotRelease(
             version = "0.2.0",
             date = "2026-02-21",
-            apkUrl = "/parrot/parrot-0.2.0.apk",
+            apkUrl = "https://github.com/RetRo99/Portfolio/releases/download/parrot-v0.2.0/parrot-0.2.0.apk",
             features = listOf(
                 "CACHED quick filter - Quickly filter to show only cached/downloaded books",
                 "DATE_ADDED sort option - Sort your book library by when books were added",
@@ -172,7 +172,7 @@ object ParrotRes {
         ParrotRelease(
             version = "0.1.0",
             date = "2026-02-21",
-            apkUrl = "/parrot/parrot-0.1.0.apk",
+            apkUrl = "https://github.com/RetRo99/Portfolio/releases/download/parrot-v0.1.0/parrot-0.1.0.apk",
             features = listOf(
                 "Multi-User Profiles - Create and switch between multiple user profiles. Each profile has its own reading progress and preferences. Long-press profiles to rename or delete them",
                 "Local Book Import - Import EPUB files directly from your device. Automatic detection of readaloud books with audio. Delete imported books from the book details screen",
@@ -191,7 +191,7 @@ object ParrotRes {
         ParrotRelease(
             version = "0.0.8",
             date = "2026-02-17",
-            apkUrl = "/parrot/parrot-0.0.8.apk",
+            apkUrl = "https://github.com/RetRo99/Portfolio/releases/download/parrot-v0.0.8/parrot-0.0.8.apk",
             bugFixes = listOf(
                 "Fixed crash when restoring app after process death"
             ),
