@@ -1,6 +1,6 @@
 # Rok Retar, mobile engineer
 
-> Rok Retar is a mobile engineer in Slovenia who builds Android apps and takes Kotlin Multiplatform (KMP) to production. He designed and led the move of a company's production iOS app onto shared Kotlin, keeping native UI where the platform does it better. He also builds Parrot, an ebook and audiobook reader for Android. This site is written in Kotlin with Kobweb. Below is a longer description of each page.
+> Rok Retar is a mobile engineer in Slovenia who builds apps in Kotlin, for Android and iOS, using Kotlin Multiplatform (KMP). He designed and led the move of a company's production iOS app onto shared Kotlin, keeping native UI where the platform does it better. He also builds Parrot, an ebook and audiobook reader for Android. This site is written in Kotlin with Kobweb. Below is a longer description of each page.
 
 ## Pages
 
@@ -10,14 +10,32 @@ Introduces Rok as an Android and Kotlin Multiplatform engineer. Covers how he wo
 ### [Parrot: ebook and audiobook reader](https://www.retar.app/parrot)
 A case study for Parrot, a reader for your own ebooks and audiobooks on Android phones, tablets and e-ink readers, built with Kotlin Multiplatform. Features: read-along highlighting for ebooks with synced narration, on-device voices that read any ebook aloud, one reading position across the ebook and audiobook versions of a book, Storyteller, Audiobookshelf and OPDS libraries, Parrot Cloud, highlights, notes and an offline dictionary, an e-ink theme, and reading statistics. The page links the latest APK and the full version history.
 
+### [Highlighting the sentence the narrator is reading: EPUB read-along with Media3](https://www.retar.app/blog/epub-read-along-media3)
+An engineering note on Parrot's ebook read-along: SMIL media overlays, one ExoPlayer playlist per chapter, page turns for sentences split across pages, and the Media3 update that silently stopped playback.
+
+### [Never lose someone's place: syncing reading positions across devices and formats](https://www.retar.app/blog/syncing-reading-positions)
+An engineering note on how Parrot syncs reading positions: local-first writes, compare-and-set revisions on the server, when to settle a conflict automatically and when to ask, and moving a position between an ebook and its audiobook.
+
+### [Every catalogue is hostile: an OPDS client in Kotlin Multiplatform](https://www.retar.app/blog/opds-catalogue-client-kotlin-multiplatform)
+An engineering note on Parrot's OPDS catalogue browser in shared Kotlin: parsing two feed formats, keeping credentials on their origin, and the nine bugs a security review found.
+
+### [Neural voices on an e-ink reader: on-device TTS in Parrot with sherpa-onnx](https://www.retar.app/blog/on-device-neural-tts-android)
+An engineering note on reading any ebook aloud with Kokoro and Supertonic voices running on the phone via sherpa-onnx: downloading 150 MB voice models safely, preparing chapters ahead, and the lambda that crashed every synthesis.
+
 ### [Wrapping the AppsFlyer SDK into a Kotlin Multiplatform library](https://www.retar.app/blog/appsflyer-kmp-wrapper)
-An engineering note on wrapping the native AppsFlyer Android and iOS SDKs behind one coroutine-first Kotlin API with expect/actual, two native delegates and no callbacks.
+An engineering note on a coroutine-first Kotlin Multiplatform wrapper around the AppsFlyer Android and iOS SDKs: all the logic in common code, two thin native adapters, deep links as a Flow, and 160 tests that never touch a real SDK.
 
 ### [Building a smooth, infinite carousel in Kobweb](https://www.retar.app/blog/infinite-carousel)
 An engineering note on implementing a smooth, infinite carousel component in Kobweb using Compose for Web. Covers the technique for seamless looping, performance considerations, and the Compose-level API design.
 
 ### [Shipping SQLCipher inside a static Kotlin/Native framework](https://www.retar.app/blog/sqlcipher-static-kotlin-native-framework)
 An engineering note on embedding SQLCipher into a static Kotlin/Native framework for iOS. Covers the build configuration, linking challenges, and how to ship encrypted SQLite in a KMP shared module that compiles to a static framework for iOS consumption.
+
+### [Now](https://www.retar.app/now)
+What Rok is working on right now: leading Android at DevRev, bringing Parrot to iPhone, Parrot Cloud and new engineering notes.
+
+### [Uses](https://www.retar.app/uses)
+The editor, tools, Kotlin Multiplatform libraries and services Rok uses to build Android and iOS apps, and this site.
 
 ## About
 

@@ -52,13 +52,16 @@ fun MarkdownPage(content: @Composable () -> Unit) {
     val description = fm?.get("description")?.firstOrNull()
         ?: "Engineering notes on Kotlin Multiplatform, Kobweb, and Compose by Rok Retar."
     val date = fm?.get("date")?.firstOrNull()
+    val cover = fm?.get("cover")?.firstOrNull()?.let { "https://www.retar.app$it" }
+        ?: "https://www.retar.app/og-image.png"
     val path = ctx.route.path
 
     Seo(
-        title = "$title — Rok Retar",
+        title = "$title · Rok Retar",
         description = description,
         path = path,
         ogType = "article",
+        ogImage = cover,
         jsonLd = """
             {
               "@context": "https://schema.org",
@@ -67,9 +70,9 @@ fun MarkdownPage(content: @Composable () -> Unit) {
                   "@type": "BlogPosting",
                   "headline": ${jsonString(title)},
                   "inLanguage": "en",
-                  "image": "https://www.retar.app/og-image.png",
+                  "image": ${jsonString(cover)},
                   "description": ${jsonString(description)},
-                  ${if (date != null) "\"datePublished\": ${jsonString(date)}," else ""}
+                  ${if (date != null) "\"datePublished\": ${jsonString(date)}, \"dateModified\": ${jsonString(date)}," else ""}
                   "author": {
                     "@type": "Person",
                     "@id": "https://www.retar.app/#person",

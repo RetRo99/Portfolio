@@ -3,6 +3,7 @@ routeOverride: "/blog/syncing-reading-positions"
 title: "Never lose someone's place: syncing reading positions across devices and formats"
 description: "How Parrot syncs where you are in a book: local-first writes, compare-and-set revisions on the server, when to settle a conflict and when to ask, and moving a position between an ebook and its audiobook."
 date: "2026-10-13"
+cover: "/articles/syncing_positions.jpeg"
 ---
 # Never lose someone's place: syncing reading positions across devices and formats
 

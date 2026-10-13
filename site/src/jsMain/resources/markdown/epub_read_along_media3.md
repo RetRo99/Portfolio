@@ -3,6 +3,7 @@ routeOverride: "/blog/epub-read-along-media3"
 title: "Highlighting the sentence the narrator is reading: EPUB read-along with Media3"
 description: "How Parrot keeps the text and the narration in step: SMIL media overlays, one ExoPlayer playlist per chapter, page turns for split sentences, and the Media3 update that silently killed playback."
 date: "2026-10-13"
+cover: "/articles/epub_read_along.jpeg"
 ---
 # Highlighting the sentence the narrator is reading: EPUB read-along with Media3
 

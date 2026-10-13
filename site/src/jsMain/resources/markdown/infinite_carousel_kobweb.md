@@ -3,6 +3,7 @@ routeOverride: "/blog/infinite-carousel"
 title: "Building a smooth, infinite carousel in Kobweb"
 description: "A gapless, endlessly looping carousel in Kobweb and Silk: one CSS transform, no timers, no scroll code."
 date: "2025-11-17"
+cover: "/articles/infinite_carousel.jpeg"
 ---
 # Building a smooth, infinite carousel in Kobweb
 

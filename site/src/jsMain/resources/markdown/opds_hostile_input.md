@@ -3,6 +3,7 @@ routeOverride: "/blog/opds-catalogue-client-kotlin-multiplatform"
 title: "Every catalogue is hostile: an OPDS client in Kotlin Multiplatform"
 description: "Building Parrot's OPDS catalogue browser in shared Kotlin: parsing two feed formats, keeping passwords on their origin, and the nine bugs a security review found."
 date: "2026-10-13"
+cover: "/articles/opds_catalogue.jpeg"
 ---
 # Every catalogue is hostile: an OPDS client in Kotlin Multiplatform
 

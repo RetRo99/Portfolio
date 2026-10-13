@@ -3,6 +3,7 @@ routeOverride: "/blog/on-device-neural-tts-android"
 title: "Neural voices on an e-ink reader: on-device TTS in Parrot with sherpa-onnx"
 description: "How Parrot reads any ebook aloud with Kokoro and Supertonic running on the phone: downloading 150 MB voices safely, preparing chapters ahead, and the lambda that crashed every synthesis."
 date: "2026-10-13"
+cover: "/articles/on_device_tts.jpeg"
 ---
 # Neural voices on an e-ink reader: on-device TTS in Parrot with sherpa-onnx
 

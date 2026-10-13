@@ -1,13 +1,20 @@
 # Rok Retar, mobile engineer
 
-> Rok Retar is a mobile engineer in Slovenia who builds Android apps and takes Kotlin Multiplatform to production. He designed and led the move of a company's production iOS app onto shared Kotlin. He also builds Parrot, an ebook and audiobook reader for Android. This site is written in Kotlin with Kobweb.
+> Rok Retar is a mobile engineer in Slovenia who builds apps in Kotlin, for Android and iOS. He designed and led the move of a company's production iOS app onto shared Kotlin. He also builds Parrot, an ebook and audiobook reader for Android. This site is written in Kotlin with Kobweb.
 
 ## Pages
 - [Home](https://www.retar.app/)
 - [Parrot: ebook and audiobook reader](https://www.retar.app/parrot)
+- [Highlighting the sentence the narrator is reading: EPUB read-along with Media3](https://www.retar.app/blog/epub-read-along-media3)
+- [Never lose someone's place: syncing reading positions across devices and formats](https://www.retar.app/blog/syncing-reading-positions)
+- [Every catalogue is hostile: an OPDS client in Kotlin Multiplatform](https://www.retar.app/blog/opds-catalogue-client-kotlin-multiplatform)
+- [Neural voices on an e-ink reader: on-device TTS in Parrot with sherpa-onnx](https://www.retar.app/blog/on-device-neural-tts-android)
 - [Wrapping the AppsFlyer SDK into a Kotlin Multiplatform library](https://www.retar.app/blog/appsflyer-kmp-wrapper)
 - [Building a smooth, infinite carousel in Kobweb](https://www.retar.app/blog/infinite-carousel)
 - [Shipping SQLCipher inside a static Kotlin/Native framework](https://www.retar.app/blog/sqlcipher-static-kotlin-native-framework)
+- [Now](https://www.retar.app/now)
+- [Uses](https://www.retar.app/uses)
+- [RSS feed of engineering notes](https://www.retar.app/feed.xml)
 
 ## About
 Rok works across Android and Kotlin Multiplatform: shared domain and data layers in Kotlin, with native UI where the platform does it better. His daily stack is Kotlin, Jetpack Compose, Compose Multiplatform, Ktor, Koin, Decompose, SQLDelight with SQLCipher, and SKIE. Besides the iOS migration, he has shipped an AI platform with real-time chat, a gaming app with NFC and cashless payments, and Parrot.

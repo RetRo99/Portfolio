@@ -3,6 +3,7 @@ routeOverride: "/blog/sqlcipher-static-kotlin-native-framework"
 title: "Shipping SQLCipher inside a static Kotlin/Native framework (so the iOS team changed nothing)"
 description: "Baking SQLCipher into a static Kotlin/Native framework so the iOS team adds nothing, not even a linker flag."
 date: "2026-06-21"
+cover: "/articles/sqlcipher_kotlin_native.jpeg"
 ---
 # Shipping SQLCipher inside a static Kotlin/Native framework (so the iOS team changed nothing)
 

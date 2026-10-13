@@ -3,6 +3,7 @@ routeOverride: "/blog/appsflyer-kmp-wrapper"
 title: "Wrapping the AppsFlyer SDK into a Kotlin Multiplatform library (when no official KMP SDK exists)"
 description: "A coroutine-first wrapper around the AppsFlyer Android and iOS SDKs: all the logic in common code, two thin native adapters, deep links as a Flow, and 160 tests that never touch a real SDK."
 date: "2026-06-28"
+cover: "/articles/appsflyer_kmp.jpeg"
 ---
 # Wrapping the AppsFlyer SDK into a Kotlin Multiplatform library (when no official KMP SDK exists)
 
