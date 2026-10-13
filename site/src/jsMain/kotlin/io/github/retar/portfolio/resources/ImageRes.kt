@@ -6,6 +6,9 @@ enum class ImageRes(
     val intrinsicHeight: Int? = null,
 ) {
 
+    ReadAlongArticle("/articles/epub_read_along.webp", 640, 353),
+    PositionSyncArticle("/articles/syncing_positions.webp", 640, 353),
+    OpdsArticle("/articles/opds_catalogue.webp", 640, 353),
     OnDeviceTtsArticle("/articles/on_device_tts.webp", 640, 353),
     AppsFlyerArticle("/articles/appsflyer_kmp.webp", 640, 353),
     InfiniteCarouselArticle("/articles/infinite_carousel.webp", 640, 353),

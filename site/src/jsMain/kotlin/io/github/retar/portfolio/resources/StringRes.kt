@@ -404,6 +404,42 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
         lv = "Project Gutenberg OPDS kataloga pārlūkošana"
     )
 
+    data object ReadAlongArticleTitle : StringRes(
+        en = "Highlighting the sentence the narrator is reading: EPUB read-along with Media3",
+        sl = "Označevanje stavka, ki ga bere pripovedovalec: sočasno branje EPUB z Media3",
+        lv = "Teikuma izcelšana, ko lasa diktors: EPUB lasīšana līdzi ar Media3"
+    )
+
+    data object ReadAlongArticleDesc : StringRes(
+        en = "How Parrot keeps text and narration in step with SMIL media overlays, turns the page mid-sentence at the right moment, and the Media3 update that silently killed playback.",
+        sl = "Kako Parrot z medijskimi prekrivanji SMIL usklajuje besedilo in pripoved, obrne stran sredi stavka ob pravem trenutku, in posodobitev Media3, ki je tiho ustavila predvajanje.",
+        lv = "Kā Parrot ar SMIL multivides pārklājumiem saskaņo tekstu un ierakstu, pāršķir lappusi teikuma vidū īstajā brīdī, un Media3 atjauninājums, kas klusi apturēja atskaņošanu."
+    )
+
+    data object PositionSyncArticleTitle : StringRes(
+        en = "Never lose someone's place: syncing reading positions across devices and formats",
+        sl = "Nikoli ne izgubi bralčevega mesta: usklajevanje položaja branja med napravami in formati",
+        lv = "Nekad nepazaudēt lasītāja vietu: lasīšanas pozīciju sinhronizācija starp ierīcēm un formātiem"
+    )
+
+    data object PositionSyncArticleDesc : StringRes(
+        en = "Local-first writes, compare-and-set revisions, when to settle a conflict and when to ask, and moving a position between an ebook and its audiobook.",
+        sl = "Lokalni zapisi najprej, revizije s primerjavo in zamenjavo, kdaj spor rešiti samodejno in kdaj vprašati, ter prenos položaja med e-knjigo in zvočno knjigo.",
+        lv = "Vispirms lokāli ieraksti, salīdzināšanas un aizstāšanas revīzijas, kad konfliktu atrisināt pašam un kad jautāt, un pozīcijas pārnešana starp e-grāmatu un audiogrāmatu."
+    )
+
+    data object OpdsArticleTitle : StringRes(
+        en = "Every catalogue is hostile: an OPDS client in Kotlin Multiplatform",
+        sl = "Vsak katalog je sovražen: odjemalec OPDS v Kotlin Multiplatform",
+        lv = "Katrs katalogs ir naidīgs: OPDS klients Kotlin Multiplatform"
+    )
+
+    data object OpdsArticleDesc : StringRes(
+        en = "Parsing two feed formats in shared Kotlin, keeping passwords on their origin, hard budgets for every response, and the nine bugs a security review found.",
+        sl = "Razčlenjevanje dveh formatov virov v skupni kodi Kotlin, gesla ostanejo na svojem izvoru, trde omejitve za vsak odgovor in devet napak, ki jih je našel varnostni pregled.",
+        lv = "Divu plūsmu formātu parsēšana koplietotā Kotlin kodā, paroles paliek savā izcelsmē, stingri limiti katrai atbildei un deviņas kļūdas, ko atrada drošības pārbaude."
+    )
+
     data object OnDeviceTtsArticleTitle : StringRes(
         en = "Neural voices on an e-ink reader: on-device TTS with sherpa-onnx",
         sl = "Nevronski glasovi na bralniku e-ink: TTS na napravi s sherpa-onnx",

@@ -9,6 +9,9 @@ object LinkRes {
     }
 
     object Internal {
+        const val ReadAlongArticle = "/blog/epub-read-along-media3"
+        const val PositionSyncArticle = "/blog/syncing-reading-positions"
+        const val OpdsArticle = "/blog/opds-catalogue-client-kotlin-multiplatform"
         const val OnDeviceTtsArticle = "/blog/on-device-neural-tts-android"
         const val AppsFlyerArticle = "/blog/appsflyer-kmp-wrapper"
         const val InfiniteCarouselArticle = "/blog/infinite-carousel"
