@@ -15,11 +15,9 @@ import com.varabyte.kobweb.compose.ui.modifiers.id
 import com.varabyte.kobweb.compose.ui.modifiers.scrollMargin
 import io.github.retar.portfolio.LocalSetActiveSection
 import io.github.retar.portfolio.components.header.NavHeaderHeight
-import io.github.retar.portfolio.utils.trackEvent
 import org.jetbrains.compose.web.css.CSSLengthValue
 import org.jetbrains.compose.web.css.px
 import org.w3c.dom.HTMLElement
-import kotlin.js.json
 
 @Composable
 fun PortfolioSection(
@@ -29,7 +27,6 @@ fun PortfolioSection(
 ) {
     val setActive = LocalSetActiveSection.current
     var element by remember { mutableStateOf<HTMLElement?>(null) }
-    var hasTrackedView by remember { mutableStateOf(false) }
 
     DisposableEffect(section, element) {
         val currentElement = element
@@ -42,10 +39,6 @@ fun PortfolioSection(
                 entries.forEach { entry ->
                     if (entry.isIntersecting) {
                         setActive(section)
-                        if (!hasTrackedView) {
-                            hasTrackedView = true
-                            trackEvent("section-view", json("section" to section.domId))
-                        }
                     }
                 }
             }
