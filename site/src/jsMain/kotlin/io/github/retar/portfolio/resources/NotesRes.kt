@@ -11,6 +11,12 @@ object NotesRes {
     /** Newest first. The order drives the home page list and each note's "next note" link. */
     val all = listOf(
         Note(
+            route = LinkRes.Internal.WebWasmArticle,
+            title = StringRes.WebWasmArticleTitle,
+            description = StringRes.WebWasmArticleDesc,
+            image = ImageRes.WebWasmArticle,
+        ),
+        Note(
             route = LinkRes.Internal.ReadAlongArticle,
             title = StringRes.ReadAlongArticleTitle,
             description = StringRes.ReadAlongArticleDesc,

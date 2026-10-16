@@ -10,6 +10,9 @@ Introduces Rok as an Android and Kotlin Multiplatform engineer. Covers how he wo
 ### [Parrot: ebook and audiobook reader](https://www.retar.app/parrot)
 A case study for Parrot, a reader for your own ebooks and audiobooks on Android phones, tablets and e-ink readers, built with Kotlin Multiplatform. Features: read-along highlighting for ebooks with synced narration, on-device voices that read any ebook aloud, one reading position across the ebook and audiobook versions of a book, Storyteller, Audiobookshelf and OPDS libraries, Parrot Cloud, highlights, notes and an offline dictionary, an e-ink theme, and reading statistics. The page links the latest APK and the full version history.
 
+### [My Android app in a browser: Parrot on Kotlin/Wasm](https://www.retar.app/blog/android-app-in-the-browser-kotlin-wasm)
+An engineering note on running Parrot's shared Kotlin code in a browser with Kotlin/Wasm: 57 of 59 modules compiling with two build files changed, SQLite saved into IndexedDB, Readium under a Compose canvas, and the size of the first download.
+
 ### [Highlighting the sentence the narrator is reading: EPUB read-along with Media3](https://www.retar.app/blog/epub-read-along-media3)
 An engineering note on Parrot's ebook read-along: SMIL media overlays, one ExoPlayer playlist per chapter, page turns for sentences split across pages, and the Media3 update that silently stopped playback.
 

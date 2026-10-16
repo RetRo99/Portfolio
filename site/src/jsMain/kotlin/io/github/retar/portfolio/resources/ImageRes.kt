@@ -6,6 +6,7 @@ enum class ImageRes(
     val intrinsicHeight: Int? = null,
 ) {
 
+    WebWasmArticle("/articles/kotlin_wasm_browser.webp", 640, 353),
     ReadAlongArticle("/articles/epub_read_along.webp", 640, 353),
     PositionSyncArticle("/articles/syncing_positions.webp", 640, 353),
     OpdsArticle("/articles/opds_catalogue.webp", 640, 353),

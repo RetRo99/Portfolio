@@ -404,6 +404,18 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
         lv = "Project Gutenberg OPDS kataloga pārlūkošana"
     )
 
+    data object WebWasmArticleTitle : StringRes(
+        en = "My Android app in a browser: Parrot on Kotlin/Wasm",
+        sl = "Moja aplikacija za Android v brskalniku: Parrot na Kotlin/Wasm",
+        lv = "Mana Android lietotne pārlūkā: Parrot ar Kotlin/Wasm"
+    )
+
+    data object WebWasmArticleDesc : StringRes(
+        en = "57 of 59 shared modules compiling for the browser with two build files changed, SQLite saved into IndexedDB, Readium under a Compose canvas, and what the first screen costs to download.",
+        sl = "57 od 59 skupnih modulov se prevede za brskalnik ob spremembi le dveh datotek gradnje, SQLite shranjen v IndexedDB, Readium pod platnom Compose in koliko stane prenos prvega zaslona.",
+        lv = "57 no 59 kopīgajiem moduļiem kompilējas pārlūkam, mainot tikai divus būvēšanas failus, SQLite saglabāts IndexedDB, Readium zem Compose audekla un cik maksā pirmā ekrāna lejupielāde."
+    )
+
     data object ReadAlongArticleTitle : StringRes(
         en = "Highlighting the sentence the narrator is reading: EPUB read-along with Media3",
         sl = "Označevanje stavka, ki ga bere pripovedovalec: sočasno branje EPUB z Media3",
