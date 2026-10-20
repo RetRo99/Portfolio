@@ -9,6 +9,7 @@ object LinkRes {
     }
 
     object Internal {
+        const val TtsSharedKotlinArticle = "/blog/kokoro-tts-shared-kotlin-onnx-runtime"
         const val WebWasmArticle = "/blog/android-app-in-the-browser-kotlin-wasm"
         const val ReadAlongArticle = "/blog/epub-read-along-media3"
         const val PositionSyncArticle = "/blog/syncing-reading-positions"

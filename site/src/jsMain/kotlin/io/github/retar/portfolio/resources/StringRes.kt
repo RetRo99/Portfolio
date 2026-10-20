@@ -404,6 +404,18 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
         lv = "Project Gutenberg OPDS kataloga pārlūkošana"
     )
 
+    data object TtsSharedKotlinArticleTitle : StringRes(
+        en = "Neural voices in shared Kotlin: Kokoro on ONNX Runtime, without sherpa-onnx or espeak",
+        sl = "Nevronski glasovi v skupnem Kotlinu: Kokoro na ONNX Runtime, brez sherpa-onnx in espeak",
+        lv = "Neironu balsis kopīgā Kotlin kodā: Kokoro ar ONNX Runtime, bez sherpa-onnx un espeak"
+    )
+
+    data object TtsSharedKotlinArticleDesc : StringRes(
+        en = "Replacing sherpa-onnx with ONNX Runtime behind one Kotlin interface, calling its C API from Kotlin on iPhone, and porting an English pronunciation front end so Kokoro needs no espeak-ng.",
+        sl = "Zamenjava sherpa-onnx z ONNX Runtime za enim vmesnikom v Kotlinu, klicanje njegovega C API iz Kotlina na iPhonu in prenos angleškega izgovorjavnega modula, da Kokoro ne potrebuje več espeak-ng.",
+        lv = "sherpa-onnx aizstāšana ar ONNX Runtime aiz vienas Kotlin saskarnes, tā C API izsaukšana no Kotlin iPhone ierīcē un angļu izrunas moduļa pārnešana, lai Kokoro vairs nevajadzētu espeak-ng."
+    )
+
     data object WebWasmArticleTitle : StringRes(
         en = "My Android app in a browser: Parrot on Kotlin/Wasm",
         sl = "Moja aplikacija za Android v brskalniku: Parrot na Kotlin/Wasm",
