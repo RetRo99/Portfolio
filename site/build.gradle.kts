@@ -63,6 +63,7 @@ kobweb {
                 meta(content = "Rok Retar, mobile engineer: I build mobile apps in Kotlin, for Android and iOS.") { attributes["property"] = "og:image:alt" }
                 link(rel = "me", href = "https://github.com/retro99")
                 link(rel = "me", href = "https://www.linkedin.com/in/rok-retar/")
+                link(rel = "me", href = "https://bsky.app/profile/retro99.bsky.social")
                 script(type = "application/ld+json") {
                     unsafe {
                         +"""
@@ -120,7 +121,8 @@ kobweb {
                           ],
                           "sameAs": [
                             "https://github.com/retro99",
-                            "https://www.linkedin.com/in/rok-retar/"
+                            "https://www.linkedin.com/in/rok-retar/",
+                            "https://bsky.app/profile/retro99.bsky.social"
                           ]
                         }
                         """.trimIndent()
