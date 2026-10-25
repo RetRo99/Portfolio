@@ -5,6 +5,7 @@
 ## Pages
 - [Home](https://www.retar.app/)
 - [Parrot: ebook and audiobook reader](https://www.retar.app/parrot)
+- [Password managers can't see a canvas: real sign-in forms in Compose for the web](https://www.retar.app/blog/password-managers-compose-multiplatform-web)
 - [Neural voices in shared Kotlin: Kokoro on ONNX Runtime, without sherpa-onnx or espeak](https://www.retar.app/blog/kokoro-tts-shared-kotlin-onnx-runtime)
 - [My Android app in a browser: Parrot on Kotlin/Wasm](https://www.retar.app/blog/android-app-in-the-browser-kotlin-wasm)
 - [Highlighting the sentence the narrator is reading: EPUB read-along with Media3](https://www.retar.app/blog/epub-read-along-media3)

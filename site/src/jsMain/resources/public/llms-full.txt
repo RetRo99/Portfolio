@@ -10,6 +10,9 @@ Introduces Rok as an Android and Kotlin Multiplatform engineer. Covers how he wo
 ### [Parrot: ebook and audiobook reader](https://www.retar.app/parrot)
 A case study for Parrot, a reader for your own ebooks and audiobooks on Android phones, tablets and e-ink readers, built with Kotlin Multiplatform. Features: read-along highlighting for ebooks with synced narration, on-device voices that read any ebook aloud, one reading position across the ebook and audiobook versions of a book, Storyteller, Audiobookshelf and OPDS libraries, Parrot Cloud, highlights, notes and an offline dictionary, an e-ink theme, and reading statistics. The page links the latest APK and the full version history.
 
+### [Password managers can't see a canvas: real sign-in forms in Compose for the web](https://www.retar.app/blog/password-managers-compose-multiplatform-web)
+An engineering note on making browser password managers work with Parrot's Compose Multiplatform web app: real HTML inputs placed under holes in the Compose canvas, a real form submit without navigation, new-password and email modes for account creation, and the focus, Tab order and click pass-through problems along the way.
+
 ### [Neural voices in shared Kotlin: Kokoro on ONNX Runtime, without sherpa-onnx or espeak](https://www.retar.app/blog/kokoro-tts-shared-kotlin-onnx-runtime)
 An engineering note, part two of Parrot's on-device voices: replacing sherpa-onnx with ONNX Runtime behind one Kotlin interface on Android and iPhone, calling the C API from Kotlin through cinterop, and a Kotlin port of misaki's English pronunciation rules so Kokoro needs no GPL espeak-ng.
 

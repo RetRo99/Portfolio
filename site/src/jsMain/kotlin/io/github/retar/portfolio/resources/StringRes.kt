@@ -404,6 +404,18 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
         lv = "Project Gutenberg OPDS kataloga pārlūkošana"
     )
 
+    data object PasswordManagersArticleTitle : StringRes(
+        en = "Password managers can't see a canvas: real sign-in forms in Compose for the web",
+        sl = "Upravitelji gesel ne vidijo platna: prave prijavne forme v Compose za splet",
+        lv = "Paroļu pārvaldnieki neredz audeklu: īstas pieteikšanās formas Compose tīmeklim"
+    )
+
+    data object PasswordManagersArticleDesc : StringRes(
+        en = "Compose draws its text fields on a canvas, so browser password managers have nothing to fill or save. How Parrot puts a real HTML form under the canvas without changing how the fields look.",
+        sl = "Compose riše besedilna polja na platno, zato upravitelji gesel v brskalniku nimajo česa izpolniti ali shraniti. Kako Parrot postavi pravo HTML formo pod platno, ne da bi se videz polj spremenil.",
+        lv = "Compose zīmē teksta laukus uz audekla, tāpēc pārlūka paroļu pārvaldniekiem nav ko aizpildīt vai saglabāt. Kā Parrot novieto īstu HTML formu zem audekla, nemainot lauku izskatu."
+    )
+
     data object TtsSharedKotlinArticleTitle : StringRes(
         en = "Neural voices in shared Kotlin: Kokoro on ONNX Runtime, without sherpa-onnx or espeak",
         sl = "Nevronski glasovi v skupnem Kotlinu: Kokoro na ONNX Runtime, brez sherpa-onnx in espeak",
