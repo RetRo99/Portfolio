@@ -10,7 +10,31 @@ data class ParrotRelease(
 )
 
 object ParrotRes {
+    const val GOOGLE_PLAY_URL = "https://play.google.com/store/apps/details?id=com.lunariastudios.retro99.parrot"
+    const val WEB_APP_URL = "https://parrotapp.dev"
+
     val releases = listOf(
+        ParrotRelease(
+            version = "1.0.0",
+            date = "2026-11-DD", // TODO(owner): set the release date when 1.0 goes live
+            // TODO(owner): PLACEHOLDER. Upload Google Play's universal APK for 1.0.0 (Play Console >
+            // App bundle explorer) to a GitHub release tagged parrot-v1.0.0 with this file name.
+            apkUrl = "https://github.com/RetRo99/Portfolio/releases/download/parrot-v1.0.0/parrot-1.0.0.apk",
+            features = listOf(
+                "Sync your reading place with a KOReader sync server",
+                "Parrot Cloud is open to everyone, for syncing places, highlights and notes",
+                "Remove a server and keep the books you downloaded from it",
+                "Import MOBI books and set a custom sleep timer"
+            ),
+            bugFixes = listOf(
+                "Read-aloud and narration keep your place more reliably",
+                "Natural voices no longer go silent on phones and the web"
+            ),
+            improvements = listOf(
+                "Natural voices start much faster in the web app",
+                "A new package name: com.lunariastudios.retro99.parrot, installed beside the old app"
+            )
+        ),
         ParrotRelease(
             version = "0.5.0",
             date = "2026-07-02",

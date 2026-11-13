@@ -231,9 +231,9 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
     )
 
     data object ParrotFeature6Desc : StringRes(
-        en = "No server? Parrot Cloud keeps your books, reading position, highlights and statistics in sync on every device you sign in to. In early access.",
-        sl = "Nimate strežnika? Parrot Cloud sinhronizira vaše knjige, mesto branja, poudarke in statistiko na vseh napravah, v katere se prijavite. V zgodnjem dostopu.",
-        lv = "Nav servera? Parrot Cloud sinhronizē jūsu grāmatas, lasīšanas vietu, izcēlumus un statistiku visās ierīcēs, kurās piesakāties. Agrīnajā piekļuvē."
+        en = "No server? Parrot Cloud keeps your reading position, highlights, notes and statistics in sync on every device you sign in to. Free and open to everyone.",
+        sl = "Nimate strežnika? Parrot Cloud sinhronizira vaše mesto branja, poudarke, zapiske in statistiko na vseh napravah, v katere se prijavite. Brezplačen in odprt za vse.",
+        lv = "Nav servera? Parrot Cloud sinhronizē jūsu lasīšanas vietu, izcēlumus, piezīmes un statistiku visās ierīcēs, kurās piesakāties. Bez maksas un atvērts visiem."
     )
 
     data object ParrotFeature7Title : StringRes(
@@ -468,6 +468,42 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
         en = "// latest release",
         sl = "// zadnja različica",
         lv = "// jaunākā versija"
+    )
+
+    data object Parrot1Title : StringRes(
+        en = "Parrot 1.0 is out",
+        sl = "Parrot 1.0 je izšel",
+        lv = "Parrot 1.0 ir klāt"
+    )
+
+    data object Parrot1Intro : StringRes(
+        en = "Parrot 1.0 is on Google Play and on the web at parrotapp.dev. It adds KOReader sync, opens Parrot Cloud to everyone for syncing places, highlights and notes, and keeps your downloaded books when you remove a server.",
+        sl = "Parrot 1.0 je na voljo v Google Play in na spletu na parrotapp.dev. Prinaša sinhronizacijo KOReader, odpira Parrot Cloud vsem za sinhronizacijo mest branja, poudarkov in zapiskov ter ohrani prenesene knjige, ko odstranite strežnik.",
+        lv = "Parrot 1.0 ir pieejams Google Play un tīmeklī parrotapp.dev. Tas piedāvā KOReader sinhronizāciju, atver Parrot Cloud visiem lasīšanas vietu, izcēlumu un piezīmju sinhronizēšanai un saglabā lejupielādētās grāmatas, kad noņemat serveri."
+    )
+
+    data object Parrot1PackageNote : StringRes(
+        en = "New package name. Parrot 1.0 is com.lunariastudios.retro99.parrot. Versions up to 0.5.0 are com.retro99.parrot. They are separate apps and install side by side; nothing carries over by itself.",
+        sl = "Novo ime paketa. Parrot 1.0 je com.lunariastudios.retro99.parrot. Različice do 0.5.0 so com.retro99.parrot. To sta ločeni aplikaciji, ki se namestita druga ob drugi; nič se ne prenese samodejno.",
+        lv = "Jauns pakotnes nosaukums. Parrot 1.0 ir com.lunariastudios.retro99.parrot. Versijas līdz 0.5.0 ir com.retro99.parrot. Tās ir atsevišķas lietotnes, kas uzstādās blakus; nekas nepāriet pats no sevis."
+    )
+
+    data object Parrot1MoveSteps : StringRes(
+        en = "To move over: sign in to Parrot Cloud in both apps to carry your places, highlights and notes, add your books again in the new app, then uninstall the old one.",
+        sl = "Selitev: v obeh aplikacijah se prijavite v Parrot Cloud, da prenesete mesta branja, poudarke in zapiske, v novi aplikaciji znova dodajte knjige, nato odstranite staro aplikacijo.",
+        lv = "Pārcelšanās: abās lietotnēs pierakstieties Parrot Cloud, lai pārnestu lasīšanas vietas, izcēlumus un piezīmes, jaunajā lietotnē pievienojiet grāmatas vēlreiz un pēc tam atinstalējiet veco lietotni."
+    )
+
+    data object ParrotGooglePlay : StringRes(
+        en = "Get it on Google Play",
+        sl = "Prenesi v Google Play",
+        lv = "Iegūt Google Play"
+    )
+
+    data object ParrotWebApp : StringRes(
+        en = "Open the web app",
+        sl = "Odpri spletno aplikacijo",
+        lv = "Atvērt tīmekļa lietotni"
     )
 
     data object ParrotMeta : StringRes(

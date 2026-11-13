@@ -89,6 +89,7 @@ fun ParrotPage() {
         ParrotHero()
         ScreensRow()
         FeaturesSection()
+        AnnouncementSection()
         LatestReleaseSection()
         if (ParrotRes.releases.size > 1) {
             VersionHistorySection()
@@ -184,9 +185,19 @@ private fun ParrotHero() {
                 }.toAttrs(),
             ) {
                 PrimaryButton(
+                    url = ParrotRes.GOOGLE_PLAY_URL,
+                    label = StringRes.ParrotGooglePlay.value,
+                    openExternally = true,
+                    onClick = { trackEvent("google-play-click") },
+                )
+                TextLink(
+                    url = ParrotRes.WEB_APP_URL,
+                    label = StringRes.ParrotWebApp.value,
+                    onClick = { trackEvent("web-app-click") },
+                )
+                TextLink(
                     url = ParrotRes.latestRelease.apkUrl,
                     label = StringRes.ParrotDownloadLatest(ParrotRes.latestRelease.version).value,
-                    openExternally = true,
                     onClick = { trackEvent("apk-download", kotlin.js.json("version" to ParrotRes.latestRelease.version)) },
                 )
                 if (ParrotRes.releases.size > 1) {
@@ -259,6 +270,17 @@ private fun FeaturesSection() {
                     SpanText(text = paragraph.trim(), modifier = BodyStyle.toModifier().measure(66))
                 }
             }
+        }
+    }
+}
+
+@Composable
+private fun AnnouncementSection() {
+    EditorialGrid(eyebrow = StringRes.Parrot1Title.value, modifier = Modifier.sectionSpacing()) {
+        Div(attrs = Modifier.column("1rem").measure(70).toAttrs()) {
+            SpanText(text = StringRes.Parrot1Intro.value, modifier = BodyStyle.toModifier())
+            SpanText(text = StringRes.Parrot1PackageNote.value, modifier = BodyStyle.toModifier())
+            SpanText(text = StringRes.Parrot1MoveSteps.value, modifier = BodyStyle.toModifier())
         }
     }
 }
