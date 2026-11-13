@@ -17,7 +17,9 @@ concurrency:
 
 jobs:
   export:
-    runs-on: ubuntu-latest
+    # Pinned: ubuntu-latest moved to Ubuntu 26, where Playwright has no Chromium, and the
+    # export then failed without failing the job (2026-11-13, the site deployed empty).
+    runs-on: ubuntu-24.04
     env:
       KOBWEB_CLI_VERSION: 0.9.21
     defaults:
@@ -64,6 +66,11 @@ jobs:
         run: |
           cd site
           ../kobweb-${{ env.KOBWEB_CLI_VERSION }}/bin/kobweb export --notty --layout static
+
+      - name: Check the export produced the site
+        run: |
+          test -f site/.kobweb/site/index.html || { echo "Export produced no index.html"; exit 1; }
+          ls site/.kobweb/site/blog/*.html >/dev/null 2>&1 || { echo "Export produced no note pages"; exit 1; }
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
