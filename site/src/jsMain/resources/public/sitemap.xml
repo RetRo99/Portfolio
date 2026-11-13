@@ -13,6 +13,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.retar.app/blog/neural-tts-browser-onnxruntime-web</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://www.retar.app/blog/password-managers-compose-multiplatform-web</loc>
     <lastmod>2026-10-25</lastmod>
     <changefreq>yearly</changefreq>

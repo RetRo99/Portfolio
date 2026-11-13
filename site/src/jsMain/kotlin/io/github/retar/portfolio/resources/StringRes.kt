@@ -404,6 +404,18 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
         lv = "Project Gutenberg OPDS kataloga pārlūkošana"
     )
 
+    data object WebVoicesArticleTitle : StringRes(
+        en = "From 14 seconds to 1.5: fast neural voices in the browser with onnxruntime-web",
+        sl = "S 14 sekund na 1,5: hitri nevronski glasovi v brskalniku z onnxruntime-web",
+        lv = "No 14 sekundēm līdz 1,5: ātras neironu balsis pārlūkā ar onnxruntime-web"
+    )
+
+    data object WebVoicesArticleDesc : StringRes(
+        en = "How Parrot's web app went from a 14-second wait after pressing Play to under two seconds: a worker per voice so memory comes back, cross-origin isolation for four threads, and the 7-second wait that had nothing to do with the model.",
+        sl = "Kako je Parrotova spletna aplikacija s 14 sekund čakanja po pritisku na Predvajaj prišla pod dve sekundi: lasten worker za vsak glas, da se pomnilnik sprosti, izolacija med izvori za štiri niti in 7 sekund čakanja, ki niso imele nobene zveze z modelom.",
+        lv = "Kā Parrot tīmekļa lietotne no 14 sekunžu gaidīšanas pēc Atskaņot nospiešanas nonāca zem divām sekundēm: atsevišķs worker katrai balsij, lai atmiņa atgrieztos, cross-origin izolācija četriem pavedieniem un 7 sekunžu gaidīšana, kurai nebija nekāda sakara ar modeli."
+    )
+
     data object PasswordManagersArticleTitle : StringRes(
         en = "Password managers can't see a canvas: real sign-in forms in Compose for the web",
         sl = "Upravitelji gesel ne vidijo platna: prave prijavne forme v Compose za splet",
