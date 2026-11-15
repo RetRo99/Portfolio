@@ -404,6 +404,18 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
         lv = "Project Gutenberg OPDS kataloga pārlūkošana"
     )
 
+    data object ColdStartArticleTitle : StringRes(
+        en = "468 ms to 256: what actually made Parrot's Android cold start faster",
+        sl = "S 468 ms na 256: kaj je Parrotov hladni zagon na Androidu res pospešilo",
+        lv = "No 468 ms līdz 256: kas patiesībā paātrināja Parrot aukstās palaišanas laiku Android ierīcēs"
+    )
+
+    data object ColdStartArticleDesc : StringRes(
+        en = "Measuring an Android app's cold start the way Play installs it: why am start's TotalTime says nothing, how a Baseline Profile with dex layout beat compiling everything, and the 32 MB native library that cost no time at all.",
+        sl = "Merjenje hladnega zagona aplikacije za Android tako, kot jo namesti Play: zakaj TotalTime iz am start ne pove ničesar, kako je Baseline Profile z razporeditvijo dex premagal prevajanje vsega in 32 MB nativna knjižnica, ki ni stala nič časa.",
+        lv = "Android lietotnes aukstās palaišanas mērīšana tā, kā to instalē Play: kāpēc am start TotalTime neko nepasaka, kā Baseline Profile ar dex izkārtojumu pārspēja visa koda kompilēšanu un 32 MB vietējā bibliotēka, kas nemaksāja nemaz laika."
+    )
+
     data object WebVoicesArticleTitle : StringRes(
         en = "From 14 seconds to 1.5: fast neural voices in the browser with onnxruntime-web",
         sl = "S 14 sekund na 1,5: hitri nevronski glasovi v brskalniku z onnxruntime-web",

@@ -9,6 +9,7 @@ object LinkRes {
     }
 
     object Internal {
+        const val ColdStartArticle = "/blog/android-cold-start-baseline-profile"
         const val WebVoicesArticle = "/blog/neural-tts-browser-onnxruntime-web"
         const val PasswordManagersArticle = "/blog/password-managers-compose-multiplatform-web"
         const val TtsSharedKotlinArticle = "/blog/kokoro-tts-shared-kotlin-onnx-runtime"

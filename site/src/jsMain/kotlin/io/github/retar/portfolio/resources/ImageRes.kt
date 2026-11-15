@@ -6,6 +6,7 @@ enum class ImageRes(
     val intrinsicHeight: Int? = null,
 ) {
 
+    ColdStartArticle("/articles/cold_start_baseline_profile.webp", 640, 353),
     WebVoicesArticle("/articles/neural_voices_browser.webp", 640, 353),
     PasswordManagersArticle("/articles/password_managers_web.webp", 640, 353),
     TtsSharedKotlinArticle("/articles/tts_shared_kotlin.webp", 640, 353),
