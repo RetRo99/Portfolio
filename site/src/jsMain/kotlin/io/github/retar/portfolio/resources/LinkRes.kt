@@ -9,6 +9,7 @@ object LinkRes {
     }
 
     object Internal {
+        const val ScreenReaderArticle = "/blog/compose-multiplatform-web-screen-reader"
         const val ColdStartArticle = "/blog/android-cold-start-baseline-profile"
         const val WebVoicesArticle = "/blog/neural-tts-browser-onnxruntime-web"
         const val PasswordManagersArticle = "/blog/password-managers-compose-multiplatform-web"

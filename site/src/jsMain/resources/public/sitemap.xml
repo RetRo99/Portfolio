@@ -13,6 +13,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.retar.app/blog/compose-multiplatform-web-screen-reader</loc>
+    <lastmod>2026-11-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://www.retar.app/blog/android-cold-start-baseline-profile</loc>
     <lastmod>2026-11-15</lastmod>
     <changefreq>yearly</changefreq>

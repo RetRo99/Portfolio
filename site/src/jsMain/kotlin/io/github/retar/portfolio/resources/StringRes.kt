@@ -404,6 +404,18 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
         lv = "Project Gutenberg OPDS kataloga pārlūkošana"
     )
 
+    data object ScreenReaderArticleTitle : StringRes(
+        en = "A canvas has no buttons: screen readers and Compose for the web",
+        sl = "Platno nima gumbov: bralniki zaslona in Compose za splet",
+        lv = "Audeklam nav pogu: ekrāna lasītāji un Compose tīmeklim"
+    )
+
+    data object ScreenReaderArticleDesc : StringRes(
+        en = "Compose Multiplatform draws a web app onto one canvas, so a screen reader finds nothing to read. How Parrot's Kotlin/Wasm app got a usable accessibility tree: Compose's hidden semantics DOM, a layer bug fixed by an alpha, browser focus, checked and selected states, and spoken page turns.",
+        sl = "Compose Multiplatform spletno aplikacijo nariše na eno platno, zato bralnik zaslona nima česa brati. Kako je Parrotova aplikacija v Kotlin/Wasm dobila uporabno drevo dostopnosti: Composov skriti semantični DOM, napaka s plastmi, ki jo je odpravila alfa različica, fokus brskalnika, stanja izbranosti in označenosti ter izgovorjeno obračanje strani.",
+        lv = "Compose Multiplatform zīmē tīmekļa lietotni uz viena audekla, tāpēc ekrāna lasītājam nav ko lasīt. Kā Parrot Kotlin/Wasm lietotne ieguva lietojamu pieejamības koku: Compose slēptais semantikas DOM, slāņu kļūda, ko novērsa alfa versija, pārlūka fokuss, atzīmēti un atlasīti stāvokļi un izrunāta lappušu pāršķiršana."
+    )
+
     data object ColdStartArticleTitle : StringRes(
         en = "468 ms to 256: what actually made Parrot's Android cold start faster",
         sl = "S 468 ms na 256: kaj je Parrotov hladni zagon na Androidu res pospešilo",

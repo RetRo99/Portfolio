@@ -10,6 +10,9 @@ Introduces Rok as an Android and Kotlin Multiplatform engineer. Covers how he wo
 ### [Parrot: ebook and audiobook reader](https://www.retar.app/parrot)
 A case study for Parrot, a reader for your own ebooks and audiobooks on Android phones, tablets and e-ink readers, built with Kotlin Multiplatform. Features: read-along highlighting for ebooks with synced narration, on-device voices that read any ebook aloud, one reading position across the ebook and audiobook versions of a book, Storyteller, Audiobookshelf and OPDS libraries, Parrot Cloud, highlights, notes and an offline dictionary, an e-ink theme, and reading statistics. The page links the latest APK and the full version history.
 
+### [A canvas has no buttons: screen readers and Compose for the web](https://www.retar.app/blog/compose-multiplatform-web-screen-reader)
+An engineering note on making Parrot's Kotlin/Wasm and Compose Multiplatform web app usable with screen readers: Compose's isA11YEnabled semantics DOM, a 1.12.1 bug that kept closed menus in the accessibility tree (fixed by Compose 1.13.0-alpha01), moving keyboard focus from the canvas to the browser, writing aria-checked and aria-selected from Compose semantics, and live-region announcements for page turns, checked with the browser's accessibility tree.
+
 ### [468 ms to 256: what actually made Parrot's Android cold start faster](https://www.retar.app/blog/android-cold-start-baseline-profile)
 An engineering note on measuring and speeding up the Android cold start of Parrot, a Kotlin Multiplatform and Compose app, in release builds: a "library shown" hook instead of am start's TotalTime, installing the profile as a .dm the way Google Play does, Perfetto findings, a Baseline Profile and startup profile with dex layout optimization (468 to 256 ms on a Galaxy Z Fold 3, faster than full compilation), and removing onnxruntime's telemetry ContentProvider, which saved no measurable time.
 
