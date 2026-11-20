@@ -3,14 +3,40 @@ package io.github.retar.portfolio.resources
 data class ParrotRelease(
     val version: String,
     val date: String,
-    val apkUrl: String,
+    /** Null for releases that ship only through Google Play. */
+    val apkUrl: String? = null,
     val features: List<String> = emptyList(),
     val bugFixes: List<String> = emptyList(),
     val improvements: List<String> = emptyList(),
 )
 
 object ParrotRes {
+    const val GOOGLE_PLAY_URL = "https://play.google.com/store/apps/details?id=com.lunariastudios.retro99.parrot"
+    const val WEB_APP_URL = "https://parrotapp.dev/"
+
     val releases = listOf(
+        ParrotRelease(
+            version = "1.0.0",
+            date = "2026-11-20",
+            features = listOf(
+                "Sync your reading place with a KOReader sync server",
+                "Parrot Cloud is open to everyone, free",
+                "An Up next queue and a Continue series shelf for audiobooks",
+                "Skip silence, volume boost and smart rewind",
+                "Look up words in any dictionary app and translate selections",
+                "Import FB2, TXT, HTML and Word books",
+                "Custom headers and a home address for your servers",
+                "Now in German, Spanish and French"
+            ),
+            improvements = listOf(
+                "Natural voices start much faster in the web app",
+                "A new package name, com.lunariastudios.retro99.parrot, installed beside the old app"
+            ),
+            bugFixes = listOf(
+                "Read-aloud and narration keep your place more reliably",
+                "Natural voices no longer go silent on phones and the web"
+            )
+        ),
         ParrotRelease(
             version = "0.5.0",
             date = "2026-07-02",

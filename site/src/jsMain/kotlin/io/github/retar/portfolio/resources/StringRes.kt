@@ -159,9 +159,9 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
     )
 
     data object ParrotSubhead : StringRes(
-        en = "A reader for your own ebooks and audiobooks on Android phones, tablets and e-ink readers. It highlights the text as the narrator reads and remembers where you are in every version of a book. Built with Kotlin Multiplatform; an iPhone version is in the works.",
-        sl = "Bralnik za lastne e-knjige in zvočne knjige na telefonih, tablicah in bralnikih e-ink z Androidom. Med pripovedovanjem označuje besedilo in si zapomni, kje ste v vsaki različici knjige. Zgrajen s Kotlin Multiplatform; različica za iPhone je v pripravi.",
-        lv = "Lasītājs jūsu e-grāmatām un audiogrāmatām Android tālruņos, planšetēs un e-ink lasītājos. Tas izceļ tekstu, kamēr diktors lasa, un atceras, kur esat katrā grāmatas versijā. Veidots ar Kotlin Multiplatform; iPhone versija top."
+        en = "A reader for your own ebooks and audiobooks on Android and in your browser. It highlights the text as the narrator reads and remembers where you are in every version of a book. Built with Kotlin Multiplatform; an iPhone version is in the works.",
+        sl = "Bralnik za lastne e-knjige in zvočne knjige na Androidu in v brskalniku. Med pripovedovanjem označuje besedilo in si zapomni, kje ste v vsaki različici knjige. Zgrajen s Kotlin Multiplatform; različica za iPhone je v pripravi.",
+        lv = "Lasītājs jūsu e-grāmatām un audiogrāmatām Android ierīcēs un pārlūkā. Tas izceļ tekstu, kamēr diktors lasa, un atceras, kur esat katrā grāmatas versijā. Veidots ar Kotlin Multiplatform; iPhone versija top."
     )
 
     data object ParrotFeature1Title : StringRes(
@@ -207,9 +207,9 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
     )
 
     data object ParrotFeature4Desc : StringRes(
-        en = "Connect the Storyteller or Audiobookshelf server you already run, or browse OPDS catalogues such as Project Gutenberg. Books go straight from the server to the device.",
-        sl = "Povežite strežnik Storyteller ali Audiobookshelf, ki ga že uporabljate, ali brskajte po katalogih OPDS, kot je Project Gutenberg. Knjige gredo neposredno s strežnika na napravo.",
-        lv = "Pievienojiet savu Storyteller vai Audiobookshelf serveri vai pārlūkojiet OPDS katalogus, piemēram, Project Gutenberg. Grāmatas nonāk tieši no servera ierīcē."
+        en = "Connect the Storyteller or Audiobookshelf server you already run, browse OPDS catalogues such as Project Gutenberg, or open your own EPUB, PDF and comic files. Books go straight from the server to the device.",
+        sl = "Povežite strežnik Storyteller ali Audiobookshelf, ki ga že uporabljate, brskajte po katalogih OPDS, kot je Project Gutenberg, ali odprite lastne datoteke EPUB, PDF in stripe. Knjige gredo neposredno s strežnika na napravo.",
+        lv = "Pievienojiet savu Storyteller vai Audiobookshelf serveri, pārlūkojiet OPDS katalogus, piemēram, Project Gutenberg, vai atveriet savus EPUB, PDF un komiksu failus. Grāmatas nonāk tieši no servera ierīcē."
     )
 
     data object ParrotFeature5Title : StringRes(
@@ -579,9 +579,9 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
     )
 
     data object ParrotMeta : StringRes(
-        en = "Android · Free · Kotlin Multiplatform",
-        sl = "Android · Brezplačno · Kotlin Multiplatform",
-        lv = "Android · Bez maksas · Kotlin Multiplatform"
+        en = "Android · Web · Free · Kotlin Multiplatform",
+        sl = "Android · splet · brezplačno · Kotlin Multiplatform",
+        lv = "Android · tīmeklis · bez maksas · Kotlin Multiplatform"
     )
 
     data object ParrotTourEyebrow : StringRes(
@@ -687,9 +687,9 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
     )
 
     data object ParrotPageSubhead : StringRes(
-        en = "A reader for your own ebooks and audiobooks on Android phones, tablets and e-ink readers. It highlights the text as the narrator reads, can read any ebook aloud with a voice on your device, and remembers where you are in every version of a book. Built with Kotlin Multiplatform; an iPhone version is in the works.",
-        sl = "Bralnik za lastne e-knjige in zvočne knjige na telefonih, tablicah in bralnikih e-ink z Androidom. Med pripovedovanjem označuje besedilo, katero koli e-knjigo lahko prebere z glasom na napravi in si zapomni, kje ste v vsaki različici knjige. Zgrajen s Kotlin Multiplatform; različica za iPhone je v pripravi.",
-        lv = "Lasītājs jūsu e-grāmatām un audiogrāmatām Android tālruņos, planšetēs un e-ink lasītājos. Tas izceļ tekstu, kamēr diktors lasa, var nolasīt jebkuru e-grāmatu ar balsi jūsu ierīcē un atceras, kur esat katrā grāmatas versijā. Veidots ar Kotlin Multiplatform; iPhone versija top."
+        en = "A reader for your own ebooks and audiobooks, on Android phones, tablets and e-ink readers, and in your browser. It highlights the text as the narrator reads, reads any ebook aloud with a voice that runs on your device, and remembers where you are in every version of a book. One Kotlin Multiplatform codebase; an iPhone version is in the works.",
+        sl = "Bralnik za lastne e-knjige in zvočne knjige na telefonih, tablicah in bralnikih e-ink z Androidom ter v brskalniku. Med pripovedovanjem označuje besedilo, katero koli e-knjigo prebere z glasom, ki teče na vaši napravi, in si zapomni, kje ste v vsaki različici knjige. Ena koda v Kotlin Multiplatform; različica za iPhone je v pripravi.",
+        lv = "Lasītājs jūsu e-grāmatām un audiogrāmatām Android tālruņos, planšetēs un e-ink lasītājos, kā arī pārlūkā. Tas izceļ tekstu, kamēr diktors lasa, nolasa jebkuru e-grāmatu ar balsi, kas darbojas jūsu ierīcē, un atceras, kur esat katrā grāmatas versijā. Viena Kotlin Multiplatform koda bāze; iPhone versija top."
     )
 
     data object ParrotDownloadSection : StringRes(
@@ -702,6 +702,66 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
         en = "Download v$version (APK)",
         sl = "Prenesi v$version (APK)",
         lv = "Lejupielādēt v$version (APK)"
+    )
+
+    data object ParrotGooglePlay : StringRes(
+        en = "Get it on Google Play",
+        sl = "Prenesi v Google Play",
+        lv = "Iegūt Google Play"
+    )
+
+    data object ParrotWebApp : StringRes(
+        en = "Open the web app",
+        sl = "Odpri spletno aplikacijo",
+        lv = "Atvērt tīmekļa lietotni"
+    )
+
+    data object ParrotWebEyebrow : StringRes(
+        en = "// now in your browser",
+        sl = "// zdaj v brskalniku",
+        lv = "// tagad pārlūkā"
+    )
+
+    data object ParrotWebTitle : StringRes(
+        en = "The same app, in a browser tab",
+        sl = "Ista aplikacija, v zavihku brskalnika",
+        lv = "Tā pati lietotne pārlūka cilnē"
+    )
+
+    data object ParrotWebDesc : StringRes(
+        en = "Parrot also runs at parrotapp.dev, with nothing to install. It is the same shared Kotlin as the Android app, compiled to WebAssembly: the library, the reader, highlights, statistics and sync all come along. Natural voices read aloud in the browser too, and the first sound now comes in about a second and a half instead of fourteen. Sign in to Parrot Cloud and your place follows you between the phone and the browser.",
+        sl = "Parrot teče tudi na parrotapp.dev, brez nameščanja. To je ista skupna koda v Kotlinu kot aplikacija za Android, prevedena v WebAssembly: knjižnica, bralnik, poudarki, statistika in sinhronizacija pridejo zraven. Naravni glasovi berejo na glas tudi v brskalniku, prvi zvok pa se zdaj oglasi v približno sekundi in pol namesto v štirinajstih. Prijavite se v Parrot Cloud in mesto branja vam sledi med telefonom in brskalnikom.",
+        lv = "Parrot darbojas arī vietnē parrotapp.dev, neko neinstalējot. Tas ir tas pats kopīgais Kotlin kods, kas Android lietotnei, kompilēts uz WebAssembly: līdzi nāk bibliotēka, lasītājs, izcēlumi, statistika un sinhronizācija. Dabiskās balsis lasa skaļi arī pārlūkā, un pirmā skaņa tagad atskan pēc apmēram pusotras sekundes, nevis četrpadsmit. Piesakieties Parrot Cloud, un jūsu vieta seko jums starp tālruni un pārlūku."
+    )
+
+    data object ParrotWebScreenshotDesc : StringRes(
+        en = "Parrot's web app in a desktop browser: the library with three public-domain classics, Pride and Prejudice under Continue reading.",
+        sl = "Spletna aplikacija Parrot v namiznem brskalniku: knjižnica s tremi klasikami v javni domeni, Prevzetnost in pristranost pod Nadaljuj z branjem.",
+        lv = "Parrot tīmekļa lietotne galddatora pārlūkā: bibliotēka ar trim sabiedriskā īpašuma klasikas darbiem, Lepnums un aizspriedumi sadaļā Turpināt lasīt."
+    )
+
+    data object ParrotWebNotesLabel : StringRes(
+        en = "How it got there",
+        sl = "Kako je prišel tja",
+        lv = "Kā tas tur nonāca"
+    )
+
+    data object Parrot1Title : StringRes(
+        en = "// parrot 1.0",
+        sl = "// parrot 1.0",
+        lv = "// parrot 1.0"
+    )
+
+    data object Parrot1Intro : StringRes(
+        en = "Parrot 1.0 is out, on Google Play and on the web at parrotapp.dev. It now also speaks German, Spanish and French.",
+        sl = "Parrot 1.0 je izšel, v Google Play in na spletu na parrotapp.dev. Zdaj govori tudi nemško, špansko in francosko.",
+        lv = "Parrot 1.0 ir klāt Google Play un tīmeklī parrotapp.dev. Tagad tas runā arī vāciski, spāniski un franciski."
+    )
+
+    data object Parrot1PackageNote : StringRes(
+        en = "If you installed an APK from this page before: 1.0 has a new package name (com.lunariastudios.retro99.parrot), so it installs beside the old app instead of updating it. Sign in to Parrot Cloud in both apps to carry over your places, highlights and notes, add your books again in the new app, then uninstall the old one.",
+        sl = "Če ste prej namestili APK s te strani: 1.0 ima novo ime paketa (com.lunariastudios.retro99.parrot), zato se namesti poleg stare aplikacije, namesto da bi jo posodobil. V obeh aplikacijah se prijavite v Parrot Cloud, da prenesete mesta branja, poudarke in opombe, v novi aplikaciji znova dodajte knjige, nato odstranite staro.",
+        lv = "Ja iepriekš instalējāt APK no šīs lapas: 1.0 ir jauns pakotnes nosaukums (com.lunariastudios.retro99.parrot), tāpēc tas tiek instalēts blakus vecajai lietotnei, nevis to atjaunina. Abās lietotnēs piesakieties Parrot Cloud, lai pārnestu vietas, izcēlumus un piezīmes, jaunajā lietotnē vēlreiz pievienojiet grāmatas un pēc tam atinstalējiet veco."
     )
 
     data object ParrotViewHistory : StringRes(
@@ -717,9 +777,9 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
     )
 
     data object ParrotFeature1PageDesc : StringRes(
-        en = "Choose the font, weight, size, margins and line height, and Parrot keeps them for every book. Day, night and e-ink themes cover the rest; the e-ink theme drops animation and uses clear outlines and larger type.\n\nTap the screen edges or use the volume buttons to turn pages, search inside the book, jump from the contents, and tap any word for an offline dictionary definition. Highlights in four colours and notes in the margin collect in one list you can export as Markdown.",
-        sl = "Izberite pisavo, debelino, velikost, robove in razmik med vrsticami, Parrot pa jih ohrani za vsako knjigo. Za ostalo poskrbijo dnevna, nočna in e-ink tema; tema e-ink opusti animacije ter uporablja jasne obrobe in večjo pisavo.\n\nStrani obračate s tapom ob robu zaslona ali z gumbi za glasnost, iščete po knjigi, skočite iz kazala in tapnete katero koli besedo za razlago v slovarju brez povezave. Poudarki v štirih barvah in opombe ob robu se zberejo v enem seznamu, ki ga lahko izvozite v Markdown.",
-        lv = "Izvēlieties fontu, biezumu, izmēru, malas un rindstarpu, un Parrot tos saglabā katrai grāmatai. Pārējo nodrošina dienas, nakts un e-ink tēmas; e-ink tēma atsakās no animācijām un izmanto skaidras kontūras un lielāku burtu izmēru.\n\nPāršķiriet lapas, pieskaroties ekrāna malām vai ar skaļuma pogām, meklējiet grāmatā, pārejiet no satura rādītāja un pieskarieties jebkuram vārdam, lai bezsaistē redzētu vārdnīcas skaidrojumu. Izcēlumi četrās krāsās un piezīmes malās tiek apkopoti vienā sarakstā, ko var eksportēt kā Markdown."
+        en = "Choose the font, weight, size, margins and line height, and Parrot keeps them for every book. Day, night and e-ink themes cover the rest; the e-ink theme drops animation and uses clear outlines and larger type.\n\nTap the screen edges or use the volume buttons to turn pages, search inside the book, jump from the contents, and tap any word for an offline dictionary definition, or send it to your dictionary app or translator. Highlights in four colours and notes in the margin collect in one list you can export as Markdown or send to Readwise.",
+        sl = "Izberite pisavo, debelino, velikost, robove in razmik med vrsticami, Parrot pa jih ohrani za vsako knjigo. Za ostalo poskrbijo dnevna, nočna in e-ink tema; tema e-ink opusti animacije ter uporablja jasne obrobe in večjo pisavo.\n\nStrani obračate s tapom ob robu zaslona ali z gumbi za glasnost, iščete po knjigi, skočite iz kazala in tapnete katero koli besedo za razlago v slovarju brez povezave ali jo pošljete v svojo aplikacijo za slovar ali prevajanje. Poudarki v štirih barvah in opombe ob robu se zberejo v enem seznamu, ki ga lahko izvozite v Markdown ali pošljete v Readwise.",
+        lv = "Izvēlieties fontu, biezumu, izmēru, malas un rindstarpu, un Parrot tos saglabā katrai grāmatai. Pārējo nodrošina dienas, nakts un e-ink tēmas; e-ink tēma atsakās no animācijām un izmanto skaidras kontūras un lielāku burtu izmēru.\n\nPāršķiriet lapas, pieskaroties ekrāna malām vai ar skaļuma pogām, meklējiet grāmatā, pārejiet no satura rādītāja un pieskarieties jebkuram vārdam, lai bezsaistē redzētu vārdnīcas skaidrojumu vai nosūtītu to uz savu vārdnīcas vai tulkošanas lietotni. Izcēlumi četrās krāsās un piezīmes malās tiek apkopoti vienā sarakstā, ko var eksportēt kā Markdown vai nosūtīt uz Readwise."
     )
 
     data object ParrotFeature2PageTitle : StringRes(
@@ -729,9 +789,9 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
     )
 
     data object ParrotFeature2PageDesc : StringRes(
-        en = "For ebooks with synced narration, such as those made with Storyteller, each sentence lights up as it is read, and you can switch between reading and listening without losing your place. Audio keeps playing in the background, with chapter controls in the notification and on Android Auto, plus a sleep timer.\n\nNo audiobook? Download a voice and Parrot reads any ebook aloud. Chapters are prepared ahead so playback has no gaps, and the text is processed on the device.",
-        sl = "Pri e-knjigah s sinhronizirano pripovedjo, na primer tistih iz Storytellerja, se vsak stavek osvetli, ko je prebran, med branjem in poslušanjem pa preklapljate, ne da bi izgubili mesto. Zvok se predvaja v ozadju, poglavja upravljate iz obvestila in prek Android Auto, na voljo je tudi časovnik za spanje.\n\nNimate zvočne knjige? Prenesite glas in Parrot bo prebral katero koli e-knjigo. Poglavja se pripravijo vnaprej, zato predvajanje teče brez premorov, besedilo pa se obdela na napravi.",
-        lv = "E-grāmatām ar sinhronizētu stāstījumu, piemēram, no Storyteller, katrs teikums iedegas, kad tas tiek nolasīts, un jūs varat pārslēgties starp lasīšanu un klausīšanos, nezaudējot vietu. Audio turpina skanēt fonā, nodaļas var pārslēgt paziņojumā un Android Auto, un ir arī miega taimeris.\n\nNav audiogrāmatas? Lejupielādējiet balsi, un Parrot nolasīs jebkuru e-grāmatu. Nodaļas tiek sagatavotas iepriekš, lai atskaņošana būtu bez pauzēm, un teksts tiek apstrādāts ierīcē."
+        en = "For ebooks with synced narration, such as those made with Storyteller, each sentence lights up as it is read, and you can switch between reading and listening without losing your place. Audio keeps playing in the background, with chapter controls in the notification and on Android Auto, plus a sleep timer. Skip silence, volume boost and smart rewind are one tap away, and an Up next queue and a Continue series shelf keep the next audiobook ready.\n\nNo audiobook? Download a voice and Parrot reads any ebook aloud, on your phone or in the browser. Chapters are prepared ahead so playback has no gaps, and the text is processed on the device.",
+        sl = "Pri e-knjigah s sinhronizirano pripovedjo, na primer tistih iz Storytellerja, se vsak stavek osvetli, ko je prebran, med branjem in poslušanjem pa preklapljate, ne da bi izgubili mesto. Zvok se predvaja v ozadju, poglavja upravljate iz obvestila in prek Android Auto, na voljo je tudi časovnik za spanje. Preskok tišine, ojačitev glasnosti in pametno previjanje nazaj so en tap stran, vrsta Naslednje in polica Nadaljuj serijo pa imata naslednjo zvočno knjigo pripravljeno.\n\nNimate zvočne knjige? Prenesite glas in Parrot bo prebral katero koli e-knjigo, na telefonu ali v brskalniku. Poglavja se pripravijo vnaprej, zato predvajanje teče brez premorov, besedilo pa se obdela na napravi.",
+        lv = "E-grāmatām ar sinhronizētu stāstījumu, piemēram, no Storyteller, katrs teikums iedegas, kad tas tiek nolasīts, un jūs varat pārslēgties starp lasīšanu un klausīšanos, nezaudējot vietu. Audio turpina skanēt fonā, nodaļas var pārslēgt paziņojumā un Android Auto, un ir arī miega taimeris. Klusuma izlaišana, skaļuma pastiprinājums un gudrā attīšana ir viena pieskāriena attālumā, bet rinda Nākamais un plaukts Turpināt sēriju tur nākamo audiogrāmatu gatavu.\n\nNav audiogrāmatas? Lejupielādējiet balsi, un Parrot nolasīs jebkuru e-grāmatu tālrunī vai pārlūkā. Nodaļas tiek sagatavotas iepriekš, lai atskaņošana būtu bez pauzēm, un teksts tiek apstrādāts ierīcē."
     )
 
     data object ParrotFeature3PageTitle : StringRes(
@@ -753,9 +813,9 @@ sealed class StringRes(val en: String, val sl: String, val lv: String) {
     )
 
     data object ParrotFeature4PageDesc : StringRes(
-        en = "Connect the Storyteller or Audiobookshelf server you already run, or browse OPDS catalogues such as Project Gutenberg. No server? Parrot Cloud keeps your books, place, highlights and notes on every device you sign in to.\n\nLink the ebook and audiobook of the same book and Parrot shows where you are in each, then moves the others to the matching place when you ask. Downloaded books work offline, and your place syncs the next time you are online.",
-        sl = "Povežite strežnik Storyteller ali Audiobookshelf, ki ga že uporabljate, ali brskajte po katalogih OPDS, kot je Project Gutenberg. Nimate strežnika? Parrot Cloud ohrani vaše knjige, mesto branja, poudarke in opombe na vseh napravah, v katere se prijavite.\n\nPovežite e-knjigo in zvočno knjigo iste knjige in Parrot pokaže, kje ste v vsaki, ter na zahtevo premakne ostale na ustrezno mesto. Prenesene knjige delujejo brez povezave, mesto branja pa se sinhronizira, ko ste spet na spletu.",
-        lv = "Pievienojiet savu Storyteller vai Audiobookshelf serveri vai pārlūkojiet OPDS katalogus, piemēram, Project Gutenberg. Nav servera? Parrot Cloud saglabā jūsu grāmatas, vietu, izcēlumus un piezīmes visās ierīcēs, kurās piesakāties.\n\nSasaistiet vienas grāmatas e-grāmatu un audiogrāmatu, un Parrot parāda, kur esat katrā, un pēc pieprasījuma pārvieto pārējās uz atbilstošo vietu. Lejupielādētās grāmatas darbojas bezsaistē, un vieta tiek sinhronizēta, kad atkal esat tiešsaistē."
+        en = "Connect the Storyteller or Audiobookshelf server you already run, browse OPDS catalogues such as Project Gutenberg, or open your own files: EPUB, PDF, comics (CBZ), MOBI, FB2, TXT, HTML and Word. Already on KOReader? Parrot syncs your place with a KOReader sync server.\n\nNo server? Parrot Cloud is free and open to everyone. It keeps your place, highlights, notes and statistics in step on every device you sign in to, and your book files stay on your devices. Link the ebook and audiobook of the same book and Parrot shows where you are in each, then moves the others to the matching place when you ask. Downloaded books work offline, and your place syncs the next time you are online.",
+        sl = "Povežite strežnik Storyteller ali Audiobookshelf, ki ga že uporabljate, brskajte po katalogih OPDS, kot je Project Gutenberg, ali odprite lastne datoteke: EPUB, PDF, stripe (CBZ), MOBI, FB2, TXT, HTML in Word. Že uporabljate KOReader? Parrot sinhronizira mesto branja s strežnikom KOReader sync.\n\nNimate strežnika? Parrot Cloud je brezplačen in odprt za vse. Mesto branja, poudarke, opombe in statistiko usklajuje na vseh napravah, v katere se prijavite, datoteke knjig pa ostanejo na vaših napravah. Povežite e-knjigo in zvočno knjigo iste knjige in Parrot pokaže, kje ste v vsaki, ter na zahtevo premakne ostale na ustrezno mesto. Prenesene knjige delujejo brez povezave, mesto branja pa se sinhronizira, ko ste spet na spletu.",
+        lv = "Pievienojiet savu Storyteller vai Audiobookshelf serveri, pārlūkojiet OPDS katalogus, piemēram, Project Gutenberg, vai atveriet savus failus: EPUB, PDF, komiksus (CBZ), MOBI, FB2, TXT, HTML un Word. Jau lietojat KOReader? Parrot sinhronizē jūsu vietu ar KOReader sync serveri.\n\nNav servera? Parrot Cloud ir bez maksas un atvērts visiem. Tas saskaņo jūsu vietu, izcēlumus, piezīmes un statistiku visās ierīcēs, kurās piesakāties, bet grāmatu faili paliek jūsu ierīcēs. Sasaistiet vienas grāmatas e-grāmatu un audiogrāmatu, un Parrot parāda, kur esat katrā, un pēc pieprasījuma pārvieto pārējās uz atbilstošo vietu. Lejupielādētās grāmatas darbojas bezsaistē, un vieta tiek sinhronizēta, kad atkal esat tiešsaistē."
     )
 
     data object VersionHistory : StringRes(

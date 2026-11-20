@@ -1,6 +1,6 @@
 # Rok Retar, mobile engineer
 
-> Rok Retar is a mobile engineer in Slovenia who builds apps in Kotlin, for Android and iOS, using Kotlin Multiplatform (KMP). He designed and led the move of a company's production iOS app onto shared Kotlin, keeping native UI where the platform does it better. He also builds Parrot, an ebook and audiobook reader for Android. This site is written in Kotlin with Kobweb. Below is a longer description of each page.
+> Rok Retar is a mobile engineer in Slovenia who builds apps in Kotlin, for Android and iOS, using Kotlin Multiplatform (KMP). He designed and led the move of a company's production iOS app onto shared Kotlin, keeping native UI where the platform does it better. He also builds Parrot, an ebook and audiobook reader for Android and the web. This site is written in Kotlin with Kobweb. Below is a longer description of each page.
 
 ## Pages
 
@@ -8,7 +8,7 @@
 Introduces Rok as an Android and Kotlin Multiplatform engineer. Covers how he works (share the domain and data layers, keep the UI native where the platform does it better, let module boundaries enforce dependency direction), the production iOS migration, his daily stack, the production apps he has shipped, the Parrot showcase and his engineering notes.
 
 ### [Parrot: ebook and audiobook reader](https://www.retar.app/parrot)
-A case study for Parrot, a reader for your own ebooks and audiobooks on Android phones, tablets and e-ink readers, built with Kotlin Multiplatform. Features: read-along highlighting for ebooks with synced narration, on-device voices that read any ebook aloud, one reading position across the ebook and audiobook versions of a book, Storyteller, Audiobookshelf and OPDS libraries, Parrot Cloud, highlights, notes and an offline dictionary, an e-ink theme, and reading statistics. The page links the latest APK and the full version history.
+A case study for Parrot, a reader for your own ebooks and audiobooks on Android phones, tablets and e-ink readers and in the browser (web app at https://parrotapp.dev/, Kotlin/Wasm), built with Kotlin Multiplatform. Parrot 1.0 is on Google Play. Features: read-along highlighting for ebooks with synced narration, on-device voices that read any ebook aloud (also in the browser), one reading position across the ebook and audiobook versions of a book, Storyteller, Audiobookshelf, OPDS and KOReader sync, EPUB, PDF, comics, MOBI, FB2, TXT, HTML and Word files, free Parrot Cloud sync, highlights, notes and an offline dictionary, an e-ink theme, and reading statistics. The page links Google Play, the web app, and the version history with older APKs.
 
 ### [A canvas has no buttons: screen readers and Compose for the web](https://www.retar.app/blog/compose-multiplatform-web-screen-reader)
 An engineering note on making Parrot's Kotlin/Wasm and Compose Multiplatform web app usable with screen readers: Compose's isA11YEnabled semantics DOM, a 1.12.1 bug that kept closed menus in the accessibility tree (fixed by Compose 1.13.0-alpha01), moving keyboard focus from the canvas to the browser, writing aria-checked and aria-selected from Compose semantics, and live-region announcements for page turns, checked with the browser's accessibility tree.

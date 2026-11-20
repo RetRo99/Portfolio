@@ -16,7 +16,6 @@ import io.github.retar.portfolio.components.PortfolioSection
 import io.github.retar.portfolio.components.PortfolioSectionId
 import io.github.retar.portfolio.components.widgets.ArticleRow
 import io.github.retar.portfolio.components.widgets.Callout
-import io.github.retar.portfolio.components.widgets.DownloadButton
 import io.github.retar.portfolio.components.widgets.EditorialGrid
 import io.github.retar.portfolio.components.widgets.FactList
 import io.github.retar.portfolio.components.widgets.PhoneRowItemStyle
@@ -300,9 +299,15 @@ private fun ParrotShowcaseSection() {
                     label = StringRes.CtaOpenCaseStudy.value,
                     onClick = { trackEvent("case-study-open") },
                 )
-                DownloadButton(
-                    url = ParrotRes.latestRelease.apkUrl,
-                    label = StringRes.DownloadVersionApk(ParrotRes.latestRelease.version).value,
+                TextLink(
+                    url = ParrotRes.GOOGLE_PLAY_URL,
+                    label = StringRes.ParrotGooglePlay.value,
+                    onClick = { trackEvent("google-play-click", json("from" to "home")) },
+                )
+                TextLink(
+                    url = ParrotRes.WEB_APP_URL,
+                    label = StringRes.ParrotWebApp.value,
+                    onClick = { trackEvent("web-app-click", json("from" to "home")) },
                 )
             }
         }

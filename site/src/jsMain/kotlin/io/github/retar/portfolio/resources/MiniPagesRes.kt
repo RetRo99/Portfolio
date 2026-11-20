@@ -69,9 +69,9 @@ object NowRes {
                 ListEntry(
                     title = same("Parrot Cloud"),
                     body = Copy(
-                        en = "Books, reading positions, highlights and statistics synced across every device you sign in to. It's in early access while I harden it.",
-                        sl = "Knjige, mesta branja, označbe in statistika, usklajeni na vseh napravah, v katere se prijavite. Je v zgodnjem dostopu, dokler ga utrjujem.",
-                        lv = "Grāmatas, lasīšanas vietas, iezīmējumi un statistika, sinhronizēti visās ierīcēs, kurās pierakstāties. Tas ir agrīnajā piekļuvē, kamēr to nostiprinu.",
+                        en = "Reading positions, highlights, notes and statistics synced across every device you sign in to, including the web app. Open to everyone and free; your book files stay on your devices.",
+                        sl = "Mesta branja, označbe, zapiski in statistika, usklajeni na vseh napravah, v katere se prijavite, tudi v spletni aplikaciji. Odprt za vse in brezplačen; datoteke knjig ostanejo na vaših napravah.",
+                        lv = "Lasīšanas vietas, iezīmējumi, piezīmes un statistika, sinhronizēti visās ierīcēs, kurās pierakstāties, arī tīmekļa lietotnē. Atvērts visiem un bez maksas; grāmatu faili paliek jūsu ierīcēs.",
                     ),
                 ),
             ),

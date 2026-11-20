@@ -25,6 +25,7 @@ import io.github.retar.portfolio.components.widgets.PrimaryButton
 import io.github.retar.portfolio.components.widgets.TextLink
 import io.github.retar.portfolio.components.widgets.rise
 import io.github.retar.portfolio.resources.ImageRes
+import io.github.retar.portfolio.resources.LinkRes
 import io.github.retar.portfolio.resources.ParrotRelease
 import io.github.retar.portfolio.resources.ParrotRes
 import io.github.retar.portfolio.resources.ProjectsRes
@@ -67,8 +68,8 @@ fun ParrotPage() {
     }
 
     Seo(
-        title = "Parrot: ebook and audiobook reader for Android · Rok Retar",
-        description = "Parrot reads your own ebooks and audiobooks on Android phones, tablets and e-ink readers, with read-along highlighting, on-device voices and Storyteller, Audiobookshelf and Parrot Cloud libraries.",
+        title = "Parrot: ebook and audiobook reader for Android and the web · Rok Retar",
+        description = "Parrot reads your own ebooks and audiobooks on Android phones, tablets, e-ink readers and in the browser, with read-along highlighting, on-device voices, KOReader sync and Storyteller, Audiobookshelf, OPDS and Parrot Cloud libraries.",
         path = "/parrot",
         ogType = "article",
         jsonLd = """
@@ -77,8 +78,10 @@ fun ParrotPage() {
               "@type": "SoftwareApplication",
               "name": "Parrot",
               "applicationCategory": "BookApplication",
-              "operatingSystem": "Android",
-              "description": "A reader for your own ebooks and audiobooks on Android, with read-along highlighting, on-device voices and Storyteller, Audiobookshelf and Parrot Cloud libraries.",
+              "operatingSystem": "Android, Web",
+              "url": "https://parrotapp.dev/",
+              "installUrl": "https://play.google.com/store/apps/details?id=com.lunariastudios.retro99.parrot",
+              "description": "A reader for your own ebooks and audiobooks on Android and in the browser, with read-along highlighting, on-device voices, KOReader sync and Storyteller, Audiobookshelf, OPDS and Parrot Cloud libraries.",
               "author": {
                 "@type": "Person",
                 "@id": "https://www.retar.app/#person",
@@ -96,8 +99,10 @@ fun ParrotPage() {
     Div(attrs = Modifier.styleModifier { property("width", "100%") }.toAttrs()) {
         ParrotHero()
         ScreensRow()
+        WebAppSection()
         TourSection()
         FeaturesSection()
+        AnnouncementSection()
         LatestReleaseSection()
         if (ParrotRes.releases.size > 1) {
             VersionHistorySection()
@@ -193,10 +198,14 @@ private fun ParrotHero() {
                 }.toAttrs(),
             ) {
                 PrimaryButton(
-                    url = ParrotRes.latestRelease.apkUrl,
-                    label = StringRes.ParrotDownloadLatest(ParrotRes.latestRelease.version).value,
-                    download = true,
-                    onClick = { trackEvent("apk-download", kotlin.js.json("version" to ParrotRes.latestRelease.version)) },
+                    url = ParrotRes.GOOGLE_PLAY_URL,
+                    label = StringRes.ParrotGooglePlay.value,
+                    onClick = { trackEvent("google-play-click") },
+                )
+                TextLink(
+                    url = ParrotRes.WEB_APP_URL,
+                    label = StringRes.ParrotWebApp.value,
+                    onClick = { trackEvent("web-app-click") },
                 )
                 if (ParrotRes.releases.size > 1) {
                     TextLink(
@@ -233,6 +242,64 @@ private fun ScreensRow() {
                 description = shot.description.value,
                 modifier = PhoneRowItemStyle.toModifier().styleModifier { property("--offset", offset) },
             )
+        }
+    }
+}
+
+@Composable
+private fun WebAppSection() {
+    val notes = listOf(
+        LinkRes.Internal.WebWasmArticle to StringRes.WebWasmArticleTitle.value,
+        LinkRes.Internal.WebVoicesArticle to StringRes.WebVoicesArticleTitle.value,
+        LinkRes.Internal.ScreenReaderArticle to StringRes.ScreenReaderArticleTitle.value,
+        LinkRes.Internal.PasswordManagersArticle to StringRes.PasswordManagersArticleTitle.value,
+    )
+    val palette = sitePalette()
+    EditorialGrid(eyebrow = StringRes.ParrotWebEyebrow.value, modifier = Modifier.sectionSpacing()) {
+        Image(
+            src = ImageRes.ParrotWebLibrary.path,
+            description = StringRes.ParrotWebScreenshotDesc.value,
+            modifier = Modifier.styleModifier {
+                property("display", "block")
+                property("width", "100%")
+                property("height", "auto")
+                property("border-radius", "8px")
+                property("border", "1px solid ${palette.border}")
+            },
+            width = ImageRes.ParrotWebLibrary.intrinsicWidth,
+            height = ImageRes.ParrotWebLibrary.intrinsicHeight,
+        )
+        Div(attrs = Modifier.column("0.875rem").toAttrs()) {
+            H2Text(
+                text = StringRes.ParrotWebTitle.value,
+                modifier = H2Style.toModifier().styleModifier {
+                    property("font-size", "clamp(1.75rem, 2.5vw + 0.75rem, 2.5rem)")
+                },
+            )
+            SpanText(text = StringRes.ParrotWebDesc.value, modifier = BodyStyle.toModifier().measure(66))
+            Div(attrs = Modifier.styleModifier { property("margin-top", "0.5rem") }.toAttrs()) {
+                PrimaryButton(
+                    url = ParrotRes.WEB_APP_URL,
+                    label = StringRes.ParrotWebApp.value,
+                    onClick = { trackEvent("web-app-click", kotlin.js.json("from" to "web-section")) },
+                )
+            }
+        }
+        Div(attrs = Modifier.column("0.5rem").toAttrs()) {
+            SpanText(text = StringRes.ParrotWebNotesLabel.value, modifier = MonoEyebrowStyle.toModifier())
+            notes.forEach { (route, title) ->
+                TextLink(url = route, label = title)
+            }
+        }
+    }
+}
+
+@Composable
+private fun AnnouncementSection() {
+    EditorialGrid(eyebrow = StringRes.Parrot1Title.value, modifier = Modifier.sectionSpacing()) {
+        Div(attrs = Modifier.column("1rem").measure(70).toAttrs()) {
+            SpanText(text = StringRes.Parrot1Intro.value, modifier = BodyStyle.toModifier())
+            SpanText(text = StringRes.Parrot1PackageNote.value, modifier = BodyStyle.toModifier())
         }
     }
 }
@@ -339,10 +406,19 @@ private fun LatestReleaseSection() {
         }
         ReleaseNotes(latest)
         Div {
-            DownloadButton(
-                url = latest.apkUrl,
-                label = StringRes.ParrotDownloadLatest(latest.version).value,
-            )
+            val apk = latest.apkUrl
+            if (apk != null) {
+                DownloadButton(
+                    url = apk,
+                    label = StringRes.ParrotDownloadLatest(latest.version).value,
+                )
+            } else {
+                PrimaryButton(
+                    url = ParrotRes.GOOGLE_PLAY_URL,
+                    label = StringRes.ParrotGooglePlay.value,
+                    onClick = { trackEvent("google-play-click", kotlin.js.json("from" to "latest-release")) },
+                )
+            }
         }
     }
 }
@@ -391,12 +467,14 @@ private fun ReleaseHistoryRow(release: ParrotRelease) {
         Div(attrs = Modifier.column("0.25rem").toAttrs()) {
             H3Text(text = StringRes.VersionLabel(release.version).value, modifier = H3Style.toModifier())
             SpanText(text = release.date, modifier = CaptionStyle.toModifier())
+            release.apkUrl?.let { apk ->
             TextLink(
-                url = release.apkUrl,
+                url = apk,
                 label = StringRes.DownloadApk.value,
                 modifier = Modifier.styleModifier { property("margin-top", "0.5rem") },
                 onClick = { trackEvent("apk-download", kotlin.js.json("version" to release.version)) },
             )
+            }
         }
         ReleaseNotes(release)
     }

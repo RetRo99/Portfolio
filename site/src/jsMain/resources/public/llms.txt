@@ -1,6 +1,6 @@
 # Rok Retar, mobile engineer
 
-> Rok Retar is a mobile engineer in Slovenia who builds apps in Kotlin, for Android and iOS. He designed and led the move of a company's production iOS app onto shared Kotlin. He also builds Parrot, an ebook and audiobook reader for Android. This site is written in Kotlin with Kobweb.
+> Rok Retar is a mobile engineer in Slovenia who builds apps in Kotlin, for Android and iOS. He designed and led the move of a company's production iOS app onto shared Kotlin. He also builds Parrot, an ebook and audiobook reader for Android and the web. This site is written in Kotlin with Kobweb.
 
 ## Pages
 - [Home](https://www.retar.app/)

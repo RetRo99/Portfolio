@@ -6,6 +6,7 @@ enum class ImageRes(
     val intrinsicHeight: Int? = null,
 ) {
 
+    ParrotWebLibrary("/parrot/parrot-web-library.webp", 1056, 640),
     ScreenReaderArticle("/articles/compose_web_screen_reader.webp", 640, 353),
     ColdStartArticle("/articles/cold_start_baseline_profile.webp", 640, 353),
     WebVoicesArticle("/articles/neural_voices_browser.webp", 640, 353),
